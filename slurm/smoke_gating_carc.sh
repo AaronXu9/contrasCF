@@ -17,8 +17,11 @@
 #     sbatch slurm/smoke_gating_carc.sh
 
 set -euo pipefail
-cd "$(dirname "$0")/.."
 
+# SLURM copies the script to /var/spool/.../slurm_script, so $0 isn't the
+# repo path. Use SLURM_SUBMIT_DIR (sbatch's CWD) when available, else fall
+# back to the canonical CARC repo path.
+cd "${SLURM_SUBMIT_DIR:-/project2/katritch_223/aoxu/contrasCF}"
 source env/carc.sh
 
 echo "=== smoke test on $(hostname) at $(date -Iseconds) ==="
