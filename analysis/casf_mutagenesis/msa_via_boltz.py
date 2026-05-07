@@ -27,8 +27,9 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-BOLTZ_BIN = "/home/aoxu/miniconda3/envs/boltzina_env/bin/boltz"
-CUDA_DEVICE = "0"
+from .config import BOLTZ_BIN as _DEFAULT_BOLTZ_BIN, CUDA_DEVICE
+
+BOLTZ_BIN = str(_DEFAULT_BOLTZ_BIN)
 
 
 def _yaml_for_msa(seq: str) -> str:

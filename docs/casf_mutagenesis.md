@@ -195,10 +195,48 @@ Per-system invariants checked (all 20 pass):
 
 Pocket sizes range 2–12 residues across the subset.
 
+## Running on a different host (env-var overrides)
+
+All host-specific paths flow through env vars resolved in
+[`config.py`](../analysis/casf_mutagenesis/config.py). The defaults match
+the lab workstation; on CARC (or any other host), source the matching
+shell file before running anything:
+
+```bash
+# Lab workstation
+source env/lab.sh
+
+# USC CARC
+source env/carc.sh
+```
+
+The variables (override individually if needed):
+
+| variable | meaning | lab default |
+|---|---|---|
+| `CONTRASCF_ROOT` | repo root | `/mnt/katritch_lab2/aoxu/contrasCF` |
+| `CONTRASCF_CASF_ROOT` | pdbbind_cleansplit dir | `<root>/data/casf2016` (a symlink) |
+| `CONTRASCF_BOLTZ_BIN` | Boltz-2 binary | `/home/aoxu/miniconda3/envs/boltzina_env/bin/boltz` |
+| `CONTRASCF_AF3_ENV` | AF3 conda env dir | `/mnt/katritch_lab2/aoxu/CogLigandBench/envs/alphafold3` |
+| `CONTRASCF_AF3_DIR` | AF3 source (run_alphafold.py here) | `…/forks/alphafold3/alphafold3` |
+| `CONTRASCF_AF3_MODEL_DIR` | AF3 weights (af3.bin) | `…/forks/alphafold3/models` |
+| `CONTRASCF_CUDA_DEVICE` | GPU index | `0` |
+| `CONTRASCF_PY` | rdkit_env python (set by env/*.sh) | `/home/aoxu/miniconda3/envs/rdkit_env/bin/python` |
+
+The AF3 runner globs `lib/python*/site-packages/nvidia/*/lib` rather than
+hard-coding Python 3.12, so it adapts to whatever Python version the
+target host's AF3 env uses.
+
+To check what's currently active:
+
+```bash
+python -c "from casf_mutagenesis import config as c; print(c.REPO_ROOT, c.BOLTZ_BIN, c.AF3_ENV)"
+```
+
 ## Running the pipeline
 
-All commands assume `LD_LIBRARY_PATH` points at `rdkit_env`'s `lib/` (per
-[env_conventions](../analysis/src/) and the project's CLAUDE memory).
+All commands assume `LD_LIBRARY_PATH` points at `rdkit_env`'s `lib/`
+(set automatically by `env/lab.sh` / `env/carc.sh`).
 
 ```bash
 LIB="/home/aoxu/miniconda3/envs/rdkit_env/lib"

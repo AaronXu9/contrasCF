@@ -24,7 +24,9 @@ import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
+import os
+_repo_root_default = "/mnt/katritch_lab2/aoxu/contrasCF"
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", _repo_root_default))
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
 import gemmi  # noqa: E402

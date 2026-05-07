@@ -15,7 +15,8 @@ import json
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
+import os
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
 from casf_mutagenesis.build import build_system, write_manifest

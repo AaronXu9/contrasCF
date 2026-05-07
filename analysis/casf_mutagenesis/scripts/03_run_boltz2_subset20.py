@@ -19,17 +19,21 @@ import sys
 import time
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
+import os
+_repo_root_default = "/mnt/katritch_lab2/aoxu/contrasCF"
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", _repo_root_default))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
-from casf_mutagenesis.config import OUTPUT_ROOT, SUBSET20_JSON, VARIANTS
+from casf_mutagenesis.config import (  # noqa: E402
+    BOLTZ_BIN as _BOLTZ_BIN_PATH, CUDA_DEVICE,
+    OUTPUT_ROOT, SUBSET20_JSON, VARIANTS,
+)
 
-BOLTZ_BIN = "/home/aoxu/miniconda3/envs/boltzina_env/bin/boltz"
+BOLTZ_BIN = str(_BOLTZ_BIN_PATH)
 DIFFUSION_SAMPLES = 5
 RECYCLING_STEPS = 3
 SAMPLING_STEPS = 200
 SEED = 42
-CUDA_DEVICE = "0"
 
 # Skip outliers that may OOM on a 24 GB RTX 4090. 3dx2 is 1016 residues
 # (homo-tetramer), 4ih5/4ih7 are 562 residues — keep those, only skip the

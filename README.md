@@ -67,16 +67,24 @@ docs/
 ## Setup
 
 ```bash
-# Conda envs (already configured on the lab workstation; reproduce on CARC):
+# Conda envs needed:
 #   rdkit_env       — analysis (rdkit, gemmi, biopython, pandas, matplotlib)
-#   PyMOL-PoseBench — headless PyMOL for figure rendering
-#   unidock2        — UniDock2 + UniDock legacy
+#   PyMOL-PoseBench — headless PyMOL for figure rendering (optional)
+#   unidock2        — UniDock2 + UniDock legacy (16-case docking)
 #   boltzina_env    — Boltz-2 v2.2.1 binary
-#   alphafold3 (CogLigandBench) — AF3 v3.0.1 inference
+#   alphafold3 (dockstrat-managed) — AF3 v3.0.1 inference
 
-# Mandatory before any script: prepend env's lib/ to LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/path/to/env/lib:$LD_LIBRARY_PATH
+# Source the host-specific env file before any script.
+source env/lab.sh    # lab workstation
+source env/carc.sh   # USC CARC (discovery.usc.edu)
 ```
+
+All host-specific paths (project root, Boltz/AF3 binaries, dataset root,
+GPU index) flow through `CONTRASCF_*` env vars resolved in
+[`analysis/casf_mutagenesis/config.py`](analysis/casf_mutagenesis/config.py).
+See the "Running on a different host" section of
+[`docs/casf_mutagenesis.md`](docs/casf_mutagenesis.md) for the full
+override table.
 
 For the **16-case pipeline**, you also need the paper's predictions data
 (~400 MB, gitignored) — download from
@@ -93,28 +101,22 @@ ln -s /path/to/pdbbind_cleansplit data/casf2016
 
 ```bash
 cd /path/to/contrasCF
-LIB=/path/to/rdkit_env/lib
-PY=/path/to/rdkit_env/bin/python
+source env/lab.sh    # or env/carc.sh — sets CONTRASCF_* and $CONTRASCF_PY
 
 # 1. gating test (CDK2 must match paper 11/11)
-LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-    analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py
 
 # 2. build inputs for the 20-PDB subset
-LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-    analysis/casf_mutagenesis/scripts/01_build_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py
 
 # 3. run Boltz-2 on subset20  (~37 s/job × 76 jobs ≈ 47 min)
-LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-    analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
 
 # 4. run AF3 with MSA on subset20 (~85 s/job × 76 jobs ≈ 1.8 h)
-LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-    analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
 
 # 5. analysis: ligand RMSD + memorisation rates
-LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-    analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
 ```
 
 ## Latest results (subset20, 2026-05-06)

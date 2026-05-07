@@ -23,22 +23,22 @@ import sys
 import time
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
+_repo_root_default = "/mnt/katritch_lab2/aoxu/contrasCF"
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", _repo_root_default))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
-from casf_mutagenesis.config import OUTPUT_ROOT, SUBSET20_JSON, VARIANTS
-from casf_mutagenesis.inputs_af3 import (
+from casf_mutagenesis.config import (  # noqa: E402
+    AF3_DIR, AF3_ENV, AF3_MODEL_DIR, CUDA_DEVICE,
+    OUTPUT_ROOT, SUBSET20_JSON, VARIANTS,
+)
+from casf_mutagenesis.inputs_af3 import (  # noqa: E402
     clean_a3m_for_af3, render_af3, rewrite_a3m_query,
 )
-from casf_mutagenesis.msa_via_boltz import fetch_msa_via_boltz
+from casf_mutagenesis.msa_via_boltz import fetch_msa_via_boltz  # noqa: E402
 
-AF3_ENV = Path("/mnt/katritch_lab2/aoxu/CogLigandBench/envs/alphafold3")
-AF3_DIR = Path("/mnt/katritch_lab2/aoxu/CogLigandBench/forks/alphafold3/alphafold3")
-AF3_MODEL_DIR = Path("/mnt/katritch_lab2/aoxu/CogLigandBench/forks/alphafold3/models")
 NUM_DIFFUSION_SAMPLES = 5
 NUM_RECYCLES = 10
 TIMEOUT_S = 3600
-CUDA_DEVICE = "0"
 MAX_TOTAL_LENGTH = 800
 
 MSA_CACHE = OUTPUT_ROOT / "_msa_cache"
@@ -48,12 +48,13 @@ def _build_af3_env() -> dict:
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = CUDA_DEVICE
     env["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-    nvidia_base = AF3_ENV / "lib" / "python3.12" / "site-packages" / "nvidia"
-    if nvidia_base.is_dir():
-        nvidia_lib_dirs = [
-            str(p / "lib") for p in nvidia_base.iterdir()
-            if (p / "lib").is_dir()
-        ]
+    nvidia_lib_dirs: list[str] = []
+    for sp in AF3_ENV.glob("lib/python*/site-packages/nvidia"):
+        if sp.is_dir():
+            for child in sp.iterdir():
+                if (child / "lib").is_dir():
+                    nvidia_lib_dirs.append(str(child / "lib"))
+    if nvidia_lib_dirs:
         existing = env.get("LD_LIBRARY_PATH", "")
         env["LD_LIBRARY_PATH"] = ":".join(
             nvidia_lib_dirs + ([existing] if existing else [])
