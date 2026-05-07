@@ -18,17 +18,19 @@ export CONTRASCF_AF3_MODEL_DIR=/project2/katritch_223/aoxu/dockStrat/forks/alpha
 
 export CONTRASCF_CUDA_DEVICE=0
 
-# rdkit_env on CARC — verify the path before relying on this.
-# If the rdkit_env isn't installed yet on this machine, install with:
-#     conda env create -f env/rdkit_env.yml -p /project2/katritch_223/aoxu/conda/envs/rdkit_env
-export _RDKIT_ENV=/project2/katritch_223/aoxu/conda/envs/rdkit_env
-if [ -d "$_RDKIT_ENV" ]; then
-    export LD_LIBRARY_PATH="$_RDKIT_ENV/lib:${LD_LIBRARY_PATH:-}"
-    export CONTRASCF_PY="$_RDKIT_ENV/bin/python"
+# Analysis Python: CARC's `boltzina_env` already has rdkit + gemmi +
+# biopython + numpy + pandas + yaml AND the Boltz-2 binary, so we use it
+# for both analysis and Boltz inference. The dedicated rdkit_env at
+# /project2/katritch_223/aoxu/conda/envs/rdkit_env is missing gemmi as
+# of 2026-05-06; if it gets gemmi later, switch CONTRASCF_PY back to it.
+export _ANALYSIS_ENV=/project2/katritch_223/aoxu/conda/envs/boltzina_env
+if [ -d "$_ANALYSIS_ENV" ]; then
+    export LD_LIBRARY_PATH="$_ANALYSIS_ENV/lib:${LD_LIBRARY_PATH:-}"
+    export CONTRASCF_PY="$_ANALYSIS_ENV/bin/python"
 else
-    echo "[contrasCF] WARNING: rdkit_env not found at $_RDKIT_ENV"
-    echo "             Set CONTRASCF_PY to your rdkit/gemmi-equipped python before running."
+    echo "[contrasCF] WARNING: analysis env not found at $_ANALYSIS_ENV"
+    echo "             Set CONTRASCF_PY manually."
 fi
-unset _RDKIT_ENV
+unset _ANALYSIS_ENV
 
 echo "[contrasCF] env: USC CARC. CONTRASCF_ROOT=$CONTRASCF_ROOT"
