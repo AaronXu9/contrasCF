@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=contrasCF_subset20
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+# AF3 v3 requires Volta+ (compute 7.0+) for tokamax attention kernels.
+# CARC's P100 is Pascal (compute 6.0) and raises
+# `NotImplementedError: Not supported on Tesla P100-PCIE-16GB.`
+# v100 is the most plentiful Volta+ on CARC (29 nodes); a100/a40/l40s
+# also work. Don't use bare `gpu:1` here — SLURM may schedule a P100.
+#SBATCH --gres=gpu:v100:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=06:00:00

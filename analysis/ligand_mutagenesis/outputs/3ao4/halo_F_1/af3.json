@@ -1,0 +1,34 @@
+{
+  "name": "3ao4_halo_F_1",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "SPGIWQLDCTHLEGKVILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTVHTDNGSNFTGATVRAACDWAGIKQEIESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNHKRKGGIGGYSAGERIVDIIATD",
+        "unpairedMsa": ">query\nSPGIWQLDCTHLEGKVILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTVHTDNGSNFTGATVRAACDWAGIKQEIESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNHKRKGGIGGYSAGERIVDIIATD\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "protein": {
+        "id": "B",
+        "sequence": "SPGIWQLDCTHLEGKVILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTVHTDNGSNFTGATVRAACDWAGIKQEESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNHKRKGGIGGYSAGERIVDIIATD",
+        "unpairedMsa": ">query\nSPGIWQLDCTHLEGKVILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTVHTDNGSNFTGATVRAACDWAGIKQEESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNHKRKGGIGGYSAGERIVDIIATD\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "C",
+        "smiles": "Cn1nc(-c2cc3c(cc2F)OCO3)cc1N"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

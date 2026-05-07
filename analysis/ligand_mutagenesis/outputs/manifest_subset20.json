@@ -1,0 +1,1450 @@
+{
+  "systems": [
+    {
+      "pdbid": "3ao4",
+      "status": "ok",
+      "error": null,
+      "het_code": "833",
+      "wt_smiles": "Cn1nc(-c2ccc3c(c2)OCO3)cc1N",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 2,
+      "seq_lengths": [
+        139,
+        138
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 4
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "Cn1nc(-c2ccc3c(c2)OCO3)cc1N",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3ao4/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "Cn1nc(-c2cc3c(cc2F)OCO3)cc1N",
+          "applied": [
+            "aromatic-C@5H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3ao4/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "Cn1nc(-c2cc3c(cc2Cl)OCO3)cc1N",
+          "applied": [
+            "aromatic-C@5H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3ao4/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "Cn1nc(-c2cc3c(cc2Br)OCO3)cc1N",
+          "applied": [
+            "aromatic-C@5H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3ao4/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3udh",
+      "status": "ok",
+      "error": null,
+      "het_code": "091",
+      "wt_smiles": "O=C1Nc2ccccc2[C@]12CCNC2",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        400
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 4
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C1Nc2ccccc2[C@]12CCNC2",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3udh/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C1Nc2cc(F)ccc2[C@]12CCNC2",
+          "applied": [
+            "aromatic-C@5H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3udh/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C1Nc2cc(Cl)ccc2[C@]12CCNC2",
+          "applied": [
+            "aromatic-C@5H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3udh/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C1Nc2cc(Br)ccc2[C@]12CCNC2",
+          "applied": [
+            "aromatic-C@5H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3udh/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4bkt",
+      "status": "ok",
+      "error": null,
+      "het_code": "QD0",
+      "wt_smiles": "CNC(=O)[C@@H]1C[C@@H](O)CN1C(=O)Cc1cc(C)no1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 2,
+      "seq_lengths": [
+        140,
+        144
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 1
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 1
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CNC(=O)[C@@H]1C[C@@H](O)CN1C(=O)Cc1cc(C)no1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4bkt/wt"
+        },
+        "meth_1": {
+          "rule": "methylation",
+          "smiles": "CNC(=O)[C@@H]1C[C@@H](OC)CN1C(=O)Cc1cc(C)no1",
+          "applied": [
+            "O@7\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4bkt/meth_1"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "CNC(=O)[C@@H]1C[C@@H](O)CN1C(=O)Cc1onc(C)c1F",
+          "applied": [
+            "aromatic-C@14H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4bkt/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "CNC(=O)[C@@H]1C[C@@H](O)CN1C(=O)Cc1onc(C)c1Cl",
+          "applied": [
+            "aromatic-C@14H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4bkt/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "CNC(=O)[C@@H]1C[C@@H](O)CN1C(=O)Cc1onc(C)c1Br",
+          "applied": [
+            "aromatic-C@14H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4bkt/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4ih5",
+      "status": "ok",
+      "error": null,
+      "het_code": "12R",
+      "wt_smiles": "c1ccc(NNc2ncnc3[nH]ncc23)cc1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        562
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 7
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "c1ccc(NNc2ncnc3[nH]ncc23)cc1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih5/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "Fc1ccc(NNc2ncnc3[nH]ncc23)cc1",
+          "applied": [
+            "aromatic-C@0H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih5/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "Clc1ccc(NNc2ncnc3[nH]ncc23)cc1",
+          "applied": [
+            "aromatic-C@0H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih5/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "Brc1ccc(NNc2ncnc3[nH]ncc23)cc1",
+          "applied": [
+            "aromatic-C@0H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih5/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "1vso",
+      "status": "ok",
+      "error": null,
+      "het_code": "AT1",
+      "wt_smiles": "CC(C)(C)c1onc(OCP(=O)(O)O)c1C[C@H](N)C(=O)O",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        251
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": true,
+          "reason": "carboxylate",
+          "n_matches": 1
+        },
+        "halogenation": {
+          "eligible": false,
+          "reason": "no aromatic CH",
+          "n_matches": 0
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CC(C)(C)c1onc(OCP(=O)(O)O)c1C[C@H](N)C(=O)O",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/wt"
+        },
+        "chrg_neu_methyl": {
+          "rule": "charge_swap",
+          "smiles": "CCCC(C)(C)C[C@@H](N)Cc1c(OCP(=O)(O)O)noc1C(C)(C)C",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CCC"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_neu_methyl"
+        },
+        "chrg_neu_ethyl": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)CC(C)(C)C[C@@H](N)Cc1c(OCP(=O)(O)O)noc1C(C)(C)C",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CC(C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_neu_ethyl"
+        },
+        "chrg_neu_propyl": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)CC(C)(C)CC(C)(C)C[C@@H](N)Cc1c(OCP(=O)(O)O)noc1C(C)(C)C",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CC(C)(C)CC(C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_neu_propyl"
+        },
+        "chrg_pos_1": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)c1onc(OCP(=O)(O)O)c1C[C@H](N)C[N+](C)(C)C",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_pos_1"
+        },
+        "chrg_pos_2": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)c1onc(OCP(=O)(O)O)c1C[C@H](N)C[N+](C)(C)C[N+](C)(C)C",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_pos_2"
+        },
+        "chrg_pos_3": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)c1onc(OCP(=O)(O)O)c1C[C@H](N)C[N+](C)(C)C[N+](C)(C)C[N+](C)(C)C",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C[N+](C)(C)C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1vso/chrg_pos_3"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4w9l",
+      "status": "ok",
+      "error": null,
+      "het_code": "3JJ",
+      "wt_smiles": "CC(=O)N[C@H](C(=O)N[C@H](C(=O)N1C[C@H](O)C[C@H]1C(=O)NCc1ccc(-c2scnc2C)cc1)C(C)(C)C)C(C)(C)C",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 3,
+      "seq_lengths": [
+        141,
+        97,
+        143
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 1
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 5
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CC(=O)N[C@H](C(=O)N[C@H](C(=O)N1C[C@H](O)C[C@H]1C(=O)NCc1ccc(-c2scnc2C)cc1)C(C)(C)C)C(C)(C)C",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4w9l/wt"
+        },
+        "meth_1": {
+          "rule": "methylation",
+          "smiles": "CO[C@@H]1C[C@@H](C(=O)NCc2ccc(-c3scnc3C)cc2)N(C(=O)[C@@H](NC(=O)[C@@H](NC(C)=O)C(C)(C)C)C(C)(C)C)C1",
+          "applied": [
+            "O@14\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4w9l/meth_1"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "CC(=O)N[C@H](C(=O)N[C@H](C(=O)N1C[C@H](O)C[C@H]1C(=O)NCc1ccc(-c2sc(F)nc2C)cc1)C(C)(C)C)C(C)(C)C",
+          "applied": [
+            "aromatic-C@27H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4w9l/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "CC(=O)N[C@H](C(=O)N[C@H](C(=O)N1C[C@H](O)C[C@H]1C(=O)NCc1ccc(-c2sc(Cl)nc2C)cc1)C(C)(C)C)C(C)(C)C",
+          "applied": [
+            "aromatic-C@27H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4w9l/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "CC(=O)N[C@H](C(=O)N[C@H](C(=O)N1C[C@H](O)C[C@H]1C(=O)NCc1ccc(-c2sc(Br)nc2C)cc1)C(C)(C)C)C(C)(C)C",
+          "applied": [
+            "aromatic-C@27H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4w9l/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4ih7",
+      "status": "ok",
+      "error": null,
+      "het_code": "1ER",
+      "wt_smiles": "CC(C)(C)c1cccc(-c2ccc[nH]c2=O)c1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        562
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 7
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CC(C)(C)c1cccc(-c2ccc[nH]c2=O)c1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih7/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "CC(C)(C)c1cc(F)cc(-c2ccc[nH]c2=O)c1",
+          "applied": [
+            "aromatic-C@6H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih7/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "CC(C)(C)c1cc(Cl)cc(-c2ccc[nH]c2=O)c1",
+          "applied": [
+            "aromatic-C@6H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih7/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "CC(C)(C)c1cc(Br)cc(-c2ccc[nH]c2=O)c1",
+          "applied": [
+            "aromatic-C@6H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ih7/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "1z9g",
+      "status": "ok",
+      "error": null,
+      "het_code": "RRT",
+      "wt_smiles": "O=C(O)CC(=O)N[C@@H](CS)Cc1ccccc1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        316
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": true,
+          "reason": "carboxylate",
+          "n_matches": 1
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 5
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C(O)CC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/wt"
+        },
+        "chrg_neu_methyl": {
+          "rule": "charge_swap",
+          "smiles": "CCCC(C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CCC"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_neu_methyl"
+        },
+        "chrg_neu_ethyl": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)CC(C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CC(C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_neu_ethyl"
+        },
+        "chrg_neu_propyl": {
+          "rule": "charge_swap",
+          "smiles": "CC(C)(C)CC(C)(C)CC(C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192CC(C)(C)CC(C)(C)CC(C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_neu_propyl"
+        },
+        "chrg_pos_1": {
+          "rule": "charge_swap",
+          "smiles": "C[N+](C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_pos_1"
+        },
+        "chrg_pos_2": {
+          "rule": "charge_swap",
+          "smiles": "C[N+](C)(C)C[N+](C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_pos_2"
+        },
+        "chrg_pos_3": {
+          "rule": "charge_swap",
+          "smiles": "C[N+](C)(C)C[N+](C)(C)C[N+](C)(C)CCC(=O)N[C@@H](CS)Cc1ccccc1",
+          "applied": [
+            "carboxylate\u2192C[N+](C)(C)C[N+](C)(C)C[N+](C)(C)C"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/chrg_pos_3"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)CC(=O)N[C@@H](CS)Cc1ccc(F)cc1",
+          "applied": [
+            "aromatic-C@14H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)CC(=O)N[C@@H](CS)Cc1ccc(Cl)cc1",
+          "applied": [
+            "aromatic-C@14H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)CC(=O)N[C@@H](CS)Cc1ccc(Br)cc1",
+          "applied": [
+            "aromatic-C@14H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1z9g/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4de1",
+      "status": "ok",
+      "error": null,
+      "het_code": "0J6",
+      "wt_smiles": "O=C(Nc1cccc(-c2nnn[nH]2)c1)c1ccc2n[nH]cc2c1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        263
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 8
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C(Nc1cccc(-c2nnn[nH]2)c1)c1ccc2n[nH]cc2c1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4de1/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1cc(F)cc(-c2nnn[nH]2)c1)c1ccc2n[nH]cc2c1",
+          "applied": [
+            "aromatic-C@5H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4de1/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1cc(Cl)cc(-c2nnn[nH]2)c1)c1ccc2n[nH]cc2c1",
+          "applied": [
+            "aromatic-C@5H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4de1/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1cc(Br)cc(-c2nnn[nH]2)c1)c1ccc2n[nH]cc2c1",
+          "applied": [
+            "aromatic-C@5H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4de1/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3k5v",
+      "status": "ok",
+      "error": null,
+      "het_code": "STJ",
+      "wt_smiles": "NC(=O)c1cccc(-c2cc(Nc3ccc(OC(F)(F)F)cc3)ncn2)c1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        287
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 10
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "NC(=O)c1cccc(-c2cc(Nc3ccc(OC(F)(F)F)cc3)ncn2)c1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3k5v/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "NC(=O)c1cc(F)cc(-c2cc(Nc3ccc(OC(F)(F)F)cc3)ncn2)c1",
+          "applied": [
+            "aromatic-C@5H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3k5v/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "NC(=O)c1cc(Cl)cc(-c2cc(Nc3ccc(OC(F)(F)F)cc3)ncn2)c1",
+          "applied": [
+            "aromatic-C@5H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3k5v/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "NC(=O)c1cc(Br)cc(-c2cc(Nc3ccc(OC(F)(F)F)cc3)ncn2)c1",
+          "applied": [
+            "aromatic-C@5H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3k5v/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3uo4",
+      "status": "ok",
+      "error": null,
+      "het_code": "0C0",
+      "wt_smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3-c3ccccc3)n2)cc1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        266
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 15
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3-c3ccccc3)n2)cc1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3uo4/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3-c3ccc(F)cc3)n2)cc1",
+          "applied": [
+            "aromatic-C@23H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3uo4/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3-c3ccc(Cl)cc3)n2)cc1",
+          "applied": [
+            "aromatic-C@23H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3uo4/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3-c3ccc(Br)cc3)n2)cc1",
+          "applied": [
+            "aromatic-C@23H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3uo4/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3dx2",
+      "status": "ok",
+      "error": null,
+      "het_code": "MZB",
+      "wt_smiles": "C[S@@](=O)[C@@H]1[C@@H](N)[C@@H](O)[C@@H](O)[C@H]1O",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        1016
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 3
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": false,
+          "reason": "no aromatic CH",
+          "n_matches": 0
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "C[S@@](=O)[C@@H]1[C@@H](N)[C@@H](O)[C@@H](O)[C@H]1O",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3dx2/wt"
+        },
+        "meth_1": {
+          "rule": "methylation",
+          "smiles": "CO[C@@H]1[C@H](O)[C@H](N)[C@@H]([S@@](C)=O)[C@@H]1O",
+          "applied": [
+            "O@9\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3dx2/meth_1"
+        },
+        "meth_2": {
+          "rule": "methylation",
+          "smiles": "CO[C@@H]1[C@H](N)[C@@H]([S@@](C)=O)[C@H](O)[C@@H]1OC",
+          "applied": [
+            "O@9\u2192OCH3",
+            "O@7\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3dx2/meth_2"
+        },
+        "meth_3": {
+          "rule": "methylation",
+          "smiles": "CO[C@@H]1[C@H](OC)[C@H](N)[C@@H]([S@@](C)=O)[C@@H]1OC",
+          "applied": [
+            "O@9\u2192OCH3",
+            "O@7\u2192OCH3",
+            "O@11\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3dx2/meth_3"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "1pxn",
+      "status": "ok",
+      "error": null,
+      "het_code": "CK6",
+      "wt_smiles": "CNc1nc(C)c(-c2ccnc(Nc3ccc(O)cc3)n2)s1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        298
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 6
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CNc1nc(C)c(-c2ccnc(Nc3ccc(O)cc3)n2)s1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1pxn/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(C)c(-c2cc(F)nc(Nc3ccc(O)cc3)n2)s1",
+          "applied": [
+            "aromatic-C@9H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1pxn/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(C)c(-c2cc(Cl)nc(Nc3ccc(O)cc3)n2)s1",
+          "applied": [
+            "aromatic-C@9H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1pxn/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(C)c(-c2cc(Br)nc(Nc3ccc(O)cc3)n2)s1",
+          "applied": [
+            "aromatic-C@9H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/1pxn/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3up2",
+      "status": "ok",
+      "error": null,
+      "het_code": "0C8",
+      "wt_smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3OC(F)(F)F)n2)cc1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        266
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 10
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3ccccc3OC(F)(F)F)n2)cc1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3up2/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3cc(F)ccc3OC(F)(F)F)n2)cc1",
+          "applied": [
+            "aromatic-C@16H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3up2/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3cc(Cl)ccc3OC(F)(F)F)n2)cc1",
+          "applied": [
+            "aromatic-C@16H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3up2/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(O)c1ccc(Nc2nccc(Nc3cc(Br)ccc3OC(F)(F)F)n2)cc1",
+          "applied": [
+            "aromatic-C@16H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3up2/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3qgy",
+      "status": "ok",
+      "error": null,
+      "het_code": "L7O",
+      "wt_smiles": "CNc1nccc(-c2c[nH]c(=O)c(NC(=O)c3ccc(N4CCCCC4)cc3)c2)n1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        245
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 8
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "CNc1nccc(-c2c[nH]c(=O)c(NC(=O)c3ccc(N4CCCCC4)cc3)c2)n1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3qgy/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(F)cc(-c2c[nH]c(=O)c(NC(=O)c3ccc(N4CCCCC4)cc3)c2)n1",
+          "applied": [
+            "aromatic-C@4H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3qgy/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(Cl)cc(-c2c[nH]c(=O)c(NC(=O)c3ccc(N4CCCCC4)cc3)c2)n1",
+          "applied": [
+            "aromatic-C@4H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3qgy/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "CNc1nc(Br)cc(-c2c[nH]c(=O)c(NC(=O)c3ccc(N4CCCCC4)cc3)c2)n1",
+          "applied": [
+            "aromatic-C@4H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3qgy/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3kr8",
+      "status": "ok",
+      "error": null,
+      "het_code": "XAV",
+      "wt_smiles": "Oc1nc(-c2ccc(C(F)(F)F)cc2)nc2c1CSCC2",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 2,
+      "seq_lengths": [
+        210,
+        210
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 4
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "Oc1nc(-c2ccc(C(F)(F)F)cc2)nc2c1CSCC2",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3kr8/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "Oc1nc(-c2ccc(C(F)(F)F)cc2F)nc2c1CSCC2",
+          "applied": [
+            "aromatic-C@5H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3kr8/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "Oc1nc(-c2ccc(C(F)(F)F)cc2Cl)nc2c1CSCC2",
+          "applied": [
+            "aromatic-C@5H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3kr8/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "Oc1nc(-c2ccc(C(F)(F)F)cc2Br)nc2c1CSCC2",
+          "applied": [
+            "aromatic-C@5H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3kr8/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "2xbv",
+      "status": "ok",
+      "error": null,
+      "het_code": "XBV",
+      "wt_smiles": "O=C(Nc1ccc(Cl)cn1)[C@H]1CN(CC(F)F)C[C@@H]1C(=O)Nc1ccc(-n2ccccc2=O)cc1F",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 2,
+      "seq_lengths": [
+        235,
+        51
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 10
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "O=C(Nc1ccc(Cl)cn1)[C@H]1CN(CC(F)F)C[C@@H]1C(=O)Nc1ccc(-n2ccccc2=O)cc1F",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2xbv/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1ccc(Cl)cn1)[C@H]1CN(CC(F)F)C[C@@H]1C(=O)Nc1ccc(-n2ccc(F)cc2=O)cc1F",
+          "applied": [
+            "aromatic-C@29H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2xbv/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1ccc(Cl)cn1)[C@H]1CN(CC(F)F)C[C@@H]1C(=O)Nc1ccc(-n2ccc(Cl)cc2=O)cc1F",
+          "applied": [
+            "aromatic-C@29H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2xbv/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "O=C(Nc1ccc(Cl)cn1)[C@H]1CN(CC(F)F)C[C@@H]1C(=O)Nc1ccc(-n2ccc(Br)cc2=O)cc1F",
+          "applied": [
+            "aromatic-C@29H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2xbv/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "3b5r",
+      "status": "ok",
+      "error": null,
+      "het_code": "B5R",
+      "wt_smiles": "C[C@](O)(COc1ccc(Cl)c(F)c1)C(=O)Nc1ccc(C#N)c(C(F)(F)F)c1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        247
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 1
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 6
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "C[C@](O)(COc1ccc(Cl)c(F)c1)C(=O)Nc1ccc(C#N)c(C(F)(F)F)c1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3b5r/wt"
+        },
+        "meth_1": {
+          "rule": "methylation",
+          "smiles": "CO[C@@](C)(COc1ccc(Cl)c(F)c1)C(=O)Nc1ccc(C#N)c(C(F)(F)F)c1",
+          "applied": [
+            "O@2\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3b5r/meth_1"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@](O)(COc1ccc(Cl)c(F)c1)C(=O)Nc1cc(C(F)(F)F)c(C#N)cc1F",
+          "applied": [
+            "aromatic-C@17H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3b5r/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@](O)(COc1ccc(Cl)c(F)c1)C(=O)Nc1cc(C(F)(F)F)c(C#N)cc1Cl",
+          "applied": [
+            "aromatic-C@17H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3b5r/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@](O)(COc1ccc(Cl)c(F)c1)C(=O)Nc1cc(C(F)(F)F)c(C#N)cc1Br",
+          "applied": [
+            "aromatic-C@17H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/3b5r/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4jia",
+      "status": "ok",
+      "error": null,
+      "het_code": "1K3",
+      "wt_smiles": "COc1ccc(-c2cccc3nc(Nc4ccc(N5CCN(C)CC5)cc4)nn23)cc1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        300
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": false,
+          "reason": "no aliphatic free hydroxyl",
+          "n_matches": 0
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 11
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "COc1ccc(-c2cccc3nc(Nc4ccc(N5CCN(C)CC5)cc4)nn23)cc1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4jia/wt"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "COc1ccc(-c2cc(F)cc3nc(Nc4ccc(N5CCN(C)CC5)cc4)nn23)cc1",
+          "applied": [
+            "aromatic-C@8H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4jia/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "COc1ccc(-c2cc(Cl)cc3nc(Nc4ccc(N5CCN(C)CC5)cc4)nn23)cc1",
+          "applied": [
+            "aromatic-C@8H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4jia/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "COc1ccc(-c2cc(Br)cc3nc(Nc4ccc(N5CCN(C)CC5)cc4)nn23)cc1",
+          "applied": [
+            "aromatic-C@8H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4jia/halo_Br_1"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "pdbid": "4ivc",
+      "status": "ok",
+      "error": null,
+      "het_code": "1J6",
+      "wt_smiles": "C[C@@H](O)c1nc2cnc3[nH]ccc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+      "wt_smiles_source": "crystal_sdf",
+      "n_chains": 1,
+      "seq_lengths": [
+        302
+      ],
+      "rules_eligible": {
+        "methylation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 1
+        },
+        "charge_swap": {
+          "eligible": false,
+          "reason": "no phosphate or carboxylate",
+          "n_matches": 0
+        },
+        "halogenation": {
+          "eligible": true,
+          "reason": "",
+          "n_matches": 3
+        }
+      },
+      "variants": {
+        "wt": {
+          "rule": "",
+          "smiles": "C[C@@H](O)c1nc2cnc3[nH]ccc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+          "applied": [],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ivc/wt"
+        },
+        "meth_1": {
+          "rule": "methylation",
+          "smiles": "CO[C@H](C)c1nc2cnc3[nH]ccc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+          "applied": [
+            "O@2\u2192OCH3"
+          ],
+          "paper_faithful": true,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ivc/meth_1"
+        },
+        "halo_F_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@@H](O)c1nc2cnc3[nH]c(F)cc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+          "applied": [
+            "aromatic-C@10H\u2192F"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ivc/halo_F_1"
+        },
+        "halo_Cl_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@@H](O)c1nc2cnc3[nH]c(Cl)cc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+          "applied": [
+            "aromatic-C@10H\u2192Cl"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ivc/halo_Cl_1"
+        },
+        "halo_Br_1": {
+          "rule": "halogenation",
+          "smiles": "C[C@@H](O)c1nc2cnc3[nH]c(Br)cc3c2n1[C@H]1CC[C@H](CC#N)CC1",
+          "applied": [
+            "aromatic-C@10H\u2192Br"
+          ],
+          "paper_faithful": false,
+          "out_dir": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/4ivc/halo_Br_1"
+        }
+      },
+      "warnings": []
+    }
+  ]
+}

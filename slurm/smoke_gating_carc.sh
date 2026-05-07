@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=contrasCF_smoke
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+# AF3 v3 needs Volta+ for tokamax kernels — pin to V100. See
+# slurm/run_subset20_carc.sh for the longer note.
+#SBATCH --gres=gpu:v100:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=24G
 #SBATCH --time=00:30:00
