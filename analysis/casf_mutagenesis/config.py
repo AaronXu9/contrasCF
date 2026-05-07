@@ -75,6 +75,43 @@ DOCKING_BOX_A = (25.0, 25.0, 25.0)
 
 VARIANTS = ("wt", "rem", "pack", "inv")
 
+
+# --- runtime version assertions -------------------------------------------
+
+def assert_boltz2_binary(boltz_bin: Path | str | None = None) -> str:
+    """Sanity-check that BOLTZ_BIN points at Boltz-2, not Boltz-1.
+
+    The two coexist with the same `boltz` name (lab workstation has
+    Boltz-1 v0.4.1 in rdkit_env and Boltz-2 v2.2.1 in boltzina_env).
+    Our runners always pass `--model boltz2` so picking up the wrong
+    binary fails loudly later — but this check fails early with a
+    clear message.
+
+    Returns the detected version string (e.g. "2.2.1").
+    """
+    import subprocess
+    bin_path = Path(boltz_bin) if boltz_bin else BOLTZ_BIN
+    py = bin_path.parent / "python"
+    if not py.exists():
+        raise RuntimeError(f"no python alongside Boltz at {bin_path.parent}")
+    res = subprocess.run(
+        [str(py), "-c", "import boltz; print(boltz.__version__)"],
+        capture_output=True, text=True, timeout=15,
+    )
+    if res.returncode != 0:
+        raise RuntimeError(
+            f"could not import boltz from {py}: {res.stderr.strip()}"
+        )
+    version = res.stdout.strip()
+    major = int(version.split(".", 1)[0])
+    if major < 2:
+        raise RuntimeError(
+            f"Boltz binary at {bin_path} reports version {version} — "
+            f"expected 2.x. This module always uses --model boltz2; "
+            f"set CONTRASCF_BOLTZ_BIN to a Boltz-2 install."
+        )
+    return version
+
 # Backbone atoms excluded when measuring "side-chain heavy atom" distances.
 BACKBONE_ATOMS = frozenset({"N", "CA", "C", "O", "OXT", "H", "HA"})
 

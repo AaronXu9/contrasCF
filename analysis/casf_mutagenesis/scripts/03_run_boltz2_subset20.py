@@ -27,9 +27,12 @@ sys.path.insert(0, str(REPO_ROOT / "analysis"))
 from casf_mutagenesis.config import (  # noqa: E402
     BOLTZ_BIN as _BOLTZ_BIN_PATH, CUDA_DEVICE,
     OUTPUT_ROOT, SUBSET20_JSON, VARIANTS,
+    assert_boltz2_binary,
 )
 
 BOLTZ_BIN = str(_BOLTZ_BIN_PATH)
+_v = assert_boltz2_binary(BOLTZ_BIN)
+print(f"Boltz binary: {BOLTZ_BIN} (v{_v})")
 DIFFUSION_SAMPLES = 5
 RECYCLING_STEPS = 3
 SAMPLING_STEPS = 200

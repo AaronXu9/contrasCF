@@ -27,9 +27,10 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from .config import BOLTZ_BIN as _DEFAULT_BOLTZ_BIN, CUDA_DEVICE
+from .config import BOLTZ_BIN as _DEFAULT_BOLTZ_BIN, CUDA_DEVICE, assert_boltz2_binary
 
 BOLTZ_BIN = str(_DEFAULT_BOLTZ_BIN)
+_BOLTZ_VERSION_CHECKED = False  # lazily checked on first fetch_msa_via_boltz call
 
 
 def _yaml_for_msa(seq: str) -> str:
@@ -73,6 +74,15 @@ def fetch_msa_via_boltz(
     cache_path = cache_dir / f"{key}.a3m"
     if cache_path.exists():
         return cache_path.read_text()
+
+    # Defensive: Boltz-1 (v0.4.1) and Boltz-2 (v2.2.1) coexist as `boltz`
+    # binaries on lab workstations. We rely on the v2 schema implicitly
+    # (the YAML format and the --use_msa_server contract). Fail early if
+    # CONTRASCF_BOLTZ_BIN points at a v1 install.
+    global _BOLTZ_VERSION_CHECKED
+    if not _BOLTZ_VERSION_CHECKED:
+        assert_boltz2_binary(boltz_bin)
+        _BOLTZ_VERSION_CHECKED = True
 
     with tempfile.TemporaryDirectory(prefix="boltz_msa_") as tmp:
         tmp_dir = Path(tmp)
