@@ -1,0 +1,38 @@
+# --- generated outputs (large; not in source) -----------------------------
+analysis/casf_mutagenesis/outputs/
+analysis/results/
+docking/inputs/
+docking/outputs/
+
+# --- shipped paper data (download from Zenodo 14749304 separately) --------
+contrasCF/data/
+
+# --- data symlinks (point outside the repo) -------------------------------
+data/casf2016
+
+# --- caches / work dirs ---------------------------------------------------
+**/__pycache__/
+**/*.pyc
+**/_msa_cache/
+**/_*_work/
+**/_boltz_work/
+**/_af3_work/
+**/_af3_msa_work/
+
+# --- large binaries (download separately) ---------------------------------
+*.pdf
+*.zst
+*.bin
+*.npz
+*.npy
+
+# --- editor / OS ----------------------------------------------------------
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# --- environment ----------------------------------------------------------
+.env
+*.local.sh

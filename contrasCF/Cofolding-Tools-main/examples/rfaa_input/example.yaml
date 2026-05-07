@@ -1,0 +1,13 @@
+defaults:
+  - base
+job_name: "example"
+
+protein_inputs:
+  A:
+    fasta_file: examples/rfaa_input/example.fasta
+
+sm_inputs:
+  C:
+    input: examples/rfaa_input/example.sdf
+    input_type: "sdf"
+   
