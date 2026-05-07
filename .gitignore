@@ -3,6 +3,9 @@ analysis/casf_mutagenesis/outputs/
 analysis/results/
 docking/inputs/
 docking/outputs/
+docking/smoketest/*.sdf
+docking/smoketest/*.cif
+docking/smoketest/*.json
 
 # --- shipped paper data (download from Zenodo 14749304 separately) --------
 contrasCF/data/
