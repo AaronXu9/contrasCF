@@ -195,6 +195,36 @@ Per-system invariants checked (all 20 pass):
 
 Pocket sizes range 2–12 residues across the subset.
 
+## Boltz-1 vs Boltz-2 — env naming caveat
+
+Both Boltz-1 (v0.4.x) and Boltz-2 (v2.2.x) are pip-installed under the
+package name `boltz` and produce a `boltz` binary. The env name doesn't
+reliably indicate the version:
+
+| host | env path | Boltz version |
+|---|---|---|
+| lab | `/home/aoxu/miniconda3/envs/boltzina_env/bin/boltz` | **2.2.1** ✓ |
+| lab | `/home/aoxu/miniconda3/envs/rdkit_env/bin/boltz` | 0.4.1 (Boltz-1) |
+| CARC | `/project2/katritch_223/aoxu/conda/envs/boltzina_env/bin/boltz` | **2.2.1** ✓ |
+| CARC | `/project2/katritch_223/aoxu/.conda/envs/boltz2/bin/boltz` | **2.2.1** ✓ |
+| CARC | `/project2/katritch_223/aoxu/.conda/envs/boltzina_env/bin/boltz` | **2.2.1** ✓ |
+
+This module **only uses Boltz-2** (the runners always pass
+`--model boltz2`). To prevent accidental Boltz-1 selection, every entry
+point calls
+[`config.assert_boltz2_binary`](../analysis/casf_mutagenesis/config.py)
+which imports `boltz` from the binary's adjacent Python and fails with a
+clear error if the major version is < 2. The check is run:
+- at import time in `scripts/03_run_boltz2_subset20.py` (the dedicated
+  Boltz runner),
+- lazily on the first MSA fetch in `msa_via_boltz.fetch_msa_via_boltz`.
+
+dockStrat reuses one `boltz` binary for both `--model boltz1` and
+`--model boltz2` (its `dockstrat_config/model/{boltz1,boltz2}_inference
+.yaml` both point at the same path); the version selection is by flag,
+not by binary. This module **does not use dockStrat's runner** — it
+calls `boltz predict` directly with explicit Boltz-2 settings.
+
 ## Running on a different host (env-var overrides)
 
 All host-specific paths flow through env vars resolved in
