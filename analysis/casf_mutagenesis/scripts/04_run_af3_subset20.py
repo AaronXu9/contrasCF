@@ -44,9 +44,14 @@ def _build_env() -> dict:
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = CUDA_DEVICE
     env["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-    # Glob site-packages/nvidia/* — Python version varies across hosts
-    # (lab: 3.12; CARC may differ). The pip-installed NVIDIA wheels put
-    # CUDA libs under <env>/lib/pythonX.Y/site-packages/nvidia/*/lib/.
+    # AF3 v3 requires this on Volta (compute 7.x); harmless on Ampere+.
+    xla_flag = "--xla_disable_hlo_passes=custom-kernel-fusion-rewriter"
+    existing_xla = env.get("XLA_FLAGS", "")
+    env["XLA_FLAGS"] = (
+        f"{existing_xla} {xla_flag}".strip() if xla_flag not in existing_xla
+        else existing_xla
+    )
+    # Glob site-packages/nvidia/* — Python version varies across hosts.
     nvidia_lib_dirs: list[str] = []
     for sp in AF3_ENV.glob("lib/python*/site-packages/nvidia"):
         if sp.is_dir():

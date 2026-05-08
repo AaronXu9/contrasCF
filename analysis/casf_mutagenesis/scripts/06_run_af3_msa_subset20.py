@@ -48,6 +48,18 @@ def _build_af3_env() -> dict:
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = CUDA_DEVICE
     env["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+    # AF3 v3 explicitly requires this XLA flag on Volta (compute 7.x):
+    #   ValueError: For devices with GPU compute capability 7.x ... the ENV
+    #   XLA_FLAGS must include "--xla_disable_hlo_passes=custom-kernel-fusion-rewriter".
+    # Setting unconditionally is fine on Ampere+ (compute 8+) — at worst a
+    # redundant optimisation skip. See run-log of CARC job 8622798 for the
+    # original failure.
+    xla_flag = "--xla_disable_hlo_passes=custom-kernel-fusion-rewriter"
+    existing_xla = env.get("XLA_FLAGS", "")
+    env["XLA_FLAGS"] = (
+        f"{existing_xla} {xla_flag}".strip() if xla_flag not in existing_xla
+        else existing_xla
+    )
     nvidia_lib_dirs: list[str] = []
     for sp in AF3_ENV.glob("lib/python*/site-packages/nvidia"):
         if sp.is_dir():
