@@ -103,6 +103,10 @@ def _run_af3(json_path: Path, work_dir: Path) -> Path:
         "--run_inference=true",
         f"--num_diffusion_samples={NUM_DIFFUSION_SAMPLES}",
         f"--num_recycles={NUM_RECYCLES}",
+        # Required on Volta (compute 7.x); harmless on Ampere+ (compute 8+).
+        # AF3 v3 raises if this isn't set on V100. Pair with the XLA env flag
+        # in _build_af3_env above.
+        "--flash_attention_implementation=xla",
     ]
     result = subprocess.run(
         cmd, capture_output=True, text=True,

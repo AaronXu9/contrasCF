@@ -89,6 +89,8 @@ def _run_af3_one(json_path: Path, work_dir: Path) -> Path:
         "--run_inference=true",
         f"--num_diffusion_samples={NUM_DIFFUSION_SAMPLES}",
         f"--num_recycles={NUM_RECYCLES}",
+        # Required on Volta (compute 7.x); harmless on Ampere+.
+        "--flash_attention_implementation=xla",
     ]
     result = subprocess.run(
         cmd, capture_output=True, text=True,

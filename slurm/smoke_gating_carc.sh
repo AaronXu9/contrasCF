@@ -52,21 +52,42 @@ CUDA_VISIBLE_DEVICES=0 "$CONTRASCF_BOLTZ_BIN" predict \
 ls "$SMOKE_DIR"/boltz_results_*/predictions/*/*.cif | head -1
 
 echo
-echo "--- 4. One AF3+MSA prediction (1pxn-wt) ---"
+echo "--- 4. One AF3+MSA prediction (1pxn-wt; ~90s) ---"
+# Run the actual AF3 inference on a single system so we surface
+# host-specific issues (missing XLA_FLAGS, missing
+# --flash_attention_implementation flag, GPU-arch mismatch, etc.) BEFORE
+# the multi-hour full sbatch run. This is more expensive but catches
+# bugs early — the alternative is wasting 4+ hours per missed flag.
 $CONTRASCF_PY -c "
-import sys
+import sys, json, hashlib, shutil, subprocess
 sys.path.insert(0,'analysis')
 from casf_mutagenesis.msa_via_boltz import fetch_msa_via_boltz
-import json, hashlib
-seq = json.load(open('analysis/casf_mutagenesis/outputs/1pxn/wt/af3.json'))['sequences'][0]['protein']['sequence']
-key = hashlib.sha1(seq.encode()).hexdigest()[:16]
-a3m = fetch_msa_via_boltz(seq, cache_dir='analysis/casf_mutagenesis/outputs/_msa_cache')
-print(f'MSA fetched: sha1[:16]={key} n_seqs={a3m.count(chr(62))}')
-"
+from casf_mutagenesis.inputs_af3 import (
+    clean_a3m_for_af3, render_af3, rewrite_a3m_query,
+)
+import importlib.util
+spec = importlib.util.spec_from_file_location(
+    'runner06', 'analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py')
+mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 
-# Just verify we have a fresh AF3 JSON; full AF3 inference takes ~90s
-# and its own verification runs are covered by 06_run_af3_msa.
-echo "(AF3 inference smoke skipped here; tested by full sbatch run.)"
+# Fetch + clean the MSA, build a fresh JSON, run AF3, check the cif lands.
+seq = json.load(open('analysis/casf_mutagenesis/outputs/1pxn/wt/af3.json'))['sequences'][0]['protein']['sequence']
+smiles = json.load(open('analysis/casf_mutagenesis/outputs/1pxn/wt/af3.json'))['sequences'][1]['ligand']['smiles']
+a3m = fetch_msa_via_boltz(seq, cache_dir='analysis/casf_mutagenesis/outputs/_msa_cache')
+a3m = clean_a3m_for_af3(rewrite_a3m_query(a3m, seq), len(seq))
+
+import tempfile
+with tempfile.TemporaryDirectory(prefix='af3_smoke_') as tmp:
+    from pathlib import Path
+    json_path = Path(tmp)/'af3.json'
+    render_af3('1pxn_wt_smoke', [('A', seq)], smiles, json_path, chain_msas={'A': a3m})
+    sys_dir = mod._run_af3(json_path, Path(tmp)/'work')
+    # Find produced cif
+    cifs = list(sys_dir.glob('seed-*/*model.cif'))
+    print(f'AF3 produced {len(cifs)} cif files; first: {cifs[0] if cifs else \"(none)\"}')
+    assert cifs, 'AF3 produced no cif'
+print('AF3 smoke OK')
+"
 
 rm -rf "$SMOKE_DIR"
 echo
