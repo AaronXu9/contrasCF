@@ -67,7 +67,15 @@ def main() -> int:
     n_err = sum(1 for e in entries if e.status == "error")
     n_warn = sum(1 for e in entries if e.status == "ok" and e.warnings)
     print(f"Summary: ok={n_ok} warn={n_warn} error={n_err}")
-    return 0 if n_err == 0 else 1
+    # Per-system errors (missing raw/ entries, malformed crystal SDF, etc.)
+    # are data issues, not pipeline failures — downstream Boltz / AF3
+    # phases skip those cells via missing_input. Always exit 0 unless ALL
+    # systems failed (which means something larger is wrong: bad paths,
+    # missing dependencies, etc.).
+    if entries and n_err == len(entries):
+        print("ERROR: all systems failed — likely a configuration problem")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

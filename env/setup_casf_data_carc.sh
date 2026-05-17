@@ -47,12 +47,18 @@ echo "Setting up $N_IDS PDBs on CARC ($SCOPE)"
         # raw/<pdbid>/{*_protein.pdb, *_ligand.sdf}
         for f in "${LAB_PDBB}/raw/${pdbid}/${pdbid}_protein.pdb" \
                  "${LAB_PDBB}/raw/${pdbid}/${pdbid}_ligand.sdf"; do
-            [ -L "$f" ] || { echo "echo 'WARN: not a symlink: $f'" >&2; continue; }
-            tgt=$(readlink "$f")
-            new_tgt=${tgt//$LAB_HIQB_PREFIX/$CARC_HIQB_PREFIX}
             base=$(basename "$f")
             echo "mkdir -p ${CARC_PDBB}/raw/${pdbid}"
-            echo "ln -sfn '${new_tgt}' '${CARC_PDBB}/raw/${pdbid}/${base}'"
+            if [ -L "$f" ]; then
+                # Symlink case: re-target lab HiQBind prefix → CARC prefix.
+                tgt=$(readlink "$f")
+                new_tgt=${tgt//$LAB_HIQB_PREFIX/$CARC_HIQB_PREFIX}
+                echo "ln -sfn '${new_tgt}' '${CARC_PDBB}/raw/${pdbid}/${base}'"
+            fi
+            # Real-file cases (a small minority — ~5% of lab raw/ entries
+            # are actual files, not symlinks; e.g. 2vvn, 3arq, 2zy1) are
+            # rsync'd in a second pass below to avoid heredoc-stream
+            # fragility for hundred-KB-scale files.
         done
         # crystal_ligands/<pdbid>_ligand.sdf
         f="${LAB_PDBB}/crystal_ligands/${pdbid}_ligand.sdf"
@@ -62,5 +68,26 @@ echo "Setting up $N_IDS PDBs on CARC ($SCOPE)"
             echo "ln -sfn '${new_tgt}' '${CARC_PDBB}/crystal_ligands/${pdbid}_ligand.sdf'"
         fi
     done <<< "$IDS"
-    echo "echo done"
+    echo "echo symlinks done"
 } | ssh aoxu@discovery.usc.edu bash
+
+# Second pass: rsync the real-file (non-symlink) entries on lab to CARC.
+# These are the residue of raw/ that aren't HiQBind symlinks. Collect the
+# list and rsync once.
+REAL_FILE_RELPATHS=()
+while IFS= read -r pdbid; do
+    for base in "${pdbid}_protein.pdb" "${pdbid}_ligand.sdf"; do
+        f="${LAB_PDBB}/raw/${pdbid}/${base}"
+        if [ -f "$f" ] && [ ! -L "$f" ]; then
+            REAL_FILE_RELPATHS+=("raw/${pdbid}/${base}")
+        fi
+    done
+done <<< "$IDS"
+
+if [ ${#REAL_FILE_RELPATHS[@]} -gt 0 ]; then
+    echo "Rsyncing ${#REAL_FILE_RELPATHS[@]} real-file entries to CARC..."
+    printf '%s\n' "${REAL_FILE_RELPATHS[@]}" | \
+        rsync -aR --files-from=- \
+              "${LAB_PDBB}/./" "aoxu@discovery.usc.edu:${CARC_PDBB}/" 2>&1 | tail -5
+fi
+echo "all done"
