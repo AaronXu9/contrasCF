@@ -1,4 +1,4 @@
-"""Analyze Boltz-2 + AF3 predictions on the CASF subset20.
+"""Analyze Boltz-2 + AF3 predictions on a CASF scope.
 
 For every (pdbid, variant, model) cell with a predicted mmCIF, compute:
   - Cα RMSD vs the crystal protein (sanity: should be small for WT, larger
@@ -8,10 +8,16 @@ For every (pdbid, variant, model) cell with a predicted mmCIF, compute:
 Aggregate memorization rate per (model, variant) — fraction of *adversarial*
 cases (rem / pack / inv) with ligand RMSD < 2 Å (paper's threshold).
 
+Scope (env-var controlled, defaults to subset20):
+  CONTRASCF_SCOPE=subset20  → 20 PDBs from PDBbind_casf2016_subset20.json
+  CONTRASCF_SCOPE=full      → 285 PDBs from PDBbind_data_split_cleansplit.json["casf2016"]
+
+Output filenames carry the scope suffix:
+  results_<scope>.csv, memorization_<scope>.csv
+
 Run:
-    LD_LIBRARY_PATH=/home/aoxu/miniconda3/envs/rdkit_env/lib:$LD_LIBRARY_PATH \\
-        /home/aoxu/miniconda3/envs/rdkit_env/bin/python \\
-        analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+    source env/lab.sh         # or env/carc.sh
+    CONTRASCF_SCOPE=full $CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
 """
 from __future__ import annotations
 import csv
@@ -28,13 +34,22 @@ from casf_mutagenesis.analysis import (
     MEMORIZATION_THRESHOLDS_A, MODEL_FILES, analyze_prediction,
     memorization_stats,
 )
-from casf_mutagenesis.config import OUTPUT_ROOT, SUBSET20_JSON, VARIANTS
+from casf_mutagenesis.config import OUTPUT_ROOT, SPLIT_JSON, SUBSET20_JSON, VARIANTS
+
+
+def _resolve_ids() -> tuple[list[str], str]:
+    scope = os.environ.get("CONTRASCF_SCOPE", "subset20")
+    if scope == "full":
+        ids = json.loads(SPLIT_JSON.read_text())["casf2016"]
+    else:
+        ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    return ids, scope
 
 
 def main() -> int:
-    ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    ids, scope = _resolve_ids()
     rows = []
-    print(f"subset20: {len(ids)} systems × {len(VARIANTS)} variants × "
+    print(f"{scope}: {len(ids)} systems × {len(VARIANTS)} variants × "
           f"{len(MODEL_FILES)} models = "
           f"{len(ids) * len(VARIANTS) * len(MODEL_FILES)} cells\n")
     for pdbid in ids:
@@ -55,7 +70,7 @@ def main() -> int:
                           f"{(': ' + rec.error) if rec.error else ''}")
 
     # CSV
-    csv_path = OUTPUT_ROOT / "results_subset20.csv"
+    csv_path = OUTPUT_ROOT / f"results_{scope}.csv"
     with csv_path.open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(asdict(rows[0]).keys()))
         w.writeheader()
@@ -65,7 +80,7 @@ def main() -> int:
 
     # Memorization aggregates
     stats = memorization_stats(rows)
-    summary_path = OUTPUT_ROOT / "memorization_subset20.csv"
+    summary_path = OUTPUT_ROOT / f"memorization_{scope}.csv"
     with summary_path.open("w", newline="") as f:
         w = csv.writer(f)
         w.writerow([
