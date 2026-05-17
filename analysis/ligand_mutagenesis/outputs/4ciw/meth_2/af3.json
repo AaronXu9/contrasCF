@@ -1,0 +1,25 @@
+{
+  "name": "4ciw_meth_2",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "LIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEH",
+        "unpairedMsa": ">query\nLIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEH\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "B",
+        "smiles": "CO[C@@H]1C(CCO)=C[C@@](O)(C(=O)O)C[C@H]1OC"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

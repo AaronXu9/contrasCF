@@ -24,7 +24,10 @@
 # Submit from the repo root on CARC:
 #     sbatch slurm/run_full_casf_carc.sh
 
-set -euo pipefail
+# `-u` (unset-var error) clashes with GMXRC sourcing inside env/carc.sh —
+# GMXRC's bash dialect uses unset $shell / $GMXLDLIB. Drop -u to let the
+# τ-RAMD additions in env/carc.sh source cleanly. Keep -e + pipefail.
+set -eo pipefail
 cd "${SLURM_SUBMIT_DIR:-/project2/katritch_223/aoxu/contrasCF}"
 source env/carc.sh
 

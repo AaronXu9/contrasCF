@@ -27,7 +27,9 @@
 # Total wallclock: ~3 h on a single GPU. Adjust --time if your CARC GPU
 # is slower than an RTX 4090.
 
-set -euo pipefail
+# Note: -u dropped because env/carc.sh now sources GMXRC (for τ-RAMD),
+# which uses unset $shell / $GMXLDLIB internally. Keep -e + pipefail.
+set -eo pipefail
 
 # SLURM copies the script to /var/spool/.../slurm_script, so $0 isn't the
 # repo path. Use SLURM_SUBMIT_DIR (sbatch's CWD) when available, else fall

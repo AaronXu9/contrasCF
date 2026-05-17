@@ -284,6 +284,77 @@ Manifest entries record per-variant `{rule, smiles, applied, paper_faithful,
 out_dir}` plus a top-level `rules_eligible` dict; downstream model-runner
 scripts read the variant set from this manifest (not from a fixed tuple).
 
+## Full CASF-2016 build (2026-05-07, n=285)
+
+`02_build_full_casf.py` on all 285 CASF-2016 PDB ids from
+`PDBbind_data_split_cleansplit.json["casf2016"]`.
+
+**Outcome:** 251/285 systems built successfully, **1300 total variants**
+emitted. 34 systems failed with `FileNotFoundError: missing
+<pdbid>_protein.pdb` — these are CASF-2016 PDB ids for which the protein
+crystal isn't present in the local `data/casf2016/raw/` (a data-availability
+gap upstream of this module, not a code defect). Failed ids:
+
+```
+1a30 1c5z 2p15 2vvn 2wca 2zcr 2zda 2zy1 3acw 3arp 3arq 3aru 3arv 3ary
+3b65 3bv9 3dxg 3f3a 3kgp 3myg 3o9i 3prs 3pww 3qqs 3r88 3twp 3uex 3uri
+3zsx 4abg 4kzq 4kzu 4owm 4pcs
+```
+
+**Per-rule eligibility (of 251 OK systems):**
+
+| rule | n eligible | % |
+|---|---|---|
+| halogenation | 213 | 85 % |
+| methylation | 74 | 29 % |
+| charge_swap | 42 | 17 % |
+
+**Variant rule counts (1300 total):**
+
+| rule | variants |
+|---|---|
+| `wt` | 251 |
+| `halo_*` | 639 |
+| `chrg_*` | 252 (= 42 × 6) |
+| `meth_*` | 158 (mean ≈ 2 OHs per methylation-eligible ligand) |
+
+**Variants-per-system distribution:**
+
+| variants | systems |
+|---|---|
+| 1 (wt only) | 9 |
+| 2 | 2 |
+| 4 (wt + halo only) | 140 |
+| 5 | 32 |
+| 6 | 16 |
+| 7 | 16 |
+| 8 | 7 |
+| 9 | 1 |
+| 10 (wt + halo + charge_swap) | 21 |
+| 11–13 | 7 |
+
+The 9 systems with only the `wt` variant have a ligand with no aliphatic
+OH, no phosphate, no carboxylate, AND no aromatic CH — usually small
+crystallographic ligands like single ions or simple cofactors.
+
+**Results path:**
+
+```
+analysis/ligand_mutagenesis/outputs/manifest_full.json     # 285-system manifest
+analysis/ligand_mutagenesis/outputs/<pdbid>/<variant>/     # per-variant inputs
+```
+
+Downstream model-runner / analysis scripts should:
+
+- Read `manifest_full.json` to enumerate (pdbid, variant) pairs and pick up
+  per-variant ligand SMILES and the `paper_faithful` flag (use this to
+  filter the soft-extension carboxylate / halogenation variants if you
+  want to limit to the paper's exact transformations).
+- Skip systems with `status == "error"` (the 34 missing-PDB cases).
+- Reuse the protein chain sequences across all variants of a system
+  (constant in this module — the docking inputs share `receptor.pdb` and
+  `box.json` via hardlink for the same reason).
+
 ## Running on a different host (env-var overrides)
 
 This module re-exports all CASF / Boltz / AF3 paths from

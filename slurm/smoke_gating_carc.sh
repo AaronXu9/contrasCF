@@ -18,7 +18,9 @@
 # Submit from the repo root on CARC:
 #     sbatch slurm/smoke_gating_carc.sh
 
-set -euo pipefail
+# Note: -u dropped because env/carc.sh now sources GMXRC (for τ-RAMD),
+# which uses unset $shell / $GMXLDLIB internally. Keep -e + pipefail.
+set -eo pipefail
 
 # SLURM copies the script to /var/spool/.../slurm_script, so $0 isn't the
 # repo path. Use SLURM_SUBMIT_DIR (sbatch's CWD) when available, else fall

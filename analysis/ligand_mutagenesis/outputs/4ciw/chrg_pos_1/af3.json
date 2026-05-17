@@ -1,0 +1,25 @@
+{
+  "name": "4ciw_chrg_pos_1",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "LIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEH",
+        "unpairedMsa": ">query\nLIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEH\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "B",
+        "smiles": "C[N+](C)(C)C[C@@]1(O)C=C(CCO)[C@@H](O)[C@H](O)C1"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}
