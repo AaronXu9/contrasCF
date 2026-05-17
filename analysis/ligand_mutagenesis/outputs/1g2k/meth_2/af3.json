@@ -1,0 +1,34 @@
+{
+  "name": "1g2k_meth_2",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF",
+        "unpairedMsa": ">query\nPQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "protein": {
+        "id": "B",
+        "sequence": "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF",
+        "unpairedMsa": ">query\nPQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "C",
+        "smiles": "CNC(=O)c1cccc(CN2[C@H](COc3ccccc3)[C@H](OC)[C@@H](OC)[C@@H](COc3ccccc3)N(Cc3ccccc3)S2(=O)=O)c1"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

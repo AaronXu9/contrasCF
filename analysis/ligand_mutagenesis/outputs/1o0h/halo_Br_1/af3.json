@@ -1,0 +1,25 @@
+{
+  "name": "1o0h_halo_Br_1",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "KETAAAKFERQHMDSSTSAASSSNYCNQMMKSRNLTKDRCKPVNTFVHESLADVQAVCSQKNVACKNGQTNCYQSYSTMSITDCRETGSSKYPNCAYKTTQANKHIIVACEGNPYVPVHFDASV",
+        "unpairedMsa": ">query\nKETAAAKFERQHMDSSTSAASSSNYCNQMMKSRNLTKDRCKPVNTFVHESLADVQAVCSQKNVACKNGQTNCYQSYSTMSITDCRETGSSKYPNCAYKTTQANKHIIVACEGNPYVPVHFDASV\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "B",
+        "smiles": "Nc1nc(Br)nc2c1ncn2[C@@H]1O[C@H](CO[P@@](=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

@@ -1,0 +1,25 @@
+{
+  "name": "4lzs_wt",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "SMNPPPPETSNPNKPKRQTNQLQYLLRVVLKTLWKHQFAWPFQQPVDAVKLNLPDYYKIIKTPMDMGTIKKRLENNYYWNAQECIQDFNTMFTNCYIYNKPGDDIVLMAEALEKLFLQKINELPTEE",
+        "unpairedMsa": ">query\nSMNPPPPETSNPNKPKRQTNQLQYLLRVVLKTLWKHQFAWPFQQPVDAVKLNLPDYYKIIKTPMDMGTIKKRLENNYYWNAQECIQDFNTMFTNCYIYNKPGDDIVLMAEALEKLFLQKINELPTEE\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "B",
+        "smiles": "CCc1c(C(=O)NC)[nH]c(C)c1C(C)=O"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

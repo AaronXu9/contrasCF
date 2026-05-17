@@ -1,0 +1,34 @@
+{
+  "name": "1o5b_halo_Cl_1",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "LKFQCGQK",
+        "unpairedMsa": ">query\nLKFQCGQK\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "protein": {
+        "id": "B",
+        "sequence": "IIGGEFTTIENQPWFAAIYRRHRGGSVTYVCGGSLMSPCWVISATHCFIDYPKKEDYIVYLGRSRLNSNTQGEMKFEVENLILHKDYSADTLAHHNDIALLKIRSKEGRCAQPSRTIQTICLPSMYNDPQFGTSCEITGFGKEASTDYLYPEQLKMTVVKLISHRECQQPHYYGSEVTTKMLCAADPQWKTDACQGDSGGPLVCSLQGRMTLTGIVSWGRGCALKDKPGVYTRVSHFLPWIRSHT",
+        "unpairedMsa": ">query\nIIGGEFTTIENQPWFAAIYRRHRGGSVTYVCGGSLMSPCWVISATHCFIDYPKKEDYIVYLGRSRLNSNTQGEMKFEVENLILHKDYSADTLAHHNDIALLKIRSKEGRCAQPSRTIQTICLPSMYNDPQFGTSCEITGFGKEASTDYLYPEQLKMTVVKLISHRECQQPHYYGSEVTTKMLCAADPQWKTDACQGDSGGPLVCSLQGRMTLTGIVSWGRGCALKDKPGVYTRVSHFLPWIRSHT\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "C",
+        "smiles": "NC(=[NH2+])c1cc2c(I)cc(Cl)cc2s1"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}

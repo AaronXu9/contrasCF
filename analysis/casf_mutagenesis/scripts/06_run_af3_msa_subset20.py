@@ -29,7 +29,7 @@ sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
 from casf_mutagenesis.config import (  # noqa: E402
     AF3_DIR, AF3_ENV, AF3_MODEL_DIR, CUDA_DEVICE,
-    OUTPUT_ROOT, SUBSET20_JSON, VARIANTS,
+    OUTPUT_ROOT, SPLIT_JSON, SUBSET20_JSON, VARIANTS,
 )
 from casf_mutagenesis.inputs_af3 import (  # noqa: E402
     clean_a3m_for_af3, render_af3, rewrite_a3m_query,
@@ -154,8 +154,20 @@ def _copy_top(af3_sys_dir: Path, name: str, dst_dir: Path) -> dict:
     return out
 
 
+def _resolve_ids() -> tuple[list[str], str]:
+    scope = os.environ.get("CONTRASCF_SCOPE", "subset20")
+    if scope == "full":
+        ids = json.loads(SPLIT_JSON.read_text())["casf2016"]
+    else:
+        ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    start = int(os.environ.get("CONTRASCF_START", "0"))
+    end = int(os.environ.get("CONTRASCF_END", str(len(ids))))
+    return ids[start:end], f"{scope}[{start}:{end}]"
+
+
 def main() -> int:
-    ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    ids, scope_label = _resolve_ids()
+    print(f"AF3+MSA scope: {scope_label}, n_pdb={len(ids)}")
 
     # Phase 1: ensure WT MSA is cached for each system
     print("Phase 1: fetch MSAs for WT sequences\n")

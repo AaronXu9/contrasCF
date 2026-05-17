@@ -1,0 +1,15 @@
+; step6.0_minimization.mdp — energy minimization
+; soluble protein-ligand system, AMBER ff14SB + GAFF2 + TIP3P
+integrator              = steep
+emtol                   = 500.0
+emstep                  = 0.01
+nsteps                  = 5000
+nstlist                 = 10
+cutoff-scheme           = Verlet
+coulombtype             = PME
+rcoulomb                = 1.0
+vdwtype                 = cutoff
+vdw-modifier            = Potential-shift-Verlet
+rvdw                    = 1.0
+constraints             = h-bonds
+constraint_algorithm    = LINCS

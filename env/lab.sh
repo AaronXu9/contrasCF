@@ -21,4 +21,13 @@ export CONTRASCF_CUDA_DEVICE=0
 export LD_LIBRARY_PATH=/home/aoxu/miniconda3/envs/rdkit_env/lib:${LD_LIBRARY_PATH:-}
 export CONTRASCF_PY=/home/aoxu/miniconda3/envs/rdkit_env/bin/python
 
+# --- τ-RAMD pilot ---------------------------------------------------------
+# Output root for the ramd_pilot module (per-system sim dirs + analysis).
+export CONTRASCF_RAMD_OUT=$CONTRASCF_ROOT/analysis/ramd_pilot/outputs
+# Path to the gromacs-ramd build (HITS-MCM patched fork). Empty on the lab
+# workstation since the pilot runs on CARC.
+export CONTRASCF_GMX_RAMD=
+# AmberTools env (antechamber, parmchk2, acpype) for ligand parameterization.
+export CONTRASCF_AMBERTOOLS_ENV=
+
 echo "[contrasCF] env: lab workstation. Use \$CONTRASCF_PY for analysis scripts."

@@ -1,0 +1,45 @@
+; step6.1_nvt_heat.mdp — NVT heating 0 → 300 K, 100 ps
+; Heavy-atom backbone + sidechain restraints (BB=1000, SC=500 kJ/mol/nm²)
+; via topology #ifdef macros: define POSRES_FC_BB / POSRES_FC_SC.
+define                  = -DPOSRES_FC_BB=1000 -DPOSRES_FC_SC=500
+integrator              = md
+dt                      = 0.001                  ; 1 fs (heating)
+nsteps                  = 100000                 ; 100 ps
+nstlog                  = 1000
+nstcalcenergy           = 500
+nstenergy               = 1000
+nstxout-compressed      = 5000                   ; 5 ps
+;
+cutoff-scheme           = Verlet
+nstlist                 = 20
+coulombtype             = PME
+rcoulomb                = 1.0
+vdwtype                 = cutoff
+vdw-modifier            = Potential-shift-Verlet
+rvdw                    = 1.0
+;
+tcoupl                  = V-rescale
+tc_grps                 = Protein  Non-Protein
+tau_t                   = 0.5      0.5
+ref_t                   = 300.0    300.0
+;
+pcoupl                  = no
+;
+constraints             = h-bonds
+constraint_algorithm    = LINCS
+continuation            = no
+;
+gen_vel                 = yes
+gen_temp                = 300.0
+gen_seed                = -1
+;
+nstcomm                 = 100
+comm_mode               = linear
+comm_grps               = System
+refcoord_scaling        = com
+;
+; Annealing 0 → 300 K linearly over the 100 ps run
+annealing               = single   single
+annealing_npoints       = 2        2
+annealing_time          = 0 100    0 100
+annealing_temp          = 0 300    0 300

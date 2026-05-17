@@ -26,7 +26,7 @@ sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
 from casf_mutagenesis.config import (  # noqa: E402
     BOLTZ_BIN as _BOLTZ_BIN_PATH, CUDA_DEVICE,
-    OUTPUT_ROOT, SUBSET20_JSON, VARIANTS,
+    OUTPUT_ROOT, SPLIT_JSON, SUBSET20_JSON, VARIANTS,
     assert_boltz2_binary,
 )
 
@@ -110,8 +110,21 @@ def _copy_top(pred_dir: Path, prefix: str, dst_dir: Path) -> dict:
     return out
 
 
+def _resolve_ids() -> tuple[list[str], str]:
+    """Read PDB ids from env-driven scope. Returns (ids, scope_label)."""
+    scope = os.environ.get("CONTRASCF_SCOPE", "subset20")
+    if scope == "full":
+        ids = json.loads(SPLIT_JSON.read_text())["casf2016"]
+    else:
+        ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    start = int(os.environ.get("CONTRASCF_START", "0"))
+    end = int(os.environ.get("CONTRASCF_END", str(len(ids))))
+    return ids[start:end], f"{scope}[{start}:{end}]"
+
+
 def main() -> int:
-    ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    ids, scope_label = _resolve_ids()
+    print(f"Boltz-2 scope: {scope_label}, n_pdb={len(ids)}")
     n_total = len(ids) * len(VARIANTS)
     n_done = 0
     n_skip = 0

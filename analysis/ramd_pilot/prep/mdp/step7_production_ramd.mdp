@@ -1,0 +1,79 @@
+; step7_production_ramd.mdp — τ-RAMD production
+;
+; REQUIRES: gromacs-ramd patched build (HITS-MCM/gromacs-ramd, tag
+; gromacs-2024.1-ramd-2.1). Vanilla GROMACS rejects the ramd-* options.
+; Verify with: strings $GMXLIB/../lib64/libgromacs_mpi.so | grep ^ramd-
+;
+; Per-replica template. Substituted at grompp time:
+;   {RAMD_SEED}    — distinct integer per replica (1..15) for force RNG
+;   {RAMD_FORCE}   — random force magnitude in kJ/mol/nm.
+;                    Plan default 14 kcal/mol/Å × 41.84 ≈ 585.8 kJ/mol/nm.
+;   {RAMD_RECEPTOR}, {RAMD_LIGAND} — index group names (Protein, ATP).
+;
+integrator              = md
+dt                      = 0.002
+; Hard cap; gromacs-ramd will early-stop on exit (max-dist).
+; Substituted at submit time: 2_500_000 = 5 ns (calibration),
+; 50_000_000 = 100 ns (production).
+nsteps                  = {NSTEPS}
+nstlog                  = 5000
+nstcalcenergy           = 500
+nstenergy               = 5000
+nstxout-compressed      = 5000             ; 10 ps stride
+;
+cutoff-scheme           = Verlet
+nstlist                 = 20
+coulombtype             = PME
+rcoulomb                = 1.1                     ; ≥ largest excluded pair (CDK2 ~1.08 nm)
+vdwtype                 = cutoff
+vdw-modifier            = Potential-shift-Verlet
+rvdw                    = 1.1
+;
+tcoupl                  = V-rescale
+tc-grps                 = Protein  Non-Protein
+tau-t                   = 1.0      1.0
+ref-t                   = 300.0    300.0
+;
+pcoupl                  = C-rescale
+pcoupltype              = isotropic
+tau-p                   = 5.0
+compressibility         = 4.5e-5
+ref-p                   = 1.0
+;
+constraints             = h-bonds
+constraint-algorithm    = LINCS
+; Each replica is an INDEPENDENT trajectory from the equilibrated structure
+; with fresh thermal velocities (continuation=no), so gen-vel=yes is correct
+; and we do NOT pass -t equil.cpt at grompp time.
+continuation            = no
+gen-vel                 = yes
+gen-temp                = 300.0
+gen-seed                = {RAMD_SEED}
+;
+nstcomm                 = 100
+comm-mode               = linear
+comm-grps               = System
+refcoord-scaling        = com
+;
+; ---------------- RAMD-specific (gromacs-ramd patch) -------------------
+; Random Acceleration MD: applies a force of magnitude {RAMD_FORCE} on
+; the COM vector from receptor → ligand, in a random direction. Direction
+; is reoriented every ramd-eval-freq * dt = 100 fs (50 steps × 2 fs).
+; If the COM separation grows by less than ramd-group1-r-min-dist over an
+; eval window, the direction is randomized again.
+ramd                    = yes
+ramd-seed               = {RAMD_SEED}
+ramd-ngroups            = 1
+ramd-eval-freq          = 50
+ramd-force-out-freq     = 100
+;
+ramd-group1-force       = {RAMD_FORCE}            ; kJ/mol/nm
+ramd-group1-r-min-dist  = 0.0025                  ; nm; ≈ 0.025 Å (Kokh 2018)
+ramd-group1-max-dist    = 4.0                     ; nm; exit threshold
+ramd-group1-receptor    = {RAMD_RECEPTOR}
+ramd-group1-ligand      = {RAMD_LIGAND}
+; pbcatom = atom index (1-based) closest to each group's geometric centre.
+; Required when a group spans > 0.5 × half-box. Computed per-system by
+; ramd.replica_runner from solv_ions.gro + index.ndx; substituted here.
+ramd-group1-receptor-pbcatom = {RAMD_RECEPTOR_PBCATOM}
+ramd-group1-ligand-pbcatom   = {RAMD_LIGAND_PBCATOM}

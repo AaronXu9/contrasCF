@@ -33,4 +33,26 @@ else
 fi
 unset _ANALYSIS_ENV
 
+# --- τ-RAMD pilot ---------------------------------------------------------
+# Output root for the ramd_pilot module. Sim working dirs land under
+# $CONTRASCF_RAMD_OUT/<system>/replicas/r{NN}; analysis under
+# $CONTRASCF_RAMD_OUT/<run>/.
+export CONTRASCF_RAMD_OUT=/scratch1/aoxu/contrasCF/ramd_pilot
+# Path to the gromacs-ramd build (HITS-MCM patched fork). Built per
+# analysis/ramd_pilot/carc_setup/install_gromacs_ramd.sh — that script
+# leaves the binaries under $CONTRASCF_GMX_RAMD/{bin,share}.
+export CONTRASCF_GMX_RAMD=/project2/katritch_223/aoxu/gromacs-ramd-2024.3
+# Auto-source GMXRC so gmx_mpi is on PATH after `source env/carc.sh`.
+# Skipped silently if the build hasn't run yet (first-time setup).
+# CUDA must be loaded before GMXRC for libcufft.so.11 to resolve at runtime.
+if [ -f "$CONTRASCF_GMX_RAMD/bin/GMXRC" ]; then
+    if command -v module >/dev/null 2>&1; then
+        module load cuda/12.6.3 2>/dev/null || true
+    fi
+    source "$CONTRASCF_GMX_RAMD/bin/GMXRC"
+fi
+# AmberTools env (antechamber, parmchk2, acpype). Built per
+# analysis/ramd_pilot/carc_setup/setup_ambertools_env.sh.
+export CONTRASCF_AMBERTOOLS_ENV=/project2/katritch_223/aoxu/conda/envs/ambertools
+
 echo "[contrasCF] env: USC CARC. CONTRASCF_ROOT=$CONTRASCF_ROOT"

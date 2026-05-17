@@ -1,0 +1,13 @@
+version: 1
+sequences:
+  - protein:
+      id: [A]
+      sequence: PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF
+      msa: empty
+  - protein:
+      id: [B]
+      sequence: PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF
+      msa: empty
+  - ligand:
+      id: [C]
+      smiles: CO[C@H]([C@@H](OC)[C@@H](OCc1ccccc1)C(=O)N[C@H]1c2ccccc2C[C@H]1O)[C@@H](OCc1ccccc1)C(=O)N[C@H]1c2ccccc2C[C@H]1O

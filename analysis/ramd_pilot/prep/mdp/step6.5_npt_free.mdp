@@ -1,0 +1,39 @@
+; step6.5_npt_free.mdp — final unrestrained NPT equilibration (5 ns)
+; system = solvated CDK2 + ATP, ff14SB / GAFF2 / TIP3P
+integrator              = md
+dt                      = 0.002
+nsteps                  = 2500000          ; 5 ns
+nstlog                  = 5000
+nstcalcenergy           = 500
+nstenergy               = 5000
+nstxout-compressed      = 50000            ; 100 ps
+;
+cutoff-scheme           = Verlet
+nstlist                 = 20
+coulombtype             = PME
+rcoulomb                = 1.0
+vdwtype                 = cutoff
+vdw-modifier            = Potential-shift-Verlet
+rvdw                    = 1.0
+;
+tcoupl                  = V-rescale
+tc_grps                 = Protein  Non-Protein
+tau_t                   = 0.5      0.5
+ref_t                   = 300.0    300.0
+;
+pcoupl                  = C-rescale
+pcoupltype              = isotropic
+tau_p                   = 5.0
+compressibility         = 4.5e-5
+ref_p                   = 1.0
+;
+constraints             = h-bonds
+constraint_algorithm    = LINCS
+continuation            = yes
+;
+nstcomm                 = 100
+comm_mode               = linear
+comm_grps               = System
+;
+gen_vel                 = no
+refcoord_scaling        = com

@@ -354,18 +354,19 @@ predictions. Memorization rates on the **14 adversarial** cases per model:
 
 | model | variant | n | median lig RMSD | median Cα RMSD | <2 Å | <4 Å |
 |---|---|---|---|---|---|---|
-| **AF3+MSA** | wt   | 19 | **0.68 Å** | **1.21 Å** | **0.79** | 0.79 |
-| **AF3+MSA** | rem  | 19 | 6.47 Å | 1.46 Å | 0.37 | 0.37 |
+| **AF3+MSA** | wt   | 19 | **0.58 Å** | **1.21 Å** | **0.89** | 0.89 |
+| **AF3+MSA** | rem  | 19 | 6.48 Å | 1.46 Å | 0.37 | 0.37 |
 | **AF3+MSA** | pack | 19 | 4.05 Å | 1.23 Å | 0.37 | 0.47 |
-| **AF3+MSA** | inv  | 19 | 8.76 Å | 1.44 Å | 0.26 | 0.32 |
-| Boltz-2 | wt   | 19 | 1.54 Å | 0.96 Å | 0.63 | 0.74 |
-| Boltz-2 | rem  | 19 | 7.91 Å | 1.34 Å | 0.26 | 0.32 |
-| Boltz-2 | pack | 19 | 5.55 Å | 1.04 Å | 0.37 | 0.42 |
-| Boltz-2 | inv  | 19 | 7.29 Å | 1.73 Å | 0.21 | 0.32 |
-| AF3 (no-MSA) | wt   | 19 | 17.29 Å | 19.15 Å | 0 | 0 |
-| AF3 (no-MSA) | rem  | 19 | 20.29 Å | 18.66 Å | 0 | 0.05 |
-| AF3 (no-MSA) | pack | 19 | 15.83 Å | 19.77 Å | 0 | 0 |
-| AF3 (no-MSA) | inv  | 19 | 15.67 Å | 18.32 Å | 0 | 0 |
+| **AF3+MSA** | inv  | 19 | 6.88 Å | 1.46 Å | 0.26 | 0.37 |
+| Boltz-2 | wt   | 19 | 1.42 Å | 0.86 Å | 0.63 | 0.79 |
+| Boltz-2 | rem  | 19 | 6.47 Å | 1.36 Å | 0.37 | 0.42 |
+| Boltz-2 | pack | 19 | 1.96 Å | 1.53 Å | 0.53 | 0.58 |
+| Boltz-2 | inv  | 19 | 5.66 Å | 1.54 Å | 0.32 | 0.42 |
+
+(Updated 2026-05-17 after the chain-proximity fix below; see "Pocket-
+aligned Cα chain selection" in implementation history. Previous tables
+under-counted memorisation because the Cα superposition picked the
+largest chain rather than the ligand-binding chain on homo-multimers.)
 
 **WT baseline (higher is better — the model should get unperturbed
 systems right):** AF3+MSA places the ligand within 2 Å of the crystal
@@ -590,6 +591,34 @@ order so future work can reuse the diagnostic patterns.
 16. **Re-ran analysis.** AF3+MSA WT 79 % at 2 Å (median 0.68 Å);
     adversarial 26–37 %. Boltz-2 WT 63 %, adversarial 21–37 %. AF3
     no-MSA still 0 % everywhere (kept as the broken-baseline column).
+
+### Day 12 (2026-05-17) — pocket-aligned Cα chain selection
+
+17. **WT outlier audit.** 5 systems (4w9l, 4bkt, 3k5v, 3ao4, 3b5r) had
+    WT ligand RMSD ≫ 2 Å in both Boltz-2 and AF3+MSA. The pattern —
+    same systems failing in both models AND sometimes-clean Cα RMSD
+    (4w9l-WT: AF3+MSA lig 47.7 Å on Cα 0.66 Å) — pointed at an analysis
+    bug rather than two independent model failures.
+18. **Bug 7 (Cα chain selection on multimers).**
+    `analysis.src.loaders.extract_protein_ca` picks the largest polymer
+    chain. CASF includes homo-multimers (4w9l is a homo-trimer of
+    chains C/K/L); crystal binds chain C, predicted-Boltz binds chain
+    L (equivalent pocket, different chain). Picking "largest" gives the
+    same chain on both sides (L), the superpose is fine, but the ligand
+    sits on the *other* equivalent chain → 47 Å apparent RMSD on a
+    correctly-placed pose. Fix:
+    `casf_mutagenesis.analysis.extract_protein_ca_near(st, lig_xyz)` —
+    pick the chain whose nearest Cα is closest to the ligand centroid.
+    Used independently for crystal and predicted; the model may bind a
+    different equivalent chain than the crystal, but the question
+    "did the ligand land at AN equivalent pocket?" is chain-agnostic
+    on symmetric multimers.
+19. **Net effect on subset20:** AF3+MSA WT 0.79 → **0.89** (+2 systems
+    recovered); Boltz-2 pack 0.37 → 0.53 (+3 systems — pocket-aligned
+    reveals more memorisation on `pack` than we previously credited).
+    Remaining WT outliers (3k5v, 3ao4, 3b5r) all have either bad Cα
+    fold (>5 Å) or ligand placement on the right fold but wrong site —
+    real model failures, not pipeline issues.
 
 ### Diagnostic patterns to reuse
 

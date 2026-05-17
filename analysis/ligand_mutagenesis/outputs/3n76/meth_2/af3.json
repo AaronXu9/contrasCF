@@ -1,0 +1,25 @@
+{
+  "name": "3n76_meth_2",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "ELIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEHV",
+        "unpairedMsa": ">query\nELIVNVINGPNLGRLGRREPAVYGGTTHDELVALIEREAAELGLKAVVRQSDSEAQLLDWIHQAADAAEPVILNAGGLTHTSVALRDACAELSAPLIEVHISNVHAREEFRRHSYLSPIATGVIVGLGIQGYLLALRYLAEHV\n",
+        "pairedMsa": "",
+        "templates": []
+      }
+    },
+    {
+      "ligand": {
+        "id": "B",
+        "smiles": "CO[C@@H]1[C@@H](CCCOc2ccccc2)C[C@@](O)(C(=O)O)C[C@H]1OC"
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 2
+}
