@@ -138,6 +138,66 @@ def _heavy_indices(mol: Chem.Mol) -> list[int]:
 
 
 # ---------------------------------------------------------------------------
+# Pocket-aligned Cα extraction (chain closest to ligand)
+# ---------------------------------------------------------------------------
+
+def extract_protein_ca_near(
+    st: gemmi.Structure, lig_xyz: np.ndarray,
+) -> ProteinCA:
+    """Like `loaders.extract_protein_ca` but pick the protein chain whose
+    nearest Cα is closest to the ligand centroid — not the largest chain.
+
+    Rationale: CASF systems include homo-multimers where the largest chain
+    is not necessarily the chain binding the ligand. 4w9l is a homo-trimer
+    (chains C/K/L); crystal ligand binds chain C, predicted-Boltz ligand
+    binds chain L. Picking "largest" → both pick chain L → superpose L→L →
+    ligand RMSD reflects inter-chain offset rather than placement accuracy.
+    Picking "closest to ligand" on each side gives the biophysically
+    meaningful pocket-aligned superposition.
+
+    Falls back to largest-chain when no chain has > 20 polymer residues
+    (single-chain systems).
+    """
+    from loaders import STANDARD_AA, ProteinCA
+    centroid = lig_xyz.mean(axis=0)
+    model = st[0]
+    candidates: list[tuple[float, "gemmi.Chain"]] = []
+    for ch in model:
+        # Need both polymer residues AND a Cα to measure proximity.
+        ca_coords = []
+        for r in ch:
+            if r.name not in STANDARD_AA:
+                continue
+            for a in r:
+                if a.name == "CA":
+                    ca_coords.append((a.pos.x, a.pos.y, a.pos.z))
+                    break
+        if len(ca_coords) < 20:
+            continue
+        d_min = float(
+            np.min(np.linalg.norm(np.asarray(ca_coords) - centroid, axis=1))
+        )
+        candidates.append((d_min, ch))
+    if not candidates:
+        # No protein chain with >20 residues — fall back to library helper.
+        from loaders import extract_protein_ca
+        return extract_protein_ca(st)
+    candidates.sort(key=lambda x: x[0])
+    chain = candidates[0][1]
+
+    residues: list[tuple[str, int, str, np.ndarray]] = []
+    for r in chain:
+        if r.name not in STANDARD_AA:
+            continue
+        ca = next((a for a in r if a.name == "CA"), None)
+        if ca is None:
+            continue
+        pos = np.array([ca.pos.x, ca.pos.y, ca.pos.z], dtype=float)
+        residues.append((chain.name, r.seqid.num, r.name, pos))
+    return ProteinCA(residues=residues)
+
+
+# ---------------------------------------------------------------------------
 # Predicted ligand extraction
 # ---------------------------------------------------------------------------
 
@@ -263,12 +323,11 @@ def analyze_prediction(
         crystal_pdb = CASF_RAW / pdbid / f"{pdbid}_protein.pdb"
         crystal_sdf = CASF_LIGANDS / f"{pdbid}_ligand.sdf"
         st_native = read_structure(crystal_pdb)
-        native_ca = extract_protein_ca(st_native)
         crystal_mol = _crystal_ligand_mol(crystal_sdf)
+        crystal_lig_xyz = _heavy_coords(crystal_mol)
 
         # Predicted loading
         st_pred = read_structure(cif_path)
-        pred_ca = extract_protein_ca(st_pred)
 
         # SMILES for bond-order recovery: use crystal-derived SMILES (same as
         # what we passed to the model when generating inputs)
@@ -287,13 +346,21 @@ def analyze_prediction(
             1 for _ in crystal_mol.GetAtoms() if _.GetAtomicNum() != 1
         )
 
+        # Pick the chain CLOSEST to the ligand on each side, not the largest
+        # chain. CASF includes homo-multimers (e.g. 4w9l C/K/L trimer) where
+        # crystal vs predicted may put the ligand on a different homologous
+        # chain. Without this, 4w9l-WT shows 47 Å ligand RMSD on a fold that
+        # was actually predicted correctly (Cα 0.66 Å).
+        pred_lig_heavy = pred_lig_block.heavy_coords
+        native_ca = extract_protein_ca_near(st_native, crystal_lig_xyz)
+        pred_ca = extract_protein_ca_near(st_pred, pred_lig_heavy)
+
         # Cα superpose: we want pred → native, then apply same R,t to ligand
         sup = superpose_by_index(pred_ca, native_ca)
         rec.ca_rmsd_a = round(sup.rmsd, 3)
         rec.n_ca_paired = sup.n_paired
 
         # Transform predicted ligand heavy coords into native frame
-        pred_lig_heavy = pred_lig_block.heavy_coords
         pred_lig_native_frame = sup.apply(pred_lig_heavy)
 
         # If we have an RDKit mol with the same atom count as the LigandBlock,
