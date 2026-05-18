@@ -180,7 +180,16 @@ def main() -> int:
     print(f"\nTotal {n_total} | done={n_done - n_skip - n_fail} "
           f"skip={n_skip} fail={n_fail}")
     print(f"Run log: {log_path}")
-    return 0 if n_fail == 0 else 1
+    # Per-cell failures (a YAML parsing edge case, a Boltz internal error
+    # on a specific ligand) are recorded in the run log and should NOT
+    # bring down the SLURM script — we still want the AF3+MSA phase to
+    # run on the cells that succeeded. Only catastrophic failure (e.g.,
+    # every cell failed → likely a config problem) should exit non-zero.
+    new_runs = [r for r in runs if r.get("status") == "ok" or r.get("status") == "error"]
+    if new_runs and all(r.get("status") == "error" for r in new_runs):
+        print("ERROR: every Boltz-2 cell failed — likely a config problem")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
