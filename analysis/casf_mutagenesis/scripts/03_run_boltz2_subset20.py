@@ -180,15 +180,13 @@ def main() -> int:
     print(f"\nTotal {n_total} | done={n_done - n_skip - n_fail} "
           f"skip={n_skip} fail={n_fail}")
     print(f"Run log: {log_path}")
-    # Per-cell failures (a YAML parsing edge case, a Boltz internal error
-    # on a specific ligand) are recorded in the run log and should NOT
-    # bring down the SLURM script — we still want the AF3+MSA phase to
-    # run on the cells that succeeded. Only catastrophic failure (e.g.,
-    # every cell failed → likely a config problem) should exit non-zero.
-    new_runs = [r for r in runs if r.get("status") == "ok" or r.get("status") == "error"]
-    if new_runs and all(r.get("status") == "error" for r in new_runs):
-        print("ERROR: every Boltz-2 cell failed — likely a config problem")
-        return 1
+    # Always return 0 — per-cell failures are recorded in the run log
+    # and shouldn't bring down the SLURM script. (Catastrophic config
+    # failures are caught at startup by assert_boltz2_binary.) Earlier
+    # versions that returned 1 on n_fail>0 caused 6/10 array chunks of
+    # 8839889 to die before reaching AF3; the "all-errors → exit 1"
+    # variant in 8862173 had the same effect when a chunk's only
+    # non-skip work happened to be a few failures.
     return 0
 
 

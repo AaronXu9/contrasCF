@@ -266,12 +266,7 @@ def main() -> int:
     print(f"\nTotal {n_total} | done={n_done - n_skip - n_fail} "
           f"skip={n_skip} fail={n_fail}")
     print(f"Run log: {log_path}")
-    # See note in 03_run_boltz2_subset20.py — per-cell failures shouldn't
-    # exit non-zero (used to kill SLURM scripts under set -e).
-    new_runs = [r for r in runs if r.get("status") in ("ok", "error")]
-    if new_runs and all(r.get("status") == "error" for r in new_runs):
-        print("ERROR: every AF3 cell failed — likely a config problem")
-        return 1
+    # Always return 0 — see note in 03_run_boltz2_subset20.py.
     return 0
 
 
