@@ -1,0 +1,39 @@
+CMD: /home/aoxu/projects/PoseBench/forks/GNINA/gnina -r /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/docking/receptor.pdb -l /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/docking/ligand.sdf --center_x 47.163714285714285 --center_y 12.408142857142854 --center_z 2.409821428571429 --size_x 25.0 --size_y 25.0 --size_z 25.0 --cnn_scoring rescore --num_modes 9 --exhaustiveness 8 --seed 42 -o /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/gnina/poses.sdf
+
+STDOUT:
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3 master:97fa6bc+   Built Oct  3 2024.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+Commandline: /home/aoxu/projects/PoseBench/forks/GNINA/gnina -r /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/docking/receptor.pdb -l /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/docking/ligand.sdf --center_x 47.163714285714285 --center_y 12.408142857142854 --center_z 2.409821428571429 --size_x 25.0 --size_y 25.0 --size_z 25.0 --cnn_scoring rescore --num_modes 9 --exhaustiveness 8 --seed 42 -o /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/2qbr/chrg_pos_2/gnina/poses.sdf
+Using random seed: 42
+
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+***************************************************
+ | pose 0 | initial pose not within box
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -5.76       -0.64       0.2899      5.487
+    2       -6.14        0.86       0.1846      5.659
+    3       -6.30       -0.39       0.1508      4.680
+    4       -6.55       -0.08       0.1391      4.952
+    5       -5.45        0.37       0.1312      5.499
+    6       -6.15       -0.04       0.1256      4.244
+    7       -5.90        0.61       0.1194      4.339
+    8       -6.06       -0.28       0.1168      4.607
+    9       -6.11       -0.33       0.1135      4.403
+
+
+STDERR:

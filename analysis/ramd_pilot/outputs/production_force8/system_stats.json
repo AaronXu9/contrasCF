@@ -1,0 +1,48 @@
+{
+  "bindingsite_pack": {
+    "system_id": "bindingsite_pack",
+    "n_replicas": 15,
+    "n_eff": 10,
+    "tau_KM": 0.6623000000000001,
+    "tau_KM_ci": [
+      0.5918000000000001,
+      0.8933000000000001
+    ],
+    "tau_geom": 0.7194662492792948,
+    "f_stable": 0.0,
+    "f_stable_ci": [
+      0.0,
+      0.2775327998628892
+    ],
+    "f_ee": 0.3333333333333333,
+    "f_ee_ci": [
+      0.1517632443971473,
+      0.5828645226148023
+    ],
+    "n_exited": 10,
+    "force_kcalmolA": null
+  },
+  "bindingsite_wt": {
+    "system_id": "bindingsite_wt",
+    "n_replicas": 15,
+    "n_eff": 15,
+    "tau_KM": 2.9058,
+    "tau_KM_ci": [
+      0.9183000000000001,
+      3.4518
+    ],
+    "tau_geom": 2.105619365752152,
+    "f_stable": 0.0,
+    "f_stable_ci": [
+      0.0,
+      0.20388330103584862
+    ],
+    "f_ee": 0.0,
+    "f_ee_ci": [
+      0.0,
+      0.20388330103584862
+    ],
+    "n_exited": 15,
+    "force_kcalmolA": null
+  }
+}

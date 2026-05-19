@@ -404,6 +404,108 @@ on unperturbed systems. Worth investigating per-system: alternate binding
 modes, our heavy-atom MCS-based ligand selection picking the wrong HET
 residue, or genuine model misplacement.
 
+## Full CASF-2016 results (2026-05-18)
+
+Scaled to all 285 PDBs after fixing a SLURM job-array bug-chain (see
+"Implementation history → Day 13"). 34 of 285 systems have no raw/
+entry on lab or CARC HiQBind and were dropped; effective n=251.
+
+### Cofolding axis (protein mutagenesis: rem / pack / inv)
+
+| model | variant | n | <2 Å | <4 Å | median lig | median Cα |
+|---|---|---|---|---|---|---|
+| **AF3+MSA** | wt | 239 | **0.80** | **0.89** | **0.83 Å** | 0.63 Å |
+| AF3+MSA | rem | 239 | 0.31 | 0.40 | 5.38 Å | 0.97 Å |
+| AF3+MSA | pack | 238 | 0.26 | 0.42 | 5.05 Å | 0.91 Å |
+| AF3+MSA | inv | 239 | 0.16 | 0.28 | 6.63 Å | 1.08 Å |
+| Boltz-2 | wt | 229 | 0.59 | 0.76 | 1.39 Å | 0.75 Å |
+| Boltz-2 | rem | 229 | 0.23 | 0.44 | 4.83 Å | 1.41 Å |
+| Boltz-2 | pack | 229 | 0.25 | 0.39 | 5.16 Å | 1.19 Å |
+| Boltz-2 | inv | 229 | 0.17 | 0.36 | 5.32 Å | 1.46 Å |
+
+**Reads:**
+- AF3+MSA hits paper-comparable 80 % WT success (median lig 0.83 Å,
+  Cα 0.63 Å).
+- AF3+MSA adversarial memorisation 16–31 % is **lower than the paper's
+  ~50 %**. Possible causes: our pocket-aligned Cα superposition (chain
+  closest to ligand) is stricter than full-structure superposition;
+  ColabFold-vs-paper-pipeline MSA quality; n=239 vs 285.
+- WT → adversarial gap is large for both models: AF3+MSA 80 → 16–31 %
+  (drop of 49–64 pp), Boltz-2 59 → 17–25 % (drop of 34–42 pp). Both
+  cofolders DO respond to pocket disruption in the majority of systems.
+- **`inv` is hardest to memorise** for both models (16 % AF3, 17 %
+  Boltz) — the chemistry-flipping mutation displaces the ligand most
+  often. `rem` and `pack` are easier to "memorise around" (paper-aligned).
+- Subset20 over-estimated memorisation rates by 10–28 pp on multiple
+  variants; n matters.
+
+### Physics axis (GNINA, single RTX 4090, ~6 s/cell)
+
+GNINA docks against the **WT crystal protein** with the box on the
+crystal-ligand centroid. The "protein binding-site" variants (rem/pack/
+inv) require a mutant receptor and are deferred (see "Mutant-protein
+GNINA — deferred" below). What we DO have:
+
+**GNINA WT, n=251** — places the unperturbed crystal ligand in the
+crystal pocket: **<2 Å = 0.73**, <4 Å = 0.87, median 1.13 Å. That's
+the physics-axis WT ceiling.
+
+**Ligand mutagenesis** — same WT crystal protein, but the ligand is
+modified (halogenation / methylation / charge swap). Memorisation rate
+(higher = ligand stays near WT pose despite chemistry change):
+
+| family | n | <2 Å | <4 Å | median | physics read |
+|---|---|---|---|---|---|
+| wt | 251 | 0.63 | 0.85 | 1.48 Å | independent build/SDF source |
+| halo_F_1 | 213 | 0.60 | 0.84 | 1.60 Å | F = smallest atom → tiny shift |
+| halo_Cl_1 | 213 | 0.57 | 0.80 | 1.73 Å | – |
+| halo_Br_1 | 213 | 0.49 | 0.74 | 2.05 Å | bigger atom → small shift |
+| meth_1 | 74 | 0.51 | 0.76 | 1.97 Å | one methyl ≈ tolerated |
+| meth_2 | 44 | 0.25 | 0.52 | 3.87 Å | clear degradation |
+| meth_3 | 25 | 0.20 | 0.36 | 9.02 Å | mostly displaced |
+| meth_4 | 14 | 0.21 | 0.29 | 8.15 Å | – |
+| meth_5 | 1 | 0.00 | 0.00 | 14.78 Å | single system; expelled |
+| chrg_neu_methyl | 42 | 0.19 | 0.38 | 5.05 Å | charge flip → strong response |
+| chrg_neu_ethyl | 42 | 0.19 | 0.38 | 5.90 Å | – |
+| chrg_neu_propyl | 42 | 0.17 | 0.45 | 4.57 Å | – |
+| chrg_pos_1 | 42 | 0.17 | 0.48 | 5.35 Å | – |
+| chrg_pos_2 | 42 | 0.29 | 0.40 | 5.94 Å | – |
+| chrg_pos_3 | 42 | 0.19 | 0.52 | 3.61 Å | – |
+
+**Reads:**
+- **Halogenation barely perturbs** (49–60 %). F → Cl → Br shows a clean
+  monotonic decrease as the substituent size grows.
+- **Methylation gives a dose-response**: 1 methyl 51 % → 2 methyls
+  25 % → ≥3 methyls ~20 %. Physics-correct (each added methyl displaces
+  more solvent / clashes more with pocket geometry).
+- **Charge mutations are the strongest perturbation** (17–29 %
+  regardless of magnitude — even a single +1 amine vs neutral methyl
+  is enough). GNINA's Vina + CNN scoring catches the electrostatic
+  mismatch as expected.
+
+### Physics ↔ cofolding contrast
+
+| axis | model | WT <2 Å | adversarial <2 Å | discriminator |
+|---|---|---|---|---|
+| protein binding-site | AF3+MSA | 0.80 | 0.16–0.31 | residue identity flip (rem/pack/inv) |
+| protein binding-site | Boltz-2 | 0.59 | 0.17–0.25 | – |
+| ligand chemistry | GNINA | 0.63–0.73 | 0.17–0.60 | substituent size / charge |
+
+Cofolding models partially memorise across all binding-site
+perturbations. Physics docking shows clean dose-response on ligand
+modifications. Together they isolate two complementary axes of the
+"co-folding learns physics?" question: cofolding fails the protein
+axis ~70 % of the time; physics docking passes the ligand axis with a
+graded response.
+
+### Mutant-protein GNINA — deferred
+
+GNINA on the AF3+MSA-predicted **mutant** receptors (rem/pack/inv)
+would complete the 2×2 (protein axis × physics-vs-cofolding) grid.
+Requires rsync of ~720 AF3+MSA mutant CIFs from CARC, strip-to-receptor
+into a new docking-input tree, then run GNINA. Estimated ~1 GPU-hour
+on lab. Tracked under follow-on.
+
 ## Known limitation: AF3 single-sequence mode
 
 The AF3 runner uses `--norun_data_pipeline --run_inference=true`, which

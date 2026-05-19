@@ -1,0 +1,11 @@
+{
+  "call": "FAIL",
+  "R": 4.387437717046655,
+  "tau_KM_wt": 2.9058,
+  "tau_KM_pack": 0.6623000000000001,
+  "f_ee_wt": 0.0,
+  "reasons": [
+    "tau_KM(WT)=2.91 ns < 5.0 ns (WT does not bind)"
+  ],
+  "next_step": "Pivot to unbinding metaD or steered-MD with Jarzynski."
+}
