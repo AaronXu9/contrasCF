@@ -91,6 +91,9 @@ MODEL_FILES = {
     "Boltz2": {
         "cif_glob":    "{prefix}_model_*.cif",
         "conf":        "confidence_{prefix}_model_{rank}.json",
+        # Boltz-2 also emits binding-affinity predictions (one per system,
+        # not per pose) when the YAML requests `properties: - affinity:`.
+        "affinity":    "affinity_{prefix}.json",
     },
     "AF3": {  # no-MSA baseline
         "cif_glob":    "af3_{prefix}_model_*.cif",
@@ -130,6 +133,13 @@ class PredictionRecord:
     ligand_iptm: float | None = None
     complex_plddt: float | None = None
     ranking_score: float | None = None
+    # Boltz-2 binding-affinity sidecar (one value per system, broadcast to
+    # every pose of that cell). None for AF3 / AF3+MSA which don't predict
+    # affinity, and None if the affinity JSON is absent.
+    #   affinity_pred_value:        log[IC50] in µM (lower = tighter)
+    #   affinity_probability_binary: P(binder) ∈ [0, 1]
+    affinity_pred_value: float | None = None
+    affinity_probability_binary: float | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -331,6 +341,30 @@ def _matched_rmsd(
 # Per-prediction pipeline
 # ---------------------------------------------------------------------------
 
+def _read_affinity(spec: dict, prefix: str, sys_dir: Path) -> dict:
+    """Return Boltz-2 binding-affinity fields for this cell. Empty/None if the
+    model doesn't predict affinity (AF3) or the sidecar is absent.
+
+    Affinity is a per-system quantity in Boltz-2 — it does NOT vary across
+    diffusion samples, so the same values are broadcast to every pose record.
+    """
+    out: dict = {"affinity_pred_value": None,
+                 "affinity_probability_binary": None}
+    if "affinity" not in spec:
+        return out
+    aff_path = sys_dir / spec["affinity"].format(prefix=prefix)
+    if not aff_path.exists():
+        return out
+    try:
+        d = json.loads(aff_path.read_text())
+    except Exception:
+        return out
+    for k in ("affinity_pred_value", "affinity_probability_binary"):
+        if k in d:
+            out[k] = float(d[k])
+    return out
+
+
 def _read_confidence(spec: dict, prefix: str, rank: int, sys_dir: Path) -> dict:
     """Return a dict of confidence fields for one pose. All keys may be None.
 
@@ -442,6 +476,11 @@ def _analyze_single_pose(
     # failed-RMSD cell can report its model's reported confidence).
     conf = _read_confidence(spec, prefix, pose_idx, sys_dir)
     for k, v in conf.items():
+        setattr(rec, k, v)
+    # Merge Boltz-2 affinity sidecar (None for AF3 — _read_affinity short-
+    # circuits when spec has no "affinity" key).
+    aff = _read_affinity(spec, prefix, sys_dir)
+    for k, v in aff.items():
         setattr(rec, k, v)
     return rec
 
@@ -589,6 +628,66 @@ def paired_stats(
 # ---------------------------------------------------------------------------
 # Bootstrap CIs on memorization rate
 # ---------------------------------------------------------------------------
+
+@dataclass
+class AffinityPairedRecord:
+    pdbid: str
+    model: str               # "Boltz2" (the only model predicting affinity)
+    variant: str             # rem | pack | inv
+    wt_affinity: float | None        # log[IC50] µM
+    adv_affinity: float | None
+    delta_affinity: float | None     # adv − wt: positive = recognized
+    wt_probability: float | None     # P(binder)
+    adv_probability: float | None
+    delta_probability: float | None  # adv − wt: negative = recognized
+
+
+def affinity_paired_stats(
+    records: list[PredictionRecord],
+) -> list[AffinityPairedRecord]:
+    """Per (pdbid, model) join WT ↔ each adversarial variant on affinity
+    fields. Only records where `affinity_pred_value is not None` contribute
+    (i.e. Boltz-2 cells with the affinity sidecar present).
+
+    Affinity is a per-system quantity — we use pose_idx==0 to dedupe
+    (every pose record carries the same affinity values for that cell).
+
+    Interpretation:
+      - WT (true binder): low affinity_pred_value, high probability.
+      - Adversarial (broken pocket): biophysically should have HIGHER
+        affinity_pred_value and LOWER probability.
+      - delta_affinity > 0 ⇒ model recognized the perturbation.
+      - delta_affinity ≈ 0 ⇒ model memorized the affinity.
+    """
+    # Filter to one record per (pdbid, model, variant) on pose 0 with an
+    # affinity value.
+    by_key: dict[tuple[str, str, str], PredictionRecord] = {}
+    for r in records:
+        if r.pose_idx != 0 or r.affinity_pred_value is None:
+            continue
+        by_key[(r.pdbid, r.model, r.variant)] = r
+
+    out: list[AffinityPairedRecord] = []
+    seen_pairs: set[tuple[str, str, str]] = set()
+    for (pdbid, model, variant), adv in by_key.items():
+        if variant == "wt":
+            continue
+        wt = by_key.get((pdbid, model, "wt"))
+        adv_aff = adv.affinity_pred_value
+        adv_prob = adv.affinity_probability_binary
+        wt_aff = wt.affinity_pred_value if wt is not None else None
+        wt_prob = wt.affinity_probability_binary if wt is not None else None
+        d_aff = (adv_aff - wt_aff) if (wt_aff is not None and adv_aff is not None) else None
+        d_prob = (adv_prob - wt_prob) if (wt_prob is not None and adv_prob is not None) else None
+        out.append(AffinityPairedRecord(
+            pdbid=pdbid, model=model, variant=variant,
+            wt_affinity=wt_aff, adv_affinity=adv_aff, delta_affinity=d_aff,
+            wt_probability=wt_prob, adv_probability=adv_prob,
+            delta_probability=d_prob,
+        ))
+        seen_pairs.add((pdbid, model, variant))
+    return out
+
 
 def bootstrap_memorization_ci(
     records: list[PredictionRecord],
