@@ -38,6 +38,16 @@ def render_boltz(
         f"      id: [{lig_id}]",
         f"      smiles: {ligand_smiles}",
     ]
+    # Request Boltz-2 binding-affinity prediction for the ligand. This produces
+    # `affinity_<prefix>.json` alongside the structure outputs, containing
+    # `affinity_pred_value` (log[IC50] µM; lower = tighter) and
+    # `affinity_probability_binary` (P(binder) ∈ [0, 1]). The runner already
+    # copies the affinity sidecar into the variant directory.
+    lines += [
+        "properties:",
+        "  - affinity:",
+        f"      binder: {lig_id}",
+    ]
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text("\n".join(lines) + "\n")
