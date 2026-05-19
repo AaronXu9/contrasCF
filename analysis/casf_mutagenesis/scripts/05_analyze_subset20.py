@@ -105,6 +105,20 @@ def main() -> int:
         print(f"  {s.model:<7s} {s.variant:<6s} {s.n_total:>3d} "
               f"{s.rate(2.0):>6.2f} {s.rate(4.0):>6.2f} "
               f"{s.median_rmsd_a:>7.2f}")
+
+    # Paired-WT framing: per (pdbid, model), Δ RMSD adversarial − WT
+    from casf_mutagenesis.analysis import paired_stats
+    for selector, suffix in [("top1", ""), ("oracle", "_oracle")]:
+        paired = paired_stats(rows, pose_selector=selector)
+        if not paired:
+            continue
+        path = OUTPUT_ROOT / f"paired{suffix}_{scope}.csv"
+        with path.open("w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(asdict(paired[0]).keys()))
+            w.writeheader()
+            for r in paired:
+                w.writerow(asdict(r))
+        print(f"Paired ({selector}): {path}")
     return 0
 
 

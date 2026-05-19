@@ -523,3 +523,64 @@ def memorization_stats(
             median_rmsd_a=float(np.median(arr)),
         )
     return out
+
+
+# ---------------------------------------------------------------------------
+# Paired WT-vs-adversarial framing
+# ---------------------------------------------------------------------------
+
+@dataclass
+class PairedRecord:
+    pdbid: str
+    model: str
+    variant: str          # rem | pack | inv
+    pose_idx: int         # rank within the adversarial-variant cell
+    wt_rmsd_a: float | None
+    adv_rmsd_a: float | None
+    delta_rmsd_a: float | None
+    wt_correct_2A: bool | None
+    memorized_given_wt: bool | None  # True iff wt_correct_2A and adv_rmsd < 2 Å
+
+
+def paired_stats(
+    records: list[PredictionRecord],
+    pose_selector: str = "top1",      # "top1" = rank-0; "oracle" = min-rmsd
+) -> list[PairedRecord]:
+    """Per (pdbid, model) join WT ↔ each adversarial variant; report Δ RMSD
+    and conditional memorization. Only `ok`-status records contribute.
+    `pose_selector` picks which pose per cell to use as the comparison
+    point — "top1" is the model's own rank-0, "oracle" picks the
+    minimum-RMSD pose (an upper bound on what best-of-N could achieve).
+    """
+    def _pick(cell: list[PredictionRecord]) -> PredictionRecord | None:
+        ok = [r for r in cell if r.status == "ok" and r.ligand_rmsd_a is not None]
+        if not ok:
+            return None
+        if pose_selector == "oracle":
+            return min(ok, key=lambda r: r.ligand_rmsd_a)
+        return min(ok, key=lambda r: r.pose_idx)  # top1 = rank 0
+
+    cells: dict[tuple[str, str, str], list[PredictionRecord]] = {}
+    for r in records:
+        cells.setdefault((r.pdbid, r.model, r.variant), []).append(r)
+    selected: dict[tuple[str, str, str], PredictionRecord | None] = {
+        k: _pick(v) for k, v in cells.items()
+    }
+
+    out: list[PairedRecord] = []
+    for (pdbid, model, variant), adv in selected.items():
+        if variant == "wt":
+            continue
+        wt = selected.get((pdbid, model, "wt"))
+        wt_rmsd = wt.ligand_rmsd_a if wt is not None else None
+        adv_rmsd = adv.ligand_rmsd_a if adv is not None else None
+        delta = (adv_rmsd - wt_rmsd) if (wt_rmsd is not None and adv_rmsd is not None) else None
+        wt_ok = (wt_rmsd < 2.0) if wt_rmsd is not None else None
+        mem = (wt_ok and adv_rmsd < 2.0) if (wt_ok is not None and adv_rmsd is not None) else None
+        out.append(PairedRecord(
+            pdbid=pdbid, model=model, variant=variant,
+            pose_idx=(adv.pose_idx if adv is not None else 0),
+            wt_rmsd_a=wt_rmsd, adv_rmsd_a=adv_rmsd, delta_rmsd_a=delta,
+            wt_correct_2A=wt_ok, memorized_given_wt=mem,
+        ))
+    return out
