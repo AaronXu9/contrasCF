@@ -31,7 +31,7 @@ REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contr
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
 from casf_mutagenesis.analysis import (
-    MEMORIZATION_THRESHOLDS_A, MODEL_FILES, analyze_prediction,
+    MEMORIZATION_THRESHOLDS_A, MODEL_FILES, analyze_predictions,
     memorization_stats,
 )
 from casf_mutagenesis.config import OUTPUT_ROOT, SPLIT_JSON, SUBSET20_JSON, VARIANTS
@@ -55,19 +55,24 @@ def main() -> int:
     for pdbid in ids:
         for variant in VARIANTS:
             for model in MODEL_FILES:
-                rec = analyze_prediction(pdbid, variant, model)
-                rows.append(rec)
-                if rec.status == "ok":
-                    print(
-                        f"  {pdbid:6s} {variant:5s} {model:7s} "
-                        f"lig_rmsd={rec.ligand_rmsd_a:6.2f} Å "
-                        f"ca_rmsd={rec.ca_rmsd_a:5.2f} Å  "
-                        f"({rec.n_ca_paired} Cα; "
-                        f"{rec.n_heavy_matched}/{rec.n_heavy_native} heavy)"
-                    )
-                else:
-                    print(f"  {pdbid:6s} {variant:5s} {model:7s} {rec.status}"
-                          f"{(': ' + rec.error) if rec.error else ''}")
+                recs = analyze_predictions(pdbid, variant, model)
+                rows.extend(recs)
+                for rec in recs:
+                    if rec.status == "ok":
+                        conf = (rec.confidence_score
+                                if rec.confidence_score is not None
+                                else (rec.ranking_score or 0.0))
+                        print(
+                            f"  {pdbid:6s} {variant:5s} {model:7s} "
+                            f"pose={rec.pose_idx} "
+                            f"lig_rmsd={rec.ligand_rmsd_a:6.2f} Å "
+                            f"ca_rmsd={rec.ca_rmsd_a:5.2f} Å  "
+                            f"conf={conf:.3f}"
+                        )
+                    else:
+                        print(f"  {pdbid:6s} {variant:5s} {model:7s} "
+                              f"pose={rec.pose_idx} {rec.status}"
+                              f"{(': ' + rec.error) if rec.error else ''}")
 
     # CSV
     csv_path = OUTPUT_ROOT / f"results_{scope}.csv"
