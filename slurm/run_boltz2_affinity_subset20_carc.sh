@@ -79,16 +79,16 @@ print(f"Moved to _backup_pre_affinity: {n_cif} CIFs, {n_conf} confidence JSONs")
 PY
 echo
 
-echo "=== 2/4 regenerate inputs (writes affinity-enabled boltz.yaml) ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py
-echo
-
-echo "=== 3/4 Boltz-2 (with affinity) ==="
+echo "=== 2/2 Boltz-2 (with affinity) ==="
+# Note: input regen (01_build_subset20.py) intentionally NOT run here —
+# CARC doesn't have the 42 GB CASF data tree (raw PDBs + ligand SDFs).
+# The affinity-enabled boltz.yaml files are rsync'd from the lab box
+# before submission, and Boltz-2 only needs the YAMLs as input.
+#
+# Analysis (05_analyze_subset20.py) also intentionally NOT run here —
+# it needs the crystal data for RMSD. Run analysis back on the lab box
+# after rsyncing the affinity JSONs back.
 $CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
-echo
-
-echo "=== 4/4 analyze ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
 echo
 
 echo "=== Done at $(date -Iseconds) ==="
