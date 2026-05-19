@@ -86,22 +86,25 @@ def _run_boltz_one(yaml_path: Path, prefix: str, work_dir: Path) -> Path:
     return pred_dir
 
 
-def _copy_top(pred_dir: Path, prefix: str, dst_dir: Path) -> dict:
-    src_cif = pred_dir / f"{prefix}_model_0.cif"
-    src_conf = pred_dir / f"confidence_{prefix}_model_0.json"
-    if not src_cif.exists():
-        cifs = sorted(pred_dir.glob(f"{prefix}_model_*.cif"))
-        if not cifs:
-            raise FileNotFoundError(f"no model cifs in {pred_dir}")
-        src_cif = cifs[0]
+def _copy_all_samples(pred_dir: Path, prefix: str, dst_dir: Path) -> dict:
+    """Copy every Boltz `{prefix}_model_N.cif` + matching confidence JSON.
+
+    Boltz writes samples ranked 0..N-1 by `confidence_score` (best first).
+    Preserve that ranking — `model_0` remains the top-confidence pose.
+    """
+    cifs = sorted(pred_dir.glob(f"{prefix}_model_*.cif"))
+    if not cifs:
+        raise FileNotFoundError(f"no model cifs in {pred_dir}")
+    out: dict = {"cifs": [], "confs": [], "affinity": None}
+    for src_cif in cifs:
+        dst_cif = dst_dir / src_cif.name
+        shutil.copy(src_cif, dst_cif)
+        out["cifs"].append(str(dst_cif))
         src_conf = pred_dir / f"confidence_{src_cif.stem}.json"
-    dst_cif = dst_dir / f"{prefix}_model_0.cif"
-    shutil.copy(src_cif, dst_cif)
-    out = {"cif": str(dst_cif), "conf": None, "affinity": None}
-    if src_conf.exists():
-        dst_conf = dst_dir / f"confidence_{prefix}_model_0.json"
-        shutil.copy(src_conf, dst_conf)
-        out["conf"] = str(dst_conf)
+        if src_conf.exists():
+            dst_conf = dst_dir / src_conf.name
+            shutil.copy(src_conf, dst_conf)
+            out["confs"].append(str(dst_conf))
     aff = pred_dir / f"affinity_{prefix}.json"
     if aff.exists():
         dst_aff = dst_dir / f"affinity_{prefix}.json"
@@ -162,7 +165,7 @@ def main() -> int:
                 if work.exists():
                     shutil.rmtree(work)
                 pred_dir = _run_boltz_one(yaml_path, prefix, work)
-                outs = _copy_top(pred_dir, prefix, v_dir)
+                outs = _copy_all_samples(pred_dir, prefix, v_dir)
                 entry.update({"status": "ok", "outputs": outs,
                               "wallclock_s": round(time.time() - t0, 1)})
                 # tidy up: remove the work dir to save disk

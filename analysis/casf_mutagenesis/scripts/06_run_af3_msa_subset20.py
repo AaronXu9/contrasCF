@@ -126,31 +126,40 @@ def _run_af3(json_path: Path, work_dir: Path) -> Path:
     return sys_dir
 
 
-def _copy_top(af3_sys_dir: Path, name: str, dst_dir: Path) -> dict:
-    """Copy the top-ranked AF3 model with `af3msa_` prefix."""
+def _copy_all_samples(af3_sys_dir: Path, name: str, dst_dir: Path,
+                      prefix_str: str = "af3msa") -> dict:
+    """Copy every AF3 sample, renamed `<prefix_str>_<name>_model_<rank>.cif`,
+    ranked 0..N-1 by ranking_score (best first)."""
     import csv
-    out: dict = {"cif": None, "ranking": None, "conf": None}
     ranking = af3_sys_dir / f"{name}_ranking_scores.csv"
     if not ranking.exists():
         raise FileNotFoundError(f"missing ranking CSV: {ranking}")
     with ranking.open() as f:
         rows = list(csv.DictReader(f))
     rows.sort(key=lambda r: float(r["ranking_score"]), reverse=True)
-    top = rows[0]
-    seed, sample = int(top["seed"]), int(top["sample"])
-    sub = af3_sys_dir / f"seed-{seed}_sample-{sample}"
-    src_cif = sub / f"{name}_seed-{seed}_sample-{sample}_model.cif"
-    src_conf = sub / f"{name}_seed-{seed}_sample-{sample}_summary_confidences.json"
-    dst_cif = dst_dir / f"af3msa_{name}_model_0.cif"
-    shutil.copy(src_cif, dst_cif)
-    out["cif"] = str(dst_cif)
-    if src_conf.exists():
-        dst_conf = dst_dir / f"af3msa_summary_confidences_{name}.json"
-        shutil.copy(src_conf, dst_conf)
-        out["conf"] = str(dst_conf)
-    dst_rank = dst_dir / f"af3msa_ranking_scores_{name}.csv"
+    out: dict = {"cifs": [], "confs": [], "ranking": None}
+    for rank, row in enumerate(rows):
+        seed, sample = int(row["seed"]), int(row["sample"])
+        sub = af3_sys_dir / f"seed-{seed}_sample-{sample}"
+        src_cif = sub / f"{name}_seed-{seed}_sample-{sample}_model.cif"
+        src_conf = sub / f"{name}_seed-{seed}_sample-{sample}_summary_confidences.json"
+        if not src_cif.exists():
+            raise FileNotFoundError(f"missing model cif: {src_cif}")
+        dst_cif = dst_dir / f"{prefix_str}_{name}_model_{rank}.cif"
+        shutil.copy(src_cif, dst_cif)
+        out["cifs"].append(str(dst_cif))
+        if src_conf.exists():
+            dst_conf = dst_dir / f"{prefix_str}_summary_confidences_{name}_{rank}.json"
+            shutil.copy(src_conf, dst_conf)
+            out["confs"].append(str(dst_conf))
+    dst_rank = dst_dir / f"{prefix_str}_ranking_scores_{name}.csv"
     shutil.copy(ranking, dst_rank)
     out["ranking"] = str(dst_rank)
+    # Legacy compat: rank-0 confidence JSON without the `_0` suffix, so the
+    # old single-pose analysis path keeps working.
+    if out["confs"]:
+        legacy_conf = dst_dir / f"{prefix_str}_summary_confidences_{name}.json"
+        shutil.copy(out["confs"][0], legacy_conf)
     return out
 
 
@@ -246,7 +255,7 @@ def main() -> int:
                 if work.exists():
                     shutil.rmtree(work)
                 af3_sys = _run_af3(json_msa, work)
-                outs = _copy_top(af3_sys, prefix, v_dir)
+                outs = _copy_all_samples(af3_sys, prefix, v_dir, "af3msa")
                 entry.update({
                     "status": "ok", "outputs": outs,
                     "wallclock_s": round(time.time() - t0, 1),
