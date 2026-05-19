@@ -20,6 +20,7 @@ This module reuses building blocks from `analysis/src/`:
     the Biopython-friendly residue-pair-by-resnum logic).
 """
 from __future__ import annotations
+import json
 import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -82,10 +83,25 @@ from .config import CASF_LIGANDS, CASF_RAW, OUTPUT_ROOT, VARIANTS
 
 # Models we currently produce outputs for. Each tuple is
 # (model_name, cif_filename_pattern, must_exist_marker).
+# Each entry is a per-model file spec. `{prefix}` is substituted with
+# f"{pdbid}_{variant}" and `{rank}` enumerates 0..N-1 of diffusion samples.
+# If no `_model_<rank>` files exist for rank > 0, we fall back to the legacy
+# single-pose layout where only `_model_0` exists on disk.
 MODEL_FILES = {
-    "Boltz2":  "{prefix}_model_0.cif",
-    "AF3":     "af3_{prefix}_model_0.cif",      # no-MSA baseline
-    "AF3+MSA": "af3msa_{prefix}_model_0.cif",   # with ColabFold MSA
+    "Boltz2": {
+        "cif_glob":    "{prefix}_model_*.cif",
+        "conf":        "confidence_{prefix}_model_{rank}.json",
+    },
+    "AF3": {  # no-MSA baseline
+        "cif_glob":    "af3_{prefix}_model_*.cif",
+        "conf":        "af3_summary_confidences_{prefix}_{rank}.json",
+        "conf_legacy": "af3_summary_confidences_{prefix}.json",  # rank-0 fallback
+    },
+    "AF3+MSA": {  # with ColabFold MSA
+        "cif_glob":    "af3msa_{prefix}_model_*.cif",
+        "conf":        "af3msa_summary_confidences_{prefix}_{rank}.json",
+        "conf_legacy": "af3msa_summary_confidences_{prefix}.json",
+    },
 }
 
 MEMORIZATION_THRESHOLDS_A = (2.0, 4.0)
@@ -96,6 +112,7 @@ class PredictionRecord:
     pdbid: str
     variant: str
     model: str
+    pose_idx: int = 0             # 0 = top-ranked by model confidence
     status: str = "ok"            # "ok" | "missing_cif" | "no_ligand" | "error"
     error: str | None = None
     ligand_rmsd_a: float | None = None
@@ -104,6 +121,15 @@ class PredictionRecord:
     n_heavy_matched: int | None = None
     n_heavy_pred: int | None = None
     n_heavy_native: int | None = None
+    # Confidence sidecar fields — None if JSON missing / key absent.
+    # Boltz-2: confidence_score, iptm, ptm, ligand_iptm, complex_plddt
+    # AF3 / AF3+MSA: ranking_score, iptm, ptm (no ligand_iptm / plddt)
+    confidence_score: float | None = None
+    iptm: float | None = None
+    ptm: float | None = None
+    ligand_iptm: float | None = None
+    complex_plddt: float | None = None
+    ranking_score: float | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -305,16 +331,42 @@ def _matched_rmsd(
 # Per-prediction pipeline
 # ---------------------------------------------------------------------------
 
-def analyze_prediction(
-    pdbid: str, variant: str, model: str,
+def _read_confidence(spec: dict, prefix: str, rank: int, sys_dir: Path) -> dict:
+    """Return a dict of confidence fields for one pose. All keys may be None.
+
+    Looks for spec["conf"] formatted with prefix+rank first, then
+    spec.get("conf_legacy") formatted with prefix only (rank-0 only).
+    """
+    out: dict = {"confidence_score": None, "iptm": None, "ptm": None,
+                 "ligand_iptm": None, "complex_plddt": None,
+                 "ranking_score": None}
+    conf_path = sys_dir / spec["conf"].format(prefix=prefix, rank=rank)
+    if not conf_path.exists() and rank == 0 and "conf_legacy" in spec:
+        conf_path = sys_dir / spec["conf_legacy"].format(prefix=prefix)
+    if not conf_path.exists():
+        return out
+    try:
+        d = json.loads(conf_path.read_text())
+    except Exception:
+        return out
+    for k in ("confidence_score", "iptm", "ptm", "ligand_iptm", "complex_plddt"):
+        if k in d:
+            out[k] = float(d[k])
+    if "ranking_score" in d:
+        out["ranking_score"] = float(d["ranking_score"])
+    return out
+
+
+def _analyze_single_pose(
+    pdbid: str, variant: str, model: str, pose_idx: int,
+    cif_path: Path, spec: dict, sys_dir: Path,
     *, smiles_override: str | None = None,
 ) -> PredictionRecord:
     pdbid = pdbid.lower()
-    rec = PredictionRecord(pdbid=pdbid, variant=variant, model=model)
+    prefix = f"{pdbid}_{variant}"
+    rec = PredictionRecord(pdbid=pdbid, variant=variant, model=model,
+                           pose_idx=pose_idx)
     try:
-        v_dir = OUTPUT_ROOT / pdbid / variant
-        cif_pattern = MODEL_FILES[model]
-        cif_path = v_dir / cif_pattern.format(prefix=f"{pdbid}_{variant}")
         if not cif_path.exists():
             rec.status = "missing_cif"
             return rec
@@ -385,7 +437,47 @@ def analyze_prediction(
     except Exception as exc:
         rec.status = "error"
         rec.error = f"{type(exc).__name__}: {exc}"
+
+    # Merge confidence sidecar values (independent of RMSD success — even a
+    # failed-RMSD cell can report its model's reported confidence).
+    conf = _read_confidence(spec, prefix, pose_idx, sys_dir)
+    for k, v in conf.items():
+        setattr(rec, k, v)
     return rec
+
+
+def analyze_predictions(
+    pdbid: str, variant: str, model: str,
+    *, smiles_override: str | None = None,
+) -> list[PredictionRecord]:
+    """Enumerate every available diffusion sample for this cell. Returns a
+    list with at least one record (missing_cif if no files at all)."""
+    pdbid = pdbid.lower()
+    spec = MODEL_FILES[model]
+    sys_dir = OUTPUT_ROOT / pdbid / variant
+    prefix = f"{pdbid}_{variant}"
+    cifs = sorted(sys_dir.glob(spec["cif_glob"].format(prefix=prefix)))
+    if not cifs:
+        return [PredictionRecord(pdbid=pdbid, variant=variant, model=model,
+                                 pose_idx=0, status="missing_cif")]
+    records: list[PredictionRecord] = []
+    for rank, cif in enumerate(cifs):
+        rec = _analyze_single_pose(
+            pdbid, variant, model, rank, cif, spec, sys_dir,
+            smiles_override=smiles_override,
+        )
+        records.append(rec)
+    return records
+
+
+def analyze_prediction(
+    pdbid: str, variant: str, model: str,
+    *, smiles_override: str | None = None,
+) -> PredictionRecord:
+    """Back-compat wrapper: return only the top-ranked (rank-0) pose."""
+    return analyze_predictions(
+        pdbid, variant, model, smiles_override=smiles_override,
+    )[0]
 
 
 # ---------------------------------------------------------------------------
