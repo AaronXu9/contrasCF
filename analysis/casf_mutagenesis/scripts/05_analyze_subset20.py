@@ -116,7 +116,7 @@ def main() -> int:
               f"{s.median_rmsd_a:>7.2f}")
 
     # Paired-WT framing: per (pdbid, model), Δ RMSD adversarial − WT
-    from casf_mutagenesis.analysis import paired_stats
+    from casf_mutagenesis.analysis import affinity_paired_stats, paired_stats
     for selector, suffix in [("top1", ""), ("oracle", "_oracle")]:
         paired = paired_stats(rows, pose_selector=selector)
         if not paired:
@@ -128,6 +128,39 @@ def main() -> int:
             for r in paired:
                 w.writerow(asdict(r))
         print(f"Paired ({selector}): {path}")
+
+    # Paired affinity (Boltz-2 only): WT vs adversarial Δ in predicted log
+    # affinity and binding probability. Empty list if no affinity sidecars
+    # were copied (Boltz YAML didn't request affinity before this commit).
+    aff_paired = affinity_paired_stats(rows)
+    if aff_paired:
+        path = OUTPUT_ROOT / f"paired_affinity_{scope}.csv"
+        with path.open("w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(asdict(aff_paired[0]).keys()))
+            w.writeheader()
+            for r in aff_paired:
+                w.writerow(asdict(r))
+        print(f"Paired affinity (Boltz-2): {path}")
+        # Brief on-screen summary: per-model per-variant median deltas
+        print()
+        print(f"  Affinity Δ (adv − wt; positive ⇒ model recognized perturbation):")
+        print(f"  {'model':<7s} {'variant':<6s} {'n':>3s} {'median Δaff':>12s} {'median Δprob':>13s}")
+        by_key: dict[tuple[str, str], list[tuple[float, float]]] = {}
+        for r in aff_paired:
+            if r.delta_affinity is None or r.delta_probability is None:
+                continue
+            by_key.setdefault((r.model, r.variant), []).append(
+                (r.delta_affinity, r.delta_probability)
+            )
+        import statistics
+        for (model, variant), pairs in sorted(by_key.items()):
+            d_aff = statistics.median(p[0] for p in pairs)
+            d_prob = statistics.median(p[1] for p in pairs)
+            print(f"  {model:<7s} {variant:<6s} {len(pairs):>3d} "
+                  f"{d_aff:>12.3f} {d_prob:>13.3f}")
+    else:
+        print("No Boltz-2 affinity records found — re-run Boltz-2 with "
+              "affinity-enabled YAMLs to populate paired_affinity_<scope>.csv.")
     return 0
 
 
