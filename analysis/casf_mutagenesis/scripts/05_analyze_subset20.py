@@ -83,19 +83,28 @@ def main() -> int:
             w.writerow(asdict(r))
     print(f"\nPer-cell results: {csv_path}")
 
-    # Memorization aggregates
-    stats = memorization_stats(rows)
+    # Memorization aggregates (top-1-by-confidence semantics: rank-0 only).
+    from casf_mutagenesis.analysis import bootstrap_memorization_ci
+    rank0 = [r for r in rows if r.pose_idx == 0]
+    stats = memorization_stats(rank0)
+    ci_2a = bootstrap_memorization_ci(rows, threshold_a=2.0)
+    ci_4a = bootstrap_memorization_ci(rows, threshold_a=4.0)
     summary_path = OUTPUT_ROOT / f"memorization_{scope}.csv"
     with summary_path.open("w", newline="") as f:
         w = csv.writer(f)
         w.writerow([
             "model", "variant", "n_total",
-            "memorization_rate_2A", "memorization_rate_4A", "median_rmsd_A",
+            "memorization_rate_2A", "ci_lo_2A", "ci_hi_2A",
+            "memorization_rate_4A", "ci_lo_4A", "ci_hi_4A",
+            "median_rmsd_A",
         ])
         for (model, variant), s in sorted(stats.items()):
+            r2, lo2, hi2 = ci_2a.get((model, variant), (s.rate(2.0), 0.0, 0.0))
+            r4, lo4, hi4 = ci_4a.get((model, variant), (s.rate(4.0), 0.0, 0.0))
             w.writerow([
                 s.model, s.variant, s.n_total,
-                f"{s.rate(2.0):.3f}", f"{s.rate(4.0):.3f}",
+                f"{r2:.3f}", f"{lo2:.3f}", f"{hi2:.3f}",
+                f"{r4:.3f}", f"{lo4:.3f}", f"{hi4:.3f}",
                 f"{s.median_rmsd_a:.2f}" if s.median_rmsd_a is not None else "",
             ])
     print(f"Memorization summary: {summary_path}")

@@ -584,3 +584,46 @@ def paired_stats(
             wt_correct_2A=wt_ok, memorized_given_wt=mem,
         ))
     return out
+
+
+# ---------------------------------------------------------------------------
+# Bootstrap CIs on memorization rate
+# ---------------------------------------------------------------------------
+
+def bootstrap_memorization_ci(
+    records: list[PredictionRecord],
+    threshold_a: float = 2.0,
+    n_boot: int = 1000,
+    seed: int = 42,
+) -> dict[tuple[str, str], tuple[float, float, float]]:
+    """For each (model, adversarial-variant), return (point_rate, lo95, hi95).
+
+    Bootstrap resamples *pdbids* (not individual cells) so the unit of
+    independence matches the experimental design — three variants per system
+    are not independent. Only rank-0 (top-1-by-confidence) poses are used.
+    """
+    keyed: dict[tuple[str, str], dict[str, float]] = {}
+    for r in records:
+        if r.pose_idx != 0 or r.status != "ok" or r.ligand_rmsd_a is None:
+            continue
+        if r.variant == "wt":
+            continue
+        keyed.setdefault((r.model, r.variant), {})[r.pdbid] = r.ligand_rmsd_a
+
+    rng = np.random.default_rng(seed)
+    out: dict[tuple[str, str], tuple[float, float, float]] = {}
+    for key, by_pdb in keyed.items():
+        pdbids = list(by_pdb.keys())
+        rmsds = np.asarray([by_pdb[p] for p in pdbids])
+        if len(rmsds) == 0:
+            continue
+        point = float((rmsds < threshold_a).mean())
+        n = len(pdbids)
+        if n < 2:
+            out[key] = (point, point, point)
+            continue
+        idx = rng.integers(0, n, size=(n_boot, n))
+        boot_rates = (rmsds[idx] < threshold_a).mean(axis=1)
+        lo, hi = np.percentile(boot_rates, [2.5, 97.5])
+        out[key] = (point, float(lo), float(hi))
+    return out
