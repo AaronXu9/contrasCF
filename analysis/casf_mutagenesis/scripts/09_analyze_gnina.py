@@ -43,22 +43,19 @@ LIGAND_OUTPUTS = REPO_ROOT / "analysis" / "ligand_mutagenesis" / "outputs"
 def discover_cells() -> list[tuple[str, str, str, Path]]:
     """Return [(module, system, variant, gnina_sdf), ...] for every cell."""
     cells: list[tuple[str, str, str, Path]] = []
-    # casf binding-site: WT only on disk
-    if CASF_OUTPUTS.is_dir():
-        for sys_dir in sorted(CASF_OUTPUTS.iterdir()):
-            if not sys_dir.is_dir(): continue
-            sdf = sys_dir / "wt" / "gnina" / "poses.sdf"
-            if sdf.exists():
-                cells.append(("casf", sys_dir.name, "wt", sdf))
-    # ligand mutagenesis: all variants
-    if LIGAND_OUTPUTS.is_dir():
-        for sys_dir in sorted(LIGAND_OUTPUTS.iterdir()):
-            if not sys_dir.is_dir(): continue
+    # casf binding-site: walk all variants (wt now joined by rem/pack/inv)
+    for module, root in (("casf", CASF_OUTPUTS), ("ligand", LIGAND_OUTPUTS)):
+        if not root.is_dir():
+            continue
+        for sys_dir in sorted(root.iterdir()):
+            if not sys_dir.is_dir() or len(sys_dir.name) != 4:
+                continue
             for var_dir in sorted(sys_dir.iterdir()):
-                if not var_dir.is_dir(): continue
+                if not var_dir.is_dir():
+                    continue
                 sdf = var_dir / "gnina" / "poses.sdf"
                 if sdf.exists():
-                    cells.append(("ligand", sys_dir.name, var_dir.name, sdf))
+                    cells.append((module, sys_dir.name, var_dir.name, sdf))
     return cells
 
 
@@ -68,7 +65,13 @@ def main() -> int:
     rows: list[GninaRecord] = []
     for i, (module, system, variant, sdf) in enumerate(cells, 1):
         crystal = CASF_LIGANDS / f"{system}_ligand.sdf"
-        rec = analyze_gnina(system, variant, module, sdf, crystal)
+        # receptor.pdb is alongside the docking inputs — sdf.parent ==
+        # <v_dir>/gnina, so <v_dir>/docking/receptor.pdb.
+        receptor_pdb = sdf.parent.parent / "docking" / "receptor.pdb"
+        rec = analyze_gnina(
+            system, variant, module, sdf, crystal,
+            receptor_pdb=receptor_pdb if receptor_pdb.exists() else None,
+        )
         rows.append(rec)
         if rec.status == "ok":
             print(

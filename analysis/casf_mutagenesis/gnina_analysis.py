@@ -28,7 +28,11 @@ from rdkit.Chem import rdFMCS
 REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 
-from casf_mutagenesis.config import CASF_LIGANDS  # noqa: E402
+from casf_mutagenesis.config import CASF_LIGANDS, CASF_RAW  # noqa: E402
+from casf_mutagenesis.analysis import (  # noqa: E402
+    extract_protein_ca_near, superpose_by_index,
+)
+import gemmi  # noqa: E402
 
 
 @dataclass
@@ -114,9 +118,27 @@ def _aligned_rmsd(crystal_pts: np.ndarray, pose_pts: np.ndarray) -> float:
     return float(np.sqrt(np.mean(np.sum(diff * diff, axis=1))))
 
 
+def _ca_transform(receptor_pdb: Path, crystal_pdb: Path, lig_xyz: np.ndarray):
+    """Return a Superposition that maps receptor → crystal frame.
+
+    Used for casf_mutagenesis rem/pack/inv where GNINA docked against an
+    AF3-predicted mutant receptor — pose coords are in the AF3 frame and
+    must be transformed before comparing to the crystal ligand.
+
+    For WT and ligand_mutagenesis, the docking receptor IS the crystal
+    protein → identity transform; we skip this call entirely there.
+    """
+    st_rec = gemmi.read_structure(str(receptor_pdb))
+    st_crys = gemmi.read_structure(str(crystal_pdb))
+    rec_ca = extract_protein_ca_near(st_rec, lig_xyz)
+    crys_ca = extract_protein_ca_near(st_crys, lig_xyz)
+    return superpose_by_index(rec_ca, crys_ca)
+
+
 def analyze_gnina(
     system: str, variant: str, module: str,
     gnina_sdf: Path, crystal_sdf: Path | None = None,
+    *, receptor_pdb: Path | None = None,
 ) -> GninaRecord:
     rec = GninaRecord(system=system, variant=variant, module=module)
     if crystal_sdf is None:
@@ -138,6 +160,24 @@ def analyze_gnina(
         rec.n_matched_heavy = n
         c_pts = _heavy_coords(crystal, c_idx)
         p_pts = _heavy_coords(pose, p_idx)
+        # If a receptor frame differs from the crystal frame (only happens
+        # for casf rem/pack/inv where GNINA docked into AF3-predicted
+        # mutants), align receptor → crystal and apply the transform to
+        # the pose before computing RMSD.
+        needs_align = (module == "casf" and variant != "wt") and receptor_pdb is not None
+        if needs_align:
+            crystal_pdb = CASF_RAW / system / f"{system}_protein.pdb"
+            if crystal_pdb.exists():
+                # Use crystal ligand centroid for pocket-aligned chain pick
+                # (we know where the ligand sits in the crystal frame).
+                crys_centroid = np.asarray(_heavy_coords(crystal, list(range(crystal.GetNumHeavyAtoms()))))
+                try:
+                    sup = _ca_transform(receptor_pdb, crystal_pdb, crys_centroid)
+                    p_pts = sup.apply(p_pts)
+                except Exception as exc:
+                    rec.status = "align_failed"
+                    rec.error = f"{type(exc).__name__}: {exc}"
+                    return rec
         rec.rmsd_a = round(_aligned_rmsd(c_pts, p_pts), 3)
     except Exception as exc:
         rec.status = "error"

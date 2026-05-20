@@ -1,0 +1,6278 @@
+{
+  "runs": [
+    {
+      "system": "1bcu",
+      "variant": "inv",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bcu/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1bcu",
+      "variant": "pack",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bcu/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1bcu",
+      "variant": "rem",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bcu/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1bcu",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1bzc",
+      "variant": "inv",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bzc/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1bzc",
+      "variant": "pack",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bzc/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1bzc",
+      "variant": "rem",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1bzc/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1bzc",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1e66",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1e66/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1e66",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1e66/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1e66",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1e66/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1e66",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1eby",
+      "variant": "inv",
+      "wallclock_s": 13.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1eby/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1eby",
+      "variant": "pack",
+      "wallclock_s": 14.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1eby/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1eby",
+      "variant": "rem",
+      "wallclock_s": 14.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1eby/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1eby",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1g2k",
+      "variant": "inv",
+      "wallclock_s": 11.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1g2k/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1g2k",
+      "variant": "pack",
+      "wallclock_s": 11.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1g2k/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1g2k",
+      "variant": "rem",
+      "wallclock_s": 11.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1g2k/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1g2k",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1gpk",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpk/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpk",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpk/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpk",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpk/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpk",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1gpn",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpn/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpn",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpn/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpn",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1gpn/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1gpn",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1h22",
+      "variant": "inv",
+      "wallclock_s": 9.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h22/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1h22",
+      "variant": "pack",
+      "wallclock_s": 8.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h22/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1h22",
+      "variant": "rem",
+      "wallclock_s": 8.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h22/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1h22",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1h23",
+      "variant": "inv",
+      "wallclock_s": 10.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h23/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1h23",
+      "variant": "pack",
+      "wallclock_s": 10.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h23/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1h23",
+      "variant": "rem",
+      "wallclock_s": 10.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1h23/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1h23",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1k1i",
+      "variant": "inv",
+      "wallclock_s": 8.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1k1i/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1k1i",
+      "variant": "pack",
+      "wallclock_s": 8.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1k1i/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1k1i",
+      "variant": "rem",
+      "wallclock_s": 8.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1k1i/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1k1i",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1lpg",
+      "variant": "inv",
+      "wallclock_s": 9.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1lpg/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1lpg",
+      "variant": "pack",
+      "wallclock_s": 9.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1lpg/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1lpg",
+      "variant": "rem",
+      "wallclock_s": 9.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1lpg/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1lpg",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1mq6",
+      "variant": "inv",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1mq6/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1mq6",
+      "variant": "pack",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1mq6/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1mq6",
+      "variant": "rem",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1mq6/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1mq6",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1nc1",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc1",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc1",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1nc3",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc3/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc3",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc3/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc3",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nc3/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1nc3",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1nvq",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nvq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1nvq",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nvq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1nvq",
+      "variant": "rem",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1nvq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1nvq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1o0h",
+      "variant": "inv",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o0h/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1o0h",
+      "variant": "pack",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o0h/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1o0h",
+      "variant": "rem",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o0h/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1o0h",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1o3f",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o3f/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1o3f",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o3f/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1o3f",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1o3f/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1o3f",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1o5b",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1owh",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1owh/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1owh",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1owh/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1owh",
+      "variant": "rem",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1owh/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1owh",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1oyt",
+      "variant": "inv",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1oyt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1oyt",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1oyt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1oyt",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1oyt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1oyt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1p1n",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1n/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1n",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1n/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1n",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1n/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1n",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1p1q",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1q/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1q",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1q/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1q",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1p1q/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1p1q",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1ps3",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1pxn",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1pxn/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1pxn",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1pxn/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1pxn",
+      "variant": "rem",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1pxn/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1pxn",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1q8t",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8t/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8t",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8t/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8t",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8t/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8t",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1q8u",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8u/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8u",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8u/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8u",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1q8u/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1q8u",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1qf1",
+      "variant": "inv",
+      "wallclock_s": 8.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qf1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1qf1",
+      "variant": "pack",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qf1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1qf1",
+      "variant": "rem",
+      "wallclock_s": 6.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qf1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1qf1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1qkt",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qkt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1qkt",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qkt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1qkt",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1qkt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1qkt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1r5y",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1r5y/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1r5y",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1r5y/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1r5y",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1r5y/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1r5y",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1s38",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1s38/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1s38",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1s38/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1s38",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1s38/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1s38",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1sqa",
+      "variant": "inv",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1sqa/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1sqa",
+      "variant": "pack",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1sqa/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1sqa",
+      "variant": "rem",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1sqa/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1sqa",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1syi",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1syi/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1syi",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1syi/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1syi",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1syi/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1syi",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1u1b",
+      "variant": "inv",
+      "wallclock_s": 19.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1u1b/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1u1b",
+      "variant": "pack",
+      "wallclock_s": 18.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1u1b/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1u1b",
+      "variant": "rem",
+      "wallclock_s": 19.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1u1b/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1u1b",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1uto",
+      "variant": "inv",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1uto/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1uto",
+      "variant": "pack",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1uto/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1uto",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1uto/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1uto",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1vso",
+      "variant": "inv",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1vso/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1vso",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1vso/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1vso",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1vso/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1vso",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1w4o",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1w4o/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1w4o",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1w4o/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1w4o",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1w4o/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1w4o",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1y6r",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1y6r/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1y6r",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1y6r/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1y6r",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1y6r/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1y6r",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1yc1",
+      "variant": "inv",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1yc1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1yc1",
+      "variant": "pack",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1yc1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1yc1",
+      "variant": "rem",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1yc1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1yc1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1ydr",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydr/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydr",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydr/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydr",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydr/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1ydt",
+      "variant": "inv",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydt",
+      "variant": "pack",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydt",
+      "variant": "rem",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1ydt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1ydt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1z6e",
+      "variant": "inv",
+      "wallclock_s": 7.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z6e/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1z6e",
+      "variant": "pack",
+      "wallclock_s": 7.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z6e/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1z6e",
+      "variant": "rem",
+      "wallclock_s": 7.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z6e/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1z6e",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1z95",
+      "variant": "inv",
+      "wallclock_s": 5.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z95/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1z95",
+      "variant": "pack",
+      "wallclock_s": 6.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z95/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1z95",
+      "variant": "rem",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z95/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1z95",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "1z9g",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z9g/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "1z9g",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z9g/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "1z9g",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/1z9g/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "1z9g",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2al5",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2al5/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2al5",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2al5/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2al5",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2al5/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2al5",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2br1",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2br1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2br1",
+      "variant": "pack",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2br1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2br1",
+      "variant": "rem",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2br1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2br1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2brb",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2brb/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2brb",
+      "variant": "pack",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2brb/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2brb",
+      "variant": "rem",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2brb/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2brb",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2c3i",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2cbv",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cbv/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2cbv",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cbv/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2cbv",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cbv/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2cbv",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2cet",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cet/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2cet",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cet/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2cet",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2cet/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2cet",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2fvd",
+      "variant": "inv",
+      "wallclock_s": 6.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fvd/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2fvd",
+      "variant": "pack",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fvd/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2fvd",
+      "variant": "rem",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fvd/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2fvd",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2fxs",
+      "variant": "inv",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fxs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2fxs",
+      "variant": "pack",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fxs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2fxs",
+      "variant": "rem",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2fxs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2fxs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2hb1",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2hb1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2hb1",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2hb1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2hb1",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2hb1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2hb1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2iwx",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2iwx/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2iwx",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2iwx/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2iwx",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2iwx/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2iwx",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2j78",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j78/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2j78",
+      "variant": "pack",
+      "wallclock_s": 2.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j78/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2j78",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j78/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2j78",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2j7h",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j7h/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2j7h",
+      "variant": "pack",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j7h/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2j7h",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2j7h/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2j7h",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2p4y",
+      "variant": "inv",
+      "wallclock_s": 10.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2p4y/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2p4y",
+      "variant": "pack",
+      "wallclock_s": 9.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2p4y/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2p4y",
+      "variant": "rem",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2p4y/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2p4y",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2pog",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2pog/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2pog",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2pog/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2pog",
+      "variant": "rem",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2pog/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2pog",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2qbp",
+      "variant": "inv",
+      "wallclock_s": 7.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbp/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbp",
+      "variant": "pack",
+      "wallclock_s": 9.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbp/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbp",
+      "variant": "rem",
+      "wallclock_s": 7.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbp/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbp",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2qbq",
+      "variant": "inv",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbq",
+      "variant": "pack",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbq",
+      "variant": "rem",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2qbr",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbr/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbr",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbr/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbr",
+      "variant": "rem",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qbr/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2qbr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2qe4",
+      "variant": "inv",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qe4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2qe4",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qe4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2qe4",
+      "variant": "rem",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qe4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2qe4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2qnq",
+      "variant": "inv",
+      "wallclock_s": 9.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qnq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2qnq",
+      "variant": "pack",
+      "wallclock_s": 9.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qnq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2qnq",
+      "variant": "rem",
+      "wallclock_s": 9.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2qnq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2qnq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2r9w",
+      "variant": "inv",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2r9w/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2r9w",
+      "variant": "pack",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2r9w/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2r9w",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2r9w/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2r9w",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2v00",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v00/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2v00",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v00/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2v00",
+      "variant": "rem",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v00/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2v00",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2v7a",
+      "variant": "inv",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v7a/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2v7a",
+      "variant": "pack",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v7a/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2v7a",
+      "variant": "rem",
+      "wallclock_s": 6.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2v7a/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2v7a",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2vkm",
+      "variant": "inv",
+      "wallclock_s": 14.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vkm/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2vkm",
+      "variant": "pack",
+      "wallclock_s": 14.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vkm/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2vkm",
+      "variant": "rem",
+      "wallclock_s": 15.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vkm/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2vkm",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2vw5",
+      "variant": "inv",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vw5/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2vw5",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vw5/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2vw5",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2vw5/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2vw5",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2w4x",
+      "variant": "inv",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w4x/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2w4x",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w4x/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2w4x",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w4x/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2w4x",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2w66",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w66/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2w66",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w66/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2w66",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2w66/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2w66",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wbg",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wbg/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wbg",
+      "variant": "pack",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wbg/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wbg",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wbg/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wbg",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2weg",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2weg/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2weg",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2weg/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2weg",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2weg/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2weg",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wer",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wer/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wer",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wer/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wer",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wer/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wer",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wn9",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wn9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wn9",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wn9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wn9",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wn9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wn9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wnc",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wnc/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wnc",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wnc/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wnc",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wnc/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wnc",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wtv",
+      "variant": "inv",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wtv/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wtv",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wtv/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wtv",
+      "variant": "rem",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wtv/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wtv",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2wvt",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wvt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2wvt",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wvt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2wvt",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2wvt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2wvt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2x00",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2x00/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2x00",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2x00/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2x00",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2x00/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2x00",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xb8",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xb8/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xb8",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xb8/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xb8",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xb8/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xb8",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xbv",
+      "variant": "inv",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xbv/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xbv",
+      "variant": "pack",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xbv/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xbv",
+      "variant": "rem",
+      "wallclock_s": 6.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xbv/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xbv",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xdl",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xdl/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xdl",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xdl/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xdl",
+      "variant": "rem",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xdl/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xdl",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xii",
+      "variant": "inv",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xii/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xii",
+      "variant": "pack",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xii/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xii",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xii/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xii",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xj7",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xj7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xj7",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xj7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xj7",
+      "variant": "rem",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xj7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xj7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xnb",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xnb/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xnb",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xnb/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xnb",
+      "variant": "rem",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xnb/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xnb",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2xys",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xys/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2xys",
+      "variant": "pack",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xys/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2xys",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2xys/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2xys",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2y5h",
+      "variant": "inv",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2y5h/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2y5h",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2y5h/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2y5h",
+      "variant": "rem",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2y5h/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2y5h",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2yfe",
+      "variant": "inv",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yfe/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2yfe",
+      "variant": "pack",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yfe/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2yfe",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yfe/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2yfe",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2yge",
+      "variant": "inv",
+      "wallclock_s": 6.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yge/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2yge",
+      "variant": "pack",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yge/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2yge",
+      "variant": "rem",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yge/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2yge",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2yki",
+      "variant": "inv",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yki/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2yki",
+      "variant": "pack",
+      "wallclock_s": 6.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yki/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2yki",
+      "variant": "rem",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2yki/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2yki",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2ymd",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2ymd/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2ymd",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2ymd/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2ymd",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2ymd/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2ymd",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2zb1",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zb1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2zb1",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zb1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2zb1",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zb1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2zb1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "2zcq",
+      "variant": "inv",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zcq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "2zcq",
+      "variant": "pack",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zcq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "2zcq",
+      "variant": "rem",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/2zcq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "2zcq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ag9",
+      "variant": "inv",
+      "wallclock_s": 75.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ag9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ag9",
+      "variant": "pack",
+      "wallclock_s": 75.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ag9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ag9",
+      "variant": "rem",
+      "wallclock_s": 76.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ag9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ag9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ao4",
+      "variant": "inv",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ao4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ao4",
+      "variant": "pack",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ao4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ao4",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ao4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ao4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3b1m",
+      "variant": "inv",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b1m/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3b1m",
+      "variant": "pack",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b1m/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3b1m",
+      "variant": "rem",
+      "wallclock_s": 7.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b1m/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3b1m",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3b27",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b27/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3b27",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b27/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3b27",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b27/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3b27",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3b5r",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b5r/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3b5r",
+      "variant": "pack",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b5r/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3b5r",
+      "variant": "rem",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b5r/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3b5r",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3b68",
+      "variant": "inv",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b68/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3b68",
+      "variant": "pack",
+      "wallclock_s": 6.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b68/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3b68",
+      "variant": "rem",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3b68/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3b68",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3bgz",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3bgz/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3bgz",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3bgz/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3bgz",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3bgz/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3bgz",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3cj4",
+      "variant": "inv",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3cj4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3cj4",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3cj4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3cj4",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3cj4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3cj4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3coy",
+      "variant": "inv",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coy/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3coy",
+      "variant": "pack",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coy/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3coy",
+      "variant": "rem",
+      "wallclock_s": 6.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coy/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3coy",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3coz",
+      "variant": "inv",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coz/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3coz",
+      "variant": "pack",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coz/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3coz",
+      "variant": "rem",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3coz/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3coz",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3d4z",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3d6q",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3d6q/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3d6q",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3d6q/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3d6q",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3d6q/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3d6q",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3dd0",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3dd0/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3dd0",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3dd0/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3dd0",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3dd0/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3dd0",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3dx1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3dx2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3e5a",
+      "variant": "inv",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e5a/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3e5a",
+      "variant": "pack",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e5a/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3e5a",
+      "variant": "rem",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e5a/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3e5a",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3e92",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e92/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3e92",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e92/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3e92",
+      "variant": "rem",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e92/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3e92",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3e93",
+      "variant": "inv",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e93/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3e93",
+      "variant": "pack",
+      "wallclock_s": 7.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e93/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3e93",
+      "variant": "rem",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3e93/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3e93",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ebp",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ehy",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ehy/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ehy",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ehy/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ehy",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ehy/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ehy",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ejr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3f3c",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3c/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3c",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3c/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3c",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3c/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3c",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3f3d",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3d/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3d",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3d/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3d",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3d/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3d",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3f3e",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3e/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3e",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3e/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3e",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3f3e/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3f3e",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3fcq",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fcq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3fcq",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fcq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3fcq",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fcq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3fcq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3fur",
+      "variant": "inv",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fur/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3fur",
+      "variant": "pack",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fur/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3fur",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fur/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3fur",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3fv1",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv1",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv1",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3fv2",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv2",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv2",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3fv2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3fv2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3g0w",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g0w/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3g0w",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g0w/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3g0w",
+      "variant": "rem",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g0w/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3g0w",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3g2n",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3g2z",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g2z/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3g2z",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g2z/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3g2z",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g2z/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3g2z",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3g31",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g31/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3g31",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g31/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3g31",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3g31/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3g31",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gbb",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gbb/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gbb",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gbb/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gbb",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gbb/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gbb",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gc5",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gc5/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gc5",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gc5/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gc5",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gc5/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gc5",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ge7",
+      "variant": "inv",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ge7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ge7",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ge7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ge7",
+      "variant": "rem",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ge7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ge7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gnw",
+      "variant": "inv",
+      "wallclock_s": 11.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gnw/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gnw",
+      "variant": "pack",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gnw/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gnw",
+      "variant": "rem",
+      "wallclock_s": 8.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gnw/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gnw",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gr2",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gr2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gr2",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gr2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gr2",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gr2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gr2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gv9",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gv9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gv9",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gv9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gv9",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gv9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gv9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3gy4",
+      "variant": "inv",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gy4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3gy4",
+      "variant": "pack",
+      "wallclock_s": 2.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gy4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3gy4",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3gy4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3gy4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ivg",
+      "variant": "inv",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ivg/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ivg",
+      "variant": "pack",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ivg/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ivg",
+      "variant": "rem",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ivg/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ivg",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3jvr",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvr/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvr",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvr/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvr",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvr/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3jvs",
+      "variant": "inv",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvs",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvs",
+      "variant": "rem",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jvs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3jvs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3jya",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jya/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3jya",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jya/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3jya",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3jya/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3jya",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3k5v",
+      "variant": "inv",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3k5v/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3k5v",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3k5v/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3k5v",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3k5v/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3k5v",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3kr8",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kr8/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3kr8",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kr8/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3kr8",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kr8/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3kr8",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3kwa",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kwa/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3kwa",
+      "variant": "pack",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kwa/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3kwa",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3kwa/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3kwa",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3l7b",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3lka",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3lka/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3lka",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3lka/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3lka",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3lka/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3lka",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3mss",
+      "variant": "inv",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3mss/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3mss",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3mss/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3mss",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3mss/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3mss",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3n76",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n76/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3n76",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n76/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3n76",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n76/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3n76",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3n7a",
+      "variant": "inv",
+      "wallclock_s": 2.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n7a/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3n7a",
+      "variant": "pack",
+      "wallclock_s": 2.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n7a/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3n7a",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n7a/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3n7a",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3n86",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n86/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3n86",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n86/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3n86",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3n86/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3n86",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3nq9",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nq9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3nq9",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nq9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3nq9",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nq9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3nq9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3nw9",
+      "variant": "inv",
+      "wallclock_s": 8.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nw9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3nw9",
+      "variant": "pack",
+      "wallclock_s": 8.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nw9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3nw9",
+      "variant": "rem",
+      "wallclock_s": 7.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nw9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3nw9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3nx7",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nx7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3nx7",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nx7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3nx7",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3nx7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3nx7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3oe4",
+      "variant": "inv",
+      "wallclock_s": 6.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe4",
+      "variant": "pack",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe4",
+      "variant": "rem",
+      "wallclock_s": 6.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3oe5",
+      "variant": "inv",
+      "wallclock_s": 6.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe5/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe5",
+      "variant": "pack",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe5/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe5",
+      "variant": "rem",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3oe5/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3oe5",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ozs",
+      "variant": "inv",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozs",
+      "variant": "pack",
+      "wallclock_s": 7.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozs",
+      "variant": "rem",
+      "wallclock_s": 8.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ozt",
+      "variant": "inv",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozt",
+      "variant": "pack",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozt",
+      "variant": "rem",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ozt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ozt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3p5o",
+      "variant": "inv",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3p5o/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3p5o",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3p5o/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3p5o",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3p5o/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3p5o",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3pxf",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pxf/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3pxf",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pxf/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3pxf",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pxf/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3pxf",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3pyy",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pyy/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3pyy",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pyy/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3pyy",
+      "variant": "rem",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3pyy/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3pyy",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3qgy",
+      "variant": "inv",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3qgy/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3qgy",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3qgy/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3qgy",
+      "variant": "rem",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3qgy/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3qgy",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3rlr",
+      "variant": "inv",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rlr/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3rlr",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rlr/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3rlr",
+      "variant": "rem",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rlr/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3rlr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3rr4",
+      "variant": "inv",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rr4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3rr4",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rr4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3rr4",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rr4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3rr4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3rsx",
+      "variant": "inv",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rsx/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3rsx",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rsx/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3rsx",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3rsx/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3rsx",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ryj",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ryj/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ryj",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ryj/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ryj",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ryj/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ryj",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3syr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3tsk",
+      "variant": "inv",
+      "wallclock_s": 12.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3tsk/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3tsk",
+      "variant": "pack",
+      "wallclock_s": 12.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3tsk/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3tsk",
+      "variant": "rem",
+      "wallclock_s": 12.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3tsk/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3tsk",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3u5j",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u5j/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3u5j",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u5j/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3u5j",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u5j/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3u5j",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3u8k",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8k/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8k",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8k/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8k",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8k/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8k",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3u8n",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8n/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8n",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8n/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8n",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u8n/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3u8n",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3u9q",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u9q/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3u9q",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u9q/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3u9q",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3u9q/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3u9q",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3udh",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3udh/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3udh",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3udh/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3udh",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3udh/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3udh",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ueu",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ueu/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ueu",
+      "variant": "pack",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ueu/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ueu",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ueu/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ueu",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3uev",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uev/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3uev",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uev/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3uev",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uev/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3uev",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3uew",
+      "variant": "inv",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uew/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3uew",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uew/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3uew",
+      "variant": "rem",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uew/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3uew",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3ui7",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ui7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3ui7",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ui7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3ui7",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3ui7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3ui7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3uo4",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uo4/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3uo4",
+      "variant": "pack",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uo4/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3uo4",
+      "variant": "rem",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uo4/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3uo4",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3up2",
+      "variant": "inv",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3up2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3up2",
+      "variant": "pack",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3up2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3up2",
+      "variant": "rem",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3up2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3up2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3utu",
+      "variant": "inv",
+      "wallclock_s": 15.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3utu/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3utu",
+      "variant": "pack",
+      "wallclock_s": 15.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3utu/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3utu",
+      "variant": "rem",
+      "wallclock_s": 16.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3utu/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3utu",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3uuo",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uuo/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3uuo",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uuo/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3uuo",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3uuo/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3uuo",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3wtj",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wtj/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3wtj",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wtj/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3wtj",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wtj/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3wtj",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3wz8",
+      "variant": "inv",
+      "wallclock_s": 7.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wz8/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3wz8",
+      "variant": "pack",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wz8/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3wz8",
+      "variant": "rem",
+      "wallclock_s": 7.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3wz8/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3wz8",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3zdg",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zdg/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3zdg",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zdg/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3zdg",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zdg/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3zdg",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3zso",
+      "variant": "inv",
+      "wallclock_s": 13.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zso/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3zso",
+      "variant": "pack",
+      "wallclock_s": 12.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zso/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3zso",
+      "variant": "rem",
+      "wallclock_s": 12.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zso/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3zso",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "3zt2",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zt2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "3zt2",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zt2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "3zt2",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/3zt2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "3zt2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4agn",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agn/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4agn",
+      "variant": "pack",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agn/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4agn",
+      "variant": "rem",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agn/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4agn",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4agp",
+      "variant": "inv",
+      "wallclock_s": 5.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agp/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4agp",
+      "variant": "pack",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agp/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4agp",
+      "variant": "rem",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agp/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4agp",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4agq",
+      "variant": "inv",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agq/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4agq",
+      "variant": "pack",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agq/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4agq",
+      "variant": "rem",
+      "wallclock_s": 5.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4agq/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4agq",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4bkt",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4bkt/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4bkt",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4bkt/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4bkt",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4bkt/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4bkt",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4cig",
+      "variant": "inv",
+      "wallclock_s": 8.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cig/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4cig",
+      "variant": "pack",
+      "wallclock_s": 8.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cig/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4cig",
+      "variant": "rem",
+      "wallclock_s": 8.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cig/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4cig",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ciw",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ciw/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ciw",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ciw/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ciw",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ciw/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ciw",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4cr9",
+      "variant": "inv",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cr9/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4cr9",
+      "variant": "pack",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cr9/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4cr9",
+      "variant": "rem",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cr9/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4cr9",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4cra",
+      "variant": "inv",
+      "wallclock_s": 7.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cra/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4cra",
+      "variant": "pack",
+      "wallclock_s": 7.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cra/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4cra",
+      "variant": "rem",
+      "wallclock_s": 7.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4cra/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4cra",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4crc",
+      "variant": "inv",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4crc/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4crc",
+      "variant": "pack",
+      "wallclock_s": 8.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4crc/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4crc",
+      "variant": "rem",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4crc/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4crc",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ddh",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddh/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddh",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddh/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddh",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddh/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddh",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ddk",
+      "variant": "inv",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddk/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddk",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddk/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddk",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ddk/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ddk",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4de1",
+      "variant": "inv",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de1/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4de1",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de1/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4de1",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de1/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4de1",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4de2",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4de2",
+      "variant": "pack",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4de2",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4de2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4de3",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de3/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4de3",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de3/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4de3",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4de3/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4de3",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4djv",
+      "variant": "inv",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4djv/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4djv",
+      "variant": "pack",
+      "wallclock_s": 4.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4djv/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4djv",
+      "variant": "rem",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4djv/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4djv",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4dld",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dld/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4dld",
+      "variant": "pack",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dld/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4dld",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dld/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4dld",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4dli",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dli/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4dli",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dli/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4dli",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4dli/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4dli",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4e5w",
+      "variant": "inv",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e5w/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4e5w",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e5w/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4e5w",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e5w/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4e5w",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4e6q",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e6q/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4e6q",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e6q/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4e6q",
+      "variant": "rem",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4e6q/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4e6q",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ea2",
+      "variant": "inv",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ea2/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ea2",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ea2/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ea2",
+      "variant": "rem",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ea2/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ea2",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4eky",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4eo8",
+      "variant": "inv",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eo8/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4eo8",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eo8/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4eo8",
+      "variant": "rem",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eo8/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4eo8",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4eor",
+      "variant": "inv",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eor/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4eor",
+      "variant": "pack",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eor/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4eor",
+      "variant": "rem",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4eor/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4eor",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4f09",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f09/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4f09",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f09/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4f09",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f09/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4f09",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4f2w",
+      "variant": "inv",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f2w/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4f2w",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f2w/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4f2w",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f2w/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4f2w",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4f3c",
+      "variant": "inv",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f3c/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4f3c",
+      "variant": "pack",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f3c/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4f3c",
+      "variant": "rem",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f3c/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4f3c",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4f9w",
+      "variant": "inv",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f9w/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4f9w",
+      "variant": "pack",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f9w/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4f9w",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4f9w/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4f9w",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4gfm",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gfm/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4gfm",
+      "variant": "pack",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gfm/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4gfm",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gfm/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4gfm",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4gid",
+      "variant": "inv",
+      "wallclock_s": 14.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gid/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4gid",
+      "variant": "pack",
+      "wallclock_s": 15.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gid/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4gid",
+      "variant": "rem",
+      "wallclock_s": 15.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gid/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4gid",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4gkm",
+      "variant": "inv",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gkm/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4gkm",
+      "variant": "pack",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gkm/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4gkm",
+      "variant": "rem",
+      "wallclock_s": 3.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gkm/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4gkm",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4gr0",
+      "variant": "inv",
+      "wallclock_s": 10.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gr0/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4gr0",
+      "variant": "pack",
+      "wallclock_s": 11.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gr0/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4gr0",
+      "variant": "rem",
+      "wallclock_s": 11.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4gr0/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4gr0",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4hge",
+      "variant": "inv",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4hge/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4hge",
+      "variant": "pack",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4hge/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4hge",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4hge/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4hge",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ih5",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih5/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih5",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih5/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih5",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih5/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih5",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ih7",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih7",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih7",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ih7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ih7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ivb",
+      "variant": "inv",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivb/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivb",
+      "variant": "pack",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivb/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivb",
+      "variant": "rem",
+      "wallclock_s": 4.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivb/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivb",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ivc",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivc/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivc",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivc/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivc",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivc/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivc",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ivd",
+      "variant": "inv",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivd/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivd",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivd/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivd",
+      "variant": "rem",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ivd/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ivd",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4j21",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j21/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4j21",
+      "variant": "pack",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j21/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4j21",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j21/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4j21",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4j28",
+      "variant": "inv",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j28/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4j28",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j28/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4j28",
+      "variant": "rem",
+      "wallclock_s": 3.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j28/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4j28",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4j3l",
+      "variant": "inv",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j3l/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4j3l",
+      "variant": "pack",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j3l/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4j3l",
+      "variant": "rem",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4j3l/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4j3l",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4jfs",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jfs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4jfs",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jfs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4jfs",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jfs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4jfs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4jia",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jia/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4jia",
+      "variant": "pack",
+      "wallclock_s": 5.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jia/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4jia",
+      "variant": "rem",
+      "wallclock_s": 5.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jia/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4jia",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4jsz",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jsz/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4jsz",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jsz/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4jsz",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jsz/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4jsz",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4jxs",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jxs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4jxs",
+      "variant": "pack",
+      "wallclock_s": 4.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jxs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4jxs",
+      "variant": "rem",
+      "wallclock_s": 4.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4jxs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4jxs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4k18",
+      "variant": "inv",
+      "wallclock_s": 5.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k18/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4k18",
+      "variant": "pack",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k18/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4k18",
+      "variant": "rem",
+      "wallclock_s": 5.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k18/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4k18",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4k77",
+      "variant": "inv",
+      "wallclock_s": 3.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k77/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4k77",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k77/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4k77",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4k77/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4k77",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4kz6",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4kz6/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4kz6",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4kz6/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4kz6",
+      "variant": "rem",
+      "wallclock_s": 3.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4kz6/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4kz6",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4llx",
+      "variant": "inv",
+      "wallclock_s": 2.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4llx/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4llx",
+      "variant": "pack",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4llx/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4llx",
+      "variant": "rem",
+      "wallclock_s": 2.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4llx/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4llx",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4lzs",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4lzs/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4lzs",
+      "variant": "pack",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4lzs/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4lzs",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4lzs/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4lzs",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4m0y",
+      "variant": "inv",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0y/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0y",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0y/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0y",
+      "variant": "rem",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0y/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0y",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4m0z",
+      "variant": "inv",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0z/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0z",
+      "variant": "pack",
+      "wallclock_s": 4.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0z/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0z",
+      "variant": "rem",
+      "wallclock_s": 4.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4m0z/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4m0z",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4mgd",
+      "variant": "inv",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mgd/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4mgd",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mgd/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4mgd",
+      "variant": "rem",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mgd/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4mgd",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4mme",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mme/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4mme",
+      "variant": "pack",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mme/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4mme",
+      "variant": "rem",
+      "wallclock_s": 3.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4mme/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4mme",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ogj",
+      "variant": "inv",
+      "wallclock_s": 8.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ogj/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ogj",
+      "variant": "pack",
+      "wallclock_s": 8.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ogj/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ogj",
+      "variant": "rem",
+      "wallclock_s": 8.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ogj/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ogj",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4qac",
+      "variant": "inv",
+      "wallclock_s": 4.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qac/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4qac",
+      "variant": "pack",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qac/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4qac",
+      "variant": "rem",
+      "wallclock_s": 3.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qac/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4qac",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4qd6",
+      "variant": "inv",
+      "wallclock_s": 6.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qd6/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4qd6",
+      "variant": "pack",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qd6/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4qd6",
+      "variant": "rem",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4qd6/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4qd6",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4rfm",
+      "variant": "inv",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4rfm/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4rfm",
+      "variant": "pack",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4rfm/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4rfm",
+      "variant": "rem",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4rfm/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4rfm",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4tmn",
+      "variant": "inv",
+      "wallclock_s": 10.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4tmn/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4tmn",
+      "variant": "pack",
+      "wallclock_s": 10.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4tmn/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4tmn",
+      "variant": "rem",
+      "wallclock_s": 10.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4tmn/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4tmn",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4twp",
+      "variant": "inv",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4twp/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4twp",
+      "variant": "pack",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4twp/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4twp",
+      "variant": "rem",
+      "wallclock_s": 4.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4twp/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4twp",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4ty7",
+      "variant": "inv",
+      "wallclock_s": 6.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ty7/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4ty7",
+      "variant": "pack",
+      "wallclock_s": 6.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ty7/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4ty7",
+      "variant": "rem",
+      "wallclock_s": 7.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4ty7/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4ty7",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4u4s",
+      "variant": "inv",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4u4s/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4u4s",
+      "variant": "pack",
+      "wallclock_s": 3.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4u4s/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4u4s",
+      "variant": "rem",
+      "wallclock_s": 3.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4u4s/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4u4s",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4w9c",
+      "variant": "inv",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9c/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9c",
+      "variant": "pack",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9c/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9c",
+      "variant": "rem",
+      "wallclock_s": 5.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9c/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9c",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4w9h",
+      "variant": "inv",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9h/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9h",
+      "variant": "pack",
+      "wallclock_s": 6.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9h/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9h",
+      "variant": "rem",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9h/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9h",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4w9i",
+      "variant": "inv",
+      "wallclock_s": 6.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9i/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9i",
+      "variant": "pack",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9i/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9i",
+      "variant": "rem",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9i/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9i",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4w9l",
+      "variant": "inv",
+      "wallclock_s": 10.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9l/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9l",
+      "variant": "pack",
+      "wallclock_s": 10.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9l/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9l",
+      "variant": "rem",
+      "wallclock_s": 9.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4w9l/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4w9l",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4wiv",
+      "variant": "inv",
+      "wallclock_s": 4.2,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4wiv/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4wiv",
+      "variant": "pack",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4wiv/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4wiv",
+      "variant": "rem",
+      "wallclock_s": 4.1,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4wiv/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4wiv",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "4x6p",
+      "variant": "inv",
+      "wallclock_s": 8.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4x6p/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "4x6p",
+      "variant": "pack",
+      "wallclock_s": 8.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4x6p/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "4x6p",
+      "variant": "rem",
+      "wallclock_s": 8.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/4x6p/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "4x6p",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5a7b",
+      "variant": "inv",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5a7b/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5a7b",
+      "variant": "pack",
+      "wallclock_s": 6.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5a7b/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5a7b",
+      "variant": "rem",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5a7b/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5a7b",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5aba",
+      "variant": "inv",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5aba/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5aba",
+      "variant": "pack",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5aba/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5aba",
+      "variant": "rem",
+      "wallclock_s": 3.5,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5aba/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5aba",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5c28",
+      "variant": "inv",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c28/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5c28",
+      "variant": "pack",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c28/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5c28",
+      "variant": "rem",
+      "wallclock_s": 3.0,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c28/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5c28",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5c2h",
+      "variant": "inv",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c2h/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5c2h",
+      "variant": "pack",
+      "wallclock_s": 6.3,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c2h/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5c2h",
+      "variant": "rem",
+      "wallclock_s": 6.4,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5c2h/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5c2h",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5dwr",
+      "variant": "inv",
+      "wallclock_s": 5.6,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5dwr/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5dwr",
+      "variant": "pack",
+      "wallclock_s": 5.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5dwr/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5dwr",
+      "variant": "rem",
+      "wallclock_s": 5.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5dwr/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5dwr",
+      "variant": "wt",
+      "status": "skip_existing"
+    },
+    {
+      "system": "5tmn",
+      "variant": "inv",
+      "wallclock_s": 8.9,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5tmn/inv/gnina/poses.sdf"
+    },
+    {
+      "system": "5tmn",
+      "variant": "pack",
+      "wallclock_s": 8.8,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5tmn/pack/gnina/poses.sdf"
+    },
+    {
+      "system": "5tmn",
+      "variant": "rem",
+      "wallclock_s": 8.7,
+      "status": "ok",
+      "sdf": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/outputs/5tmn/rem/gnina/poses.sdf"
+    },
+    {
+      "system": "5tmn",
+      "variant": "wt",
+      "status": "skip_existing"
+    }
+  ]
+}

@@ -498,13 +498,46 @@ modifications. Together they isolate two complementary axes of the
 axis ~70 % of the time; physics docking passes the ligand axis with a
 graded response.
 
-### Mutant-protein GNINA — deferred
+### Mutant-protein GNINA (2026-05-19) — DONE
 
-GNINA on the AF3+MSA-predicted **mutant** receptors (rem/pack/inv)
-would complete the 2×2 (protein axis × physics-vs-cofolding) grid.
-Requires rsync of ~720 AF3+MSA mutant CIFs from CARC, strip-to-receptor
-into a new docking-input tree, then run GNINA. Estimated ~1 GPU-hour
-on lab. Tracked under follow-on.
+GNINA docked against the AF3+MSA-predicted **mutant** receptors. 717
+new cells (239 systems × 3 variants × ~3 s/cell on RTX 4090). Pose RMSD
+computed in the crystal frame after pocket-aligned Cα superposition
+(receptor → crystal); GNINA poses live in the AF3 frame so this
+transform is essential.
+
+| model | wt | rem | pack | inv |
+|---|---|---|---|---|
+| AF3+MSA | 0.80 | 0.31 | 0.26 | 0.16 |
+| Boltz-2 | 0.59 | 0.23 | 0.25 | 0.17 |
+| **GNINA** | **0.73** | **0.14** | **0.13** | **0.10** |
+
+**GNINA is the strongest physics signal on the protein axis** — WT
+73 % → adversarial 10–14 % (drop of 59–63 pp). The cofolders memorise
+more often (16–31 % adversarial); GNINA's Vina + CNN scoring rejects
+the disrupted pocket harder. This is the paper's punchline made
+quantitative: physics docking less memorising than cofolding when the
+pocket is broken.
+
+### Build pipeline for mutant docking inputs
+
+[`scripts/10_build_mutant_docking.py`](../analysis/casf_mutagenesis/scripts/10_build_mutant_docking.py)
+takes the AF3+MSA mutant CIFs (rsync'd from CARC) and for each
+(pdbid, variant ∈ {rem, pack, inv}):
+  1. Strips predicted complex → `receptor.pdb` (mutant in AF3 frame).
+  2. Copies the WT crystal ligand SDF → `ligand.sdf` (binding-site
+     mutations modify the protein, not the ligand chemistry).
+  3. Places the docking box on the AF3-predicted ligand centroid.
+
+Then `08_run_gnina_variants.py` with `CONTRASCF_OUTPUTS_ROOT` pointed
+at `casf_mutagenesis/outputs/` finds all docking/ subdirs and dockers;
+skip_existing makes resubmission cheap.
+
+`09_analyze_gnina.py` now reads `receptor.pdb` per cell and, for
+`module == "casf" and variant != "wt"`, applies an extra Cα
+superposition (receptor → crystal) before computing pose RMSD — without
+this the apparent RMSD is ~40 Å because the AF3-frame pose is being
+compared directly to the crystal-frame ligand.
 
 ## Known limitation: AF3 single-sequence mode
 
