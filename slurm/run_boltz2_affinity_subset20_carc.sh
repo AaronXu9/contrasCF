@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:v100:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
-#SBATCH --time=02:30:00
+#SBATCH --time=06:00:00
 #SBATCH --output=slurm/logs/boltz_aff_%j.out
 #SBATCH --error=slurm/logs/boltz_aff_%j.err
 
