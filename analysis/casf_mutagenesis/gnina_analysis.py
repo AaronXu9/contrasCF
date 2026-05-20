@@ -40,6 +40,7 @@ class GninaRecord:
     system: str
     variant: str
     module: str                  # "casf" | "ligand"
+    engine: str = "gnina"        # "gnina" | "unidock2"
     status: str = "ok"
     error: str | None = None
     rmsd_a: float | None = None
@@ -139,8 +140,9 @@ def analyze_gnina(
     system: str, variant: str, module: str,
     gnina_sdf: Path, crystal_sdf: Path | None = None,
     *, receptor_pdb: Path | None = None,
+    engine: str = "gnina",
 ) -> GninaRecord:
-    rec = GninaRecord(system=system, variant=variant, module=module)
+    rec = GninaRecord(system=system, variant=variant, module=module, engine=engine)
     if crystal_sdf is None:
         crystal_sdf = CASF_LIGANDS / f"{system}_ligand.sdf"
     try:
