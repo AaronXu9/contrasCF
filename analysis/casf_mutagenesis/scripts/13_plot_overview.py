@@ -153,6 +153,8 @@ def panel_a_pocket(ax) -> None:
         methods.append(("GNINA", "dock:gnina"))
     if ("casf", "unidock2", "rem") in dock:
         methods.append(("UniDock2", "dock:unidock2"))
+    if ("casf", "surfdock", "rem") in dock:
+        methods.append(("SurfDock", "dock:surfdock"))
 
     width = 0.18
     x = np.arange(len(methods))
@@ -199,11 +201,12 @@ def panel_a_pocket(ax) -> None:
 def panel_b_ligand(ax) -> None:
     """Same as panel a but for ligand-side variants (only docking engines have data)."""
     dock = load_docking_memorization()
-    engines = ("gnina", "unidock2")
+    engines = ("gnina", "unidock2", "surfdock")
+    LABELS = {"gnina": "GNINA", "unidock2": "UniDock2", "surfdock": "SurfDock"}
     methods = []
     for eng in engines:
         if ("ligand", eng, "wt") in dock:
-            methods.append((eng.upper() if eng == "gnina" else "UniDock2", eng))
+            methods.append((LABELS[eng], eng))
 
     # collapse per ligand group: average rate, weighted by n
     def grouped_rate(eng: str, group_key: str) -> tuple[float, int]:

@@ -14,14 +14,41 @@ For the deep dives, see the per-topic docs:
 | signal                            | Boltz-2          | AF3 (no MSA)    | AF3+MSA           | GNINA            | UniDock2         | SurfDock  |
 |-----------------------------------|------------------|-----------------|-------------------|------------------|------------------|-----------|
 | **Pocket mutation** (rem/pack/inv) | | | | | | |
-| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | runner ready, runs locally |
-| Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | n/a (confidence in SDF tags) |
+| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | ✓ subset20 (n=76 of 80; SurfDock fails on these systems — see below) |
+| Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | confidence in SDF tags |
 | Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | n/a       |
 | Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | ✓ (top-10) |
 | **Ligand mutation** (halo/chrg/meth) | | | | | | |
-| Ligand RMSD vs crystal             | **running** on CARC (job 8932179) | —             | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | runner ready, runs locally |
+| Ligand RMSD vs crystal             | **running** on CARC (job 8932179, ~147/1300 done) | —             | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | not yet (would extend runner to walk ligand_mutagenesis outputs) |
 | Confidence                         | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
 | Affinity head                      | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
+
+### SurfDock CASF result, briefly
+
+SurfDock (the diffusion-based docker) was integrated as a 4th docking
+engine via `analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py`.
+On subset20 it ran 76/80 cells successfully (the 4 failures: 3 oversized
+3dx2 cells with no docking inputs at all, plus 4ih7/inv hitting a
+SurfDock-internal RDKit parse bug on the cropped pocket PDB).
+
+The actual RMSD numbers were striking: SurfDock got **0/77 cells below
+2 Å** and only **3/77 below 4 Å** — even on WT. Inspecting individual
+poses showed SurfDock's diffusion drifted the ligand 4-7 Å away from the
+crystal pocket on essentially every system. The other docking engines
+(GNINA, UniDock2) succeed on the same `docking/` inputs (GNINA WT 73% < 2 Å),
+so the inputs are good — SurfDock just fails on these CASF systems. The
+16-case CB2/MEK1 SurfDock data the user previously generated worked fine,
+so the install + pipeline are correct. The hypothesis is that CASF-2016
+sits outside SurfDock's training distribution despite both deriving from
+PDBbind — CASF is the standard held-out benchmark, which SurfDock training
+likely excluded.
+
+This is itself a useful finding — SurfDock is not a reliable substitute
+for Vina-family docking on novel CASF-style binding sites. But it means
+the SurfDock numbers in panel (a) of the cross-method figure should
+NOT be read as "all docking methods agree" — they're really "SurfDock
+fails on every variant, including WT, so its WT-vs-adversarial gap is
+ambiguous."
 
 ✓ = results on disk. — = not run. n/a = method doesn't produce that signal.
 

@@ -25,7 +25,7 @@ from casf_mutagenesis.config import CASF_LIGANDS
 
 CASF_OUTPUTS = REPO_ROOT / "analysis" / "casf_mutagenesis" / "outputs"
 LIGAND_OUTPUTS = REPO_ROOT / "analysis" / "ligand_mutagenesis" / "outputs"
-ENGINES = ("gnina", "unidock2")
+ENGINES = ("gnina", "unidock2", "surfdock")
 
 
 def discover_cells() -> list[tuple[str, str, str, str, Path]]:
