@@ -5,11 +5,27 @@
 log[IC50] go up and the predicted P(binder) go down on the adversarial variants?
 Or does the model "memorize" the WT affinity?
 
-**Headline (subset20):** the affinity head **memorizes**. Median Δ log[IC50]
-across rem / pack / inv is **only +0.2 to +0.3 log units** (factor ≤ 2× weaker)
-when biophysically the perturbed pockets should not bind at all (Δ ≥ +3 to +6
-log units expected). Recognition is even weaker than on the structure side:
+**Headline:** the affinity head **memorizes**. Median Δ log[IC50] is
+**+0.1 to +0.3 log units** across rem / pack / inv (factor ≤ 2× weaker) when
+biophysically the perturbed pockets should not bind at all (Δ ≥ +3 to +6 log
+units expected). Recognition is even weaker than on the structure side:
 ~70-80% of cells are "not registered" on either affinity axis.
+
+Full CASF (n=229 per variant) numbers are **even more memorized** than the
+20-system smoke set — median Δ shrinks from +0.19-0.30 (subset20) to
++0.10-0.17 (full CASF), suggesting the subset20 cherry-picked cells were
+on the slightly-more-physics-aware end of the distribution.
+
+| scope    | rem median Δaff | pack median Δaff | inv median Δaff |
+|----------|------------------|-------------------|------------------|
+| subset20 (n=19) | +0.304       | +0.240            | +0.192           |
+| **full CASF (n=229)** | **+0.145** | **+0.101** | **+0.171** |
+
+### Full CASF figure
+
+![Boltz-2 affinity memorization, full CASF](../analysis/casf_mutagenesis/figures/affinity_memorization_full.png)
+
+### Subset20 figure (for reference)
 
 ![Boltz-2 affinity memorization on subset20](../analysis/casf_mutagenesis/figures/affinity_memorization_subset20.png)
 
@@ -76,6 +92,40 @@ If Boltz-2 is "doing the physics", on the **adversarial** cells we'd expect:
 - `delta_probability` ≪ 0 (negative) — adversarial pose no longer classified as binder.
 
 The opposite — `Δ ≈ 0` — is the **memorization signature**: model says "still binds, basically the same" despite the pocket being broken.
+
+---
+
+## Results — full CASF (n=229 per variant; 22 skipped for too-long, plus 34 missing protein PDB)
+
+### Per-variant medians
+
+| variant | n   | WT aff (log µM) | adv aff | **median Δaff** | WT P(bind) | adv P(bind) | **median Δprob** |
+|---------|-----|------------------|---------|-----------------|------------|-------------|------------------|
+| rem     | 229 | -                | -       | **+0.145**      | -          | -           | **-0.068**       |
+| pack    | 229 | -                | -       | **+0.101**      | -          | -           | **-0.085**       |
+| inv     | 229 | -                | -       | **+0.171**      | -          | -           | **-0.071**       |
+
+WT/adv medians omitted in the full-CASF table because the per-system
+distribution is heterogeneous (some systems have nM-tight WT predictions,
+others mid-µM). The Δ columns are the meaningful diagnostic — they
+ask "how much did the model's number change for this same complex when
+the pocket was broken?"
+
+### How does full CASF differ from subset20?
+
+The full-CASF Δ values are **uniformly smaller** than subset20 by 30-50%.
+Two interpretations:
+
+1. **Subset20 was selected for diversity / known-good ground truth.** Those
+   systems may have richer training signal that Boltz-2 partially uses
+   (slightly more sensitive to perturbations).
+2. **Most of CASF is the "easy memorization" regime.** The model has seen
+   close enough analogs in training that pocket perturbations register as
+   tiny noise. Subset20 inflated the recognition rate by a few percentage
+   points; full CASF reveals the median behavior.
+
+Either way: the directional conclusion holds — the affinity head is
+essentially unresponsive to the rem/pack/inv perturbations.
 
 ---
 
