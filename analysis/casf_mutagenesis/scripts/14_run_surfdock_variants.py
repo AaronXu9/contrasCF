@@ -73,13 +73,16 @@ def _load_runner():
 
 def discover_cells(outputs_root: Path,
                    variant_filter: set[str] | None,
-                   system_limit: int | None) -> list[tuple[str, str, Path]]:
+                   system_limit: int | None,
+                   pdbid_filter: set[str] | None = None) -> list[tuple[str, str, Path]]:
     """Return sorted (pdbid, variant, docking_dir) for every cell that has
     receptor.pdb + ligand.sdf + box.json under
     <outputs_root>/<pdbid>/<variant>/docking/."""
     out: list[tuple[str, str, Path]] = []
     systems = sorted(d for d in outputs_root.iterdir()
                      if d.is_dir() and not d.name.startswith("_"))
+    if pdbid_filter is not None:
+        systems = [d for d in systems if d.name in pdbid_filter]
     if system_limit is not None:
         systems = systems[:system_limit]
     for sys_dir in systems:
@@ -164,15 +167,21 @@ def main() -> int:
         set(s.strip() for s in variant_filter_env.split(",") if s.strip())
         if variant_filter_env else None
     )
+    pdbid_filter_env = os.environ.get("CONTRASCF_PDBID_FILTER", "").strip()
+    pdbid_filter: set[str] | None = (
+        set(s.strip() for s in pdbid_filter_env.split(",") if s.strip())
+        if pdbid_filter_env else None
+    )
     system_limit = os.environ.get("CONTRASCF_SYSTEM_LIMIT")
     system_limit = int(system_limit) if system_limit else None
 
     print(f"SurfDock variant runner")
     print(f"  outputs_root:    {outputs_root}")
     print(f"  variant_filter:  {variant_filter or '(all)'}")
+    print(f"  pdbid_filter:    {pdbid_filter or '(all)'}")
     print(f"  system_limit:    {system_limit or '(unlimited)'}")
 
-    cells = discover_cells(outputs_root, variant_filter, system_limit)
+    cells = discover_cells(outputs_root, variant_filter, system_limit, pdbid_filter)
     print(f"  discovered cells: {len(cells)}")
     if not cells:
         print("nothing to do.")
