@@ -14,28 +14,35 @@ For the deep dives, see the per-topic docs:
 | signal                            | Boltz-2          | AF3 (no MSA)    | AF3+MSA           | GNINA            | UniDock2         | SurfDock  |
 |-----------------------------------|------------------|-----------------|-------------------|------------------|------------------|-----------|
 | **Pocket mutation** (rem/pack/inv) | | | | | | |
-| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | — |
-| Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | — |
-| Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | — |
-| Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | — |
+| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | runner ready, runs locally |
+| Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | n/a (confidence in SDF tags) |
+| Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | n/a       |
+| Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | ✓ (top-10) |
 | **Ligand mutation** (halo/chrg/meth) | | | | | | |
-| Ligand RMSD vs crystal             | —                | —               | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | — |
-| Confidence                         | —                | —               | —                 | n/a              | n/a              | — |
-| Affinity head                      | —                | —               | —                 | n/a              | n/a              | — |
+| Ligand RMSD vs crystal             | **running** on CARC (job 8932179) | —             | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | runner ready, runs locally |
+| Confidence                         | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
+| Affinity head                      | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
 
 ✓ = results on disk. — = not run. n/a = method doesn't produce that signal.
 
-### Gaps to consider closing
+### Gaps in progress / planned
 
-1. **Boltz-2 / AF3 on ligand_mutagenesis** — biggest open question. We have
-   docking-engine baselines (GNINA, UniDock2) for ligand perturbations but no
-   co-folding side. The same affinity infrastructure used in `casf_affinity.md`
-   would directly tell us "does Boltz-2 know that swapping ATP's phosphate for
-   a methyl breaks binding?"
-2. **AF3+MSA full CASF affinity** — AF3 doesn't have an affinity head, so this
-   gap is structural — it would require either confidence-as-proxy work or
-   adding an external affinity-prediction step.
-3. **SurfDock** — entirely absent from this module. Would need new runner + analyzer.
+1. **Boltz-2 on ligand_mutagenesis** — SLURM array `8932179` running on CARC
+   as of 2026-05-22; ~11 h wallclock. Will fill in both the structure RMSD
+   row AND the affinity row (same affinity infrastructure as casf_mutagenesis).
+2. **AF3+MSA on ligand_mutagenesis** — no AF3 runner exists yet for this
+   module. Lower priority since AF3 has no affinity head.
+3. **AF3 (no MSA) full CASF** — only subset20 today (n=19). Would need a
+   CARC re-run analogous to the affinity one (no GPU cost reason against,
+   just hasn't been scheduled).
+4. **SurfDock** — variant-aware runner ready
+   (`analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py`); runs
+   locally on the lab box since the SurfDock conda env, model weights, and
+   precomputed arrays aren't on CARC. Smoke test pending; if green,
+   subset20 (~80 cells) runs in ~1.5 h, full CASF (~1000 cells) in ~16 h
+   on RTX 4090. Same `discover_cells` contract as 08/11 runners — emits
+   `poses.sdf` files that the `12_analyze_docking_engines.py` analyzer
+   can pick up (would need a one-line addition to its `ENGINES` tuple).
 
 ## Headline figure
 
