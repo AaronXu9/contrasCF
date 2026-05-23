@@ -118,9 +118,26 @@ class PredictionRecord:
     pose_idx: int = 0             # 0 = top-ranked by model confidence
     status: str = "ok"            # "ok" | "missing_cif" | "no_ligand" | "error"
     error: str | None = None
+    # Three RMSD variants, all in Å, all symmetry-corrected on heavy atoms:
+    #   ligand_rmsd_a         : Cα-superpose on the *ligand-near chain only*,
+    #                           apply R/t to the ligand, then heavy-atom RMSD
+    #                           (canonical "did the model place it in the right
+    #                           pocket?" metric).
+    #   ligand_rmsd_fullca_a  : Cα-superpose on ALL chains' Cα (sequential pair
+    #                           per chain), apply R/t to the ligand, then heavy
+    #                           RMSD. Larger than ligand_rmsd_a on multi-chain
+    #                           systems when AF3 misorients inter-chain.
+    #   bestfit_rmsd_a        : symmetry-corrected Kabsch rigid fit of the
+    #                           ligand onto the crystal ligand — pocket-blind.
+    #                           Answers "is the ligand's internal geometry
+    #                           correct?", which is the paper's quoted metric.
     ligand_rmsd_a: float | None = None
+    ligand_rmsd_fullca_a: float | None = None
+    bestfit_rmsd_a: float | None = None
     ca_rmsd_a: float | None = None
+    ca_rmsd_fullca_a: float | None = None
     n_ca_paired: int | None = None
+    n_ca_paired_fullca: int | None = None
     n_heavy_matched: int | None = None
     n_heavy_pred: int | None = None
     n_heavy_native: int | None = None
@@ -233,6 +250,89 @@ def extract_protein_ca_near(
     return ProteinCA(residues=residues)
 
 
+def extract_protein_ca_all(st: gemmi.Structure) -> "ProteinCAByChain":
+    """Return Cα coordinates of every polymer chain (>= 20 residues), grouped
+    by chain name and preserving residue order within each chain.
+
+    Used by `superpose_all_chains` to build a multi-chain alignment that
+    answers "did the model place both proteins correctly?", in contrast to
+    `extract_protein_ca_near` which picks just the ligand-binding chain.
+    """
+    from loaders import STANDARD_AA
+    out: dict[str, list[tuple[str, int, str, np.ndarray]]] = {}
+    for ch in st[0]:
+        residues: list[tuple[str, int, str, np.ndarray]] = []
+        for r in ch:
+            if r.name not in STANDARD_AA:
+                continue
+            ca = next((a for a in r if a.name == "CA"), None)
+            if ca is None:
+                continue
+            residues.append((
+                ch.name, r.seqid.num, r.name,
+                np.array([ca.pos.x, ca.pos.y, ca.pos.z], dtype=float),
+            ))
+        if len(residues) >= 20:
+            out[ch.name] = residues
+    return ProteinCAByChain(by_chain=out)
+
+
+@dataclass
+class ProteinCAByChain:
+    by_chain: dict[str, list[tuple[str, int, str, np.ndarray]]]
+
+    @property
+    def chain_names(self) -> list[str]:
+        return sorted(self.by_chain.keys())
+
+
+def superpose_all_chains(
+    pred: "ProteinCAByChain", native: "ProteinCAByChain",
+) -> Superposition:
+    """Multi-chain Cα superposition.
+
+    Pair chains by sorted name (predicted-`A` ↔ native-`A`, etc.). Within each
+    paired chain, pair Cα by sequential index. Concatenate all pairs and run
+    one global SVD fit. This is the "align two proteins" comparison metric:
+    homo-multimer ligand placements that look fine under single-chain pocket
+    alignment may diverge here when inter-chain orientation is wrong.
+
+    If `pred` and `native` share no chain names (chain IDs renumbered), fall
+    back to pairing by sorted index — pred chain[0] ↔ nat chain[0], etc.
+    """
+    pred_names = pred.chain_names
+    nat_names = native.chain_names
+    shared = [c for c in pred_names if c in nat_names]
+    if shared:
+        pairs = [(c, c) for c in shared]
+    else:
+        # Different naming: pair by sorted index, limited to min length.
+        k = min(len(pred_names), len(nat_names))
+        pairs = list(zip(pred_names[:k], nat_names[:k]))
+
+    pred_xyz_all: list[np.ndarray] = []
+    nat_xyz_all: list[np.ndarray] = []
+    for pc, nc in pairs:
+        pr = pred.by_chain[pc]
+        nr = native.by_chain[nc]
+        n = min(len(pr), len(nr))
+        pred_xyz_all.extend(r[3] for r in pr[:n])
+        nat_xyz_all.extend(r[3] for r in nr[:n])
+
+    if len(pred_xyz_all) < 10:
+        raise RuntimeError(f"too few Cα pairs ({len(pred_xyz_all)}) across all chains")
+    pred_xyz = np.asarray(pred_xyz_all)
+    nat_xyz = np.asarray(nat_xyz_all)
+    sup = SVDSuperimposer()
+    sup.set(nat_xyz, pred_xyz)
+    sup.run()
+    rot, tran = sup.get_rotran()
+    return Superposition(
+        R=np.asarray(rot).T, t=np.asarray(tran),
+        rmsd=float(sup.get_rms()), n_paired=len(pred_xyz_all),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Predicted ligand extraction
 # ---------------------------------------------------------------------------
@@ -335,6 +435,71 @@ def _matched_rmsd(
         if rmsd < best_rmsd:
             best_rmsd = rmsd
     return best_rmsd, n_match_atoms
+
+
+def _bestfit_rmsd(
+    crystal_mol: Chem.Mol, pred_heavy_xyz: np.ndarray, pred_mol: Chem.Mol,
+) -> float:
+    """Symmetry-corrected Kabsch RMSD between predicted and crystal ligand.
+
+    Uses the SAME symmetry-aware matcher as `_matched_rmsd` (rdkit substructure
+    enumeration), but for each candidate atom mapping performs an INDEPENDENT
+    rigid-body Kabsch superposition of the predicted heavy coords onto the
+    crystal heavy coords. Returns the minimum RMSD over correspondences.
+
+    This is the paper-style "conformation-only" RMSD: ignores where the ligand
+    sits in the protein, asks only "is the internal heavy-atom geometry right?"
+    Returns NaN if matching fails on both directions.
+    """
+    crystal_heavy = Chem.RemoveHs(crystal_mol)
+    crystal_xyz = _heavy_coords(crystal_heavy)
+    if pred_mol is None:
+        n = min(len(crystal_xyz), len(pred_heavy_xyz))
+        return _kabsch_rmsd(pred_heavy_xyz[:n], crystal_xyz[:n])
+
+    pred_heavy = Chem.RemoveHs(pred_mol)
+    pred_xyz = _heavy_coords(pred_heavy)
+    n_match_atoms = crystal_heavy.GetNumAtoms()
+    matches = pred_heavy.GetSubstructMatches(
+        crystal_heavy, useChirality=False, uniquify=False, maxMatches=200,
+    )
+    if not matches:
+        # Bond-order asymmetry: try the other direction; this returns matches
+        # in crystal indexing, so the trivial mapping is the identity.
+        if crystal_heavy.GetSubstructMatches(
+            pred_heavy, useChirality=False, uniquify=False, maxMatches=1
+        ):
+            matches = [tuple(range(n_match_atoms))]
+    if not matches or pred_xyz.shape[0] != n_match_atoms or crystal_xyz.shape[0] != n_match_atoms:
+        n = min(len(crystal_xyz), len(pred_heavy_xyz))
+        return _kabsch_rmsd(pred_heavy_xyz[:n], crystal_xyz[:n])
+
+    best = float("inf")
+    for m in matches:
+        try:
+            sel_pred = pred_xyz[list(m)]
+        except IndexError:
+            continue
+        r = _kabsch_rmsd(sel_pred, crystal_xyz)
+        if r < best:
+            best = r
+    return best if best != float("inf") else float("nan")
+
+
+def _kabsch_rmsd(P: np.ndarray, Q: np.ndarray) -> float:
+    """Minimum RMSD of P onto Q under a rigid-body (rotation + translation)."""
+    if P.shape != Q.shape or len(P) < 3:
+        return float("nan")
+    Pc = P - P.mean(axis=0)
+    Qc = Q - Q.mean(axis=0)
+    H = Pc.T @ Qc
+    U, _, Vt = np.linalg.svd(H)
+    d = np.sign(np.linalg.det(Vt.T @ U.T))
+    D = np.diag([1.0, 1.0, d])
+    R = Vt.T @ D @ U.T
+    fitted = Pc @ R.T
+    diff = fitted - Qc
+    return float(np.sqrt(np.mean(np.sum(diff * diff, axis=1))))
 
 
 # ---------------------------------------------------------------------------
@@ -468,6 +633,40 @@ def _analyze_single_pose(
         )
         rec.ligand_rmsd_a = round(rmsd, 3)
         rec.n_heavy_matched = n_match
+
+        # Variant 2: full-protein (all-chains) Cα alignment then ligand RMSD.
+        try:
+            pred_all = extract_protein_ca_all(st_pred)
+            nat_all = extract_protein_ca_all(st_native)
+            sup_all = superpose_all_chains(pred_all, nat_all)
+            rec.ca_rmsd_fullca_a = round(sup_all.rmsd, 3)
+            rec.n_ca_paired_fullca = sup_all.n_paired
+            pred_lig_all_frame = sup_all.apply(pred_lig_heavy)
+            if (pred_mol is not None
+                    and pred_mol.GetNumHeavyAtoms() == len(pred_lig_all_frame)):
+                m2 = Chem.Mol(pred_mol)
+                cf2 = m2.GetConformer()
+                for i, hidx in enumerate(_heavy_indices(m2)):
+                    p = pred_lig_all_frame[i]
+                    cf2.SetAtomPosition(hidx, (float(p[0]), float(p[1]), float(p[2])))
+                transformed_all = m2
+            else:
+                transformed_all = None
+            rmsd_all, _ = _matched_rmsd(
+                crystal_mol, pred_lig_all_frame, transformed_all,
+            )
+            rec.ligand_rmsd_fullca_a = round(rmsd_all, 3)
+        except Exception:
+            pass  # leave the columns at None
+
+        # Variant 3: paper-style symmetry-Kabsch RMSD on the ligand alone.
+        # Uses untransformed pred_lig_heavy — bestfit is pocket-blind.
+        try:
+            rec.bestfit_rmsd_a = round(
+                _bestfit_rmsd(crystal_mol, pred_lig_heavy, pred_mol), 3
+            )
+        except Exception:
+            pass
     except Exception as exc:
         rec.status = "error"
         rec.error = f"{type(exc).__name__}: {exc}"
