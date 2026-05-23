@@ -41,7 +41,18 @@ UNIDOCK2_BIN = os.environ.get(
 )
 SEED = 42
 NUM_POSE = 9
-TIMEOUT_S = 1800
+# Per-cell hard timeout. Long UniDock2 runs (>5 min) on outlier systems
+# (e.g. 3d4z/meth_3, 3n86/chrg_neu_methyl) appear to trip the NVIDIA
+# kernel module into a NVML mismatch state — every subsequent cell then
+# errors at ~1 s for the rest of the run. Cap at 120 s to skip those
+# rather than crashing the driver. Cells slower than this are too rare /
+# too risky to be worth chasing here.
+TIMEOUT_S = int(os.environ.get("CONTRASCF_UNIDOCK2_TIMEOUT_S", "120"))
+
+# Abort the script entirely after this many consecutive fast (<5 s)
+# errors — strong signal that CUDA is broken and we'd just be wasting
+# cycles running 500+ dud cells. Restart after fixing the driver.
+FAST_ERROR_ABORT = int(os.environ.get("CONTRASCF_FAST_ERROR_ABORT", "5"))
 
 OUTPUTS_ROOT = Path(
     os.environ.get(
@@ -150,6 +161,7 @@ def main() -> int:
     n_done_ok = 0
     n_skip = 0
     n_fail = 0
+    n_consec_fast_errors = 0   # detect GPU-died pattern (~1 s per error)
     for i, (system, variant, docking) in enumerate(cells, 1):
         if (system, variant) in seen:
             continue
@@ -161,10 +173,31 @@ def main() -> int:
         print(f"      {status} (wallclock={wc}s)")
         if status == "ok":
             n_done_ok += 1
+            n_consec_fast_errors = 0
         elif status == "skip_existing":
             n_skip += 1
         else:
             n_fail += 1
+            # Heuristic: an error that returns in <5 s is almost certainly
+            # a CUDA-init failure (GPU is dead). Multiple in a row means
+            # the GPU went down — abort rather than burn through hundreds
+            # of cells producing 1-s fake errors.
+            try:
+                if isinstance(wc, (int, float)) and wc < 5.0:
+                    n_consec_fast_errors += 1
+                else:
+                    n_consec_fast_errors = 0
+            except Exception:
+                n_consec_fast_errors = 0
+            if n_consec_fast_errors >= FAST_ERROR_ABORT:
+                log_path.write_text(json.dumps({"runs": runs}, indent=2))
+                print(
+                    f"\nABORT: {FAST_ERROR_ABORT} consecutive <5 s errors — "
+                    f"likely GPU driver desync. Run `nvidia-smi` and recover "
+                    f"the driver before retrying.",
+                    flush=True,
+                )
+                return 2
         if (n_done_ok + n_fail) % 25 == 0:
             log_path.write_text(json.dumps({"runs": runs}, indent=2))
 
