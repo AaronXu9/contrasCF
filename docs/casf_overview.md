@@ -19,9 +19,50 @@ For the deep dives, see the per-topic docs:
 | Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | n/a       |
 | Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | ✓ (top-10) |
 | **Ligand mutation** (halo/chrg/meth) | | | | | | |
-| Ligand RMSD vs crystal             | **running** on CARC (job 8932179, ~147/1300 done) | —             | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | not yet (would extend runner to walk ligand_mutagenesis outputs) |
-| Confidence                         | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
-| Affinity head                      | will populate when 8932179 finishes | —     | —                 | n/a              | n/a              | n/a       |
+| Ligand RMSD vs crystal             | ✓ **full CASF (n=204 halo, ~42 chrg/meth)** | —             | —                 | ✓ subset20 (n≤251) | ✓ subset20 (n≤101) | not yet (would extend runner to walk ligand_mutagenesis outputs) |
+| Confidence                         | ✓ rsynced            | —     | —                 | n/a              | n/a              | n/a       |
+| Affinity head                      | ✓ **full CASF (n=959 paired rows)** | —     | —                 | n/a              | n/a              | n/a       |
+
+### Ligand-side Boltz-2 dichotomy (added 2026-05-23)
+
+Now that Boltz-2 results are in for both modules, a startling cross-axis
+pattern shows up — Boltz-2's structure head and affinity head **disagree**
+on the ligand-mutation side:
+
+| signal           | WT rate    | adversarial rate     | physics signature |
+|------------------|------------|----------------------|-------------------|
+| Structure (RMSD < 2 Å)   | 59% (n=229) | **0-3% (all variants)**  | **good** — model says "I don't know where to place this variant" |
+| Affinity (Δ log[IC50])   | baseline   | **negative median for almost every variant** (-0.04 to -0.65) | **bad** — model says "and it binds **tighter**" |
+| Probability (Δ P(binder))| baseline   | slight negative (-0.02 to -0.16) | mild — small drop |
+
+Concretely:
+
+| variant group | n | median Δaff | median Δprob | structure-correct rate |
+|---------------|---|-------------|--------------|------------------------|
+| halo (F/Cl/Br swap)       | 588 | −0.18 | −0.02 | 2.5-2.9% |
+| chrg→neutral (+alkyl)     | 126 | **−0.46** | −0.13 | 0% |
+| chrg→positive (+ammonium) | 126 | −0.05 | −0.11 | 0% |
+| methylation (1-5 methyls) | 119 | +0.07     | −0.08 | 0% |
+
+The chrg→neutral case is the most extreme — Boltz-2 thinks attaching long
+tert-butyl chains to the carboxylate of an amino-acid-like ligand makes
+it bind **tighter by a factor of 3** (median −0.46 log[IC50]). Biophysically,
+that perturbation eliminates an important polar contact and adds bulk
+the pocket can't accommodate; affinity should drop by many orders of
+magnitude. The structure head correctly refuses to place these molecules
+(0% < 2 Å), but the affinity head doesn't notice — its training likely
+encoded "more heavy atoms ≈ better contacts ≈ better predicted affinity".
+
+This isn't a single-cell artifact: the affinity-head failure spans 700+
+adversarial cells across 4 perturbation rules and 200+ different proteins.
+And it directly contradicts what the affinity head would need to do to
+serve as a reliable physics-aware reranker on the structure side.
+
+For the figure: see
+`analysis/ligand_mutagenesis/figures/affinity_memorization_ligand.png`
+(4-panel ligand-side affinity figure analogous to the casf-side one).
+
+---
 
 ### SurfDock CASF result (now at full-CASF scale)
 
@@ -69,9 +110,12 @@ distinguishing physics from memorization.
 
 ### Gaps in progress / planned
 
-1. **Boltz-2 on ligand_mutagenesis** — SLURM array `8932179` running on CARC
-   as of 2026-05-22; ~11 h wallclock. Will fill in both the structure RMSD
-   row AND the affinity row (same affinity infrastructure as casf_mutagenesis).
+1. **Boltz-2 on ligand_mutagenesis** — DONE 2026-05-23. Job 8932179 returned
+   1213 affinity sidecars + 6065 CIFs (best-of-5). Driver
+   `analysis/ligand_mutagenesis/scripts/05_analyze.py` aggregates these
+   into `results_ligand.csv` (6059 ok poses) and `paired_affinity_ligand.csv`
+   (959 paired rows). The findings are a striking dichotomy — see
+   "Ligand-side Boltz-2 dichotomy" section below.
 2. **AF3+MSA on ligand_mutagenesis** — no AF3 runner exists yet for this
    module. Lower priority since AF3 has no affinity head.
 3. **AF3 (no MSA) full CASF** — only subset20 today (n=19). Would need a

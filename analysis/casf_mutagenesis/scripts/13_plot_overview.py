@@ -31,6 +31,7 @@ import numpy as np
 
 REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
 OUT = REPO_ROOT / "analysis/casf_mutagenesis/outputs"
+LIG_OUT = REPO_ROOT / "analysis/ligand_mutagenesis/outputs"
 FIG_DIR = REPO_ROOT / "analysis/casf_mutagenesis/figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -198,23 +199,66 @@ def panel_a_pocket(ax) -> None:
     ax.grid(axis="y", alpha=0.3)
 
 
+def _load_ligand_boltz_memorization() -> dict[str, dict]:
+    """Load per-variant Boltz-2 ligand-side memorization rates from
+    results_ligand.csv. Returns {variant_name: {'n', 'rate_2A'}}, rank-0 only."""
+    path = LIG_OUT / "results_ligand.csv"
+    if not path.exists():
+        return {}
+    by_v: dict[str, list[float]] = defaultdict(list)
+    with path.open() as f:
+        for r in csv.DictReader(f):
+            if r["model"] != "Boltz2" or r["status"] != "ok":
+                continue
+            if int(r["pose_idx"]) != 0:
+                continue
+            try:
+                rmsd = float(r["ligand_rmsd_a"])
+            except (ValueError, KeyError):
+                continue
+            by_v[r["variant"]].append(rmsd)
+    return {v: {"n": len(rs), "rate_2A": sum(1 for x in rs if x < 2.0) / len(rs)}
+            for v, rs in by_v.items()}
+
+
 def panel_b_ligand(ax) -> None:
-    """Same as panel a but for ligand-side variants (only docking engines have data)."""
+    """Same as panel a but for ligand-side variants. Now includes Boltz-2
+    in addition to the docking engines (no AF3 runs on ligand_mutagenesis)."""
     dock = load_docking_memorization()
+    boltz = _load_ligand_boltz_memorization()
+
     engines = ("gnina", "unidock2", "surfdock")
     LABELS = {"gnina": "GNINA", "unidock2": "UniDock2", "surfdock": "SurfDock"}
-    methods = []
+    methods: list[tuple[str, str]] = []
+    if boltz:
+        methods.append(("Boltz-2", "cofold:Boltz2"))
     for eng in engines:
         if ("ligand", eng, "wt") in dock:
-            methods.append((LABELS[eng], eng))
+            methods.append((LABELS[eng], f"dock:{eng}"))
 
     # collapse per ligand group: average rate, weighted by n
-    def grouped_rate(eng: str, group_key: str) -> tuple[float, int]:
+    def grouped_rate(method_key: str, group_key: str) -> tuple[float, int]:
+        if method_key.startswith("cofold:"):
+            if group_key == "wt":
+                r = boltz.get("wt")
+                return (r["rate_2A"], r["n"]) if r else (0.0, 0)
+            ns, rates = [], []
+            for v in LIG_GROUPS[group_key]:
+                r = boltz.get(v)
+                if not r:
+                    continue
+                ns.append(r["n"])
+                rates.append(r["rate_2A"])
+            if not ns:
+                return (0.0, 0)
+            weighted = sum(rates[i] * ns[i] for i in range(len(ns))) / sum(ns)
+            return (weighted, sum(ns))
+        # docking engine
+        eng = method_key.split(":", 1)[1]
         if group_key == "wt":
             r = dock.get(("ligand", eng, "wt"))
             return (r["rate_2A"], r["n"]) if r else (0.0, 0)
-        ns = []
-        rates = []
+        ns, rates = [], []
         for v in LIG_GROUPS[group_key]:
             r = dock.get(("ligand", eng, v))
             if not r:
@@ -231,8 +275,8 @@ def panel_b_ligand(ax) -> None:
     for i, gkey in enumerate(LIG_GROUP_ORDER):
         rates = []
         ns = []
-        for _, eng in methods:
-            r, n = grouped_rate(eng, gkey)
+        for _, mkey in methods:
+            r, n = grouped_rate(mkey, gkey)
             rates.append(r); ns.append(n)
         bars = ax.bar(x + (i - 2) * width, rates, width,
                       label=gkey, color=LIG_COLORS[gkey],
@@ -247,7 +291,7 @@ def panel_b_ligand(ax) -> None:
     ax.set_xticklabels([m[0] for m in methods], fontsize=9)
     ax.set_ylabel("Top-1 ligand RMSD < 2 Å rate")
     ax.set_title("(b) Ligand mutation — rate of placing ligand near native\n"
-                 "(co-folding rows absent — no Boltz-2/AF3 runs on ligand_mutagenesis yet)",
+                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized",
                  fontsize=10)
     ax.legend(fontsize=8, loc="upper right", ncol=2, framealpha=0.95)
     ax.set_ylim(0, 1)
