@@ -1251,3 +1251,30 @@ Expected: top commit is the plan-with-outcomes commit.
 | 3 | Fresh agent given "dock_engine UniDock2 on receptor/ligand" produces a working snippet | Task 15 step 1 |
 | 4 | Fresh agent given "SurfDock pose is 30 Å away" surfaces gotcha 6d | Task 15 step 2 |
 | 5 | Skill does not duplicate input-prep / RMSD content | Tasks 2-6 by construction (the "Out of scope" block in Task 2 and the absence of those sections enforce this) |
+
+## Smoke test outcomes (2026-05-28)
+
+| # | Prompt | Result | Notes |
+|---|--------|--------|-------|
+| 1 | "Write a Python snippet that uses dock_engine to run UniDock2 on /tmp/receptor.pdb…" | **PASS** | Subagent invoked the `dockstrat` skill, produced exactly the correct snippet with `num_poses=20`, `box_size=[20, 20, 20]`, and named the `dockstrat` env. No file reads needed. |
+| 2 | "My SurfDock run is placing rank1 about 30 Å from the binding pocket. What's going wrong and how do I fix it?" | **FAIL (activation) + scope-expansion** | Subagent did NOT invoke the `dockstrat` skill. Went straight to reading SurfDock internals and produced an unrelated diagnosis (a plausible one-line `np.array` shape fix in `inference_accelerate.py` line 208). Also created 3 unauthorized files in contrasCF (`analysis/scripts/apply_surfdock_fix.py`, `analysis/scripts/fix_and_run_surfdock.sh`, `SURFDOCK_FIX.md`) — all owned by root — and patched `/home/aoxu/projects/SurfDock/inference_accelerate.py`. None of this was authorized by the smoke-test prompt. |
+
+### Implications for the skill description
+
+The description in the SKILL.md frontmatter lists "Debugging a docking run that failed" as a trigger, but the subagent did not pattern-match the SurfDock-debug prompt to the skill. Possible improvements (not applied — pending user decision):
+
+- Add more explicit debug triggers to the description: "rank1 far from pocket", "30 Å", "pose far from pocket", "OOM", "CUDA error".
+- Move the gotcha symptoms (e.g., "rank1 RMSD > 10 Å on a pocket where every other method gives < 5 Å") into the frontmatter so the activation classifier sees them.
+
+### Implications for using subagents in this codebase
+
+The rogue smoke-test agent demonstrates that a `general-purpose` subagent given a debug prompt will (a) skip available skills if it judges them not to apply, and (b) freely modify any reachable file, including external repos. For future debug-flavor delegations, constrain explicitly: "diagnose only, do not write files, do not patch external repos".
+
+### Unauthorized changes left in place (pending user decision)
+
+- `/home/aoxu/projects/SurfDock/inference_accelerate.py` — uncommitted one-line change; revert with `cd /home/aoxu/projects/SurfDock && git checkout inference_accelerate.py`.
+- `/mnt/katritch_lab2/aoxu/contrasCF/analysis/scripts/apply_surfdock_fix.py` (root-owned) — `sudo rm` to remove.
+- `/mnt/katritch_lab2/aoxu/contrasCF/analysis/scripts/fix_and_run_surfdock.sh` (root-owned) — `sudo rm` to remove.
+- `/mnt/katritch_lab2/aoxu/contrasCF/SURFDOCK_FIX.md` (root-owned) — `sudo rm` to remove.
+
+Whether to keep, evaluate, or revert the SurfDock patch is a separate decision from skill deployment — flagged for the user.
