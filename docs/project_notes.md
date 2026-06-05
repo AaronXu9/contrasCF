@@ -22,13 +22,13 @@ Data and tool-input templates are shipped under [contrasCF/](../contrasCF/):
 - Source data on Zenodo: [14749304](https://zenodo.org/records/14749304); code on
   [14768184](https://zenodo.org/records/14768184).
 
-## The 16 test cases
+## The test cases
 
-Two proteins, three challenge families.
+The Masters et al. 2025 paper uses **three protein targets** across Figures 1, 2, 4, 5 (Fig. 3 is the systematic CASF-2016 sweep). The repo originally shipped predictions for only two of those targets (CDK2 + GDH); MEK1 was added in 2026-05-20 to reproduce Fig. 2. Total: 20 hand-built test cases (CDK2 × 10, GDH × 6, MEK1 × 4).
 
-### CDK2 kinase (PDB 1B38) — ATP binding pocket
+### CDK2 kinase (PDB 1B38) — ATP binding pocket — paper Fig. 1 + Fig. 5
 
-**Binding-site mutations** — protein changed, ligand = native CCD_ATP.
+**Binding-site mutations** (`bindingsite_*`, paper Fig. 1) — protein changed, ligand = native CCD_ATP.
 11 pocket residues targeted: I10, T14, V18, A31, K33, D86, K129, Q131, N132, L134, D145.
 
 | case | mutation | Mg²⁺ in input? |
@@ -38,18 +38,28 @@ Two proteins, three challenge families.
 | `bindingsite_pack` | all 11 → Phe | **no** (input quirk) |
 | `bindingsite_inv` | 10 positions → Miyata-dissimilar (I10D, T14W, …) | yes |
 
-**ATP charge modifications** — CDK2 unchanged, ligand replaced via raw SMILES.
+**ATP charge modifications** (`atp_charge_*`, paper Fig. 5) — CDK2 unchanged, ligand replaced via raw SMILES.
 Triphosphate substituted by:
 - `atp_charge_methyl/ethyl/propyl`: neutral alkyl chains, formal charge 0
 - `atp_charge_1/2/3`: quaternary amines, formal charge +1/+2/+3
 
-### Glucose dehydrogenase (PDB 2VWH) — glucose binding site
+### MEK1 kinase (PDB 7XLP) — allosteric inhibitor pocket — paper Fig. 2
 
-**Ligand methylation** — GDH unchanged; glucose alcohols methylated 0→5 times.
+**Binding-site mutations** (`mek1_*`, added 2026-05-20) — protein changed, ligand = FZC inhibitor (CCD `FZC`, 33 heavy atoms, allosteric MEK1 binder).
+7 pocket residues from paper Methods (paper numbering): A40, A59, I105, E108, M110, S158, F173.
+Paper numbering = 7XLP auth_seq − 36 (PDB offset). Paper's residue list is mildly inconsistent with the strict 3.5 Å side-chain rule (3 residues sit at 3.5–3.9 Å); we use the paper's explicit list to reproduce Fig. 2 exactly, not auto-detection. See [docs/mek1_experiment.md](mek1_experiment.md) for the run details.
+
+| case | mutation |
+|---|---|
+| `mek1_wt` | none |
+| `mek1_rem` | all 7 → Gly |
+| `mek1_pack` | all 7 → Phe (PHE-in-pocket no-op) |
+| `mek1_inv` | per-position Miyata-far substitution |
+
+### Glucose dehydrogenase (PDB 2VWH) — glucose binding site — paper Fig. 4
+
+**Ligand methylation** (`glucose_*`) — GDH unchanged; glucose alcohols methylated 0→5 times.
 Input also carries NADP cofactor and Zn²⁺.
-
-### Not shipped
-- MEK1 (PDB 7XLP) — described in paper Fig. 2 but no predicted structures in the data.
 
 ## Per-model output schema (empirically verified)
 
