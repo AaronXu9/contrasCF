@@ -36,7 +36,7 @@ SURFDOCK_PRECOMPUTED_ARRAYS = "/home/aoxu/projects/precomputed/precomputed_array
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
-from config import CASES, DATA_ROOT  # noqa: E402
+from config import CASES, DATA_ROOT, SCOPES, cases_in_scope  # noqa: E402
 from docking_io import write_combined_top1  # noqa: E402
 
 
@@ -207,10 +207,21 @@ def _run_inference_with_pocket_center(csv_path: str, esm_pt: str, out_dir: str, 
         "--ligand_to_pocket_center",
     ]
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=surfdock_dir, env=env)
+    # Persist stdout + stderr so the actual Python traceback from
+    # inference_accelerate.py survives even after accelerate's own
+    # CalledProcessError pads the stderr tail with launcher frames.
+    log_dir = os.path.dirname(out_dir) if os.path.dirname(out_dir) else "."
+    try:
+        with open(os.path.join(log_dir, "inference_stderr.log"), "w") as f:
+            f.write(result.stderr or "")
+        with open(os.path.join(log_dir, "inference_stdout.log"), "w") as f:
+            f.write(result.stdout or "")
+    except OSError:
+        pass
     if result.returncode != 0:
         raise RuntimeError(
             f"SurfDock inference failed (exit {result.returncode}):\n"
-            f"  stderr tail: {result.stderr[-2000:]}"
+            f"  stderr tail: {result.stderr[-20000:]}"
         )
     return os.path.join(out_dir, "SurfDock_docking_result")
 
@@ -337,6 +348,13 @@ def run_case(case: str) -> dict:
 
 
 def main() -> None:
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--scope", choices=sorted(SCOPES), default="all")
+    args = p.parse_args()
+    cases = cases_in_scope(args.scope)
+    print(f"[surfdock] scope={args.scope}  n_cases={len(cases)}", flush=True)
+
     os.environ["PROJECT_ROOT"] = str(DOCKSTRAT_ROOT)
     os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
     os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
@@ -344,7 +362,7 @@ def main() -> None:
 
     SURFDOCK_OUT_ROOT.mkdir(parents=True, exist_ok=True)
     results = []
-    for case in CASES:
+    for case in cases:
         print(f"[surfdock] {case} ...", flush=True)
         info = run_case(case)
         tag = "ok" if info.get("ok") else "FAIL"

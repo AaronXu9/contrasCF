@@ -1,0 +1,10 @@
+--- a/inference_accelerate.py
++++ b/inference_accelerate.py
+@@ -205,7 +205,7 @@ if __name__ == '__main__':
+             y = center.split(',')[1]
+             z = center.split(',')[2]
+-            new_pocket_centers.append(np.array([(float(x),float(y),float(z))]))
++            new_pocket_centers.append(np.array([float(x),float(y),float(z)]))
+         pocket_centers = new_pocket_centers
+     else:
+         pocket_centers = [None]*len(protein_paths)
