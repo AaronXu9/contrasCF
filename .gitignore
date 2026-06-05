@@ -1,6 +1,15 @@
 # --- generated outputs (large; not in source) -----------------------------
 analysis/casf_mutagenesis/outputs/
 analysis/results/
+
+# ligand_mutagenesis: predictions are ~1.4 GB of generated artifacts. Keep the
+# experiment inputs (boltz.yaml) and manifests; ignore everything else under
+# outputs/ (Boltz-2 model CIFs, confidence/affinity JSONs, UniDock2 poses/logs).
+analysis/ligand_mutagenesis/outputs/**
+!analysis/ligand_mutagenesis/outputs/**/
+!analysis/ligand_mutagenesis/outputs/**/boltz.yaml
+!analysis/ligand_mutagenesis/outputs/manifest*.json
+
 docking/inputs/
 docking/outputs/
 docking/smoketest/*.sdf
