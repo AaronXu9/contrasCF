@@ -11,3 +11,6 @@ sequences:
   - ligand:
       id: [C]
       smiles: CCN1CNS(=O)(=O)c2cnc(Cl)cc21
+properties:
+  - affinity:
+      binder: C

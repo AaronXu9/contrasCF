@@ -553,7 +553,7 @@
     {
       "pdbid": "3arq",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arq/3arq_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arq/3arq_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -562,7 +562,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arq/3arq_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arq/3arq_protein.pdb"
       ]
     },
     {
@@ -688,7 +688,7 @@
     {
       "pdbid": "2zy1",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zy1/2zy1_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zy1/2zy1_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -697,7 +697,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zy1/2zy1_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zy1/2zy1_protein.pdb"
       ]
     },
     {
@@ -1042,7 +1042,7 @@
     {
       "pdbid": "3pww",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3pww/3pww_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3pww/3pww_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -1051,7 +1051,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3pww/3pww_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3pww/3pww_protein.pdb"
       ]
     },
     {
@@ -1219,7 +1219,7 @@
     {
       "pdbid": "3kgp",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3kgp/3kgp_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3kgp/3kgp_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -1228,7 +1228,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3kgp/3kgp_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3kgp/3kgp_protein.pdb"
       ]
     },
     {
@@ -2730,7 +2730,7 @@
     {
       "pdbid": "3arv",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arv/3arv_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arv/3arv_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -2739,7 +2739,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arv/3arv_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arv/3arv_protein.pdb"
       ]
     },
     {
@@ -2877,7 +2877,7 @@
     {
       "pdbid": "3uri",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3uri/3uri_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3uri/3uri_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -2886,7 +2886,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3uri/3uri_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3uri/3uri_protein.pdb"
       ]
     },
     {
@@ -3477,7 +3477,7 @@
     {
       "pdbid": "3arp",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arp/3arp_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arp/3arp_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -3486,7 +3486,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3arp/3arp_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3arp/3arp_protein.pdb"
       ]
     },
     {
@@ -4318,7 +4318,7 @@
     {
       "pdbid": "4owm",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4owm/4owm_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4owm/4owm_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -4327,7 +4327,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4owm/4owm_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4owm/4owm_protein.pdb"
       ]
     },
     {
@@ -4900,7 +4900,7 @@
     {
       "pdbid": "4abg",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4abg/4abg_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4abg/4abg_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -4909,7 +4909,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4abg/4abg_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4abg/4abg_protein.pdb"
       ]
     },
     {
@@ -4981,7 +4981,7 @@
     {
       "pdbid": "3prs",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3prs/3prs_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3prs/3prs_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -4990,7 +4990,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3prs/3prs_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3prs/3prs_protein.pdb"
       ]
     },
     {
@@ -5982,7 +5982,7 @@
     {
       "pdbid": "3zsx",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3zsx/3zsx_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3zsx/3zsx_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -5991,7 +5991,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3zsx/3zsx_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3zsx/3zsx_protein.pdb"
       ]
     },
     {
@@ -7018,7 +7018,7 @@
     {
       "pdbid": "4kzq",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4kzq/4kzq_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4kzq/4kzq_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -7027,7 +7027,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4kzq/4kzq_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4kzq/4kzq_protein.pdb"
       ]
     },
     {
@@ -8063,7 +8063,7 @@
     {
       "pdbid": "3uex",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3uex/3uex_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3uex/3uex_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8072,13 +8072,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3uex/3uex_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3uex/3uex_protein.pdb"
       ]
     },
     {
       "pdbid": "3twp",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3twp/3twp_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3twp/3twp_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8087,13 +8087,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3twp/3twp_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3twp/3twp_protein.pdb"
       ]
     },
     {
       "pdbid": "3aru",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3aru/3aru_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3aru/3aru_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8102,13 +8102,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3aru/3aru_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3aru/3aru_protein.pdb"
       ]
     },
     {
       "pdbid": "2wca",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2wca/2wca_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2wca/2wca_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8117,7 +8117,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2wca/2wca_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2wca/2wca_protein.pdb"
       ]
     },
     {
@@ -8189,7 +8189,7 @@
     {
       "pdbid": "3o9i",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3o9i/3o9i_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3o9i/3o9i_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8198,7 +8198,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3o9i/3o9i_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3o9i/3o9i_protein.pdb"
       ]
     },
     {
@@ -8324,7 +8324,7 @@
     {
       "pdbid": "3bv9",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3bv9/3bv9_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3bv9/3bv9_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -8333,7 +8333,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3bv9/3bv9_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3bv9/3bv9_protein.pdb"
       ]
     },
     {
@@ -9415,7 +9415,7 @@
     {
       "pdbid": "3ary",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3ary/3ary_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3ary/3ary_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -9424,13 +9424,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3ary/3ary_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3ary/3ary_protein.pdb"
       ]
     },
     {
       "pdbid": "3f3a",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3f3a/3f3a_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3f3a/3f3a_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -9439,7 +9439,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3f3a/3f3a_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3f3a/3f3a_protein.pdb"
       ]
     },
     {
@@ -11028,7 +11028,7 @@
     {
       "pdbid": "2p15",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2p15/2p15_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2p15/2p15_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -11037,13 +11037,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2p15/2p15_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2p15/2p15_protein.pdb"
       ]
     },
     {
       "pdbid": "2zda",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zda/2zda_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zda/2zda_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -11052,7 +11052,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zda/2zda_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zda/2zda_protein.pdb"
       ]
     },
     {
@@ -11274,7 +11274,7 @@
     {
       "pdbid": "3myg",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3myg/3myg_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3myg/3myg_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -11283,7 +11283,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3myg/3myg_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3myg/3myg_protein.pdb"
       ]
     },
     {
@@ -11883,7 +11883,7 @@
     {
       "pdbid": "2zcr",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zcr/2zcr_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zcr/2zcr_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -11892,7 +11892,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2zcr/2zcr_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2zcr/2zcr_protein.pdb"
       ]
     },
     {
@@ -13522,7 +13522,7 @@
     {
       "pdbid": "4pcs",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4pcs/4pcs_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4pcs/4pcs_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -13531,7 +13531,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4pcs/4pcs_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4pcs/4pcs_protein.pdb"
       ]
     },
     {
@@ -14525,7 +14525,7 @@
     {
       "pdbid": "4kzu",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4kzu/4kzu_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4kzu/4kzu_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -14534,7 +14534,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/4kzu/4kzu_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/4kzu/4kzu_protein.pdb"
       ]
     },
     {
@@ -17914,7 +17914,7 @@
     {
       "pdbid": "3r88",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3r88/3r88_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3r88/3r88_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -17923,13 +17923,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3r88/3r88_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3r88/3r88_protein.pdb"
       ]
     },
     {
       "pdbid": "3acw",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3acw/3acw_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3acw/3acw_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -17938,7 +17938,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3acw/3acw_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3acw/3acw_protein.pdb"
       ]
     },
     {
@@ -18639,7 +18639,7 @@
     {
       "pdbid": "3dxg",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3dxg/3dxg_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3dxg/3dxg_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -18648,7 +18648,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3dxg/3dxg_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3dxg/3dxg_protein.pdb"
       ]
     },
     {
@@ -18939,7 +18939,7 @@
     {
       "pdbid": "3b65",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3b65/3b65_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3b65/3b65_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -18948,13 +18948,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3b65/3b65_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3b65/3b65_protein.pdb"
       ]
     },
     {
       "pdbid": "1a30",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/1a30/1a30_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/1a30/1a30_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -18963,7 +18963,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/1a30/1a30_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/1a30/1a30_protein.pdb"
       ]
     },
     {
@@ -19433,7 +19433,7 @@
     {
       "pdbid": "3qqs",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3qqs/3qqs_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3qqs/3qqs_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -19442,7 +19442,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/3qqs/3qqs_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/3qqs/3qqs_protein.pdb"
       ]
     },
     {
@@ -19829,7 +19829,7 @@
     {
       "pdbid": "1c5z",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/1c5z/1c5z_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/1c5z/1c5z_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -19838,13 +19838,13 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/1c5z/1c5z_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/1c5z/1c5z_protein.pdb"
       ]
     },
     {
       "pdbid": "2vvn",
       "status": "error",
-      "error": "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2vvn/2vvn_protein.pdb",
+      "error": "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2vvn/2vvn_protein.pdb",
       "het_code": null,
       "wt_smiles": null,
       "wt_smiles_source": null,
@@ -19853,7 +19853,7 @@
       "rules_eligible": {},
       "variants": {},
       "warnings": [
-        "FileNotFoundError: missing /mnt/katritch_lab2/aoxu/contrasCF/data/casf2016/raw/2vvn/2vvn_protein.pdb"
+        "FileNotFoundError: missing /home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/raw/2vvn/2vvn_protein.pdb"
       ]
     },
     {

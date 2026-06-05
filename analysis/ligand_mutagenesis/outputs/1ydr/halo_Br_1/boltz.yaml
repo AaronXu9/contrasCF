@@ -11,3 +11,6 @@ sequences:
   - ligand:
       id: [A]
       smiles: C[C@H]1CNCCN1S(=O)(=O)c1cc(Br)cc2cnccc12
+properties:
+  - affinity:
+      binder: A

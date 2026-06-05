@@ -7,3 +7,6 @@ sequences:
   - ligand:
       id: [B]
       smiles: C[N+](C)(C)C[C@@H](N)Cn1cc(F)c(=O)[nH]c1=O
+properties:
+  - affinity:
+      binder: B
