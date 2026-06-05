@@ -24,7 +24,7 @@ from pathlib import Path
 REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
-from config import CASES, DATA_ROOT  # noqa: E402
+from config import CASES, DATA_ROOT, SCOPES, cases_in_scope  # noqa: E402
 from docking_io import write_combined_top1  # noqa: E402
 
 INPUTS_ROOT = REPO_ROOT / "docking" / "inputs"
@@ -137,8 +137,15 @@ def run_case(case: str) -> dict:
 
 
 def main():
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--scope", choices=sorted(SCOPES), default="all")
+    args = p.parse_args()
+    cases = cases_in_scope(args.scope)
+    print(f"[dock] scope={args.scope}  n_cases={len(cases)}", flush=True)
+
     results = []
-    for case in CASES:
+    for case in cases:
         print(f"[dock] {case} ...", flush=True)
         info = run_case(case)
         u = info["unidock2"]; g = info["gnina"]

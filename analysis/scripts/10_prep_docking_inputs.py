@@ -27,7 +27,7 @@ from rdkit.Chem import AllChem
 REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
-from config import CASES, MODELS, case_dir, find_first  # noqa: E402
+from config import CASES, MODELS, SCOPES, cases_in_scope, case_dir, find_first  # noqa: E402
 from loaders import read_structure, extract_protein_ca, select_target_ligand, STANDARD_AA  # noqa: E402
 from native import load_native  # noqa: E402
 from align import superpose_ca  # noqa: E402
@@ -200,11 +200,18 @@ def prep_case(case: str, gdh_pocket: list[int]) -> dict:
 
 
 def main():
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--scope", choices=sorted(SCOPES), default="all")
+    args = p.parse_args()
+    cases = cases_in_scope(args.scope)
+
     gdh_pocket = _gdh_pocket_resnums()
     print(f"[prep] GDH pocket residues (from 2VWH, within 6 Å of BGC): {gdh_pocket}")
+    print(f"[prep] scope={args.scope}  n_cases={len(cases)}")
 
     results = []
-    for case in CASES:
+    for case in cases:
         print(f"[prep] {case} ...", flush=True)
         try:
             info = prep_case(case, gdh_pocket)

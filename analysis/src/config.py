@@ -27,6 +27,7 @@ class NativeRef:
 NATIVES = {
     "cdk2_atp": NativeRef(pdb_id="1B38", ligand_resname="ATP"),   # CDK2-ATP
     "gdh_glc":  NativeRef(pdb_id="2VWH", ligand_resname="BGC"),   # GDH-β-D-glucose (CCD BGC)
+    "mek1_fzc": NativeRef(pdb_id="7XLP", ligand_resname="FZC"),   # MEK1-FZC inhibitor (paper Fig. 2)
 }
 
 
@@ -66,6 +67,11 @@ ATP_CHARGE_SMILES = {
     "atp_charge_2": "C[N+](C)(C)C[N+](C)(C)COC[C@H]1O[C@H]([C@H](O)[C@@H]1O)n1cnc2c(N)ncnc12",
     "atp_charge_3": "C[N+](C)(C)C[N+](C)(C)C[N+](C)(C)COC[C@H]1O[C@H]([C@H](O)[C@@H]1O)n1cnc2c(N)ncnc12",
 }
+
+# FZC inhibitor (allosteric MEK1 binder, paper Fig. 2). CCD canonical SMILES;
+# 33 heavy atoms. Constant across the 4 mek1_* variants (only the protein
+# changes — binding-site mutagenesis).
+FZC_SMILES = "Cc1ccnc(Oc2ccc(c(Cl)c2)c3cc4[nH]nc(C)c4c(O[C@H]5CCC[C@@H](N)C5)c3)n1"
 
 # Glucose methylation variants (SMILES from AF3 *_data.json files).
 GLUCOSE_SMILES = {
@@ -108,6 +114,48 @@ for n, smi in GLUCOSE_SMILES.items():
         has_zn_input=True, has_nadp_input=True,
     )
 
+# mek1_* — MEK1 binding-site mutagenesis (paper Fig. 2). Ligand = FZC inhibitor
+# (constant across all 4 variants); protein perturbed at 7 paper-listed pocket
+# residues (A40, A59, I105, E108, M110, S158, F173 in paper numbering = +36 in
+# 7XLP auth_seq). Uses paper's explicit residue list, not auto-3.5 Å detection.
+for n in ("mek1_wt", "mek1_rem", "mek1_pack", "mek1_inv"):
+    CASES[n] = CaseSpec(
+        name=n, family="bindingsite_mek1", native_key="mek1_fzc",
+        target_smiles=FZC_SMILES, common_smarts_key="FZC_FULL",
+    )
+
+
+FAMILY_ORDER = ("bindingsite", "atp_charge", "glucose", "bindingsite_mek1")
+
+
+# -- Scopes (per-target views) -----------------------------------------------
+# A "scope" is a named subset of CASES, written to its own output subdir.
+# Use SCOPES.keys() for valid --scope values; SCOPES[name] is the family set.
+
+SCOPES: dict[str, frozenset[str]] = {
+    "all":  frozenset(FAMILY_ORDER),                          # 20 cases
+    "cdk2": frozenset(("bindingsite", "atp_charge")),         # 10 cases (1B38)
+    "gdh":  frozenset(("glucose",)),                          # 6 cases (2VWH)
+    "mek1": frozenset(("bindingsite_mek1",)),                 # 4 cases (7XLP)
+}
+
+
+def cases_in_scope(scope: str) -> list[str]:
+    fams = SCOPES[scope]
+    return [n for n, c in CASES.items() if c.family in fams]
+
+
+def results_dir_for(scope: str) -> Path:
+    return RESULTS_DIR / scope
+
+
+def figures_dir_for(scope: str) -> Path:
+    return results_dir_for(scope) / "figures"
+
+
+def families_in_scope(scope: str) -> tuple[str, ...]:
+    return tuple(f for f in FAMILY_ORDER if f in SCOPES[scope])
+
 
 # -- Common subsets (SMARTS) --------------------------------------------------
 # For cross-case RMSD we want the SAME set of heavy atoms paired across
@@ -126,6 +174,10 @@ COMMON_SUBSETS = {
     # Pyranose skeleton only (6 atoms). Conserved across native BGC and
     # glucose_0..5 methylated variants.
     "GLC_CORE":  "[C;R]1[O;R][C;R][C;R][C;R][C;R]1",
+    # Full FZC inhibitor — identical graph across all mek1_* variants (only
+    # the protein is perturbed). Cross-case ligand RMSD is computed on the
+    # full 33-heavy-atom ligand.
+    "FZC_FULL":  FZC_SMILES,
 }
 
 

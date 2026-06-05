@@ -1,6 +1,10 @@
 #!/usr/bin/env python
-"""Iterate 4 models × 16 cases, compute RMSD/confidence/clashes, write results.csv."""
+"""Iterate models × cases for a scope, compute RMSD/confidence/clashes, write results.csv.
+
+Usage: python 02_run_analysis.py [--scope {all,cdk2,gdh,mek1}]  (default: all)
+"""
 from __future__ import annotations
+import argparse
 import os, sys
 from pathlib import Path
 
@@ -15,16 +19,22 @@ from rdkit import RDLogger
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 RDLogger.DisableLog("rdApp.*")
 
-from config import CASES, MODELS, RESULTS_DIR  # noqa: E402
+from config import CASES, MODELS, SCOPES, cases_in_scope, results_dir_for  # noqa: E402
 from pipeline import run_one  # noqa: E402
 
 
 def main() -> None:
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--scope", choices=sorted(SCOPES), default="all")
+    args = parser.parse_args()
+
+    out_dir = results_dir_for(args.scope)
+    out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
     models = list(MODELS.keys())
-    cases = list(CASES.keys())
-    print(f"Running pipeline on {len(models)} models × {len(cases)} cases = {len(models)*len(cases)} cells")
+    cases = cases_in_scope(args.scope)
+    print(f"[scope={args.scope}] {len(models)} models × {len(cases)} cases "
+          f"= {len(models)*len(cases)} cells → {out_dir}")
     for model in models:
         for case in cases:
             row = run_one(model, case)
@@ -40,7 +50,7 @@ def main() -> None:
                 + (f"   err={row['error']}" if row.get("error") else "")
             )
     df = pd.DataFrame(rows)
-    out = RESULTS_DIR / "results.csv"
+    out = out_dir / "results.csv"
     df.to_csv(out, index=False)
     print(f"\nWrote {out} ({len(df)} rows, {len(df.columns)} cols)")
 
@@ -60,6 +70,8 @@ def main() -> None:
     # paper's quoted WT numbers (Masters et al. 2025, p. 2: AF3=0.2, RFAA=2.2,
     # Boltz and Chai intermediate).
     wt = df[df["case"] == "bindingsite_wt"]
+    if wt.empty:
+        return
     paper_wt = {"AF3": 0.2, "RFAA": 2.2, "Boltz": 1.0, "Chai": 1.8}   # approximate
     print("\nWT sanity (bindingsite_wt):")
     print("  pose RMSD (all vs common) should match within 1e-3 for WT:")
