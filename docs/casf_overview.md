@@ -8,6 +8,7 @@ For the deep dives, see the per-topic docs:
 - [`casf_mutagenesis.md`](casf_mutagenesis.md) — pocket-mutation methodology, build pipeline, AF3/Boltz-2 structure side
 - [`ligand_mutagenesis.md`](ligand_mutagenesis.md) — ligand-mutation methodology, halogenation/charge/methylation rules
 - [`casf_affinity.md`](casf_affinity.md) — Boltz-2 binding-affinity head, the only co-folding model with an affinity signal
+- [`casf_confidence.md`](casf_confidence.md) — confidence × affinity × RMSD: the three heads dissociate (confidence registers the broken pocket; affinity is near-blind)
 
 ## The cross-method matrix today
 
