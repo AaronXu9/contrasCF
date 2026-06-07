@@ -61,37 +61,45 @@ def _build_decoys(x_pred, feats):
     lig_xyz = flat[lig_atoms]
     rec_xyz = flat[rec_atoms]
     lig_com = lig_xyz.mean(0)
-    near = rec_xyz[(rec_xyz - lig_com).norm(dim=1) < 8.0]
-    pocket = near.mean(0) if len(near) else rec_xyz.mean(0)
-    exit_vec = lig_com - pocket
-    exit_vec = exit_vec / (exit_vec.norm() + 1e-8)
+    centroid = rec_xyz.mean(0)
+    Rprot = float((rec_xyz - centroid).norm(dim=1).max())        # protein bounding radius
+    outward = lig_com - centroid
+    outward = outward / outward.norm() if float(outward.norm()) > 2.0 else torch.tensor([0., 0., 1.])
 
-    def shifted(disp_vec):
-        xd = x.clone()
-        view = xd.reshape(-1, xd.shape[-2], 3)
+    def translate_lig(vec):
+        xd = x.clone(); view = xd.reshape(-1, xd.shape[-2], 3)
         for a in lig_atoms:
-            view[:, a, :] += disp_vec
+            view[:, a, :] += vec
         return xd.to(x_pred.dtype).to(x_pred.device)
 
-    decoys = []
-    for d in EXIT_LADDER:
-        decoys.append((f"exit+{int(d)}" if d else "native", d, "exit", shifted(exit_vec * d)))
-    rand = torch.randn(3, generator=g); rand = rand / rand.norm()
-    decoys.append(("rand+10", 10.0, "rand", shifted(rand * 10.0)))
-    # rigid rotation about COM (orientation scramble, no translation)
-    theta = float(torch.rand(1, generator=g) * 2 * np.pi)
-    axis = torch.randn(3, generator=g); axis = axis / axis.norm()
-    K = torch.tensor([[0, -axis[2], axis[1]], [axis[2], 0, -axis[0]], [-axis[1], axis[0], 0]])
-    R = torch.eye(3) + np.sin(theta) * K + (1 - np.cos(theta)) * (K @ K)
+    def mindist(xp):
+        f = xp.detach().float().cpu().reshape(-1, xp.shape[-2], 3)[0]
+        return float(torch.cdist(f[lig_atoms], f[rec_atoms]).min())
+
+    decoys = [("native", 0.0, "none", x_pred)]
+    # EJECTION ladder: place the ligand COM BEYOND the protein bounding sphere so
+    # it genuinely clears all protein contacts (min-dist ~ clearance), regardless
+    # of how buried the pocket is. The achieved min ligand-protein distance is
+    # recorded per pose and is the real x-axis (raw translation is not).
+    for c in (5.0, 15.0, 30.0):
+        target = centroid + outward * (Rprot + c)
+        decoys.append((f"eject{int(c)}", c, "radial", translate_lig(target - lig_com)))
+    rd = torch.randn(3, generator=g); rd = rd / rd.norm()         # direction control
+    decoys.append(("eject_rand", 15.0, "rand", translate_lig((centroid + rd * (Rprot + 15.0)) - lig_com)))
+    # in-pocket rotation (orientation scramble, no translation)
+    th = float(torch.rand(1, generator=g) * 2 * np.pi)
+    ax = torch.randn(3, generator=g); ax = ax / ax.norm()
+    K = torch.tensor([[0, -ax[2], ax[1]], [ax[2], 0, -ax[0]], [-ax[1], ax[0], 0]])
+    Rot = torch.eye(3) + np.sin(th) * K + (1 - np.cos(th)) * (K @ K)
     xr = x.clone(); vr = xr.reshape(-1, xr.shape[-2], 3)
     for a in lig_atoms:
-        vr[:, a, :] = (R @ (vr[:, a, :].T - lig_com[:, None])).T + lig_com
+        vr[:, a, :] = (Rot @ (vr[:, a, :].T - lig_com[:, None])).T + lig_com
     decoys.append(("rot_inpocket", 0.0, "rot", xr.to(x_pred.dtype).to(x_pred.device)))
-    # SANITY: translate the WHOLE complex (lig+rec) +20 A. cdist is translation-
-    # invariant, so this MUST give Delta-aff ~ 0 — proves the ligand-only shifts
-    # are real changed cross-distances, not a broken/no-op translation.
-    xw = x.clone(); xw.reshape(-1, xw.shape[-2], 3)[:, :, :] += exit_vec * 20.0
-    decoys.append(("whole+20", 20.0, "sanity", xw.to(x_pred.dtype).to(x_pred.device)))
+    # SANITY: translate the WHOLE complex far. cdist is translation-invariant, so
+    # this MUST give Delta-aff ~ 0 and min-dist ~ native (proves the harness).
+    xw = x.clone(); xw.reshape(-1, xw.shape[-2], 3)[:, :, :] += outward * (Rprot + 30.0)
+    decoys.append(("whole_far", 0.0, "sanity", xw.to(x_pred.dtype).to(x_pred.device)))
+    decoys = [(pid, disp, axis, mindist(xp), xp) for pid, disp, axis, xp in decoys]
     return decoys, len(lig_atoms), len(rec_atoms)
 
 
@@ -109,10 +117,10 @@ def _install_patch():
         decoys, n_lig, n_rec = _DECOYS_CACHE[key]
         mw = float(feats["affinity_mw"][0]) if "affinity_mw" in feats else float("nan")
         with torch.no_grad():
-            for pose_id, disp, axis, xp in decoys:
+            for pose_id, disp, axis, min_dist, xp in decoys:
                 out = orig(self, s_inputs, z, xp, feats, multiplicity, use_kernels)
                 RESULTS.append(dict(
-                    module=call, pose_id=pose_id, disp_A=disp, axis=axis,
+                    module=call, pose_id=pose_id, disp_A=disp, axis=axis, min_lig_prot=min_dist,
                     aff_value=float(out["affinity_pred_value"].reshape(-1)[0]),
                     logits=float(out["affinity_logits_binary"].reshape(-1)[0]),
                     mw=mw, n_lig_atoms=n_lig, n_rec_atoms=n_rec,
@@ -136,6 +144,7 @@ def _aggregate(tag, out_dir):
         mw = g.mw.iloc[0]
         aff_mw = MW_MODEL_COEF * ens + MW_COEF * (mw ** 0.3) + MW_BIAS   # constant offset/ladder
         rows.append(dict(tag=tag, pose_id=pose_id, disp_A=g.disp_A.iloc[0], axis=g.axis.iloc[0],
+                         min_lig_prot=float(g.min_lig_prot.iloc[0]) if "min_lig_prot" in g else float("nan"),
                          boltz_aff=ens, boltz_aff_mw=aff_mw, boltz_prob=float(sig(g.logits).mean()),
                          mw=mw, n_lig=int(g.n_lig_atoms.iloc[0]),
                          aff_m0=g[g.module == 0].aff_value.mean(),
@@ -146,13 +155,13 @@ def _aggregate(tag, out_dir):
     nat = summ[summ.pose_id == "native"].boltz_aff.iloc[0]
     print(f"\n=== POSE-SWAP affinity (system={tag}; lower=tighter; native={nat:.3f}) ===")
     for _, r in summ.iterrows():
-        print(f"  {r.pose_id:13s} d={r.disp_A:4.0f}A {r.axis:5s}  "
+        print(f"  {r.pose_id:13s} d={r.disp_A:4.0f}A {r.axis:5s} minD={r.min_lig_prot:5.1f}A  "
               f"aff={r.boltz_aff:+.3f}  Δvs_native={r.boltz_aff-nat:+.3f}  P(bind)={r.boltz_prob:.3f}")
-    far = summ[summ.pose_id == "exit+20"]
+    far = summ[summ.pose_id == "eject30"]
     if len(far):
         gap = far.boltz_aff.iloc[0] - nat
-        print(f"\n  native→exit+20 gap = {gap:+.3f} log units "
-              f"(physics wants strongly +; ~0 ⇒ pose-insensitive)")
+        print(f"\n  native→eject30 gap = {gap:+.3f} log units  (ligand now {far.min_lig_prot.iloc[0]:.0f} A "
+              f"from protein; physics wants strongly +; ~0 ⇒ pose-insensitive)")
     print(f"[wrote] {Path(out_dir)/f'poseswap_{tag}.csv'}")
 
 
