@@ -54,6 +54,11 @@ Commits on `pose-swap` (pushed to origin): `5d05e23` (spec), `ab55b0c` (initial 
 |---|---|
 | **Boltz-2 affinity head** | median Δlog[IC50] = **−0.004** (flat) |
 | **GNINA Vina (physics)** | median **−8.7 → 0.0** kcal/mol; **100% (29/29)** collapse to ~0 — all binding energy lost |
-| **GNINA CNNaffinity** | median drop **+2.5 pK** (1–4 pK; the CNN also reacts, though it has its own non-zero floor) |
+| **GNINA CNNaffinity** | median drop **+2.5 pK** (1–4 pK; the CNN affinity has its own non-zero floor) |
+| **GNINA CNNscore** (pose plausibility, 0–1) | median **0.95 → 0.54**; collapses (<0.4) for 21% of systems, floors (~0.9) for the rest |
 
-Figure: `analysis/casf_mutagenesis/figures/pose_swap_contrast.png` — flat (Boltz) vs collapse (GNINA Vina), side by side. The Vina term hitting exactly 0 for every system confirms the ejected decoys are unambiguous non-binder geometries; Boltz-2's affinity head is alone in not noticing. **The pose-swap conclusion is now complete and externally referenced.** Branch merged to `main`.
+**Hierarchy of "did the scorer notice the ligand left?":** pure physics (Vina) — completely (100% → 0); GNINA's learned CNN — *partially* (CNNscore 0.95→0.54, CNNaff −2.5 pK; floors for most systems); Boltz-2's affinity head — *not at all* (Δ−0.004). All learned heads memorize to some degree; Boltz-2's is the most extreme.
+
+**Command check (Aaron's review):** verified `--score_only` against the lab's standard full-docking command (`gnina --autobox_ligand`, from `CogLigandBench/.../gnina_inference.py`) on 1bcu native — they agree (CNNaffinity 5.34 vs 5.37; Vina −7.19 vs −7.78). `--score_only` is the correct mode here because we score a *fixed imposed* pose; docking would re-search and discard the ejection. gnina's low CNNaffinity (~5.3) is its own calibration, identical from both commands.
+
+Figure: `analysis/casf_mutagenesis/figures/pose_swap_contrast.png` (3 panels: Boltz flat | GNINA Vina collapse | GNINA CNNscore partial). The Vina term hitting exactly 0 for every system confirms the ejected decoys are unambiguous non-binder geometries; Boltz-2's affinity head is alone in not noticing. **Conclusion complete and externally referenced.** Branch merged to `main`.

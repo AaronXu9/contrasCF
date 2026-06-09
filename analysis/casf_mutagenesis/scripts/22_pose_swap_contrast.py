@@ -47,6 +47,8 @@ def main():
             vina_native=gz.loc[0.0, "vina"], vina_eject=gz.loc[30.0, "vina"],
             vina_loss=gz.loc[0.0, "vina"] - gz.loc[30.0, "vina"],   # native is negative; loss = |binding| lost
             cnnaff_drop=gz.loc[0.0, "cnnaffinity"] - gz.loc[30.0, "cnnaffinity"],
+            cnnscore_native=gz.loc[0.0, "cnnscore"], cnnscore_eject=gz.loc[30.0, "cnnscore"],
+            cnnscore_drop=gz.loc[0.0, "cnnscore"] - gz.loc[30.0, "cnnscore"],
             far_mindist=gz.loc[30.0, "min_lig_prot"],
         ))
     C = pd.DataFrame(rows).set_index("system")
@@ -56,7 +58,9 @@ def main():
     print(f"  Boltz-2 affinity head: median Δlog[IC50] = {C.boltz_gap.median():+.3f}  (flat; physics wants +3..+6)")
     print(f"  GNINA Vina (physics):  median native = {C.vina_native.median():.2f} kcal/mol -> median ejected = "
           f"{C.vina_eject.median():.2f}  (collapses; median binding-energy lost = {C.vina_loss.median():.2f} kcal/mol)")
-    print(f"  GNINA CNNaffinity:     median drop = {C.cnnaff_drop.median():+.2f} pK  (CNN has its own memorization floor)")
+    print(f"  GNINA CNNaffinity:     median drop = {C.cnnaff_drop.median():+.2f} pK  (CNN affinity has its own floor)")
+    print(f"  GNINA CNNscore:        median {C.cnnscore_native.median():.2f} -> {C.cnnscore_eject.median():.2f} "
+          f"(drop {C.cnnscore_drop.median():+.2f}); collapses (<0.4) for {(C.cnnscore_eject < 0.4).mean():.0%} of systems, floors for the rest")
     print(f"  fraction GNINA Vina -> ~0 (|eject|<0.5): {(C.vina_eject.abs() < 0.5).mean():.0%}")
 
     C.round(4).to_csv(Path(args.out) / "pose_swap_contrast.csv")
@@ -64,30 +68,33 @@ def main():
     import matplotlib; matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     grid = np.array(CLEAR)
-    fig, ax = plt.subplots(1, 2, figsize=(12, 5), sharex=True)
-    # (a) Boltz affinity Δ
-    for s in C.index:
-        y = [boltz[s][c] - boltz[s][0.0] for c in CLEAR]
-        ax[0].plot(grid, y, color="#888", alpha=.5, lw=1)
-    medb = [np.median([boltz[s][c] - boltz[s][0.0] for s in C.index]) for c in CLEAR]
-    ax[0].plot(grid, medb, color="#36c", lw=3, marker="o", label="median")
-    ax[0].axhline(0, color="k", lw=.6); ax[0].axhline(3, color="green", ls=":", lw=1, label="physics floor (+3)")
-    ax[0].set_ylim(-0.5, 3.4)
-    ax[0].set_xlabel("ligand ejection — clearance beyond protein surface (Å)")
-    ax[0].set_ylabel("Δ predicted log[IC50] (+ = weaker)")
-    ax[0].set_title(f"Boltz-2 affinity head — FLAT\nmedian gap = {C.boltz_gap.median():+.2f} log units"); ax[0].legend(fontsize=8)
-    # (b) GNINA Vina
-    for s in C.index:
-        y = [gnina[s].loc[c, "vina"] for c in CLEAR]
-        ax[1].plot(grid, y, color="#888", alpha=.5, lw=1)
-    medg = [np.median([gnina[s].loc[c, "vina"] for s in C.index]) for c in CLEAR]
-    ax[1].plot(grid, medg, color="#c00", lw=3, marker="o", label="median")
-    ax[1].axhline(0, color="k", lw=.6)
-    ax[1].set_xlabel("ligand ejection — clearance beyond protein surface (Å)")
-    ax[1].set_ylabel("GNINA Vina binding energy (kcal/mol)")
-    ax[1].set_title(f"GNINA physics term — COLLAPSES\nmedian {C.vina_native.median():.1f} → {C.vina_eject.median():.1f} kcal/mol"); ax[1].legend(fontsize=8)
-    fig.suptitle("Pose-swap: a real physics scorer (GNINA) loses all binding energy when the ligand is ejected — Boltz-2's affinity head does not notice", fontsize=11)
-    fig.tight_layout(rect=[0, 0, 1, .95])
+    fig, ax = plt.subplots(1, 3, figsize=(17, 5), sharex=True)
+
+    def panel(i, ycol, color, ylabel, title, ylim=None, floor=None):
+        for s in C.index:
+            ax[i].plot(grid, [ycol(s, c) for c in CLEAR], color="#888", alpha=.45, lw=1)
+        med = [np.median([ycol(s, c) for s in C.index]) for c in CLEAR]
+        ax[i].plot(grid, med, color=color, lw=3, marker="o", label="median")
+        ax[i].axhline(0, color="k", lw=.6)
+        if floor is not None:
+            ax[i].axhline(floor, color="green", ls=":", lw=1, label="physics floor (+3)")
+        if ylim:
+            ax[i].set_ylim(*ylim)
+        ax[i].set_xlabel("ligand ejection — clearance beyond protein surface (Å)")
+        ax[i].set_ylabel(ylabel); ax[i].set_title(title); ax[i].legend(fontsize=8)
+
+    panel(0, lambda s, c: boltz[s][c] - boltz[s][0.0], "#36c",
+          "Δ predicted log[IC50] (+ = weaker)",
+          f"Boltz-2 affinity head — FLAT\nmedian gap = {C.boltz_gap.median():+.2f} log units",
+          ylim=(-0.5, 3.4), floor=3)
+    panel(1, lambda s, c: gnina[s].loc[c, "vina"], "#c00",
+          "GNINA Vina binding energy (kcal/mol)",
+          f"GNINA physics term — COLLAPSES\nmedian {C.vina_native.median():.1f} → {C.vina_eject.median():.1f} kcal/mol")
+    panel(2, lambda s, c: gnina[s].loc[c, "cnnscore"], "#e80",
+          "GNINA CNNscore (pose plausibility, 0–1)",
+          f"GNINA CNNscore — PARTIAL\nmedian {C.cnnscore_native.median():.2f} → {C.cnnscore_eject.median():.2f}")
+    fig.suptitle("Pose-swap: GNINA's physics term (Vina) collapses when the ligand is ejected; its CNN pose-score partly collapses; Boltz-2's affinity head does not move at all", fontsize=11)
+    fig.tight_layout(rect=[0, 0, 1, .94])
     out = Path(args.out) / "pose_swap_contrast.png"
     fig.savefig(out, dpi=130)
     print(f"[wrote] {out}\n[wrote] {Path(args.out)/'pose_swap_contrast.csv'}")
