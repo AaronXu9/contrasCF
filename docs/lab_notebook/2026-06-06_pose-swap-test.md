@@ -41,3 +41,19 @@ Figure: `analysis/casf_mutagenesis/figures/pose_swap_affinity.png` — every per
 
 ## Provenance
 Commits on `pose-swap` (pushed to origin): `5d05e23` (spec), `ab55b0c` (initial hook B + n=11, flawed decoys), `698945a` (buried-pocket fix + n=29). Scripts `19_…` (driver), `20_…` (aggregator+figure). Memory: `pose-swap-result`, `boltz2-affinity-architecture`.
+
+---
+
+## Addendum 2026-06-09 — GNINA reference (the deferred item, now done)
+
+**Setup:** gnina v1.3 (`/mnt/katritch_lab2/aoxu/envs/gnina/bin/gnina`). Per system: take crystal docking inputs (`receptor.pdb` + `ligand.sdf`), eject the ligand radially to the same clearances (5/15/30 Å beyond the protein bounding sphere), rescore each pose with `gnina --score_only` (CNNaffinity pK; Vina kcal/mol). Scripts `21_pose_swap_gnina.py` (driver), `22_pose_swap_contrast.py` (contrast + figure).
+
+**Result (n=29, same panel) — a genuine physics scorer reacts exactly as it should; Boltz-2 does not:**
+
+| metric, ligand ejected ~30+ Å | response |
+|---|---|
+| **Boltz-2 affinity head** | median Δlog[IC50] = **−0.004** (flat) |
+| **GNINA Vina (physics)** | median **−8.7 → 0.0** kcal/mol; **100% (29/29)** collapse to ~0 — all binding energy lost |
+| **GNINA CNNaffinity** | median drop **+2.5 pK** (1–4 pK; the CNN also reacts, though it has its own non-zero floor) |
+
+Figure: `analysis/casf_mutagenesis/figures/pose_swap_contrast.png` — flat (Boltz) vs collapse (GNINA Vina), side by side. The Vina term hitting exactly 0 for every system confirms the ejected decoys are unambiguous non-binder geometries; Boltz-2's affinity head is alone in not noticing. **The pose-swap conclusion is now complete and externally referenced.** Branch merged to `main`.
