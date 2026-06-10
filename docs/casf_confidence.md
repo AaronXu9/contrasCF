@@ -22,7 +22,7 @@ outputs give contradictory verdicts:
 |---|---|---|
 | **structure** | ligand RMSD | memorizes ~25–30% of adversarial cells; moves the ligand otherwise |
 | **confidence** | interface `iptm` | **registers the damage** — drops, and the drop tracks how far the ligand moved (RTM-robust) |
-| **affinity** | log[IC50], P(binder) | **near-blind** — change is dominated by regression-to-mean on WT tightness, not the structure; blind to ligand ejection |
+| **affinity** | log[IC50], P(binder) | **near-blind** — change is dominated by regression-to-mean on WT tightness, not the structure; **pose-swap-confirmed blind to a 35 Å ligand ejection** |
 
 The confidence head and affinity head respond to the same mutation
 **independently** (Δ`iptm` ↔ Δaff ≈ 0). The model's uncertainty estimate carries
@@ -98,7 +98,8 @@ mutation is governed by regression toward its prior (scaled by WT tightness),
 with at most a faint structural signal, and always orders of magnitude below
 physics. This resolves "memorized-structure vs inaccurate-module" in favor of
 the **inaccurate/insensitive module**. (Whether the faint +0.12 is real
-pose-reading is the question the **pose-swap test** is designed to settle.)
+pose-reading is settled by the **pose-swap test** below — it is *not*: the head
+ignores a ligand ejected 35 Å into solvent.)
 
 ---
 
@@ -172,12 +173,54 @@ Spearman correlation matrix (Boltz-2 adversarial cells, best-of-5):
 
 ---
 
+## The pose-swap test — direct confirmation (capstone)
+
+Q1–Q3 are observational and RTM-controlled; they leave one residual ambiguity
+(the faint +0.12 ΔAff↔ΔRMSD). The **pose-swap test** removes it by *intervention*:
+hold the trunk fixed and hand the affinity head a *supplied* pose with the ligand
+rigidly ejected from the pocket — does the predicted affinity react?
+
+**Method** (`19_pose_swap_affinity.py`; design `docs/superpowers/specs/2026-06-06-pose-swap-test-design.md`;
+lab notebook `docs/lab_notebook/2026-06-06_pose-swap-test.md`). Boltz-2's affinity
+head reads pose *only* via a distogram of `x_pred` over protein–ligand cross-pairs;
+the trunk (`s_inputs`, `z`) is pose-independent. So: monkeypatch
+`AffinityModule.forward`, capture `(s_inputs, z, x_pred, feats)` on the production
+call, then re-invoke it with `x_pred` decoys where the ligand is translated beyond
+the protein bounding sphere (clearance 5/15/30 Å, *verified* by the min
+ligand–protein distance). The native call **is** production → identity check is
+automatic; a whole-complex translation gives Δaff = 0 (translation-invariance
+control). [Bug-and-fix in the ELN: the first decoy scheme translated along a
+*local* pocket-exit vector that, for buried pockets, plowed the ligand *through*
+the protein — caught by the min-distance diagnostic, fixed by ejecting beyond the
+bounding sphere.]
+
+**Result (n=29 CASF systems; ligand ejected to a median 35 Å from the protein — zero contacts):**
+
+| scorer | response to a 35 Å ligand ejection | notices? |
+|---|---|---|
+| **Boltz-2 affinity head** | median native→eject gap = **−0.004** log units; **0/29** weaken by ≥+1; Wilcoxon p=0.27 (n.s.) | ❌ no |
+| **GNINA Vina** (pure-physics reference) | **−8.7 → 0.0** kcal/mol; **100%** of systems → ~0 (all binding energy lost) | ✅ completely |
+| **GNINA CNNscore** (learned pose-quality) | 0.95 → 0.54 (collapses for 21%, floors for the rest) | ⚠️ partially |
+
+A ligand floating 35 Å in solvent — no protein contacts — is predicted by Boltz-2's
+affinity head to bind **essentially as well as the native pose**. So the faint +0.12
+was *not* pose-reading: the head is **intrinsically pose-insensitive**, confirmed by
+direct intervention rather than correlation. The GNINA contrast sharpens the lesson:
+the *physics* term (Vina) collapses completely, while the *learned* heads memorize to
+different degrees — gnina's CNN partly, **Boltz-2's affinity head most extremely (flat)**.
+
+Figures: `pose_swap_affinity.png` (flat ejection curves), `pose_swap_contrast.png`
+(Boltz vs GNINA, 3-panel).
+
+---
+
 ## Interpretation — and the link to CounterFold
 
 The perturbation signal **is present** in the model — the interface/confidence
 representation registers the broken pocket cleanly and proportionally. The
 structure head acts on it most of the time (moves the ligand) but memorizes
-~25–30%; the affinity head essentially ignores it. This is direct evidence for
+~25–30%; the affinity head essentially ignores it (confirmed directly by the
+pose-swap test — capstone above). This is direct evidence for
 **CounterFold spec H5** ("the cofolders have the physics features but cannot/do
 not propagate them"): the features live in the trunk/interface representation,
 so the fix should **reshape the trunk**, not just retrain an output head. It
@@ -204,8 +247,9 @@ the pose level), whereas the affinity number is not.
   floor (used above) but is not a substitute for multi-seed.
 - **Affinity is per-system**, so there is no pose-level affinity analysis; the
   faint +0.12 ΔAff↔ΔRMSD residual is the limit of what the system-level data can
-  say — the **pose-swap test** (run the affinity head on a supplied decoy pose)
-  is needed to settle whether the affinity head reads the pose at all.
+  say — now settled by the **pose-swap test** (capstone §): the affinity head is
+  intrinsically pose-insensitive (flat under a 35 Å ligand ejection, while a
+  pure-physics scorer's Vina term collapses to 0).
 - **Pocket axis only.** The ligand axis (`results_ligand.csv`, halo/meth/charge)
   has identical columns and is the next extension.
 - **Regression-to-the-mean** affects every WT→adv Δ; claims here are either
@@ -237,3 +281,7 @@ $PY analysis/casf_mutagenesis/scripts/17_conf_aff_rmsd.py
 | `analysis/casf_mutagenesis/outputs/paired_conf_aff_rmsd.csv` | per-cell WT/adv RMSD + confidence + affinity + deltas |
 | `analysis/casf_mutagenesis/outputs/q1_affinity_strata.csv` / `q2_within_case_rho.csv` / `q3_corr_matrix.csv` | per-module tables |
 | `analysis/casf_mutagenesis/figures/conf_aff_rmsd_pocket.png` | 4-panel summary figure |
+| `analysis/casf_mutagenesis/scripts/19_pose_swap_affinity.py` + `20`–`22` | pose-swap driver, panel aggregator, GNINA reference + contrast |
+| `analysis/casf_mutagenesis/scripts/23`/`24_export_*_poses.py` | export native/ejected ligand structures (crystal + predicted frame) for visual inspection |
+| `analysis/casf_mutagenesis/figures/pose_swap_affinity.png` / `pose_swap_contrast.png` | pose-swap result + Boltz-vs-GNINA contrast |
+| `docs/lab_notebook/2026-06-06_pose-swap-test.md` + `docs/superpowers/specs/2026-06-06-pose-swap-test-design.md` | pose-swap lab-notebook entry + design spec |
