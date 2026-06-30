@@ -1,0 +1,9 @@
+summary: "Three-head dissociation diagnosis closed: structure half-memorizes, confidence registers the broken pocket, affinity is intrinsically pose-blind (pose-swap Δ=-0.004 at 35 A ejection; GNINA Vina collapses 100%)."
+status: "done"
+metrics:
+  poseswap_gap_logIC50: -0.004
+  poseswap_wilcoxon_p: 0.27
+  poseswap_n: 29
+  gnina_vina_collapse: "100pct"
+  af3_confidence_n: 239
+completed_at: "2026-06-30T07:54:56-07:00"
