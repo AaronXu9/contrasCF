@@ -27,6 +27,9 @@ data/casf2016
 **/*.pyc
 **/_msa_cache/
 **/_*_work/
+# Cached RCSB mmCIFs + control reports for receptor recovery
+# (scripts/25_recover_missing_receptors.py); ~25 MB, regenerable.
+**/_rcsb_cache/
 **/_boltz_work/
 **/_af3_work/
 **/_af3_msa_work/
