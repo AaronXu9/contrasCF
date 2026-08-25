@@ -52,6 +52,16 @@ POCKET_LABELS = {
 
 # Ligand-side variant grouping (collapse halo_Br/Cl/F → "halo", chrg_* → "chrg",
 # meth_1..5 → "meth"). Keeps the bar plot readable.
+#
+# NOTE on the two charge groups: they are NOT "negative variant" vs "positive
+# variant". Both ladders amputate the SAME anionic triphosphate at the same
+# bond and differ only in the tail grafted back on (charge_swap.py:36-45):
+#   chrg-  = chrg_neu_*  anion → NEUTRAL alkyl   (charge removed)
+#   chrg+  = chrg_pos_*  anion → CATIONIC ammonium (charge flipped)
+# The WT is the anionic one; these are two rungs going the same direction away
+# from it. The neutral ladder is also the isosteric control for the cationic
+# one (rungs 2 and 3 are heavy-atom matched, 9 and 13). Legend labels must say
+# this -- the bare "chrg-/chrg+" keys read as a symmetric pos/neg dichotomy.
 LIG_GROUPS = {
     "halo":  ("halo_F_1", "halo_Cl_1", "halo_Br_1"),
     "chrg-": ("chrg_neu_methyl", "chrg_neu_ethyl", "chrg_neu_propyl"),
@@ -65,6 +75,14 @@ LIG_COLORS = {
     "chrg-": "#DD8452",
     "chrg+": "#C44E52",
     "meth":  "#55A868",
+}
+# Display labels (same pattern as ligand_mutagenesis/scripts/06_plot_affinity.py).
+LIG_LABELS = {
+    "wt":    "wt (anionic)",
+    "halo":  "halo (F/Cl/Br)",
+    "chrg-": "chrg→neutral",
+    "chrg+": "chrg→flipped (+)",
+    "meth":  "meth",
 }
 
 
@@ -279,7 +297,7 @@ def panel_b_ligand(ax) -> None:
             r, n = grouped_rate(mkey, gkey)
             rates.append(r); ns.append(n)
         bars = ax.bar(x + (i - 2) * width, rates, width,
-                      label=gkey, color=LIG_COLORS[gkey],
+                      label=LIG_LABELS[gkey], color=LIG_COLORS[gkey],
                       edgecolor="white", linewidth=0.5)
         if gkey == "wt":
             for bar, n in zip(bars, ns):
@@ -291,7 +309,8 @@ def panel_b_ligand(ax) -> None:
     ax.set_xticklabels([m[0] for m in methods], fontsize=9)
     ax.set_ylabel("Top-1 ligand RMSD < 2 Å rate")
     ax.set_title("(b) Ligand mutation — rate of placing ligand near native\n"
-                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized",
+                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized\n"
+                 "both charge bars start from the same anionic WT: →neutral removes the charge, →flipped reverses it",
                  fontsize=10)
     ax.legend(fontsize=8, loc="upper right", ncol=2, framealpha=0.95)
     ax.set_ylim(0, 1)
