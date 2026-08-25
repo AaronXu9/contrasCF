@@ -3,31 +3,31 @@
     "pdbid": "1bcu",
     "variant": "rem",
     "n_mut": 2,
-    "present": 0,
+    "present": 2,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 2,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1bcu",
     "variant": "pack",
     "n_mut": 2,
-    "present": 0,
+    "present": 2,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 2,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1bcu",
     "variant": "inv",
     "n_mut": 2,
-    "present": 0,
+    "present": 2,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 2,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1bzc",
@@ -93,61 +93,61 @@
     "pdbid": "1eby",
     "variant": "rem",
     "n_mut": 8,
-    "present": 7,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1eby",
     "variant": "pack",
     "n_mut": 8,
-    "present": 7,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1eby",
     "variant": "inv",
     "n_mut": 8,
-    "present": 7,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1g2k",
     "variant": "rem",
     "n_mut": 8,
-    "present": 5,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1g2k",
     "variant": "pack",
     "n_mut": 8,
-    "present": 5,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1g2k",
     "variant": "inv",
     "n_mut": 8,
-    "present": 5,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "1gpk",
@@ -303,31 +303,31 @@
     "pdbid": "1lpg",
     "variant": "rem",
     "n_mut": 6,
-    "present": 0,
+    "present": 6,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 6,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1lpg",
     "variant": "pack",
     "n_mut": 6,
-    "present": 0,
+    "present": 6,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 6,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1lpg",
     "variant": "inv",
     "n_mut": 6,
-    "present": 0,
+    "present": 6,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 6,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1mq6",
@@ -513,31 +513,31 @@
     "pdbid": "1oyt",
     "variant": "rem",
     "n_mut": 3,
-    "present": 0,
+    "present": 3,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 3,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1oyt",
     "variant": "pack",
     "n_mut": 3,
-    "present": 0,
+    "present": 3,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 3,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1oyt",
     "variant": "inv",
     "n_mut": 3,
-    "present": 0,
+    "present": 3,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 3,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "1p1n",
@@ -1683,31 +1683,31 @@
     "pdbid": "2qnq",
     "variant": "rem",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2qnq",
     "variant": "pack",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2qnq",
     "variant": "inv",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2r9w",
@@ -2013,61 +2013,61 @@
     "pdbid": "2wn9",
     "variant": "rem",
     "n_mut": 6,
-    "present": 2,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wn9",
     "variant": "pack",
     "n_mut": 6,
-    "present": 2,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wn9",
     "variant": "inv",
     "n_mut": 6,
-    "present": 2,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wnc",
     "variant": "rem",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wnc",
     "variant": "pack",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wnc",
     "variant": "inv",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2wtv",
@@ -2133,31 +2133,31 @@
     "pdbid": "2x00",
     "variant": "rem",
     "n_mut": 5,
-    "present": 4,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2x00",
     "variant": "pack",
     "n_mut": 5,
-    "present": 4,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2x00",
     "variant": "inv",
     "n_mut": 5,
-    "present": 4,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2xb8",
@@ -2343,31 +2343,31 @@
     "pdbid": "2xys",
     "variant": "rem",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2xys",
     "variant": "pack",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2xys",
     "variant": "inv",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2yfe",
@@ -2433,31 +2433,31 @@
     "pdbid": "2ymd",
     "variant": "rem",
     "n_mut": 6,
-    "present": 5,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2ymd",
     "variant": "pack",
     "n_mut": 6,
-    "present": 5,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2ymd",
     "variant": "inv",
     "n_mut": 6,
-    "present": 5,
+    "present": 6,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "2zb1",
@@ -2523,61 +2523,61 @@
     "pdbid": "3ag9",
     "variant": "rem",
     "n_mut": 9,
-    "present": 0,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 9,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "3ag9",
     "variant": "pack",
     "n_mut": 8,
-    "present": 0,
+    "present": 8,
     "wrong_aa": 0,
-    "not_modeled": 8,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "3ag9",
     "variant": "inv",
     "n_mut": 9,
-    "present": 0,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 9,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "3ao4",
     "variant": "rem",
     "n_mut": 3,
-    "present": 2,
+    "present": 3,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3ao4",
     "variant": "pack",
     "n_mut": 3,
-    "present": 2,
+    "present": 3,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3ao4",
     "variant": "inv",
     "n_mut": 3,
-    "present": 2,
+    "present": 3,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3b1m",
@@ -3813,61 +3813,61 @@
     "pdbid": "3n7a",
     "variant": "rem",
     "n_mut": 7,
-    "present": 6,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3n7a",
     "variant": "pack",
     "n_mut": 7,
-    "present": 6,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3n7a",
     "variant": "inv",
     "n_mut": 7,
-    "present": 6,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3n86",
     "variant": "rem",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3n86",
     "variant": "pack",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3n86",
     "variant": "inv",
     "n_mut": 9,
-    "present": 7,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3nq9",
@@ -4383,61 +4383,61 @@
     "pdbid": "3u8k",
     "variant": "rem",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u8k",
     "variant": "pack",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u8k",
     "variant": "inv",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u8n",
     "variant": "rem",
     "n_mut": 7,
-    "present": 4,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u8n",
     "variant": "pack",
     "n_mut": 7,
-    "present": 4,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u8n",
     "variant": "inv",
     "n_mut": 7,
-    "present": 4,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 3,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3u9q",
@@ -4683,61 +4683,61 @@
     "pdbid": "3utu",
     "variant": "rem",
     "n_mut": 4,
-    "present": 0,
+    "present": 4,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 4,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "3utu",
     "variant": "pack",
     "n_mut": 4,
-    "present": 0,
+    "present": 4,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 4,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "3utu",
     "variant": "inv",
     "n_mut": 4,
-    "present": 0,
+    "present": 4,
     "wrong_aa": 0,
     "not_modeled": 0,
-    "no_chain": 4,
-    "verdict": "NOCHAIN"
+    "no_chain": 0,
+    "verdict": "OK"
   },
   {
     "pdbid": "3wtj",
     "variant": "rem",
     "n_mut": 4,
-    "present": 3,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3wtj",
     "variant": "pack",
     "n_mut": 4,
-    "present": 3,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3wtj",
     "variant": "inv",
     "n_mut": 4,
-    "present": 3,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3wz8",
@@ -4773,91 +4773,91 @@
     "pdbid": "3zdg",
     "variant": "rem",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zdg",
     "variant": "pack",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zdg",
     "variant": "inv",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zso",
     "variant": "rem",
     "n_mut": 9,
-    "present": 5,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zso",
     "variant": "pack",
     "n_mut": 9,
-    "present": 5,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zso",
     "variant": "inv",
     "n_mut": 9,
-    "present": 5,
+    "present": 9,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zt2",
     "variant": "rem",
     "n_mut": 7,
-    "present": 5,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zt2",
     "variant": "pack",
     "n_mut": 7,
-    "present": 5,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "3zt2",
     "variant": "inv",
     "n_mut": 7,
-    "present": 5,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4agn",
@@ -4983,31 +4983,31 @@
     "pdbid": "4cig",
     "variant": "rem",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4cig",
     "variant": "pack",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4cig",
     "variant": "inv",
     "n_mut": 5,
-    "present": 3,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4ciw",
@@ -5553,11 +5553,11 @@
     "pdbid": "4f3c",
     "variant": "rem",
     "n_mut": 7,
-    "present": 6,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4f3c",
@@ -5573,11 +5573,11 @@
     "pdbid": "4f3c",
     "variant": "inv",
     "n_mut": 7,
-    "present": 6,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 1,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4f9w",
@@ -6363,61 +6363,61 @@
     "pdbid": "4ogj",
     "variant": "rem",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4ogj",
     "variant": "pack",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4ogj",
     "variant": "inv",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4qac",
     "variant": "rem",
     "n_mut": 7,
-    "present": 3,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4qac",
     "variant": "pack",
     "n_mut": 7,
-    "present": 3,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4qac",
     "variant": "inv",
     "n_mut": 7,
-    "present": 3,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 4,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4qd6",
@@ -6573,31 +6573,31 @@
     "pdbid": "4u4s",
     "variant": "rem",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4u4s",
     "variant": "pack",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4u4s",
     "variant": "inv",
     "n_mut": 4,
-    "present": 2,
+    "present": 4,
     "wrong_aa": 0,
-    "not_modeled": 2,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "PARTIAL"
+    "verdict": "OK"
   },
   {
     "pdbid": "4w9c",
@@ -6843,31 +6843,31 @@
     "pdbid": "5c2h",
     "variant": "rem",
     "n_mut": 7,
-    "present": 0,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 7,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "5c2h",
     "variant": "pack",
     "n_mut": 5,
-    "present": 0,
+    "present": 5,
     "wrong_aa": 0,
-    "not_modeled": 5,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "5c2h",
     "variant": "inv",
     "n_mut": 7,
-    "present": 0,
+    "present": 7,
     "wrong_aa": 0,
-    "not_modeled": 7,
+    "not_modeled": 0,
     "no_chain": 0,
-    "verdict": "ABSENT"
+    "verdict": "OK"
   },
   {
     "pdbid": "5tmn",
