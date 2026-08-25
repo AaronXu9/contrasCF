@@ -18,7 +18,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 2 | `clusters_casf2016.json` O→0 typo (`105b`/`10wh`) | low now | open — 2-char fix not applied |
 | 3 | `crystal_ligands/` corpus-wide; `$CASF` misnames the root | docs | **partly done** — map written; notebook+memory stale |
 | 4 | mutant docking receptors: AF3 provenance (4a, mild) + lost mutations (4b) | medium | measured — impact nil (p≈0.99); guard not yet added |
-| 4d | `3mss`/`4eo8` mutant spec == WT (generation no-op) | medium | **new** — check co-folding arm too |
+| 4d | `3mss`/`4eo8` mutant spec == WT (generation no-op) | low | **measured** — 2 systems only; rate impact ≤0.003; generator guard still open |
 | **4e** | **AF3+MSA outputs 1 chain for all 52 multi-chain systems** | **HIGH** | **new root cause** — also depresses AF3+MSA's own WT rate |
 | 4f | 10 unparseable `boltz.yaml` files | low | **new** |
 | 5 | 2026-08-14 map claimed lab `crystal_ligands` are symlinks | low | **partly done** — map fixed; notebook+memory stale |
@@ -357,12 +357,39 @@ these 6 cells are WT duplicates masquerading as adversarial variants. They are
 also the highest-scoring "mutant" cells in the whole set (0.222 vs 0.070), which
 is exactly the contamination direction that matters.
 
-- [ ] `[confirmed]` Find why the generator emitted no mutation for `3mss`
-      (274 aa) and `4eo8` (562 aa) — likely no pocket residue passed the
-      selection filter. Either fix, or drop both systems explicitly.
-- [ ] `[open]` Check whether the same silent no-op affects the **co-folding**
-      arm (Boltz-2 / AF3+MSA) for these systems, where a WT-duplicate "mutant"
-      would directly inflate the memorization rate that is the paper's headline.
+### Checked 2026-08-25 — scope and impact measured
+
+**Scope: exactly 2 systems, 6 cells, no wider spread.** Swept all 756 mutant
+specs via `af3.json` (parses even where `boltz.yaml` is broken, see 4f):
+only `3mss` and `4eo8` are byte-identical to WT.
+List: `analysis/casf_mutagenesis/wt_duplicate_specs.json`.
+
+**Yes, it reaches the co-folding arm**, and `4eo8` scores as memorized for both
+models — but the effect on the headline rates is negligible:
+
+| model | cell | rmsd (rem / pack / inv) | counts as memorized? |
+|---|---|---|---|
+| Boltz-2 | `3mss` | 2.15 / 2.15 / 2.15 | no (just misses) |
+| Boltz-2 | `4eo8` | 0.67 / 0.67 / 0.67 | **yes** |
+| AF3+MSA | `3mss` | 2.33 / 2.33 / 2.34 | no |
+| AF3+MSA | `4eo8` | 0.93 / 0.93 / 0.93 | **yes** |
+
+Excluding both systems moves every rate by **≤ 0.003** (Boltz-2 rem
+0.231→0.229, AF3+MSA inv 0.259→0.257). No conclusion depends on it.
+
+**Useful tell:** the RMSD is *identical across rem/pack/inv* — the signature of
+one input producing one output. That is a cheap detector for this whole class of
+silent no-op, needing no sequence comparison.
+
+- [ ] `[confirmed]` Fix the generator so it cannot silently emit a mutation-free
+      variant: raise (or mark the cell) when the rendered mutant sequence equals
+      WT. `3mss` (274 aa) and `4eo8` (562 aa) presumably had no pocket residue
+      pass the selection filter.
+- [ ] `[suggested]` Add the identical-RMSD-across-variants check to the analysis
+      as a standing guard — it catches no-op mutants without re-reading specs.
+- [ ] `[suggested]` Until fixed, exclude `3mss`/`4eo8` from memorization rates
+      and say so; the correction is ≤0.003, so this is for correctness of the
+      record rather than to change a result.
 
 ### 4c. Recommended protocol for a new engine (ICM)
 

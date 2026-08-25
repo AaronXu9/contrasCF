@@ -1,0 +1,14 @@
+{
+  "noop_cells": [
+    "3mss/rem",
+    "3mss/pack",
+    "3mss/inv",
+    "4eo8/rem",
+    "4eo8/pack",
+    "4eo8/inv"
+  ],
+  "systems": [
+    "3mss",
+    "4eo8"
+  ]
+}
