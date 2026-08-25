@@ -3,8 +3,8 @@
 Open issues found while auditing the benchmark data store. Items 2-3 are latent
 traps or documentation problems that have **not** corrupted a published result;
 **item 1 is now resolved** (30 receptors recovered, `raw/` 251 → 281).
-**Item 4 is different — it affects existing GNINA/UniDock2/SurfDock mutant
-numbers and should be treated as a correctness issue.** Verified 2026-08-20 on
+**Item 4 was the correctness issue affecting existing GNINA/UniDock2/SurfDock
+mutant numbers; 4b is now fixed and the cells rebuilt.** Verified 2026-08-20 on
 katlab + CARC; reviewed and extended 2026-08-23.
 
 Companion: [`data_store_map.md`](data_store_map.md) — the corrected data-store
@@ -17,7 +17,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 1 | 34 CASF-core systems have no receptor (HiQBind gap) | medium | **DONE** — 30 recovered from RCSB, `raw/` 251 → **281**; 3 peptide-ligand + `3f3a` excluded |
 | 2 | `clusters_casf2016.json` O→0 typo (`105b`/`10wh`) | low now | open — 2-char fix not applied |
 | 3 | `crystal_ligands/` corpus-wide; `$CASF` misnames the root | docs | **partly done** — map written; notebook+memory stale |
-| 4 | mutant docking receptors: AF3 provenance (4a, mild) + lost mutations (4b) | medium | measured — impact nil (p≈0.99); guard not yet added |
+| 4 | mutant docking receptors: AF3 provenance (4a, mild) + lost mutations (4b) | medium | **DONE (4b)** — guard added; cells rebuilt on the AF3 fix: 684/690 OK, truncation 16 → 1 (`2vw5`). 4a provenance still open |
 | 4d | `3mss`/`4eo8` mutant spec == WT (generation no-op) | low | **measured** — 2 systems only; rate impact ≤0.003; generator guard still open |
 | **4e** | **AF3+MSA outputs 1 chain for all 52 multi-chain systems** | **HIGH** | **new root cause** — also depresses AF3+MSA's own WT rate |
 | 4f | 10 unparseable `boltz.yaml` files | low | **new** |

@@ -71,18 +71,22 @@ eq "raw/ RCSB-recovered are REAL files"  30 "$recreal"
 [ -L "$LAB_REPO/data/casf2016" ]; tf "data/casf2016 is a symlink (lab)" $?
 
 # docking cells
-eq "docking wt cells"   251 "$(find $OUT -path '*/wt/docking/receptor.pdb' 2>/dev/null | wc -l)"
+# NOTE: -mindepth/-maxdepth 4 restricts to outputs/<id>/<variant>/docking/, so
+# backup trees such as outputs/_docking_prefix_backup/<id>/... are not counted.
+eq "docking wt cells"   251 "$(find $OUT -mindepth 4 -maxdepth 4 -path '*/wt/docking/receptor.pdb' 2>/dev/null | wc -l)"
 for v in rem pack inv; do
-  eq "docking $v cells"  239 "$(find $OUT -path "*/$v/docking/receptor.pdb" 2>/dev/null | wc -l)"
+  eq "docking $v cells"  239 "$(find $OUT -mindepth 4 -maxdepth 4 -path "*/$v/docking/receptor.pdb" 2>/dev/null | wc -l)"
 done
-eq "docking cells total = 968" 968 "$(find $OUT -path '*/docking/receptor.pdb' 2>/dev/null | wc -l)"
+eq "docking cells total = 968" 968 "$(find $OUT -mindepth 4 -maxdepth 4 -path '*/docking/receptor.pdb' 2>/dev/null | wc -l)"
 for e in gnina unidock2 surfdock; do
-  eq "$e output dirs = 968" 968 "$(find $OUT -maxdepth 3 -type d -name $e 2>/dev/null | wc -l)"
+  eq "$e output dirs = 968" 968 "$(find $OUT -mindepth 3 -maxdepth 3 -type d -name $e 2>/dev/null | wc -l)"
 done
-eq "outputs/ entries = 293" 293 "$(ls -1 $OUT 2>/dev/null | wc -l)"
+eq "outputs/ system dirs = 251" 251 "$(ls -1 $OUT 2>/dev/null | grep -Ec '^[0-9a-z]{4}$')"
 
 # truncated-receptor list
-EXPECT="1bcu 1lpg 1oyt 2vw5 2wn9 3n7a 3n86 3utu 4bkt 4f2w 4u4s 4w9c 4w9h 4w9i 4w9l 5c2h"
+# Was 16 systems; 0169b42 (AF3+MSA all-chains) + the docking rebuild fixed 15.
+# 2vw5 remains: the prediction drops 3 of its 4 homotetramer chains.
+EXPECT="2vw5"
 ACTUAL=$($PY - <<'EOF'
 import glob,os
 root=os.environ.get("OUT","")

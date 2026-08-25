@@ -103,16 +103,21 @@ Cell counts — **katlab**: wt 251, rem/pack/inv 239 each = **968**, matching th
 968 `gnina`/`unidock2`/`surfdock` output dirs. **CARC**: wt 251, mutants **0**
 (see divergence 5).
 
-**16 systems have truncated mutant receptors** (`< 50 %` of WT residues; 56 have
-any mismatch). Audit: `analysis/casf_mutagenesis/receptor_size_audit.json`.
+**Truncated mutant receptors — FIXED 2026-08-25, 16 → 1.** The cause was the
+AF3+MSA runner passing only the first protein chain (item 4e); `0169b42` fixed
+it and the mutant docking cells were rebuilt. `1bcu` was the archetype — input
+chains L(26)+H(257) with **both mutations on chain H**, but the predicted CIF
+held only a 26-residue chain, so the receptor was a stub carrying **no mutation
+at all**. It is now 283 CA over chains H+L, matching WT, with 2/2 mutations
+present.
 
-```
-1bcu 1lpg 1oyt 2vw5 2wn9 3n7a 3n86 3utu 4bkt 4f2w 4u4s 4w9c 4w9h 4w9i 4w9l 5c2h
-```
+Remaining: **`2vw5`** only — the prediction drops 3 of its 4 homotetramer
+chains (214 of 856 CA). Note the mutation-presence guard does *not* flag it,
+because all 8 of its mutations sit on the predicted chain A; a chain-count
+check is complementary and still open.
 
-Worst case `1bcu`: input had chains L(26)+H(257) with **both mutations on chain
-H**; the predicted CIF has only chain A = 26 residues, so the receptor is a
-26-residue stub containing **no mutation at all**.
+Audits: `receptor_size_audit.json` (sizes), `mutation_presence_audit.json`
+(per-cell verdicts — now 684 OK / 6 NOMUT / 0 ABSENT / 0 PARTIAL / 0 NOCHAIN).
 
 ## Where the two hosts diverge (6 caveats) **[EXPANDED from 3]**
 
@@ -138,7 +143,9 @@ H**; the predicted CIF has only chain A = 26 residues, so the receptor is a
    scaffolding, not results** — every docking result to date was produced on
    katlab. The 239 AF3+MSA mutant CIFs *are* on CARC, so mutant inputs can be
    regenerated in place with `10_build_mutant_docking.py` rather than rsynced
-   (but that reproduces the same 16 truncated receptors — guard first).
+   (safe as of 2026-08-25: the AF3 all-chains fix plus the build-time guard in
+   `10_build_mutant_docking.py` mean a rebuild no longer reproduces the 16
+   truncated receptors).
 6. **[NEW]** `labels/clusters_casf2016.json` contains **`105b` and `10wh`**
    (digit zero) where the real ids are **`1o5b` and `1owh`** (letter O). It is
    the only file with the corruption; the other three labels files and both data
