@@ -74,13 +74,31 @@ def _build_af3_env() -> dict:
     return env
 
 
-def _read_af3_protein_sequence(af3_json_path: Path) -> str:
-    """Extract the (single) protein sequence from a no-MSA af3.json."""
+def _read_af3_protein_chains(af3_json_path: Path) -> list[tuple[str, str]]:
+    """Every protein chain in an af3.json, as [(chain_id, sequence), ...].
+
+    Replaces an earlier `_read_af3_protein_sequence` that returned only the
+    FIRST protein and silently discarded the rest. Combined with a hardcoded
+    `chain_seqs=[("A", seq)]` at the render call, that dropped every extra
+    chain from the AF3+MSA job: 51 of 52 multi-chain systems were folded as a
+    single chain, and for `1bcu` (chains L=26 then H=257) the kept chain was
+    the 26-residue L while both mutations sat on the discarded H.
+
+    An entry's `id` may be a scalar or a list (AF3 lets one entry cover several
+    identical copies); both are expanded to one tuple per chain.
+    """
     d = json.loads(af3_json_path.read_text())
+    chains: list[tuple[str, str]] = []
     for s in d["sequences"]:
-        if "protein" in s:
-            return s["protein"]["sequence"]
-    raise RuntimeError(f"no protein in {af3_json_path}")
+        pr = s.get("protein")
+        if not pr:
+            continue
+        ids = pr["id"]
+        for cid in (ids if isinstance(ids, list) else [ids]):
+            chains.append((str(cid), pr["sequence"]))
+    if not chains:
+        raise RuntimeError(f"no protein in {af3_json_path}")
+    return chains
 
 
 def _read_ligand_smiles(af3_json_path: Path) -> str:
@@ -178,26 +196,38 @@ def main() -> int:
     ids, scope_label = _resolve_ids()
     print(f"AF3+MSA scope: {scope_label}, n_pdb={len(ids)}")
 
-    # Phase 1: ensure WT MSA is cached for each system
+    # Phase 1: ensure a WT MSA is cached for EVERY protein chain of each system.
+    # One fetch per DISTINCT sequence — a homodimer reuses a single MSA, a
+    # hetero-complex (e.g. 1bcu L/H) gets one per chain.
     print("Phase 1: fetch MSAs for WT sequences\n")
-    wt_msas: dict[str, str] = {}
+    wt_msas: dict[str, dict[str, str]] = {}          # pdbid -> {chain_id: a3m}
     for i, pdbid in enumerate(ids, 1):
         wt_json = OUTPUT_ROOT / pdbid / "wt" / "af3.json"
         if not wt_json.exists():
             print(f"  [{i}/{len(ids)}] {pdbid}: no af3.json — skip"); continue
-        wt_seq = _read_af3_protein_sequence(wt_json)
-        if len(wt_seq) > MAX_TOTAL_LENGTH:
-            print(f"  [{i}/{len(ids)}] {pdbid}: len={len(wt_seq)} > {MAX_TOTAL_LENGTH} — skip")
+        wt_chains = _read_af3_protein_chains(wt_json)
+        total_len = sum(len(s) for _, s in wt_chains)
+        if total_len > MAX_TOTAL_LENGTH:
+            print(f"  [{i}/{len(ids)}] {pdbid}: total len={total_len} "
+                  f"> {MAX_TOTAL_LENGTH} — skip")
             continue
         t0 = time.time()
+        per_chain: dict[str, str] = {}
+        by_seq: dict[str, str] = {}
         try:
-            a3m = fetch_msa_via_boltz(wt_seq, cache_dir=MSA_CACHE)
-            n_seqs = sum(1 for ln in a3m.splitlines() if ln.startswith(">"))
-            wt_msas[pdbid] = a3m
-            print(f"  [{i}/{len(ids)}] {pdbid}: MSA ok "
-                  f"(n_seqs={n_seqs}, len={len(wt_seq)}, {time.time()-t0:.1f}s)")
+            for cid, seq in wt_chains:
+                if seq not in by_seq:
+                    by_seq[seq] = fetch_msa_via_boltz(seq, cache_dir=MSA_CACHE)
+                per_chain[cid] = by_seq[seq]
         except Exception as exc:
             print(f"  [{i}/{len(ids)}] {pdbid}: MSA fetch failed: {exc}")
+            continue
+        wt_msas[pdbid] = per_chain
+        n_seqs = min(sum(1 for ln in a.splitlines() if ln.startswith(">"))
+                     for a in by_seq.values())
+        print(f"  [{i}/{len(ids)}] {pdbid}: MSA ok (chains={len(wt_chains)}, "
+              f"distinct_seqs={len(by_seq)}, n_seqs>={n_seqs}, "
+              f"total_len={total_len}, {time.time()-t0:.1f}s)")
 
     # Phase 2: AF3 with MSA for each (pdbid, variant)
     print("\nPhase 2: run AF3 with MSA for each (pdbid, variant)\n")
@@ -209,8 +239,8 @@ def main() -> int:
     runs: list[dict] = []
 
     for pdbid in ids:
-        wt_a3m = wt_msas.get(pdbid)
-        if wt_a3m is None:
+        wt_chain_msas = wt_msas.get(pdbid)
+        if wt_chain_msas is None:
             for v in VARIANTS:
                 runs.append({"pdbid": pdbid, "variant": v, "status": "skip_no_msa"})
                 n_skip += 1
@@ -231,22 +261,32 @@ def main() -> int:
                 entry["status"] = "skip_existing"
                 n_skip += 1
                 runs.append(entry); continue
-            variant_seq = _read_af3_protein_sequence(af3_json)
+            variant_chains = _read_af3_protein_chains(af3_json)
             smiles = _read_ligand_smiles(af3_json)
+            entry["n_chains"] = len(variant_chains)
             try:
-                variant_a3m = rewrite_a3m_query(wt_a3m, variant_seq)
-                variant_a3m = clean_a3m_for_af3(variant_a3m, len(variant_seq))
+                # One MSA per chain, each rewritten onto that chain's own
+                # (possibly mutated) sequence. Chains are matched to the WT by
+                # id, so a mutation on any chain reaches the model.
+                chain_msas: dict[str, str] = {}
+                for cid, seq in variant_chains:
+                    base = wt_chain_msas.get(cid)
+                    if base is None:
+                        raise RuntimeError(
+                            f"chain {cid} present in variant af3.json but not in WT")
+                    a3m = rewrite_a3m_query(base, seq)
+                    chain_msas[cid] = clean_a3m_for_af3(a3m, len(seq))
             except Exception as exc:
                 entry.update({"status": "error", "error": f"a3m rewrite: {exc}"})
                 n_fail += 1
                 runs.append(entry); continue
 
-            # Render fresh JSON with MSA
+            # Render fresh JSON with MSA — ALL protein chains, not just the first
             json_msa = v_dir / "af3_msa.json"
             render_af3(
-                name=prefix, chain_seqs=[("A", variant_seq)],
+                name=prefix, chain_seqs=variant_chains,
                 ligand_smiles=smiles, out_path=json_msa,
-                chain_msas={"A": variant_a3m},
+                chain_msas=chain_msas,
             )
             print(f"  [{n_done}/{n_total}] {prefix} ...", flush=True)
             t0 = time.time()
