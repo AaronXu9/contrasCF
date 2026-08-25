@@ -1,0 +1,592 @@
+{
+  "generated_by": "25_recover_missing_receptors.py",
+  "note": "RCSB-derived, UNREFINED receptors. The other 251 are HiQBind PDBBind-Opt refined. Stratify on `source` before pooling.",
+  "excluded_peptide_ligand": {
+    "1a30": "3-mer",
+    "3bv9": "6-mer",
+    "3uri": "8-mer"
+  },
+  "records": [
+    {
+      "pdbid": "1c5z",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/1C5Z.cif",
+      "ligand_resname": "BEN",
+      "ligand_chain": "B",
+      "ligand_seqid": "251",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "B"
+      ],
+      "n_residues": 245,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/1c5z_ligand.sdf",
+      "ideal_sdf_repaired": {
+        "het_code": "BEN",
+        "repaired_sdf": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/1c5z_ligand.sdf",
+        "backup": "/mnt/katritch_lab2/aoxu/contrasCF/analysis/casf_mutagenesis/_rcsb_cache/ideal_ligand_backup/1c5z_ligand.sdf"
+      },
+      "n_pocket_residues": 2
+    },
+    {
+      "pdbid": "2p15",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2P15.cif",
+      "ligand_resname": "EZT",
+      "ligand_chain": "A",
+      "ligand_seqid": "600",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 242,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2p15_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 6
+    },
+    {
+      "pdbid": "2vvn",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2VVN.cif",
+      "ligand_resname": "NHT",
+      "ligand_chain": "A",
+      "ligand_seqid": "1718",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 648,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2vvn_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 9
+    },
+    {
+      "pdbid": "2wca",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2WCA.cif",
+      "ligand_resname": "NP6",
+      "ligand_chain": "A",
+      "ligand_seqid": "900",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 578,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2wca_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 11
+    },
+    {
+      "pdbid": "2zcr",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2ZCR.cif",
+      "ligand_resname": "B69",
+      "ligand_chain": "A",
+      "ligand_seqid": "668",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 281,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2zcr_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 9
+    },
+    {
+      "pdbid": "2zda",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2ZDA.cif",
+      "ligand_resname": "32U",
+      "ligand_chain": "H",
+      "ligand_seqid": "1000",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "H"
+      ],
+      "n_residues": 251,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2zda_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 5
+    },
+    {
+      "pdbid": "2zy1",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/2ZY1.cif",
+      "ligand_resname": "830",
+      "ligand_chain": "A",
+      "ligand_seqid": "808",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 279,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/2zy1_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 2
+    },
+    {
+      "pdbid": "3acw",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ACW.cif",
+      "ligand_resname": "651",
+      "ligand_chain": "A",
+      "ligand_seqid": "1001",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 284,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3acw_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 3
+    },
+    {
+      "pdbid": "3arp",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ARP.cif",
+      "ligand_resname": "DEQ",
+      "ligand_chain": "A",
+      "ligand_seqid": "606",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 574,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3arp_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3arq",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ARQ.cif",
+      "ligand_resname": "DM5",
+      "ligand_chain": "A",
+      "ligand_seqid": "606",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 575,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3arq_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3aru",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ARU.cif",
+      "ligand_resname": "PNX",
+      "ligand_chain": "A",
+      "ligand_seqid": "606",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 570,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3aru_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 3
+    },
+    {
+      "pdbid": "3arv",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ARV.cif",
+      "ligand_resname": "SAU",
+      "ligand_chain": "A",
+      "ligand_seqid": "606",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 575,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3arv_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 2
+    },
+    {
+      "pdbid": "3ary",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ARY.cif",
+      "ligand_resname": "I5I",
+      "ligand_chain": "A",
+      "ligand_seqid": "606",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 575,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3ary_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 2
+    },
+    {
+      "pdbid": "3b65",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3B65.cif",
+      "ligand_resname": "3B6",
+      "ligand_chain": "A",
+      "ligand_seqid": "1",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 247,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3b65_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 6
+    },
+    {
+      "pdbid": "3dxg",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3DXG.cif",
+      "ligand_resname": "U5P",
+      "ligand_chain": "A",
+      "ligand_seqid": "125",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 124,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3dxg_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3kgp",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3KGP.cif",
+      "ligand_resname": "4AZ",
+      "ligand_chain": "A",
+      "ligand_seqid": "4069",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 239,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3kgp_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 3
+    },
+    {
+      "pdbid": "3myg",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3MYG.cif",
+      "ligand_resname": "EML",
+      "ligand_chain": "A",
+      "ligand_seqid": "1",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 252,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3myg_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3o9i",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3O9I.cif",
+      "ligand_resname": "A61",
+      "ligand_chain": "A",
+      "ligand_seqid": "200",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A",
+        "B"
+      ],
+      "n_residues": 198,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3o9i_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 7
+    },
+    {
+      "pdbid": "3prs",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3PRS.cif",
+      "ligand_resname": "RIT",
+      "ligand_chain": "A",
+      "ligand_seqid": "1001",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 330,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3prs_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 9
+    },
+    {
+      "pdbid": "3pww",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3PWW.cif",
+      "ligand_resname": "ROC",
+      "ligand_chain": "A",
+      "ligand_seqid": "1001",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 330,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3pww_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 6
+    },
+    {
+      "pdbid": "3qqs",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3QQS.cif",
+      "ligand_resname": "17C",
+      "ligand_chain": "A",
+      "ligand_seqid": "404",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A",
+        "D"
+      ],
+      "n_residues": 676,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3qqs_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3r88",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3R88.cif",
+      "ligand_resname": "14F",
+      "ligand_chain": "B",
+      "ligand_seqid": "404",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "B"
+      ],
+      "n_residues": 344,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3r88_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 5
+    },
+    {
+      "pdbid": "3twp",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3TWP.cif",
+      "ligand_resname": "SAL",
+      "ligand_chain": "A",
+      "ligand_seqid": "404",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 346,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3twp_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 3
+    },
+    {
+      "pdbid": "3uex",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3UEX.cif",
+      "ligand_resname": "STE",
+      "ligand_chain": "A",
+      "ligand_seqid": "163",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 159,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3uex_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "3zsx",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/3ZSX.cif",
+      "ligand_resname": "N44",
+      "ligand_chain": "A",
+      "ligand_seqid": "1215",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A",
+        "B"
+      ],
+      "n_residues": 298,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/3zsx_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 5
+    },
+    {
+      "pdbid": "4abg",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/4ABG.cif",
+      "ligand_resname": "91B",
+      "ligand_chain": "A",
+      "ligand_seqid": "1255",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 223,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/4abg_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 2
+    },
+    {
+      "pdbid": "4kzq",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/4KZQ.cif",
+      "ligand_resname": "DFL",
+      "ligand_chain": "A",
+      "ligand_seqid": "1201",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A",
+        "C",
+        "B"
+      ],
+      "n_residues": 370,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/4kzq_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "4kzu",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/4KZU.cif",
+      "ligand_resname": "A73",
+      "ligand_chain": "A",
+      "ligand_seqid": "1201",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A",
+        "C",
+        "B"
+      ],
+      "n_residues": 370,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/4kzu_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 4
+    },
+    {
+      "pdbid": "4owm",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/4OWM.cif",
+      "ligand_resname": "3F0",
+      "ligand_chain": "A",
+      "ligand_seqid": "404",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 346,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/4owm_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 1
+    },
+    {
+      "pdbid": "4pcs",
+      "source": "RCSB",
+      "cif_url": "https://files.rcsb.org/download/4PCS.cif",
+      "ligand_resname": "2M7",
+      "ligand_chain": "A",
+      "ligand_seqid": "505",
+      "ligand_centroid_offset_a": 0.0,
+      "ligand_heavy_count_delta": 0,
+      "chains_kept": [
+        "A"
+      ],
+      "n_residues": 439,
+      "refined": false,
+      "chain_cutoff_a": 10.0,
+      "ligand_sdf_used": "/home/aoxu/projects/VLS-Benchmark-Dataset/data/pdbbind_cleansplit/crystal_ligands/4pcs_ligand.sdf",
+      "ideal_sdf_repaired": null,
+      "n_pocket_residues": 7
+    }
+  ]
+}
