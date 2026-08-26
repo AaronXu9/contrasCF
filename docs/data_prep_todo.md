@@ -23,7 +23,9 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 4f | 10 unparseable `boltz.yaml` files | low | **new** |
 | 5 | 2026-08-14 map claimed lab `crystal_ligands` are symlinks | low | **partly done** — map fixed; notebook+memory stale |
 | 6 | figure relabel uncommitted + stale committed figure | medium | **partly done** — relabelled, not committed |
-| 7 | nothing committed; 2026-08-14 notebook entries untracked | medium | open |
+| 7 | nothing committed; 2026-08-14 notebook entries untracked | medium | partly done — session work committed on a branch |
+| 8 | engine runners: documented idempotency ≠ implemented | low | **new** |
+| 9 | SurfDock not re-run — panel (b) mixed-provenance | medium | **new** — caveat now on the figure |
 
 **Roots**
 
@@ -720,3 +722,50 @@ ids=[r[0].lower() for c in d.values() for r in c]
 print(len(d),'clusters',len(ids),'ids')
 print([i for i in ids if i in ('105b','10wh')])"
 ```
+
+---
+
+## 8. Engine runners: documented idempotency ≠ implemented idempotency
+
+**Status:** open · **Severity:** low (but it costs a silent no-op run)
+
+`08_run_gnina_variants.py` and `11_run_unidock2_variants.py` both document
+"skips cells whose `poses.sdf` already exists". They actually gate on their own
+run log:
+
+```python
+seen = {(r["system"], r["variant"]) for r in runs if r.get("status") == "ok"}
+...
+if (system, variant) in seen: continue        # the poses.sdf check never runs
+```
+
+So clearing `poses.sdf` to force a re-run does nothing — the job reports
+`new ok=0 skip=0 fail=0` and exits. Re-running a subset requires removing those
+cells from `{gnina,unidock2}_variants_casf_mutagenesis_run_log.json` as well.
+
+- [ ] `[confirmed]` Either honour `poses.sdf` (drop the log gate) or fix the
+      docstrings, and add a `--force` / `--ids` flag like the one added to
+      `10_build_mutant_docking.py`.
+
+---
+
+## 9. SurfDock cannot be re-run on this host — panel (b) is mixed-provenance
+
+**Status:** open · **Severity:** medium (a figure implies a comparison it does not have)
+
+The conda env `surfdock` is absent on katlab, so SurfDock was **not** re-run
+after the receptors were rebuilt. Its bars come from the pre-fix single-chain
+receptors while GNINA and UniDock2 come from corrected ones.
+
+Its results were briefly moved aside with the other engines during the re-run
+and had to be **restored from `_docking_prefix_backup/`** (153 dirs) — without
+that, its bar would have been computed on 183 cells instead of 234, silently.
+
+A provenance note is now printed on `overview_full.png` itself
+(`13_plot_overview.py`), so the figure cannot be read as like-for-like.
+
+- [ ] `[confirmed]` Re-run SurfDock once its env is available (or on CARC) and
+      drop the caveat.
+- [ ] `[open]` SurfDock's rate is ~0.000 across all variants, so it contributes
+      nothing to the memorization conclusion either way — decide whether it
+      earns a place in the figure at all.

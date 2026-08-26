@@ -362,6 +362,18 @@ def main() -> int:
     fig.suptitle("CASF-mutagenesis: cross-method memorization overview",
                  fontsize=13, y=0.995)
     fig.tight_layout()
+    # Provenance caveat — the panels are NOT uniformly sourced as of 2026-08-25.
+    # AF3+MSA and the GNINA/UniDock2 mutant receptors were rebuilt after the
+    # single-chain AF3 defect was fixed; SurfDock could not be re-run (its conda
+    # env is absent on this host), so its bars still come from the OLD
+    # single-chain receptors. Stating it on the figure so a reader does not take
+    # the three engines as like-for-like.
+    fig.text(0.005, -0.004,
+             "Provenance: AF3+MSA and GNINA/UniDock2 mutant receptors rebuilt "
+             "2026-08-25 after the single-chain AF3 fix; SurfDock bars remain "
+             "from the pre-fix single-chain receptors (env unavailable) — not "
+             "like-for-like with the other two engines.",
+             fontsize=7.5, color="0.35", ha="left", va="top", wrap=True)
     out = FIG_DIR / "overview_full.png"
     fig.savefig(out, dpi=170, bbox_inches="tight")
     print(f"Wrote {out}")
