@@ -153,6 +153,14 @@ def run_cell(pdbid: str, variant: str, dock_dir: Path, runner_mod) -> dict:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
+    # 13_run_surfdock.py sets these in its own main(), which we bypass by
+    # calling _run_surfdock_pipeline directly -- so set them here too or the
+    # SurfDock subprocesses inherit an environment without them.
+    os.environ["PROJECT_ROOT"] = str(DOCKSTRAT_ROOT)
+    os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
+    os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
+    os.environ["precomputed_arrays"] = SURFDOCK_PRECOMPUTED_ARRAYS
+
     outputs_root = Path(os.environ.get(
         "CONTRASCF_OUTPUTS_ROOT",
         REPO_ROOT / "analysis" / "casf_mutagenesis" / "outputs",
