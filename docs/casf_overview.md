@@ -15,7 +15,7 @@ For the deep dives, see the per-topic docs:
 | signal                            | Boltz-2          | AF3 (no MSA)    | AF3+MSA           | GNINA            | UniDock2         | SurfDock  |
 |-----------------------------------|------------------|-----------------|-------------------|------------------|------------------|-----------|
 | **Pocket mutation** (rem/pack/inv) | | | | | | |
-| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | ✓ **full CASF (n=234-244)**; SurfDock fails on these systems — see below |
+| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | ⚠️ **RETRACTED** — old cells invalid (surface-prep bug, fixed 2026-08-25); needs re-run, see below |
 | Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | confidence in SDF tags |
 | Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | n/a       |
 | Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | ✓ (top-10) |
@@ -65,47 +65,49 @@ For the figure: see
 
 ---
 
-### SurfDock CASF result (now at full-CASF scale)
+### SurfDock CASF result — RETRACTED, numbers invalid (2026-08-25)
 
-SurfDock (the diffusion-based docker) was integrated as a 4th docking
-engine via `analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py`.
-On the full CASF set: **967/968 cells (99.9%)** completed successfully.
-The 1 outlier: a single adversarial-variant cell hit a systematic
-RDKit-strict-parse bug on its cropped pocket PDB (visible in earlier
-subset20 runs as well).
+**The SurfDock numbers previously reported here were an artifact of a bug in
+our own surface-preprocessing step, not a property of SurfDock.** They have
+been withdrawn. Do not cite the SurfDock row, the SurfDock bar in
+`figures/overview_full.png`, or the earlier "SurfDock fails on CASF" reading.
 
-The actual RMSD numbers, **full CASF (n ≈ 234-244 per variant)**:
+What was reported: 967/968 cells completed, but **0/244 WT under 2 Å**, median
+6.82 Å, with the conclusion that "CASF-2016 sits outside SurfDock's training
+distribution".
 
-| variant | n   | <2 Å rate | <4 Å rate | median RMSD |
-|---------|-----|-----------|------------|--------------|
-| wt      | 244 | **0/244**  | 7%         | 6.82 Å       |
-| rem     | 234 | 0/234      | 0.9%       | 8.71 Å       |
-| pack    | 234 | 1/234      | 3.0%       | 7.75 Å       |
-| inv     | 236 | 0/236      | 2.1%       | 8.42 Å       |
+What was actually wrong: `dockstrat`'s surface helper skipped SurfDock's
+ligand-proximity **interface crop**, handing the model the entire 8 Å pocket
+surface (~1474–1833 vertices) instead of the ~60–260-vertex interface patch it
+was trained on. Full diagnosis in [`SURFDOCK_FIX.md`](../SURFDOCK_FIX.md).
 
-Inspecting individual poses (see subset20 deep-dive): SurfDock's
-diffusion drifts the ligand 4-7 Å from the crystal pocket on essentially
-every system. SurfDock's own self-reported pose RMSDs match —
-its rank-1-by-confidence is ~7 Å off the crystal, ranks 4-10 are
-catastrophic divergences (millions of Å). The other docking engines
-(GNINA, UniDock2) succeed on the same `docking/` inputs (GNINA WT 73% < 2 Å),
-so the inputs are good — SurfDock just fails on these CASF systems.
+Three things falsify the old interpretation:
 
-The 16-case CB2/MEK1 SurfDock data the user previously generated worked
-fine, so the install + pipeline are correct. The hypothesis is that
-CASF-2016 sits outside SurfDock's training distribution despite both
-deriving from PDBbind — CASF is the standard held-out benchmark, which
-SurfDock training likely excluded.
+1. The same install scores **rank-1 median 0.98 Å / 80 % under 2 Å on
+   PoseBusters** (n=428) — the model and weights were always fine.
+2. `1a0q`, *SurfDock's own shipped test system*, also failed through our
+   pipeline (7.74 Å) — so the failure was never CASF-specific.
+3. With the crop restored, the same CASF systems dock sub-Ångström:
 
-This is itself a useful finding — **SurfDock is not a reliable
-substitute for Vina-family docking on novel CASF-style binding sites**.
-The SurfDock bar in panel (a) of the cross-method figure should NOT be
-read as "all docking methods agree" — it's really "SurfDock fails on
-every variant, including WT, so its WT-vs-adversarial gap is
-ambiguous." Interestingly, the WT bar IS still slightly taller than the
-adversarial bars (7% vs 0.9-3% < 4 Å), suggesting SurfDock has *some*
-residual signal — but at this RMSD scale it's not meaningfully
-distinguishing physics from memorization.
+   | system | before | after |
+   |---|---|---|
+   | `1e66` WT | 6.80 Å | **0.32 Å** |
+   | `1gpk` WT | 5.15 Å | **0.42 Å** |
+   | `1gpn` WT | 6.65 Å | **0.46 Å** |
+   | `1h23` WT | 4.96 Å | **1.30 Å** |
+   | `1h22` WT | 7.11 Å | 3.40 Å |
+   | `1k1i` WT | 7.61 Å | 3.25 Å |
+
+   Median 6.65 → **1.30 Å**; under-2 Å rate 0/5 → **3/5**.
+
+A secondary defect was also fixed: `13_run_surfdock.py` passed
+`--ligand_to_pocket_center`, which SurfDock's own eval scripts never use and
+which replaces the trained translational prior with a deterministic delta
+(`1a0q`: 0.86 Å with it, **0.44 Å** without).
+
+**Status: all 968 SurfDock cells need regenerating** before SurfDock can appear
+in this comparison at all. Until then the cross-method matrix is a 5-method
+comparison (Boltz-2, AF3, AF3+MSA, GNINA, UniDock2).
 
 ✓ = results on disk. — = not run. n/a = method doesn't produce that signal.
 
