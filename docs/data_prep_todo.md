@@ -27,6 +27,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 8 | engine runners: documented idempotency ≠ implemented | low | **new** |
 | 9 | SurfDock not re-run — panel (b) mixed-provenance | medium | **new** — caveat now on the figure |
 | 10 | docking RMSD not symmetry-corrected — rate understated ~2.4 pts | medium | **new** — measured; see `rmsd_and_failure_handling.md` |
+| 11 | `ligand_rmsd_bestfit` is 100% NaN for atp_charge, 83% for glucose (GetBestRMS cannot match modified ligands) | medium | **new** — measured |
 
 **Roots**
 

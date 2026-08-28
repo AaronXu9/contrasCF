@@ -206,7 +206,77 @@ should be fixed before publication rather than defended.
 
 ---
 
-## 5. Practical notes
+## 5. `rdMolAlign.GetBestRMS` — do NOT use it for the docking fix
+
+`analysis/src/rmsd.py:57` (the 16-case pipeline) uses `GetBestRMS` behind a
+blanket `except Exception: return float("nan")` (`:58`). It is the obvious
+candidate for fixing §4 — and it is the wrong choice. Measured 2026-08-28:
+
+| case | result |
+|---|---|
+| same molecule, different pose (WT) | **120 / 120 ok** |
+| mutated ligand vs crystal (halo / meth / charge) | **0 / 56 ok — 100 % FAIL** |
+
+Every failure is the same exception:
+`RuntimeError: No sub-structure match found between the reference and probe`.
+`GetBestRMS` requires one molecule to embed in the other. Halogenation and
+methylation **add** atoms and charge-swap **replaces** a whole tail, so neither
+molecule contains the other and the call cannot succeed by construction.
+
+### This already shows up in the published 16-case results
+
+`analysis/results/all/results.csv`, column `ligand_rmsd_bestfit` — documented as
+"the paper's quoted metric":
+
+| family | ok | NaN | % NaN |
+|---|---|---|---|
+| `atp_charge` | 0 | 48 | **100 %** |
+| `glucose` | 8 | 40 | **83 %** |
+| `bindingsite_mek1` | 24 | 8 | 25 % |
+| `bindingsite` | 31 | 1 | 3 % |
+
+The metric is **entirely absent for the ATP-charge family and mostly absent for
+glucose** — precisely the two ligand-perturbation families that Masters et al.
+Figs 4–5 are about. The surviving `glucose` rows are the unmodified ones.
+
+The pipeline does carry a designed fallback for this (`ligand_rmsd_common`, via
+a hand-specified `COMMON_SUBSETS` SMARTS per family, `pipeline.py:80-87`), so
+the analysis is not blind — but `ligand_rmsd_bestfit` is present-yet-empty
+rather than explicitly not-applicable, and the NaN is indistinguishable from a
+genuine numerical failure.
+
+### Three failure modes, only one of which is loud
+
+1. **No substructure match** → `RuntimeError` → swallowed to NaN. 100 % on
+   modified ligands.
+2. **Unbounded enumeration.** `GetBestRMS` has no `maxMatches` cap and no
+   timeout; a highly symmetric ligand enumerates every automorphism.
+   `_matched_rmsd` caps at 200 — a bound we control.
+3. **It superposes.** `GetBestRMS` runs its own Kabsch fit, so it answers "is
+   the internal geometry right?", **not** "is the pose in the right place".
+   For §4 the poses are already in-frame and must NOT be re-superposed —
+   using it there would silently convert a placement metric into a
+   conformation metric and make every docking result look far better.
+
+### Take
+
+For TODO item 10, keep the manual enumeration and extend the existing MCS path:
+
+- `rdFMCS` already handles graphs that differ (it is why `charge_swap` works in
+  the docking arm at all) — keep it;
+- swap `GetSubstructMatch` → `GetSubstructMatches(..., uniquify=False,
+  maxMatches=200)` on the MCS pattern and take the minimum;
+- **no superposition**;
+- return an explicit status (`no_match`) rather than NaN, so a failure is
+  visible instead of quietly leaving the denominator.
+
+- [ ] `[confirmed]` Mark `ligand_rmsd_bestfit` as not-applicable (rather than
+      NaN) for families where the ligand graph changes, so "missing" is
+      distinguishable from "failed".
+
+---
+
+## 6. Practical notes
 
 - All RMSDs are **heavy-atom only**; hydrogens are stripped
   (`Chem.RemoveHs`) on both sides.
