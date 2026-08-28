@@ -26,6 +26,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 7 | nothing committed; 2026-08-14 notebook entries untracked | medium | partly done — session work committed on a branch |
 | 8 | engine runners: documented idempotency ≠ implemented | low | **new** |
 | 9 | SurfDock not re-run — panel (b) mixed-provenance | medium | **new** — caveat now on the figure |
+| 10 | docking RMSD not symmetry-corrected — rate understated ~2.4 pts | medium | **new** — measured; see `rmsd_and_failure_handling.md` |
 
 **Roots**
 
