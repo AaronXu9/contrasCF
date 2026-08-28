@@ -97,9 +97,17 @@ def load_memorization_full() -> dict[tuple[str, str], dict]:
     out: dict[tuple[str, str], dict] = {}
     with path.open() as f:
         for r in csv.DictReader(f):
+            # WT-CONDITIONED rate is primary (restricted to systems where this
+            # model solved WT). Unconditioned kept for the companion view.
+            # A blank *_wtok means the conditional is UNDEFINED (0 WT-correct
+            # systems, e.g. AF3 without MSA) -- never treat that as 0.
+            wtok = (r.get("memorization_rate_2A_wtok") or "").strip()
             out[(r["model"], r["variant"])] = {
-                "n": int(r["n_total"]),
-                "rate_2A": float(r["memorization_rate_2A"]),
+                "n": int(r["n_wtok"]) if wtok else 0,
+                "rate_2A": float(wtok) if wtok else None,
+                "n_uncond": int(r["n_total"]),
+                "rate_2A_uncond": float(r["memorization_rate_2A"]),
+                "undefined": not wtok,
             }
     return out
 
@@ -131,9 +139,13 @@ def load_docking_memorization() -> dict[tuple[str, str, str], dict]:
     out: dict[tuple[str, str, str], dict] = {}
     with path.open() as f:
         for r in csv.DictReader(f):
+            wtok = (r.get("<2_A_wtok") or "").strip()
             out[(r["module"], r["engine"], r["variant"])] = {
-                "n": int(r["n"]),
-                "rate_2A": float(r["<2_A"]),
+                "n": int(r["n_wtok"]) if wtok else 0,
+                "rate_2A": float(wtok) if wtok else None,
+                "n_uncond": int(r["n"]),
+                "rate_2A_uncond": float(r["<2_A"]),
+                "undefined": not wtok,
             }
     return out
 
@@ -189,13 +201,19 @@ def panel_a_pocket(ax) -> None:
                     ns.append(r["n"] if r else 0)
                 else:
                     r = cofold.get((model, variant))
-                    rates.append(r["rate_2A"] if r else 0.0)
+                    rates.append((r["rate_2A"] or 0.0) if r else 0.0)
                     ns.append(r["n"] if r else 0)
             else:
                 _, engine = key.split(":", 1)
                 r = dock.get(("casf", engine, variant))
-                rates.append(r["rate_2A"] if r else 0.0)
-                ns.append(r["n"] if r else 0)
+                if variant == "wt":
+                    # Conditioned WT is 1.000 by construction -- show the real
+                    # (unconditioned) WT success rate instead.
+                    rates.append(r["rate_2A_uncond"] if r else 0.0)
+                    ns.append(r["n_uncond"] if r else 0)
+                else:
+                    rates.append((r["rate_2A"] or 0.0) if r else 0.0)
+                    ns.append(r["n"] if r else 0)
         bars = ax.bar(x + (i - 1.5) * width, rates, width,
                       label=POCKET_LABELS[variant], color=POCKET_COLORS[variant],
                       edgecolor="white", linewidth=0.5)
@@ -210,8 +228,10 @@ def panel_a_pocket(ax) -> None:
     ax.set_xticklabels([m[0] for m in methods], fontsize=9)
     ax.set_ylabel("Top-1 ligand RMSD < 2 Å rate")
     ax.set_title("(a) Pocket mutation — rate of placing ligand near native\n"
-                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized",
-                 fontsize=10)
+                 "WT bar = unconditioned success ceiling (n above bar). Adversarial bars are "
+                 "WT-CONDITIONED:\nrestricted to systems that method solved on WT — "
+                 "low = recognized, high = memorized",
+                 fontsize=9)
     ax.legend(fontsize=8, loc="upper right", ncol=2, framealpha=0.95)
     ax.set_ylim(0, 1)
     ax.grid(axis="y", alpha=0.3)

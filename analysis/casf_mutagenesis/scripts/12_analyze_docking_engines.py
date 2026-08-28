@@ -80,29 +80,65 @@ def main() -> int:
         for r in rows: w.writerow(asdict(r))
     print(f"\nPer-cell results: {out_csv}")
 
-    # Aggregates per (module, engine, variant)
+    # Aggregates per (module, engine, variant).
+    #
+    # Two rates are emitted per row:
+    #   * `*_wtok`  -- WT-CONDITIONED (primary). Restricted to systems where THIS
+    #     engine placed the wild-type ligand correctly (< 2 A). Without this,
+    #     an engine is credited for "responding" on systems it simply cannot
+    #     solve, which flatters low-WT-accuracy engines. E.g. UniDock2 solves
+    #     only 57.8% of WT, and conditioning moves its adversarial rate
+    #     0.071-0.092 -> 0.104-0.141.
+    #   * the bare columns -- UNCONDITIONED companion, kept so existing
+    #     consumers and previously published numbers stay reproducible.
     import statistics as st
     by = defaultdict(list)
+    per_system = defaultdict(dict)   # (module, engine) -> {system: {variant: rmsd}}
     for r in rows:
         if r.status == "ok" and r.rmsd_a is not None:
             by[(r.module, r.engine, r.variant)].append(r.rmsd_a)
+            per_system[(r.module, r.engine)][r.system] = \
+                {**per_system[(r.module, r.engine)].get(r.system, {}), r.variant: r.rmsd_a}
+
+    # Systems whose WT cell this engine got right.
+    wt_ok = {}
+    for key, sysd in per_system.items():
+        wt_ok[key] = ({s for s, d in sysd.items() if d.get("wt") is not None and d["wt"] < 2.0},
+                      {s for s, d in sysd.items() if d.get("wt") is not None})
 
     agg_csv = REPO_ROOT / "analysis" / "casf_mutagenesis" / "outputs" / "docking_memorization.csv"
     with agg_csv.open("w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["module", "engine", "variant", "n", "<2_A", "<4_A", "median_rmsd_A"])
-        print(f"\n  {'module':<7s} {'engine':<9s} {'variant':<18s} {'n':>3s} "
-              f"{'<2Å':>5s} {'<4Å':>5s} {'median':>7s}")
+        w.writerow(["module", "engine", "variant",
+                    "n_wtok", "<2_A_wtok", "<4_A_wtok", "median_rmsd_A_wtok",
+                    "n", "<2_A", "<4_A", "median_rmsd_A",
+                    "wt_correct_systems", "wt_total_systems"])
+        print(f"\n  {'module':<7s} {'engine':<9s} {'variant':<18s} "
+              f"{'n_wtok':>6s} {'<2Å*':>5s} | {'n':>4s} {'<2Å':>5s} {'median':>7s}")
         for (module, engine, variant), vals in sorted(by.items()):
             n = len(vals)
             b2 = sum(1 for x in vals if x < 2)
             b4 = sum(1 for x in vals if x < 4)
             med = st.median(vals)
-            w.writerow([module, engine, variant, n,
-                        f"{b2/n:.3f}", f"{b4/n:.3f}", f"{med:.2f}"])
-            print(f"  {module:<7s} {engine:<9s} {variant:<18s} {n:>3d} "
-                  f"{b2/n:>5.2f} {b4/n:>5.2f} {med:>7.2f}")
-    print(f"\nAggregate: {agg_csv}")
+
+            ok_set, all_set = wt_ok.get((module, engine), (set(), set()))
+            cvals = [d[variant] for s, d in per_system[(module, engine)].items()
+                     if s in ok_set and variant in d]
+            cn = len(cvals)
+            if cn:
+                c2, c4 = sum(1 for x in cvals if x < 2), sum(1 for x in cvals if x < 4)
+                cw = [f"{cn}", f"{c2/cn:.3f}", f"{c4/cn:.3f}", f"{st.median(cvals):.2f}"]
+                cshow = f"{cn:>6d} {c2/cn:>5.2f}"
+            else:
+                # No WT-correct systems -> the conditional is undefined, not zero.
+                cw = ["0", "", "", ""]
+                cshow = f"{0:>6d} {'n/a':>5s}"
+            w.writerow([module, engine, variant] + cw +
+                       [n, f"{b2/n:.3f}", f"{b4/n:.3f}", f"{med:.2f}",
+                        len(ok_set), len(all_set)])
+            print(f"  {module:<7s} {engine:<9s} {variant:<18s} {cshow} | "
+                  f"{n:>4d} {b2/n:>5.2f} {med:>7.2f}")
+    print(f"\nAggregate: {agg_csv}   (*_wtok = WT-conditioned, primary)")
     return 0
 
 

@@ -92,17 +92,52 @@ def main() -> int:
     summary_path = OUTPUT_ROOT / f"memorization_{scope}.csv"
     with summary_path.open("w", newline="") as f:
         w = csv.writer(f)
+        # WT-CONDITIONED rate (primary) alongside the unconditioned one.
+        # Restricting to systems where THIS model placed the WT ligand correctly
+        # stops a model being credited for "responding" on systems it cannot
+        # solve at all. The effect is largest where WT accuracy is lowest --
+        # Boltz-2 solves 59% of WT, and conditioning moves its memorization
+        # rate 0.166-0.240 -> 0.257-0.368. A model with zero WT-correct systems
+        # (e.g. AF3 without MSA) has an UNDEFINED conditional, written as blank,
+        # never as 0.
+        wt_ok = {}
+        for r in rank0:
+            if r.variant == "wt" and r.status == "ok" and r.ligand_rmsd_a is not None:
+                wt_ok.setdefault(r.model, set())
+                if r.ligand_rmsd_a < 2.0:
+                    wt_ok[r.model].add(r.pdbid)
+        cond = {}
+        for r in rank0:
+            if r.variant == "wt" or r.status != "ok" or r.ligand_rmsd_a is None:
+                continue
+            if r.pdbid in wt_ok.get(r.model, set()):
+                cond.setdefault((r.model, r.variant), []).append(r.ligand_rmsd_a)
+
         w.writerow([
-            "model", "variant", "n_total",
+            "model", "variant",
+            "n_wtok", "memorization_rate_2A_wtok", "memorization_rate_4A_wtok",
+            "median_rmsd_A_wtok", "wt_correct_systems",
+            "n_total",
             "memorization_rate_2A", "ci_lo_2A", "ci_hi_2A",
             "memorization_rate_4A", "ci_lo_4A", "ci_hi_4A",
             "median_rmsd_A",
         ])
+        import statistics as _st
         for (model, variant), s in sorted(stats.items()):
             r2, lo2, hi2 = ci_2a.get((model, variant), (s.rate(2.0), 0.0, 0.0))
             r4, lo4, hi4 = ci_4a.get((model, variant), (s.rate(4.0), 0.0, 0.0))
+            cv = cond.get((model, variant), [])
+            if cv:
+                cw = [len(cv),
+                      f"{sum(1 for x in cv if x < 2.0) / len(cv):.3f}",
+                      f"{sum(1 for x in cv if x < 4.0) / len(cv):.3f}",
+                      f"{_st.median(cv):.2f}"]
+            else:
+                cw = [0, "", "", ""]
             w.writerow([
-                s.model, s.variant, s.n_total,
+                s.model, s.variant,
+                *cw, len(wt_ok.get(model, set())),
+                s.n_total,
                 f"{r2:.3f}", f"{lo2:.3f}", f"{hi2:.3f}",
                 f"{r4:.3f}", f"{lo4:.3f}", f"{hi4:.3f}",
                 f"{s.median_rmsd_a:.2f}" if s.median_rmsd_a is not None else "",
