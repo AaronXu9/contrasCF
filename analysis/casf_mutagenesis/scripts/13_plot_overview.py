@@ -294,12 +294,16 @@ def panel_b_ligand(ax) -> None:
         # docking engine
         eng = method_key.split(":", 1)[1]
         if group_key == "wt":
+            # WT bar stays UNCONDITIONED (conditioned WT is 1.000 by construction).
             r = dock.get(("ligand", eng, "wt"))
-            return (r["rate_2A"], r["n"]) if r else (0.0, 0)
+            return (r["rate_2A_uncond"], r["n_uncond"]) if r else (0.0, 0)
         ns, rates = [], []
         for v in LIG_GROUPS[group_key]:
             r = dock.get(("ligand", eng, v))
-            if not r:
+            # rate_2A is None when the conditional is UNDEFINED (no WT-correct
+            # systems for that variant) -- drop it from the weighted mean rather
+            # than folding in a spurious zero.
+            if not r or r["rate_2A"] is None or not r["n"]:
                 continue
             ns.append(r["n"])
             rates.append(r["rate_2A"])
@@ -382,17 +386,16 @@ def main() -> int:
     fig.suptitle("CASF-mutagenesis: cross-method memorization overview",
                  fontsize=13, y=0.995)
     fig.tight_layout()
-    # Provenance caveat — the panels are NOT uniformly sourced as of 2026-08-25.
-    # AF3+MSA and the GNINA/UniDock2 mutant receptors were rebuilt after the
-    # single-chain AF3 defect was fixed; SurfDock could not be re-run (its conda
-    # env is absent on this host), so its bars still come from the OLD
-    # single-chain receptors. Stating it on the figure so a reader does not take
-    # the three engines as like-for-like.
+    # Provenance. As of 2026-08-28 all three docking engines ARE like-for-like:
+    # SurfDock was re-run on the same post-fix receptors after its interface-crop
+    # bug was found, so the earlier "SurfDock is not like-for-like" caveat no
+    # longer applies and has been removed.
     fig.text(0.005, -0.004,
-             "Provenance: AF3+MSA and GNINA/UniDock2 mutant receptors rebuilt "
-             "2026-08-25 after the single-chain AF3 fix; SurfDock bars remain "
-             "from the pre-fix single-chain receptors (env unavailable) — not "
-             "like-for-like with the other two engines.",
+             "Provenance: all mutant receptors rebuilt 2026-08-25 after the single-chain "
+             "AF3 fix; SurfDock re-run 2026-08-26 on those same receptors after its "
+             "interface-crop bug (SURFDOCK_FIX.md) — the three docking engines are "
+             "like-for-like. Panel (a) adversarial bars are WT-conditioned; panels "
+             "(b)-(d) are not.",
              fontsize=7.5, color="0.35", ha="left", va="top", wrap=True)
     out = FIG_DIR / "overview_full.png"
     fig.savefig(out, dpi=170, bbox_inches="tight")
