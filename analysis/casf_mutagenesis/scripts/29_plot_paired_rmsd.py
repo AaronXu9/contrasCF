@@ -110,8 +110,15 @@ def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
     return out
 
 
-def panel(ax_hi, ax_lo, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
-    """Draw one method across a broken y-axis: ax_lo = 0-20 A, ax_hi = 20-95 A."""
+def panel(ax_hi, ax_lo, method: str, data: dict[str, list[tuple[float, float]]],
+          variants: tuple[str, ...] = VARIANTS) -> None:
+    """Draw one method across a broken y-axis: ax_lo = 0-20 A, ax_hi = 20-95 A.
+
+    `variants` restricts which mutation cases are drawn.  With a single variant
+    the panel carries one series, so the annotated rate is that variant's own
+    WT-conditioned memorization rate and matches docking_memorization.csv /
+    memorization_full.csv row-for-row.
+    """
     for ax in (ax_hi, ax_lo):
         # Shade the region conditioning discards: the method failed on WT there.
         ax.axvspan(THR, X_MAX, color="0.90", zorder=0)
@@ -129,7 +136,7 @@ def panel(ax_hi, ax_lo, method: str, data: dict[str, list[tuple[float, float]]])
     ax_hi.set_yticks([40, 70])
 
     n_wt_ok = n_mem = 0
-    for v in VARIANTS:
+    for v in variants:
         pts = data.get(v, [])
         if not pts:
             continue
@@ -160,22 +167,13 @@ def panel(ax_hi, ax_lo, method: str, data: dict[str, list[tuple[float, float]]])
     ax_hi.set_title(method, fontsize=11, pad=8)
 
 
-def main() -> int:
-    data = load_pairs()
-    order = [m for m in ("SurfDock", "surfdock", "gnina", "unidock2", "AF3+MSA", "Boltz2")
-             if m in data]
-    pretty = {"surfdock": "SurfDock", "gnina": "GNINA", "unidock2": "UniDock2",
-              "AF3+MSA": "AF3+MSA", "Boltz2": "Boltz-2"}
-    if not order:
-        print("no data found", file=sys.stderr)
-        return 1
-
+def build_figure(data, order, pretty, variants: tuple[str, ...], subtitle: str):
     ncol = len(order)
     fig, axes = plt.subplots(2, ncol, figsize=(2.9 * ncol, 4.6), squeeze=False,
                              sharex="col", gridspec_kw=dict(height_ratios=[1, 3.2],
                                                             hspace=0.06))
     for i, m in enumerate(order):
-        panel(axes[0][i], axes[1][i], pretty.get(m, m), data[m])
+        panel(axes[0][i], axes[1][i], pretty.get(m, m), data[m], variants)
     for i in range(1, ncol):
         axes[0][i].tick_params(labelleft=False)
         axes[1][i].tick_params(labelleft=False)
@@ -183,31 +181,57 @@ def main() -> int:
     for ax in axes[1]:
         ax.set_xlabel("WT ligand RMSD (Å)")
 
-    h, l = axes[1][0].get_legend_handles_labels()
-    fig.suptitle("Per-system ligand RMSD, wild-type vs mutated pocket  (top-1 pose)",
-                 fontsize=13)
+    fig.suptitle(subtitle, fontsize=13)
     fig.tight_layout()
-    # Legend then explainer, both BELOW the axes -- keeping the explainer out of
-    # the suptitle's band, which collided when it sat at the top.
-    fig.legend(h, l, loc="lower center", ncol=3, frameon=False,
-               fontsize=9, bbox_to_anchor=(0.5, -0.07))
-    fig.text(0.5, -0.155,
+    # A single-variant figure has one series per panel, so it needs no legend --
+    # the title names it (see the dataviz skill).
+    y_txt = -0.155
+    if len(variants) > 1:
+        h, l = axes[1][0].get_legend_handles_labels()
+        seen, hh, ll = set(), [], []
+        for a, b in zip(h, l):
+            if b not in seen:
+                seen.add(b); hh.append(a); ll.append(b)
+        fig.legend(hh, ll, loc="lower center", ncol=3, frameon=False,
+                   fontsize=9, bbox_to_anchor=(0.5, -0.07))
+    else:
+        y_txt = -0.10
+    fig.text(0.5, y_txt,
              "Each point is one system.  Under the horizontal line = still native on a "
              "destroyed pocket (MEMORIZED, the bad outcome); above it = ligand moved "
              "(desired).\nGrey band = the method failed on WT, so its mutant cell is "
              "uninformative — that is exactly what WT-conditioning removes.\n"
-             "y-axis is broken at 20 Å (linear in both segments) so the 10% of "
-             "points out to 92 Å are shown without squashing the 2 Å threshold; "
-             "nothing in y is clipped.\nx is pinned at 15 Å (3% of WT values, all "
-             "inside the discarded grey band, so exact position there carries no "
-             "information).",
+             "y-axis is broken at 20 Å (linear in both segments) so the 10% of points "
+             "out to 92 Å are shown without squashing the 2 Å threshold; nothing in y "
+             "is clipped.  x is pinned at 15 Å (3% of WT values, all inside the "
+             "discarded grey band).",
              ha="center", va="bottom", fontsize=8.5, color="0.3")
-    out = FIG_DIR / "paired_rmsd_wt_vs_mutant.png"
-    fig.savefig(out, dpi=170, bbox_inches="tight")
-    print(f"Wrote {out}")
-    for m in order:
-        tot = sum(len(v) for v in data[m].values())
-        print(f"  {pretty.get(m, m):9s} {tot:4d} paired points")
+    return fig
+
+
+def main() -> int:
+    data = load_pairs()
+    order = [m for m in ("surfdock", "gnina", "unidock2", "AF3+MSA", "Boltz2")
+             if m in data]
+    pretty = {"surfdock": "SurfDock", "gnina": "GNINA", "unidock2": "UniDock2",
+              "AF3+MSA": "AF3+MSA", "Boltz2": "Boltz-2"}
+    if not order:
+        print("no data found", file=sys.stderr)
+        return 1
+
+    jobs = [(VARIANTS, "paired_rmsd_wt_vs_mutant.png",
+             "Per-system ligand RMSD, wild-type vs mutated pocket  (top-1 pose)")]
+    jobs += [((v,), f"paired_rmsd_{v}.png",
+              f"Per-system ligand RMSD, wild-type vs {VARIANT_LABEL[v]}  (top-1 pose)")
+             for v in VARIANTS]
+
+    for variants, fname, subtitle in jobs:
+        fig = build_figure(data, order, pretty, variants, subtitle)
+        out = FIG_DIR / fname
+        fig.savefig(out, dpi=170, bbox_inches="tight")
+        plt.close(fig)
+        n = sum(len(data[m].get(v, [])) for m in order for v in variants)
+        print(f"Wrote {out}   ({n} points, variants={','.join(variants)})")
     return 0
 
 
