@@ -51,11 +51,15 @@ VARIANT_LABEL = {"rem": "rem (→Gly)", "pack": "pack (→Phe)", "inv": "inv (Mi
 VARIANT_COLOR = {"rem": "#0072B2", "pack": "#D55E00", "inv": "#009E73"}
 VARIANT_MARKER = {"rem": "o", "pack": "s", "inv": "^"}   # secondary encoding
 THR = 2.0
-# x is clipped hard at 4 A: WT RMSD is <2 for most systems (that is the point),
-# so an equal-aspect 0-14 x-axis spends ~85% of its width on the uninformative
-# shaded band. y keeps the full range because the mutant response is the signal.
-CLIP_X = 4.0
-CLIP_Y = 14.0
+# LOG axes, no clipping. RMSD here spans 0.085-91.6 A -- about 3 decades -- so:
+#   * a linear 0-92 axis squashes the whole decision region (0-4 A) into the
+#     bottom 4% of the plot, hiding the 2 A threshold that defines the metric;
+#   * clipping at 14 A (an earlier version of this figure) silently discarded
+#     16.2% of points -- 19% for the docking engines -- and piled them into a
+#     false band on the top edge.
+# Log keeps the 2 A lines legible AND shows every point at its true value; the
+# y=x diagonal is still a straight line. There are no zero RMSDs (min 0.085).
+LO, HI = 0.08, 100.0
 
 
 def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
@@ -103,8 +107,8 @@ def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
 
 def panel(ax, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
     # Shade the region conditioning discards: the method failed on WT there.
-    ax.axvspan(THR, CLIP_X, color="0.90", zorder=0)
-    ax.plot([0, CLIP_Y], [0, CLIP_Y], ls="--", lw=1.0, color="0.55", zorder=1)
+    ax.axvspan(THR, HI, color="0.90", zorder=0)
+    ax.plot([LO, HI], [LO, HI], ls="--", lw=1.0, color="0.55", zorder=1)
     ax.axhline(THR, lw=1.0, color="0.35", zorder=1)
     ax.axvline(THR, lw=1.0, color="0.35", zorder=1)
 
@@ -113,8 +117,8 @@ def panel(ax, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
         pts = data.get(v, [])
         if not pts:
             continue
-        x = np.clip([p[0] for p in pts], 0, CLIP_X)
-        y = np.clip([p[1] for p in pts], 0, CLIP_Y)
+        x = np.clip([p[0] for p in pts], LO, HI)
+        y = np.clip([p[1] for p in pts], LO, HI)
         ax.scatter(x, y, s=11, c=VARIANT_COLOR[v], marker=VARIANT_MARKER[v],
                    alpha=0.55, linewidths=0.3, edgecolors="white",
                    label=VARIANT_LABEL[v], zorder=3)
@@ -127,8 +131,10 @@ def panel(ax, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
             transform=ax.transAxes, va="top", ha="left", fontsize=8,
             bbox=dict(boxstyle="round,pad=0.28", fc="white", ec="0.7", lw=0.6))
     ax.set_title(method, fontsize=11)
-    ax.set_xlim(0, CLIP_X); ax.set_ylim(0, CLIP_Y)
-    ax.grid(alpha=0.25, lw=0.5)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_xlim(LO, HI); ax.set_ylim(LO, HI)
+    ax.set_aspect("equal", adjustable="box")   # equal decades: the diagonal is 45 deg
+    ax.grid(alpha=0.25, lw=0.5, which="both")
     ax.set_axisbelow(True)
 
 
@@ -164,7 +170,7 @@ def main() -> int:
              "destroyed pocket (MEMORIZED, the bad outcome); above it = ligand moved "
              "(desired).\nGrey band = the method failed on WT, so its mutant cell is "
              "uninformative — that is exactly what WT-conditioning removes.  "
-             "x clipped at 4 Å, y at 14 Å.",
+             "Log axes: RMSD spans 0.09–92 Å, so nothing is clipped.",
              ha="center", va="bottom", fontsize=8.5, color="0.3")
     out = FIG_DIR / "paired_rmsd_wt_vs_mutant.png"
     fig.savefig(out, dpi=170, bbox_inches="tight")
