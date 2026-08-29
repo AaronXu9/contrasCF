@@ -51,15 +51,20 @@ VARIANT_LABEL = {"rem": "rem (→Gly)", "pack": "pack (→Phe)", "inv": "inv (Mi
 VARIANT_COLOR = {"rem": "#0072B2", "pack": "#D55E00", "inv": "#009E73"}
 VARIANT_MARKER = {"rem": "o", "pack": "s", "inv": "^"}   # secondary encoding
 THR = 2.0
-# LOG axes, no clipping. RMSD here spans 0.085-91.6 A -- about 3 decades -- so:
-#   * a linear 0-92 axis squashes the whole decision region (0-4 A) into the
-#     bottom 4% of the plot, hiding the 2 A threshold that defines the metric;
-#   * clipping at 14 A (an earlier version of this figure) silently discarded
-#     16.2% of points -- 19% for the docking engines -- and piled them into a
-#     false band on the top edge.
-# Log keeps the 2 A lines legible AND shows every point at its true value; the
-# y=x diagonal is still a straight line. There are no zero RMSDs (min 0.085).
-LO, HI = 0.08, 100.0
+# LINEAR axes with a BROKEN y. Constraints that force this shape:
+#   * adversarial RMSD reaches 91.6 A but is 90% under 20 A, so one linear
+#     0-92 axis squashes the decision region (0-4 A) into ~4% of the height
+#     and hides the 2 A threshold that defines the metric;
+#   * clipping at 14 A (the first version of this figure) silently dropped
+#     16.2% of points and piled them into a false band on the top edge;
+#   * a log axis fixes both but compresses the high end, and readers think
+#     about RMSD linearly -- 3 vs 30 A should not look like a small step.
+# So: a tall linear 0-20 panel carrying the 2 A line and 90% of the data, and
+# a short compressed linear 20-95 panel above it for the remaining 10%. Both
+# segments are linear, nothing is clipped in y.
+Y_SPLIT = 20.0        # break point
+Y_TOP = 95.0          # above the 91.6 A max
+X_MAX = 15.0          # covers 97% of WT; the rest sits in the discarded band
 
 
 def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
@@ -105,37 +110,54 @@ def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
     return out
 
 
-def panel(ax, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
-    # Shade the region conditioning discards: the method failed on WT there.
-    ax.axvspan(THR, HI, color="0.90", zorder=0)
-    ax.plot([LO, HI], [LO, HI], ls="--", lw=1.0, color="0.55", zorder=1)
-    ax.axhline(THR, lw=1.0, color="0.35", zorder=1)
-    ax.axvline(THR, lw=1.0, color="0.35", zorder=1)
+def panel(ax_hi, ax_lo, method: str, data: dict[str, list[tuple[float, float]]]) -> None:
+    """Draw one method across a broken y-axis: ax_lo = 0-20 A, ax_hi = 20-95 A."""
+    for ax in (ax_hi, ax_lo):
+        # Shade the region conditioning discards: the method failed on WT there.
+        ax.axvspan(THR, X_MAX, color="0.90", zorder=0)
+        ax.set_xlim(0, X_MAX)
+        ax.grid(alpha=0.25, lw=0.5)
+        ax.set_axisbelow(True)
+    # Thresholds and the "mutation changed nothing" diagonal live in the lower
+    # panel; above 20 A both are off-scale or meaningless.
+    ax_lo.plot([0, Y_SPLIT], [0, Y_SPLIT], ls="--", lw=1.0, color="0.55", zorder=1)
+    ax_lo.axhline(THR, lw=1.0, color="0.35", zorder=1)
+    ax_lo.axvline(THR, lw=1.0, color="0.35", zorder=1)
+    ax_hi.axvline(THR, lw=1.0, color="0.35", zorder=1)
+    ax_lo.set_ylim(0, Y_SPLIT)
+    ax_hi.set_ylim(Y_SPLIT, Y_TOP)
+    ax_hi.set_yticks([40, 70])
 
     n_wt_ok = n_mem = 0
     for v in VARIANTS:
         pts = data.get(v, [])
         if not pts:
             continue
-        x = np.clip([p[0] for p in pts], LO, HI)
-        y = np.clip([p[1] for p in pts], LO, HI)
-        ax.scatter(x, y, s=11, c=VARIANT_COLOR[v], marker=VARIANT_MARKER[v],
-                   alpha=0.55, linewidths=0.3, edgecolors="white",
-                   label=VARIANT_LABEL[v], zorder=3)
+        # x beyond X_MAX is pinned to the edge -- those points are all inside the
+        # discarded (grey) band, where exact position carries no information.
+        x = np.clip([p[0] for p in pts], 0, X_MAX)
+        y = np.array([p[1] for p in pts])
+        for ax in (ax_hi, ax_lo):
+            ax.scatter(x, y, s=11, c=VARIANT_COLOR[v], marker=VARIANT_MARKER[v],
+                       alpha=0.55, linewidths=0.3, edgecolors="white",
+                       label=VARIANT_LABEL[v], zorder=3)
         n_wt_ok += sum(1 for a, _ in pts if a < THR)
         n_mem += sum(1 for a, b in pts if a < THR and b < THR)
 
+    # Break marks on the facing spines.
+    ax_hi.spines["bottom"].set_visible(False)
+    ax_lo.spines["top"].set_visible(False)
+    ax_hi.tick_params(bottom=False, labelbottom=False)
+    kw = dict(marker=[(-1, -0.4), (1, 0.4)], markersize=7, linestyle="none",
+              color="0.35", mec="0.35", mew=1, clip_on=False)
+    ax_hi.plot([0, 1], [0, 0], transform=ax_hi.transAxes, **kw)
+    ax_lo.plot([0, 1], [1, 1], transform=ax_lo.transAxes, **kw)
+
     rate = n_mem / n_wt_ok if n_wt_ok else float("nan")
-    ax.text(0.03, 0.97,
-            f"memorized {n_mem}/{n_wt_ok} = {rate:.3f}",
-            transform=ax.transAxes, va="top", ha="left", fontsize=8,
-            bbox=dict(boxstyle="round,pad=0.28", fc="white", ec="0.7", lw=0.6))
-    ax.set_title(method, fontsize=11)
-    ax.set_xscale("log"); ax.set_yscale("log")
-    ax.set_xlim(LO, HI); ax.set_ylim(LO, HI)
-    ax.set_aspect("equal", adjustable="box")   # equal decades: the diagonal is 45 deg
-    ax.grid(alpha=0.25, lw=0.5, which="both")
-    ax.set_axisbelow(True)
+    ax_hi.text(0.03, 0.92, f"memorized {n_mem}/{n_wt_ok} = {rate:.3f}",
+               transform=ax_hi.transAxes, va="top", ha="left", fontsize=8,
+               bbox=dict(boxstyle="round,pad=0.28", fc="white", ec="0.7", lw=0.6))
+    ax_hi.set_title(method, fontsize=11, pad=8)
 
 
 def main() -> int:
@@ -149,15 +171,19 @@ def main() -> int:
         return 1
 
     ncol = len(order)
-    fig, axes = plt.subplots(1, ncol, figsize=(2.9 * ncol, 4.2), squeeze=False,
-                             sharey=True)
-    for ax, m in zip(axes[0], order):
-        panel(ax, pretty.get(m, m), data[m])
-    axes[0][0].set_ylabel("mutant-pocket ligand RMSD (Å)")
-    for ax in axes[0]:
+    fig, axes = plt.subplots(2, ncol, figsize=(2.9 * ncol, 4.6), squeeze=False,
+                             sharex="col", gridspec_kw=dict(height_ratios=[1, 3.2],
+                                                            hspace=0.06))
+    for i, m in enumerate(order):
+        panel(axes[0][i], axes[1][i], pretty.get(m, m), data[m])
+    for i in range(1, ncol):
+        axes[0][i].tick_params(labelleft=False)
+        axes[1][i].tick_params(labelleft=False)
+    fig.supylabel("mutant-pocket ligand RMSD (Å)", fontsize=10, x=0.055)
+    for ax in axes[1]:
         ax.set_xlabel("WT ligand RMSD (Å)")
 
-    h, l = axes[0][0].get_legend_handles_labels()
+    h, l = axes[1][0].get_legend_handles_labels()
     fig.suptitle("Per-system ligand RMSD, wild-type vs mutated pocket  (top-1 pose)",
                  fontsize=13)
     fig.tight_layout()
@@ -169,8 +195,12 @@ def main() -> int:
              "Each point is one system.  Under the horizontal line = still native on a "
              "destroyed pocket (MEMORIZED, the bad outcome); above it = ligand moved "
              "(desired).\nGrey band = the method failed on WT, so its mutant cell is "
-             "uninformative — that is exactly what WT-conditioning removes.  "
-             "Log axes: RMSD spans 0.09–92 Å, so nothing is clipped.",
+             "uninformative — that is exactly what WT-conditioning removes.\n"
+             "y-axis is broken at 20 Å (linear in both segments) so the 10% of "
+             "points out to 92 Å are shown without squashing the 2 Å threshold; "
+             "nothing in y is clipped.\nx is pinned at 15 Å (3% of WT values, all "
+             "inside the discarded grey band, so exact position there carries no "
+             "information).",
              ha="center", va="bottom", fontsize=8.5, color="0.3")
     out = FIG_DIR / "paired_rmsd_wt_vs_mutant.png"
     fig.savefig(out, dpi=170, bbox_inches="tight")
