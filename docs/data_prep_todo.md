@@ -19,13 +19,13 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 3 | `crystal_ligands/` corpus-wide; `$CASF` misnames the root | docs | **partly done** — map written; notebook+memory stale |
 | 4 | mutant docking receptors: AF3 provenance (4a, mild) + lost mutations (4b) | medium | **DONE (4b)** — guard added; cells rebuilt on the AF3 fix: 684/690 OK, truncation 16 → 1 (`2vw5`). 4a provenance still open |
 | 4d | `3mss`/`4eo8` mutant spec == WT (generation no-op) | low | **measured** — 2 systems only; rate impact ≤0.003; generator guard still open |
-| **4e** | **AF3+MSA outputs 1 chain for all 52 multi-chain systems** | **HIGH** | **new root cause** — also depresses AF3+MSA's own WT rate |
+| 4e | AF3+MSA output 1 chain for all 52 multi-chain systems | was HIGH | **DONE** — root cause fixed (`06_run…:77,246`), 4 variants re-run, multi-seed confirmed (inv 0.529±0.020) |
 | 4f | 10 unparseable `boltz.yaml` files | low | **new** |
 | 5 | 2026-08-14 map claimed lab `crystal_ligands` are symlinks | low | **partly done** — map fixed; notebook+memory stale |
-| 6 | figure relabel uncommitted + stale committed figure | medium | **partly done** — relabelled, not committed |
-| 7 | nothing committed; 2026-08-14 notebook entries untracked | medium | partly done — session work committed on a branch |
+| 6 | figure relabel + stale committed figure | medium | **DONE** — relabelled, re-rendered, committed |
+| 7 | uncommitted work; 2026-08-14 notebook entries untracked | medium | **partly done** — committed on `fix/af3-multichain-and-data-audit` (not pushed); notebook entries still untracked + still contain the 2 disproved claims |
 | 8 | engine runners: documented idempotency ≠ implemented | low | **new** |
-| 9 | SurfDock not re-run — panel (b) mixed-provenance | medium | **new** — caveat now on the figure |
+| 9 | SurfDock not re-run — mixed-provenance | medium | **DONE (other session)** — interface-crop bug fixed + re-run 2026-08-26; WT 0.876 (was ~0.001), mutants 0.026–0.046; figure caveat retracted |
 | 10 | docking RMSD not symmetry-corrected — rate understated ~2.4 pts | medium | **new** — measured; see `rmsd_and_failure_handling.md` |
 | 11 | `ligand_rmsd_bestfit` is 100% NaN for atp_charge, 83% for glucose (GetBestRMS cannot match modified ligands) | medium | **new** — measured |
 
