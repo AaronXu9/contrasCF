@@ -22,7 +22,8 @@ ligand in the native pocket even under perturbations that should abolish binding
 
 **Our extension.** Three moves beyond the paper:
 
-1. **Scale** — full CASF-2016 (281 systems) instead of 16 hand-built cases.
+1. **Scale** — full CASF-2016 (251 systems run; 281 receptors available)
+   instead of 16 hand-built cases.
 2. **Breadth** — add the physics-based/docking arm (GNINA, UniDock2, SurfDock, **ICM**),
    which the paper never tested. If memorisation is a *learned-model* pathology,
    physics-based docking should not show it.
@@ -57,8 +58,14 @@ pocket **exactly on 25/25** (Jaccard 1.00). `build_system()` succeeds 30/30.
 
 Still excluded (4): `1a30`/`3bv9`/`3uri` (peptide ligands — categorical) and `3f3a`.
 
-> ⚠️ Anywhere the old doc says **n=251**, the current number is **281**. Results computed
-> before 2026-08-23 still use 251.
+> ⚠️ **The 281 is receptors, not experiments.** The recovery expanded `raw/` to 281, but
+> variants and predictions were never generated for the 30 new systems — verified
+> 2026-09-02: they have no output directories on katlab *or* CARC (CARC holds 251 system
+> dirs; 0 prediction CIFs newer than 2026-08-20). They do appear in `results_full.csv`,
+> but all 360 of their rows are `missing_cif` with no usable RMSD.
+>
+> **Report it as: 281 receptors available · 251 systems in the current experiment ·
+> 239 with mutant docking inputs.** Quoting a bare n=281 overstates what has been run.
 
 ### 2.2 Data preparation and the data store ✅
 
@@ -148,65 +155,118 @@ Binding-site residues (3.5 Å shell) are mutated in three ways, following Master
 
 ### 3.3 Methods, setup and filtering stats
 
-| method | kind | cells | completion | notes |
-|---|---|---|---|---|
-| Boltz-2 | co-folding | 229 WT-scored | ✅ | affinity + confidence heads available |
-| AF3+MSA | co-folding | 238 | ✅ | multi-chain fix + full re-run 2026-08-24; multi-seed confirmed |
-| AF3 (no MSA) | co-folding | 19 | ⚠️ | **0/19 WT-correct** — cannot enter a conditioned comparison |
-| GNINA | docking | 251 | ✅ | re-run 2026-08-25 on rebuilt receptors |
-| UniDock2 | docking | 251 | ✅ | re-run 2026-08-25 on rebuilt receptors |
-| SurfDock | docking | 249 | ✅ | 956/968 cells; 12 excluded (1.24%) |
-| **ICM** | docking | **251** | ✅ | **new** — scored 2026-09-02, see below |
+**Experiment set: 251 systems × 4 variants = 1004 cells per method.** Coverage differs by
+method, and the reasons are now characterised rather than left as bare n's.
+
+| method | kind | wt | rem | pack | inv | why short of 251 |
+|---|---|---|---|---|---|---|
+| GNINA | docking | 251 | 239 | 239 | 239 | mutant cells need an AF3 mutant CIF (251→239) |
+| UniDock2 | docking | 251 | 239 | 239 | 239 | same |
+| ICM | docking | 251 | 232 | 233 | 232 | same, plus 18–19 cells not produced |
+| SurfDock | docking | 249 | 238 | 238 | **231** | 12 documented exclusions, variant-linked (7/8 unexplained are `inv`) |
+| AF3+MSA | co-folding | 238 | 239 | 239 | 239 | 12–13 systems `missing_cif` |
+| Boltz-2 | co-folding | 229 | 229 | 229 | 229 | **the same 22 systems** `missing_cif` throughout |
+| AF3 (no MSA) | co-folding | 19 | 19 | 19 | 19 | only ever run on subset20 |
+
+**Two distinct failure modes, and neither is an analysis failure:**
+
+- **Co-folding — 100% `missing_cif`, i.e. the prediction was never generated.** It is
+  *system-level*: the same systems are absent from all four variants, so it hits WT and
+  mutant equally and does not bias the WT→mutant contrast. These are **re-runnable**.
+- **Docking — zero analysis failures.** Every produced cell scores `ok`. WT is essentially
+  complete; the deficit is *mutant-only*, because mutant docking inputs depend on the AF3
+  mutant CIF existing.
 
 **ICM (new).** Run on CARC 2026-09-01 against `docking/receptor_aligned.pdb` — the
 corrected multi-chain receptors (2026-08-25) pre-transformed into the **crystal frame**
 (verified: mean Cα distance to crystal 0.80 Å / 1.61 Å, vs 65.95 / 29.75 Å untransformed),
 so poses need no superposition. Scored with the *same* matcher as the other engines
-(`30_analyze_icm.py`) for comparability.
+(`30_analyze_icm.py`).
 
 - **948/948 cells scored, zero failures.**
 - **Parse caveat:** 228 cells (24%) fail strict RDKit sanitisation —
-  `AtomValenceException: Explicit valence for atom # 12 P, 7` — ICM writes phosphorus
-  valences RDKit rejects. Recovered by skipping only the valence check; heavy-atom counts
-  still match the crystal. The `parse_mode` column records which path each cell took.
-- **Cross-check:** our RMSD agrees with ICM's own self-reported value
-  (WT 0.685 vs 0.697; inv 0.091 vs 0.091).
-- ⏳ **251 cells lack a `FINISHED` marker** — all the WT ones. They scored fine, but clean
-  termination is unconfirmed; worth asking whether WT ran under a different script.
+  `AtomValenceException: Explicit valence for atom # 12 P, 7`. Recovered by skipping only
+  the valence check; heavy-atom counts still match the crystal. `parse_mode` records the
+  path per cell. Without it ICM's WT would read 0.651 on n=189 instead of 0.685 on n=251.
+- **Cross-check:** our RMSD tracks ICM's own self-reported value (WT 0.685 vs 0.697).
+- ⏳ 251 cells lack a `FINISHED` marker — all WT. They scored fine; clean termination
+  unconfirmed.
 
-### 3.4 Cross-method result (WT-conditioned) ✅
+**Per-system distributions, not just rates.** `29_plot_paired_rmsd.py` renders WT-vs-mutant
+scatter per method (`paired_rmsd_{rem,pack,inv}.png`): each point one system, the horizontal
+line the 2 Å memorisation threshold, and a grey band marking WT failures — which is exactly
+what WT-conditioning discards. ⏳ ICM still to be added as a sixth column.
+
+### 3.4 Cross-method result ✅
+
+#### 3.4a The fair comparison — a common system set (lead with this)
+
+Every method in a per-method table has its own denominator, and co-folding is additionally
+credited on systems where it never got the fold right. Docking is *handed* a receptor;
+co-folding must *predict* one, so a Cα filter is only definable for co-folding — a
+Cα-conditioned table is therefore still not symmetric across arms.
+
+The symmetric construction is a common-system intersection:
+
+- **Set A** — systems all six methods produced for all four variants → **n = 209**
+- **Set B** — A, plus **both** co-folding models solved WT (ligand < 2 Å **and** Cα < 2 Å)
+  → **n = 96**. In B every method is scored on identical systems and the co-folding models
+  are WT-correct by construction, so neither "different denominators" nor "credited on
+  systems it cannot solve" applies to anyone.
+
+![matched comparison](../analysis/casf_mutagenesis/figures/matched_comparison.png)
+
+| method | kind | A (n=209) | **B (n=96)** |
+|---|---|---|---|
+| SurfDock | docking | 0.037 | **0.035** |
+| UniDock2 | docking | 0.085 | **0.101** |
+| ICM | docking | 0.116 | **0.156** |
+| GNINA | docking | 0.131 | **0.163** |
+| Boltz-2 | co-folding | 0.219 | **0.333** |
+| AF3+MSA | co-folding | 0.325 | **0.420** |
+
+*(adversarial retention = fraction still within 2 Å after the pocket is destroyed; lower =
+less memorisation)*
+
+> **Tightening from A to B raises co-folding retention and leaves docking flat.** The
+> separation *widens* under the stricter, fairer test — docking **0.035–0.163** vs
+> co-folding **0.333–0.420**. That is the opposite of what a critic would predict if the
+> effect were an artifact of unequal denominators, which is why this should lead the
+> section. Cost: n=96, and that should be stated plainly — it is the price of full symmetry.
+
+#### 3.4b Per-method WT-conditioned rates (larger n, own denominators)
 
 ![cross-method conditioned](../analysis/casf_mutagenesis/figures/crossmethod_conditioned.png)
 
-**Retention** = of the systems a method solved at WT, the fraction *still* within 2 Å after
-the pocket is destroyed. Lower = less memorisation.
+Retention = of the systems a method solved at WT, the fraction still within 2 Å afterwards.
 
 | method | kind | WT ceiling | WT-correct | rem | pack | inv | **retention** |
 |---|---|---|---|---|---|---|---|
 | SurfDock | docking | 0.876 | 218/249 | 0.024 | 0.043 | 0.030 | **0.032** |
 | UniDock2 | docking | 0.578 | 145/251 | 0.141 | 0.141 | 0.104 | **0.129** |
-| **ICM** | docking | 0.685 | 172/251 | 0.133 | 0.170 | 0.114 | **0.139** |
+| ICM | docking | 0.685 | 172/251 | 0.133 | 0.170 | 0.114 | **0.139** |
 | GNINA | docking | 0.729 | 183/251 | 0.180 | 0.157 | 0.151 | **0.163** |
 | Boltz-2 | co-folding | 0.594 | 136/229 | 0.368 | 0.360 | 0.257 | **0.328** |
 | AF3+MSA | co-folding | 0.824 | 196/238 | 0.439 | 0.367 | 0.301 | **0.369** |
 | AF3 (no MSA) | co-folding | 0.000 | 0/19 | — | — | — | *undefined* |
 
-**The claim this supports.** SurfDock's WT ceiling (0.876) essentially matches AF3+MSA's
-(0.824), but its retention is **~10× lower**. So co-folding-grade accuracy on native
-structures **does not require** adversarial retention — the retention is not the price of
-the accuracy. All four docking engines cluster at 0.03–0.16; both co-folding models sit at
-0.33–0.37.
+Adding a protein-structure filter to the co-folding arm alone barely moves it — Boltz-2
+0.328 → **0.316**, AF3+MSA 0.369 → **0.368** (WT-correct 136→118 and 196→182). Co-folding
+usually gets the fold right when it gets the ligand right (WT Cα < 2 Å on 77% / 87%,
+medians 0.75 / 0.60 Å), so the filter removes few cells and they are not preferentially
+memorisers.
 
-**ICM strengthens this specifically.** It is a mature, purely physics-based commercial
-docker — the cleanest "physics baseline" in the set — and it behaves like the other
-dockers (retention 0.139), not like the co-folding models.
+**The claim.** SurfDock's WT ceiling (0.876) essentially matches AF3+MSA's (0.824) but its
+retention is ~10× lower — co-folding-grade accuracy on native structures **does not
+require** adversarial retention. **ICM strengthens this specifically:** a mature, purely
+physics-based commercial docker, the cleanest physics baseline in the set, behaving like
+the other dockers rather than like the co-folding models.
 
 > ⚠️ **Do not use the "gap" column from the update doc.** It is not computed consistently:
 > four rows use `1 − retention`, Boltz-2 alone uses `WT_uncond − retention`. Computed
-> consistently, Boltz-2's gap is **0.672**, not 0.266 — which reorders it *above* AF3+MSA.
-> The qualitative conclusion is unaffected, but the number should be fixed or dropped.
-> **Recommendation: report retention, not gap** — gap folds the WT ceiling into what is
-> supposed to be a memorisation score, which is also why ICM's gap (+0.546) misleadingly
+> consistently Boltz-2's gap is **0.672**, not 0.266, which reorders it above AF3+MSA. The
+> qualitative conclusion is unaffected. **Report retention, not gap** — gap folds the WT
+> ceiling into a memorisation score, which is also why ICM's gap (+0.546) misleadingly
 > ranks it below AF3+MSA despite far lower retention.
 
 ### 3.5 Deep dives: the three heads dissociate ✅
@@ -252,6 +312,11 @@ are single-seed. To be written once that arm is decision-grade.
 
 **New / carried from the data-prep TODO**
 - [ ] Fix or drop the inconsistent "gap" column (§3.4).
+- [ ] **Generate variants + predictions for the 30 recovered systems** so the experiment
+      actually reaches 281 (currently receptors 281 / experiment 251).
+- [ ] Re-run the 22 Boltz-2 and 12–13 AF3+MSA `missing_cif` systems — these are incomplete
+      GPU runs, not intrinsic failures, and would lift both co-folding denominators.
+- [ ] Add ICM as a sixth column to `29_plot_paired_rmsd.py`.
 - [ ] Symmetry-correct the docking matcher (≈ +2.4 points) — TODO 10.
 - [ ] `ligand_rmsd_bestfit` NaN for modified ligands — TODO 11.
 - [ ] ICM: confirm the 251 WT cells without `FINISHED`.
