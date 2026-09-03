@@ -158,24 +158,66 @@ Binding-site residues (3.5 Å shell) are mutated in three ways, following Master
 **Experiment set: 251 systems × 4 variants = 1004 cells per method.** Coverage differs by
 method, and the reasons are now characterised rather than left as bare n's.
 
-| method | kind | wt | rem | pack | inv | why short of 251 |
+| method | kind | wt | rem | pack | inv | subtractions from 251 |
 |---|---|---|---|---|---|---|
-| GNINA | docking | 251 | 239 | 239 | 239 | mutant cells need an AF3 mutant CIF (251→239) |
-| UniDock2 | docking | 251 | 239 | 239 | 239 | same |
-| ICM | docking | 251 | 232 | 233 | 232 | same, plus 18–19 cells not produced |
-| SurfDock | docking | 249 | 238 | 238 | **231** | 12 documented exclusions, variant-linked (7/8 unexplained are `inv`) |
-| AF3+MSA | co-folding | 238 | 239 | 239 | 239 | 12–13 systems `missing_cif` |
-| Boltz-2 | co-folding | 229 | 229 | 229 | 229 | **the same 22 systems** `missing_cif` throughout |
+| GNINA | docking | 251 | 239 | 239 | 239 | **B** |
+| UniDock2 | docking | 251 | 239 | 239 | 239 | **B** |
+| ICM | docking | 251 | 232 | 233 | 232 | **B** + 6–7 cells never produced |
+| SurfDock | docking | 249 | 238 | 238 | **231** | **B** + 12 documented exclusions, variant-linked |
+| AF3+MSA | co-folding | 238 | 239 | 239 | 239 | **A** (12) + `2xbv` at WT only |
+| Boltz-2 | co-folding | 229 | 229 | 229 | 229 | **A** (the same 22 throughout) |
 | AF3 (no MSA) | co-folding | 19 | 19 | 19 | 19 | only ever run on subset20 |
 
-**Two distinct failure modes, and neither is an analysis failure:**
+**Only three mechanisms produce every number above — and two of them are the same event.**
 
-- **Co-folding — 100% `missing_cif`, i.e. the prediction was never generated.** It is
-  *system-level*: the same systems are absent from all four variants, so it hits WT and
-  mutant equally and does not bias the WT→mutant contrast. These are **re-runnable**.
-- **Docking — zero analysis failures.** Every produced cell scores `ok`. WT is essentially
-  complete; the deficit is *mutant-only*, because mutant docking inputs depend on the AF3
-  mutant CIF existing.
+**A · Co-folding: the prediction was never generated (`missing_cif`).** *System-level* — the
+same systems are absent from all four variants, so it hits WT and mutant equally and cannot
+bias the WT→mutant contrast. Boltz-2: 22 systems, giving a flat 229. AF3+MSA: 12 systems,
+giving 239 — **plus one extra at WT only, `2xbv`**, which is the entire reason AF3+MSA's WT
+(238) reads *lower* than its own mutants (239). These are re-runnable; nothing failed.
+
+**B · Docking mutant arm: there is no mutant receptor to dock into.** The mutant receptor
+*is* the AF3+MSA mutant CIF, so A propagates straight into docking. Verified — the two sets
+are **identical**, not merely overlapping:
+
+```
+GNINA mutant-missing (12): 1o5b 1ps3 2c3i 3d4z 3dx1 3dx2 3ebp 3ejr 3g2n 3l7b 3syr 4eky
+AF3+MSA missing_cif  (12): 1o5b 1ps3 2c3i 3d4z 3dx1 3dx2 3ebp 3ejr 3g2n 3l7b 3syr 4eky
+```
+
+So A and B are **one root cause counted twice**: re-running those 12 AF3 predictions restores
+GNINA, UniDock2 and AF3+MSA simultaneously. Docking WT is untouched (251) because WT receptors
+come from the crystal, not from AF3.
+
+**C · Engine-specific run failures, on top of B.**
+
+- **SurfDock — 12 cells**, two documented mechanisms: 8 "0 graphs" (7 `inv`, 1 `rem`) and 4
+  MSMS-no-surface (2 `wt`, 1 `pack`, 1 `inv`). This is the **only variant-linked failure in
+  the study** and the whole reason `inv` is 231 while `rem`/`pack` are 238.
+- **ICM — 6–7 cells, mutant-only**: no output directory at all (`_icm_poses/<sys>/<v>/ICM`
+  absent) for `1z9g 3qgy 4jxs 4kz6 4tmn 5tmn` across all three mutants, plus `3ivg` in `rem`
+  and `inv` but not `pack` — which is why pack is 233 and rem/inv are 232. Of the cells that
+  *were* produced, 948/948 scored ok.
+
+**Zero analysis failures anywhere.** Every cell that exists on disk scores `ok` for every
+method. Nothing above is a metric or parsing failure.
+
+**Does any of this bias the WT→mutant contrast?** Only a failure that *correlates with
+variant* can, and almost none do: co-folding is flat across all four, docking's deficit is
+uniform across the three mutants. The one exception is SurfDock's 7 `inv` mesh failures.
+Since failures are dropped rather than penalised (`docs/rmsd_and_failure_handling.md`), we
+bound it by assuming **every** dropped cell would have been memorised:
+
+| SurfDock (WT-conditioned) | scored | dropped | retention | worst case |
+|---|---|---|---|---|
+| rem | 206 | 12 | 0.024 | 0.078 |
+| pack | 207 | 11 | 0.043 | 0.092 |
+| inv | 200 | 18 | 0.030 | **0.110** |
+
+> The **docking-vs-co-folding separation is safe** under this bound — co-folding `inv` sits at
+> 0.257–0.301, far outside it. But **SurfDock's lead over UniDock2 is not**: 0.110 worst-case
+> crosses UniDock2's 0.104, so the *within-docking* ranking should not be stated as settled
+> until the 8 "0 graphs" cells are explained.
 
 **ICM (new).** Run on CARC 2026-09-01 against `docking/receptor_aligned.pdb` — the
 corrected multi-chain receptors (2026-08-25) pre-transformed into the **crystal frame**
