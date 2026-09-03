@@ -20,7 +20,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 4 | mutant docking receptors: AF3 provenance (4a, mild) + lost mutations (4b) | medium | **DONE (4b)** — guard added; cells rebuilt on the AF3 fix: 684/690 OK, truncation 16 → 1 (`2vw5`). 4a provenance still open |
 | 4d | `3mss`/`4eo8` mutant spec == WT (generation no-op) | low | **measured** — 2 systems only; rate impact ≤0.003; generator guard still open |
 | 4e | AF3+MSA output 1 chain for all 52 multi-chain systems | was HIGH | **DONE** — root cause fixed (`06_run…:77,246`), 4 variants re-run, multi-seed confirmed (inv 0.529±0.020) |
-| 4f | 10 unparseable `boltz.yaml` files | low | **new** |
+| 4f | 10 unparseable `boltz.yaml` files | **medium** | **root-caused (2026-09-03)** — these are *exactly* Boltz-2's 10 unexplained `missing_cif` systems; the YAML predates the run. Repair + re-run → see §13a |
 | 5 | 2026-08-14 map claimed lab `crystal_ligands` are symlinks | low | **partly done** — map fixed; notebook+memory stale |
 | 6 | figure relabel + stale committed figure | medium | **DONE** — relabelled, re-rendered, committed |
 | 7 | uncommitted work; 2026-08-14 notebook entries untracked | medium | **partly done** — committed on `fix/af3-multichain-and-data-audit` (not pushed); notebook entries still untracked + still contain the 2 disproved claims |
@@ -28,6 +28,8 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 9 | SurfDock not re-run — mixed-provenance | medium | **DONE (other session)** — interface-crop bug fixed + re-run 2026-08-26; WT 0.876 (was ~0.001), mutants 0.026–0.046; figure caveat retracted |
 | 10 | docking RMSD not symmetry-corrected — rate understated ~2.4 pts | medium | **new** — measured; see `rmsd_and_failure_handling.md` |
 | 11 | `ligand_rmsd_bestfit` is 100% NaN for atp_charge, 83% for glucose (GetBestRMS cannot match modified ligands) | medium | **new** — measured |
+| 12 | docking arm never extended to the 30 recovered receptors | **medium** | **new** — docking covers 251 systems vs co-folding's 285; cross-family comparisons run on unequal denominators |
+| **13** | **complete inventory of unresolved failure cells** (every method's short `n`) | **medium** | **new — mostly root-caused.** Boltz-2's 22 fully explained (12 over an 800 aa cap + 10 = item 4f); AF3+MSA 10/13; docking mutant gap *inherits* it. **Open:** SurfDock's 8 "0 graphs", ICM's 7 unproduced, 3 AF3+MSA singletons |
 
 **Roots**
 
@@ -603,9 +605,17 @@ It also contradicts my own pre-run prediction that memorization would drop.
 `1o3f 1o5b 1uto 2y5h 2yge 3uuo 4e5w 4m0z 4x6p 5dwr` — `yaml.safe_load` raises
 (e.g. `1o3f/rem/boltz.yaml` line 8: "expected \<block end>, but found scalar").
 
-- [ ] `[open]` Determine whether Boltz-2 ever consumed these (a malformed input
-      may have silently failed) or whether the corruption post-dates the run.
-      Note `1o5b` is also the O/0-typo id from item 2.
+**ANSWERED 2026-09-03 (§13a).** Boltz-2 **never consumed them** — this list is
+*exactly* the set of Boltz-2 `missing_cif` systems not explained by the 800 aa
+length cap, so the corruption predates the run rather than post-dating it. With
+the 12 over-cap systems they account for all 22 of Boltz-2's missing systems,
+leaving no residual.
+
+- [x] `[confirmed]` Corruption predates the run; Boltz-2 produced no CIF for any
+      of the 10.
+- [ ] `[open]` Repair the 10 YAMLs and re-run Boltz-2 (40 cells). Note `1o5b` is
+      also the O/0-typo id from item 2 *and* an AF3+MSA failure — three defects
+      on one system.
 
 ---
 
@@ -771,3 +781,193 @@ A provenance note is now printed on `overview_full.png` itself
 - [ ] `[open]` SurfDock's rate is ~0.000 across all variants, so it contributes
       nothing to the memorization conclusion either way — decide whether it
       earns a place in the figure at all.
+
+## 12. Docking arm never extended to the 30 recovered receptors — OPEN
+
+Item 1 recovered 30 receptors and took `raw/` from 251 to 281, but only the
+**co-folding** arm was re-run over them. `10_build_mutant_docking.py` and the
+three engine runners (`08_`, `11_`, `14_`) were never pointed at the new ids.
+
+Verified 2026-09-03 from the result CSVs:
+
+```
+co-folding (results_full.csv)       285 systems x 4 variants
+docking    (docking_results.csv)    251 systems (wt) / 239 (mutants)
+co-folded but never docked:          34 systems
+```
+
+The 34: `1a30 1c5z 2p15 2vvn 2wca 2zcr 2zda 2zy1 3acw 3arp 3arq 3aru 3arv 3ary
+3b65 3bv9 3dxg 3f3a 3kgp 3myg 3o9i 3prs 3pww 3qqs 3r88 3twp 3uex 3uri 3zsx 4abg
+4kzq 4kzu 4owm 4pcs` — i.e. the 30 recovered plus the 4 excluded
+(3 peptide-ligand + `3f3a`), which stay excluded.
+
+**Why it matters.** Every docking-vs-co-folding statement in
+`docs/casf_overview.md` compares a 251-system denominator against a 285-system
+one. WT-conditioning does not fix this: it conditions *within* a method, so it
+narrows each method to its own solvable set but never puts the two families on
+a common system list. The recovered systems are also not a random sample — they
+are exactly the ones HiQBind dropped, so they may be systematically harder.
+
+**What closing it costs.** A rebuild of the mutant docking receptors for 30
+systems (needs the AF3-predicted mutants, which already exist) plus 30 x 4 x 3
+= 360 docking cells across GNINA / UniDock2 / SurfDock. SurfDock needs the
+`TMPDIR` redirect (see §Verification commands) or it will fill the root fs.
+
+- [open] Re-run `10_build_mutant_docking.py` over the 30 recovered ids, then
+  `08_` / `11_` / `14_` with `CONTRASCF_PDBID_FILTER`, then re-run
+  `12_analyze_docking_engines.py`.
+- [tentative] Until then, quote cross-family comparisons on the matched
+  251-system intersection rather than each method's own denominator.
+
+---
+
+## 13. Complete inventory of unresolved failure cells — READ BEFORE ANY RE-RUN
+
+**Status:** mostly root-caused 2026-09-03 · **Severity:** medium (defines every
+per-method `n`; two sub-items are silent by design)
+
+Every method's `n` falls short of 251 × 4 for a reason, and until now those
+reasons were scattered. This section is the single inventory. **Nothing here is
+an analysis failure** — every cell that exists on disk scores `ok`. The losses
+are all upstream: a prediction, a pose, or a surface was never produced.
+
+### 13-summary
+
+| method | wt | rem | pack | inv | cause | resolved? |
+|---|---|---|---|---|---|---|
+| GNINA | 251 | 239 | 239 | 239 | 13b (inherits 13a) | root-caused |
+| UniDock2 | 251 | 239 | 239 | 239 | 13b (inherits 13a) | root-caused |
+| ICM | 251 | 232 | 233 | 232 | 13b + 13d | **13d open** |
+| SurfDock | 249 | 238 | 238 | **231** | 13b + 13c | **13c open (8 cells)** |
+| AF3+MSA | 238 | 239 | 239 | 239 | 13a | 10/13 root-caused |
+| Boltz-2 | 229 | 229 | 229 | 229 | 13a | **fully root-caused** |
+| AF3 (no MSA) | 19 | 19 | 19 | 19 | only ever run on subset20 | by design |
+
+### 13a. Co-folding `missing_cif` — the prediction was never generated
+
+`missing_cif` is **100%** of co-folding loss. It is *system-level*: the same
+systems are absent from all four variants (one exception, below), so it hits WT
+and mutant equally and cannot bias a WT→mutant contrast.
+
+**Boltz-2's 22 decompose exactly, with nothing left over:**
+
+- **12 systems exceed a hard length cap** — `MAX_TOTAL_LENGTH = 800` at
+  `03_run_boltz2_subset20.py:44` (same constant at `04_run_af3_subset20.py:40`
+  and `06_run_af3_msa_subset20.py:42`). Written as an OOM guard for a 24 GB GPU.
+  These are `1ps3 2j78 2vw5 3d4z 3dx1 3dx2 3ebp 3ejr 3g2n 3l7b 3syr 4eky` — the
+  **only** 12 systems in the 251 over 800 aa. The runner prints `SKIP (len=…)`
+  and exits 0, so a sweep looks clean while silently dropping them.
+- **10 systems have an unparseable `boltz.yaml`** — `1o3f 1o5b 1uto 2y5h 2yge
+  3uuo 4e5w 4m0z 4x6p 5dwr`. **This is exactly item 4f's list**, which answers
+  4f's open question: Boltz-2 never consumed them; the malformed YAML predates
+  the run rather than post-dating it. 12 + 10 = 22. ✅
+
+**AF3+MSA's 13 are 10 explained + 3 not:**
+
+- 10 are over the 800 aa cap.
+- `1o5b` (253 aa) — MSA *was* fetched (`af3_msa.json` present for all 4) but no
+  CIF exists. Also carries the item 4f malformed YAML **and** is the item 2 O/0
+  typo id: three unrelated defects on one system.
+- `2c3i` (277 aa) — no `af3_msa.json` at `wt`, and no CIF at any variant.
+- `2xbv` (286 aa) — **`wt` only**, and its `wt` is the one variant with no
+  `af3_msa.json`. This single cell is the entire reason AF3+MSA's WT (238) reads
+  *lower* than its own mutants (239), and it is the only variant-asymmetric
+  co-folding failure in the study.
+
+- [ ] `[open]` Re-run the 12 over-cap systems with the cap raised (or on a
+      larger GPU) — see 13-cost. They are not failures; they were never
+      attempted.
+- [ ] `[open]` Repair the 10 malformed `boltz.yaml` files (closes 4f), then
+      re-run Boltz-2 on them.
+- [ ] `[open]` Diagnose `1o5b`, `2c3i`, `2xbv` individually — MSA present but no
+      CIF (`1o5b`) is a different failure from MSA absent (`2c3i`, `2xbv`).
+- [ ] `[open]` **`2j78` and `2vw5` are anomalous the other way**: both are over
+      the 800 aa cap, both are recorded `ok` for all four AF3+MSA variants, and
+      neither has an `af3_msa.json`. Verify these are genuinely MSA-conditioned
+      predictions and not no-MSA runs filed under the `AF3+MSA` label. If they
+      are no-MSA, they are contaminating that arm.
+
+### 13b. Docking mutant arm — inherits 13a, one root cause counted twice
+
+The mutant docking receptor **is** the AF3+MSA mutant CIF, so 13a propagates
+straight into docking. Verified — the sets are identical, not merely overlapping:
+
+```
+GNINA/UniDock2 mutant-missing (12): 1o5b 1ps3 2c3i 3d4z 3dx1 3dx2 3ebp 3ejr 3g2n 3l7b 3syr 4eky
+AF3+MSA missing_cif           (12): 1o5b 1ps3 2c3i 3d4z 3dx1 3dx2 3ebp 3ejr 3g2n 3l7b 3syr 4eky
+```
+
+Docking WT stays at 251 because WT receptors come from the crystal, not from
+AF3. **Fixing 13a therefore lifts AF3+MSA, GNINA and UniDock2 together** — worth
+more than it looks from any single row.
+
+### 13c. SurfDock — 12 exclusions, 8 of them unexplained
+
+Two mechanisms (`docs/casf_overview.md`): 8 cells where SurfDock builds **zero
+graphs** (7 `inv`, 1 `rem`) and 4 where **MSMS produces no surface** (2 `wt`,
+1 `pack`, 1 `inv`). Exact ids: `wt` {`1syi`,`2al5`} · `rem` {`4k77`} · `pack`
+{`1z95`} · `inv` {`1o3f`,`1p1n`,`2weg`,`3e5a`,`3n86`,`3pyy`,`4de3`,`4ih7`}.
+
+**This is the only variant-correlated failure in the study**, which makes it the
+only one that could bias a WT→mutant contrast. Bounded by assuming *every*
+dropped cell would have been memorised (failures are dropped, not penalised):
+
+| SurfDock (WT-conditioned) | scored | dropped | retention | worst case |
+|---|---|---|---|---|
+| rem | 206 | 12 | 0.024 | 0.078 |
+| pack | 207 | 11 | 0.043 | 0.092 |
+| inv | 200 | 18 | 0.030 | **0.110** |
+
+The docking-vs-co-folding separation survives this bound (co-folding `inv` is
+0.257–0.301). **SurfDock's lead over UniDock2 does not** — 0.110 crosses
+UniDock2's 0.104.
+
+- [ ] `[open]` Cause of the 8 "0 graphs" cells is unestablished. Mesh size is
+      **refuted** as the predictor (`analysis/casf_mutagenesis/mesh_census.json`:
+      failed cells span 42–158 vertices, successful ones 7–166). 7 of 8 are
+      `inv`, so it is variant-linked — that is all that is established.
+- [ ] `[tentative]` Do not state the within-docking ranking as settled until
+      these 8 are explained. The docking-vs-co-folding claim is unaffected.
+
+### 13d. ICM — 6–7 mutant cells never produced
+
+No output directory at all (`outputs/_icm_poses/<sys>/<variant>/ICM` absent) for
+`1z9g 3qgy 4jxs 4kz6 4tmn 5tmn` across all three mutant variants, plus `3ivg` in
+`rem` and `inv` but **not** `pack` — which is why pack is 233 while rem/inv are
+232. These are on top of 13b, not overlapping it. Of the cells that *were*
+produced, **948/948 scored ok**.
+
+Docking inputs exist for all of them on katlab, so the inputs are not the
+blocker. `receptor_aligned.pdb` is absent on katlab for **every** system (0/251
+at every variant) because the alignment step ran on CARC — so the katlab file
+tree cannot distinguish "never aligned" from "aligned on CARC only", and this
+must be checked on CARC.
+
+- [ ] `[open]` On CARC, check whether `receptor_aligned.pdb` exists for these 7
+      systems' mutant variants. If absent, the alignment step is the failure and
+      the fix is upstream of ICM; if present, ICM itself failed and its run log
+      is the place to look.
+- [ ] `[open]` Ask the collaborator who ran ICM (2026-09-01) for the run log —
+      we have poses but no stderr, so we cannot currently distinguish a crash
+      from a skip.
+- [ ] `[open]` `3ivg` running at `pack` but not `rem`/`inv` argues against a
+      whole-system exclusion and for a per-cell failure. Worth confirming.
+- [ ] `[open]` 251 ICM cells lack a `FINISHED` marker — **all WT**. They scored
+      fine, so this is a bookkeeping gap, not a result problem, but clean
+      termination is unconfirmed.
+
+### 13-cost
+
+| fix | cells | notes |
+|---|---|---|
+| 12 over-cap systems, 3 co-folding models | 144 | needs >24 GB GPU or a raised cap; longest is 1016 aa |
+| 10 malformed `boltz.yaml` | 40 | YAML repair first, then Boltz-2 |
+| `1o5b` / `2c3i` / `2xbv` | 9 | diagnose before re-running |
+| docking mutants unlocked by the above | up to 12 × 3 × 4 engines | free once 13a lands |
+| SurfDock 8 "0 graphs" | 8 | blocked on diagnosis; `TMPDIR` redirect required |
+| ICM 7 systems | 19 | blocked on CARC check |
+
+**Standing rule for future runs.** Both silent-loss paths — the 800 aa cap and
+the `SKIP (len=…)` exit-0 — mean a sweep that *looks* clean can be short by 12
+systems. After any co-folding sweep, diff the produced cell count against
+251 × 4 before trusting a rate.
