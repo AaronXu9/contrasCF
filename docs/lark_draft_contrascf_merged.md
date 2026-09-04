@@ -559,28 +559,142 @@ Stop detecting "interaction lost" *through the pose*. Supervise at the **interac
 *gone*, so the chemistry gate zeroes that H-bond **regardless of where the ligand sits**. No pose
 motion is required, which is precisely the failure mode that sank Route 2.
 
-Labels come from PLIP on the **crystal** WT complex — physical correctness, not "reproduce the
-generator" — and counterfactuals self-generate from crystal (remove one side chain, ligand fixed).
-Co-folded mutants are unusable as labels: they re-dock the ligand 0.8–9 Å, and an 8-system PLIP
-prototype found 38% of interactions killed but **37% of untouched contacts also broken** by pose
-noise alone.
+#### 4.4.1 Training data — self-generated counterfactuals from crystals
 
-| test | result | bar |
+**Source.** CASF-2016 **crystal** complexes: `raw/<id>/<id>_protein.pdb` +
+`crystal_ligands/<id>_ligand.sdf`. Crystal, not co-folded, so labels are *physically* correct rather
+than "reproduce the generator".
+
+**Labels.** PLIP 2.3.0 on the crystal complex → `T_wt[k, r]` ∈ {0,1}, a binary presence map over
+(interaction class `k`, pocket residue `r`). The pocket is every residue within **8 Å** of the ligand.
+
+**Counterfactuals are generated, not collected.** For each **key residue** — one carrying at least one
+side-chain-mediated interaction — build a single-residue side-chain-removal variant: keep backbone
+N/CA/C/O, drop the side chain, **hold the ligand pose fixed**. Physics then gives the label for free:
+
+- `dead` = that residue's side-chain interactions → must read 0
+- `alive` = everything else → must persist unchanged
+
+This is the design's central trick. **No mutant structures are needed and no model is in the loop** —
+the supervision comes from the chemistry of what atoms remain.
+
+> **Why co-folded mutants cannot be used as labels.** The obvious alternative — diff PLIP(WT) against
+> PLIP(co-folded mutant) — was prototyped on 8 systems and **rejected**: the co-folded mutant re-docks
+> the ligand 0.8–9.2 Å, so only **63% of untouched contacts survive** and **35% of contacts are new and
+> spurious**. The signal (median 38% of interactions killed) is the same size as the noise. Crystal
+> single-residue removal avoids the whole problem.
+
+**A labelling gotcha that had to be handled.** PLIP reports `residue_atom` as an *OpenBabel atom type*,
+not a PDB atom name, so the backbone/side-chain split needs a residue-aware map (`Nam` = backbone amide
+donor, `O2` = backbone carbonyl, `O3` = Ser/Thr/Tyr side-chain OH, `Ng+`/`N3+` = Arg/Lys side chain).
+A naive `{N, CA, C, O}` test is wrong. Asn/Gln/Asp/Glu remain ambiguous (0–2 per system) and are
+resolved against the actual PDB atom.
+
+#### 4.4.2 Architecture — a physics-shaped reader with ~40 parameters
+
+Per ligand atom `L` and pocket atom `P`, each interaction class `k` gets a **membership**:
+
+```
+memb_k(L,P) = clamp(gate_k(chem_L, chem_P), 0, 1) · exp( −(d(L,P) − μ_k)² / 2σ_k² )
+                        ↑ chemical compatibility          ↑ learnable radial window
+```
+
+- **`gate_k`** is a product of 7 boolean atom flags — `donor, acceptor, positive, negative, aromatic,
+  hydrophobic, halogen` — one rule per class over **K = 10** classes (`HBDonor`, `HBAcceptor`,
+  `Cationic`, `Anionic`, `XBDonor`, `XBAcceptor`, `PiStacking`, `CationPi`, `PiCation`, `Hydrophobic`).
+  The gates are **directional**: `HBDonor = protein_donor × ligand_acceptor`, `HBAcceptor` the reverse.
+  Desymmetrising them is what makes the two classes distinct instead of degenerate; grounding XB in the
+  halogen flag separates it from HB.
+- **`μ_k`, `log σ_k`** are the *only* typer parameters — initialised to per-class distance priors and
+  learned. **That is 2 × 10 = 20 numbers.**
+
+**The local tap** is the addition that makes interaction-level supervision possible. The original head
+pooled everything to a global `(K,3)` vector for affinity; the tap keeps the residue axis:
+
+```
+E[k, r] = Σ_{P ∈ residue r} Σ_L  memb_k(L, P)          # (K, R)
+```
+
+implemented as an `index_add_` over a pocket-atom→residue index. The global `(K,3)` affinity path is
+left unchanged, and summing `E` over `r` recovers the global evidence channel exactly — an invariant
+the unit tests assert.
+
+A second variant, `local_evidence_split`, returns `(E_sidechain, E_backbone)` by partitioning the
+contributing pocket atoms. This is what later makes the backbone/side-chain mediation analysis possible.
+
+**Evidence → probability** is a per-class affine calibrator, `logit = softplus(a_k)·E[k,r] + b_k`, with
+`softplus` enforcing `a_k ≥ 0` so **more evidence can only mean more interaction** (a monotonicity
+constraint, not a free fit), and `b_k` initialised to −1.0, i.e. a prior of "absent". That is another
+2 × 10 = 20 parameters.
+
+> **The whole trainable model is ~40 parameters.** It has no capacity to memorise a 285-system
+> benchmark; essentially all of the performance below comes from the physics-shaped inductive bias.
+> That is the strongest argument that the head is reading chemistry rather than fitting the dataset.
+
+#### 4.4.3 Loss — three terms, no pose term
+
+```
+L = λ_recover · BCE( σ(a·E_wt + b),        T_wt )              # (1) reproduce PLIP on the WT crystal
+  + λ_vanish  · BCE( σ(a·E_cf + b)[dead],  0    )              # (2) removed side chain → no interaction
+  + λ_persist · BCE( σ(a·E_cf + b)[alive], T_wt[alive] )       # (3) survivors are unchanged
+```
+
+with `λ_recover = λ_vanish = λ_persist = 1.0`. Term (1) is evaluated **once per system** on the WT;
+terms (2) and (3) are evaluated **once per key residue**, each on that residue's counterfactual.
+
+Because positives are only ~10% of cells, `recover` is class-weighted with
+`pos_weight = negatives/positives` per class, clamped to [1, 30].
+
+**There is deliberately no pose term.** Sensitivity comes from the chemistry gate, not from ligand
+motion — which is precisely the property Route 2 lacked and the reason it had a degenerate solution.
+
+#### 4.4.4 Training
+
+Head-only and fully offline: **no generative model is in the loop**, so the whole thing is testable
+without FLOWR or Boltz.
+
+| | |
+|---|---|
+| optimiser | Adam, lr **1e-2** |
+| epochs | **80** |
+| batching | one system per step (full-batch over that system's counterfactuals) |
+| split | **25% held out**, split by **complex**, not by residue — so generalisation is to unseen proteins |
+| pocket | 8 Å around the ligand |
+| scale | ≤ 60 systems, single seed |
+
+#### 4.4.5 Results
+
+| test | result | pre-registered bar |
 |---|---|---|
-| **crystal, held out** | recover-AUROC **0.955**; P(dead) **0.575 → 0.031** (~18×) on an *unchanged* pose | PASS |
+| **crystal, held out** — does it predict real interactions? | recover-AUROC **0.955** | PASS |
+| **crystal counterfactual** — does the removed interaction read off? | P(dead) **0.575 → 0.031**, ~**18×** drop, on an *unchanged* pose | PASS |
 | **transfer B** — co-folded `rem` structure | mutated 0.994 vs unmutated 0.395 → **Δ +0.599** | ≥ +0.30 ✅ |
 | **transfer A** — pose-free counterfactual on co-folded WT | mutated 0.942, control **0.000 false-positive** | ≥ +0.30 ✅ |
-| **refined A**, side-chain-mediated only | **0.993** (n=144), control 0.000 | load-bearing |
+| **refined A** — side-chain-mediated cells only | **0.993** (n=144), control 0.000 | load-bearing |
 
-The refinement matters for honesty: the headline 0.942 was **diluted by backbone survivors that
-correctly persist** — Gly keeps its backbone N/O, so backbone H-bonds *should not* die, and killing
-them would be wrong. Splitting by mediation raises the should-die rate to 0.993 and isolates the
-claim properly.
+The transfer test is the thesis check: take the head trained *only* on crystals and apply it to the
+**co-folding model's own output structures**. Metric B passes even through the re-docked-pose confound;
+metric A is the head's intended serve-time use and passes with zero false positives.
 
-**Honest negative:** class-weighted recover training did **not** sharpen absolute calibration (mean
-P on real interactions 0.559 → 0.542); present/absent evidence overlaps and an affine calibrator
-cannot separate it. It does not matter for this use — the counterfactual runs on the **relative**
-drop, not absolute confidence — but it does bound single-structure calls.
+#### 4.4.6 Analysis
+
+**The refinement cuts the right way.** The headline 0.942 was **diluted by backbone survivors that
+correctly persist** — Gly keeps its backbone N and O, so backbone H-bonds *should not* die, and killing
+them would have been the error. Splitting by mediation (`local_evidence_split`) raises the should-die
+rate to **0.993** and isolates the claim properly. A residual mixed cell remains: backbone-mediated
+interactions on mutated residues sit at 0.438 (n=16), where the hard `E_sc > E_bb` threshold is too
+crude — a continuous mediation weight is the open fix.
+
+**Honest negative — calibration did not improve.** Class-weighted `recover` training did **not** sharpen
+absolute calibration (mean P on real interactions 0.559 → 0.542). Present and absent evidence overlap,
+and an affine `a·E + b` cannot separate them. This does not affect the result — the counterfactual runs
+on the **relative** drop between `E_wt` and `E_cf`, not on absolute confidence — but it does bound the
+head to *comparative* calls and rules out using it to score a single structure in isolation.
+
+**What the ~18× drop actually demonstrates.** It is measured **on an unchanged pose**. Nothing moved;
+only the atoms present changed. That is a direct measurement of the pose-trapping robustness the design
+claims, rather than an inference from a correlation — and it is the property that neither the affinity
+head (§3.5) nor `L_pose` (§4.3) had.
 
 ### 4.5 Why this answers §3.5
 
