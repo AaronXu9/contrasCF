@@ -1,0 +1,71 @@
+{
+  "system": "3uo4",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/3uo4_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 1.018
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.749,
+        "n_ca_paired": 266,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 3.148
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 0.756,
+        "n_ca_paired": 266,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 2.784
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 0.749,
+        "n_ca_paired": 266,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 3.146
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 0.757,
+        "n_ca_paired": 266,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/wt/3uo4_wt_model_0.cif",
+        "reported_rmsd_a": 0.487
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.761,
+        "n_ca_paired": 266,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/rem/3uo4_rem_model_0.cif",
+        "reported_rmsd_a": 0.591
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 0.776,
+        "n_ca_paired": 266,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/pack/3uo4_pack_model_0.cif",
+        "reported_rmsd_a": 0.62
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 0.761,
+        "n_ca_paired": 266,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3uo4/inv/3uo4_inv_model_0.cif",
+        "reported_rmsd_a": 0.591
+      }
+    }
+  }
+}

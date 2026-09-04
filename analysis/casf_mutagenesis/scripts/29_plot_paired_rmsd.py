@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 """Per-datapoint WT-vs-mutant ligand RMSD, one panel per method.
 
+Six methods: SurfDock, UniDock2, ICM, GNINA (docking) then AF3+MSA, Boltz-2
+(co-folding), so the family boundary is a single vertical cut in the figure.
+
 Answers "what happened to *this* system when its pocket was destroyed?", which
 the aggregate bar chart (13_plot_overview.py) cannot show: a single memorization
 rate is compatible with many different per-system distributions.
@@ -72,16 +75,22 @@ def load_pairs() -> dict[str, dict[str, list[tuple[float, float]]]]:
     out: dict[str, dict[str, list[tuple[float, float]]]] = defaultdict(
         lambda: defaultdict(list))
 
-    # Docking engines: docking_results.csv is already top-1 (rank-1 pose only).
+    # Docking engines: already top-1 (rank-1 pose only). ICM lives in its own
+    # file (30_analyze_icm.py) but writes the same schema, so it merges here and
+    # is scored by the same matcher as GNINA / UniDock2 / SurfDock.
     dock: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
-    with (OUT / "docking_results.csv").open() as f:
-        for r in csv.DictReader(f):
-            if r["module"] != "casf" or r["status"] != "ok" or not r["rmsd_a"]:
-                continue
-            try:
-                dock[(r["engine"], r["system"])][r["variant"]] = float(r["rmsd_a"])
-            except ValueError:
-                continue
+    for fname in ("docking_results.csv", "icm_results.csv"):
+        path = OUT / fname
+        if not path.exists():
+            continue
+        with path.open() as f:
+            for r in csv.DictReader(f):
+                if r.get("module") != "casf" or r["status"] != "ok" or not r["rmsd_a"]:
+                    continue
+                try:
+                    dock[(r["engine"], r["system"])][r["variant"]] = float(r["rmsd_a"])
+                except ValueError:
+                    continue
     for (engine, _sys), d in dock.items():
         if "wt" not in d:
             continue
@@ -211,10 +220,11 @@ def build_figure(data, order, pretty, variants: tuple[str, ...], subtitle: str):
 
 def main() -> int:
     data = load_pairs()
-    order = [m for m in ("surfdock", "gnina", "unidock2", "AF3+MSA", "Boltz2")
+    # Docking first, then co-folding — so the family boundary is one vertical cut.
+    order = [m for m in ("surfdock", "unidock2", "icm", "gnina", "AF3+MSA", "Boltz2")
              if m in data]
     pretty = {"surfdock": "SurfDock", "gnina": "GNINA", "unidock2": "UniDock2",
-              "AF3+MSA": "AF3+MSA", "Boltz2": "Boltz-2"}
+              "icm": "ICM", "AF3+MSA": "AF3+MSA", "Boltz2": "Boltz-2"}
     if not order:
         print("no data found", file=sys.stderr)
         return 1

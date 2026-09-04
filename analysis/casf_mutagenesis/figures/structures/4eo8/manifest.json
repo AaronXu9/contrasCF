@@ -1,0 +1,71 @@
+{
+  "system": "4eo8",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/4eo8_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 0.991
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 1.2,
+        "n_ca_paired": 562,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 6.22
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 1.2,
+        "n_ca_paired": 562,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 6.221
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 1.202,
+        "n_ca_paired": 562,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 4.528
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 0.647,
+        "n_ca_paired": 562,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/wt/4eo8_wt_model_0.cif",
+        "reported_rmsd_a": 0.674
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.647,
+        "n_ca_paired": 562,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/rem/4eo8_rem_model_0.cif",
+        "reported_rmsd_a": 0.674
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 0.647,
+        "n_ca_paired": 562,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/pack/4eo8_pack_model_0.cif",
+        "reported_rmsd_a": 0.674
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 0.647,
+        "n_ca_paired": 562,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4eo8/inv/4eo8_inv_model_0.cif",
+        "reported_rmsd_a": 0.674
+      }
+    }
+  }
+}

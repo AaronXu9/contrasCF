@@ -1,0 +1,71 @@
+{
+  "system": "2fvd",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/2fvd_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 1.5
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 2.587,
+        "n_ca_paired": 286,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 4.195
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 2.851,
+        "n_ca_paired": 286,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 5.305
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 3.218,
+        "n_ca_paired": 286,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 14.664
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 2.086,
+        "n_ca_paired": 286,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/wt/2fvd_wt_model_0.cif",
+        "reported_rmsd_a": 0.412
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 2.18,
+        "n_ca_paired": 286,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/rem/2fvd_rem_model_0.cif",
+        "reported_rmsd_a": 1.554
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 2.319,
+        "n_ca_paired": 286,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/pack/2fvd_pack_model_0.cif",
+        "reported_rmsd_a": 0.58
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 2.122,
+        "n_ca_paired": 286,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/2fvd/inv/2fvd_inv_model_0.cif",
+        "reported_rmsd_a": 9.647
+      }
+    }
+  }
+}

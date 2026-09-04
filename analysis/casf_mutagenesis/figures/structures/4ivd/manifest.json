@@ -1,0 +1,71 @@
+{
+  "system": "4ivd",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/4ivd_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 1.229
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 2.309,
+        "n_ca_paired": 300,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 5.487
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 3.001,
+        "n_ca_paired": 300,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 2.694
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 3.043,
+        "n_ca_paired": 300,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 2.178
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 1.059,
+        "n_ca_paired": 300,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/wt/4ivd_wt_model_0.cif",
+        "reported_rmsd_a": 0.553
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.887,
+        "n_ca_paired": 300,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/rem/4ivd_rem_model_0.cif",
+        "reported_rmsd_a": 0.596
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 4.327,
+        "n_ca_paired": 300,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/pack/4ivd_pack_model_0.cif",
+        "reported_rmsd_a": 1.424
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 1.532,
+        "n_ca_paired": 300,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/4ivd/inv/4ivd_inv_model_0.cif",
+        "reported_rmsd_a": 0.766
+      }
+    }
+  }
+}

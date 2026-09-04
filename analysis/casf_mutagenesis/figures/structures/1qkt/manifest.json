@@ -1,0 +1,71 @@
+{
+  "system": "1qkt",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/1qkt_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 0.621
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 1.579,
+        "n_ca_paired": 248,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 4.326
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 1.907,
+        "n_ca_paired": 248,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 5.33
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 2.149,
+        "n_ca_paired": 248,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 2.307
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 1.172,
+        "n_ca_paired": 248,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/wt/1qkt_wt_model_0.cif",
+        "reported_rmsd_a": 0.436
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 1.433,
+        "n_ca_paired": 248,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/rem/1qkt_rem_model_0.cif",
+        "reported_rmsd_a": 0.475
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 1.406,
+        "n_ca_paired": 248,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/pack/1qkt_pack_model_0.cif",
+        "reported_rmsd_a": 0.879
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 1.07,
+        "n_ca_paired": 248,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/1qkt/inv/1qkt_inv_model_0.cif",
+        "reported_rmsd_a": 0.672
+      }
+    }
+  }
+}

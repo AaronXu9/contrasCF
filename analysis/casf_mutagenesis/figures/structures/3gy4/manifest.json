@@ -1,0 +1,71 @@
+{
+  "system": "3gy4",
+  "frame": "crystal",
+  "reference_ligand": "data/casf2016/crystal_ligands/3gy4_ligand.sdf",
+  "cells": {
+    "surfdock": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/wt/surfdock/poses.sdf",
+        "reported_rmsd_a": 1.072
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.162,
+        "n_ca_paired": 223,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/rem/surfdock/poses.sdf",
+        "reported_rmsd_a": 3.333
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 0.272,
+        "n_ca_paired": 223,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/pack/surfdock/poses.sdf",
+        "reported_rmsd_a": 25.909
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 0.316,
+        "n_ca_paired": 223,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/inv/surfdock/poses.sdf",
+        "reported_rmsd_a": 25.464
+      }
+    },
+    "boltz2": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 0.173,
+        "n_ca_paired": 223,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/wt/3gy4_wt_model_0.cif",
+        "reported_rmsd_a": 0.211
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 0.195,
+        "n_ca_paired": 223,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/rem/3gy4_rem_model_0.cif",
+        "reported_rmsd_a": 0.398
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 0.236,
+        "n_ca_paired": 223,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/pack/3gy4_pack_model_0.cif",
+        "reported_rmsd_a": 21.456
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 0.218,
+        "n_ca_paired": 223,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3gy4/inv/3gy4_inv_model_0.cif",
+        "reported_rmsd_a": 11.552
+      }
+    }
+  }
+}

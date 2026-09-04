@@ -237,7 +237,8 @@ so poses need no superposition. Scored with the *same* matcher as the other engi
 **Per-system distributions, not just rates.** `29_plot_paired_rmsd.py` renders WT-vs-mutant
 scatter per method (`paired_rmsd_{rem,pack,inv}.png`): each point one system, the horizontal
 line the 2 Å memorisation threshold, and a grey band marking WT failures — which is exactly
-what WT-conditioning discards. ⏳ ICM still to be added as a sixth column.
+what WT-conditioning discards. ✅ ICM added as a sixth column 2026-09-03; the figures are in
+§3.4b.
 
 ### 3.4 Cross-method result ✅
 
@@ -311,6 +312,38 @@ the other dockers rather than like the co-folding models.
 > ceiling into a memorisation score, which is also why ICM's gap (+0.546) misleadingly
 > ranks it below AF3+MSA despite far lower retention.
 
+**The same numbers per system, not pooled.** A rate is compatible with many different
+per-system distributions, so the bar chart above cannot settle whether co-folding's higher
+retention comes from a few systems or from the whole population. The paired scatter shows it
+directly — each point is one system, x = its WT RMSD, y = its RMSD once the pocket is
+destroyed:
+
+![paired rmsd, inv](../analysis/casf_mutagenesis/figures/paired_rmsd_inv.png)
+
+- **Below the horizontal line = memorised** (still native on a pocket that no longer exists —
+  the bad outcome). **Above it = the ligand moved** (desired).
+- **Grey band = the method failed on WT**, so its mutant cell is uninformative. That band is
+  exactly what WT-conditioning discards, which makes the conditioning visible rather than
+  asserted — read the rate off the unshaded column only.
+- The dashed diagonal is "the mutation changed nothing".
+- y is **broken at 20 Å**, linear in both segments, so the 10% of points out to 92 Å are shown
+  without squashing the 2 Å threshold. Nothing in y is clipped.
+
+Reading across the six panels, the difference is **population-wide, not a few outliers**: the
+docking panels are nearly empty below the 2 Å line, while AF3+MSA and Boltz-2 carry a dense
+band of points sitting on the floor at low WT RMSD. The per-panel rates are the same numbers
+as the table above (`inv`: SurfDock 6/200, UniDock2 14/135, ICM 18/158, GNINA 26/172,
+Boltz-2 35/136, AF3+MSA 59/196).
+
+> **Denominator note.** The panel denominators are *per-variant* (systems where this method
+> solved WT **and** produced this variant), so they are at or below the table's WT-correct
+> column — ICM's 158 vs 172, for instance, is the 14 WT-correct systems whose `inv` cell was
+> never produced (§3.3). The panel is the stricter, more honest count.
+
+`paired_rmsd_{rem,pack}.png` are the same figure for the other two mutation cases, and
+`paired_rmsd_wt_vs_mutant.png` overlays all three — but **quote the per-variant ones**: the
+overlaid figure's rate is pooled across variants and matches no single CSV row.
+
 ### 3.5 Deep dives: the three heads dissociate ✅
 
 *(from main doc; Q1 numbers below are the update doc's re-checked, WT-conditioned values)*
@@ -358,7 +391,8 @@ are single-seed. To be written once that arm is decision-grade.
       actually reaches 281 (currently receptors 281 / experiment 251).
 - [ ] Re-run the 22 Boltz-2 and 12–13 AF3+MSA `missing_cif` systems — these are incomplete
       GPU runs, not intrinsic failures, and would lift both co-folding denominators.
-- [ ] Add ICM as a sixth column to `29_plot_paired_rmsd.py`.
+- [x] ~~Add ICM as a sixth column to `29_plot_paired_rmsd.py`.~~ Done 2026-09-03 — all four
+      paired figures regenerated with six columns.
 - [ ] Symmetry-correct the docking matcher (≈ +2.4 points) — TODO 10.
 - [ ] `ligand_rmsd_bestfit` NaN for modified ligands — TODO 11.
 - [ ] ICM: confirm the 251 WT cells without `FINISHED`.
