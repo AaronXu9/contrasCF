@@ -193,6 +193,13 @@ def main() -> int:
     system_limit = os.environ.get("CONTRASCF_SYSTEM_LIMIT")
     system_limit = int(system_limit) if system_limit else None
     system_start = int(os.environ.get("CONTRASCF_SYSTEM_START", "0"))
+    # An explicit pdbid list is a selection, not a window: applying the
+    # array slice on top of it silently yields 0 cells and exits 0, which
+    # reads as a successful no-op and burns a queue slot. Selection wins.
+    if pdbid_filter and (system_start or system_limit):
+        print(f"  note: CONTRASCF_PDBID_FILTER is set, so ignoring "
+              f"system_start={system_start} / system_limit={system_limit}")
+        system_start, system_limit = 0, None
 
     print(f"SurfDock variant runner")
     print(f"  outputs_root:    {outputs_root}")
