@@ -41,7 +41,18 @@ NUM_RECYCLES = 10
 TIMEOUT_S = 3600
 MAX_TOTAL_LENGTH = 800
 
-MSA_CACHE = OUTPUT_ROOT / "_msa_cache"
+# Which outputs tree to walk. Default = the binding-site (casf) module, so
+# protein-arm behaviour is unchanged when the env var is unset. Point it at
+# analysis/ligand_mutagenesis/outputs to drive the ligand arm — the same
+# contract 08_/11_/14_ already honour.
+OUTPUTS_ROOT = Path(os.environ.get("CONTRASCF_OUTPUTS_ROOT", str(OUTPUT_ROOT)))
+
+# The MSA cache stays anchored to the casf tree even when OUTPUTS_ROOT is
+# overridden, and that is deliberate: the ligand arm perturbs the LIGAND, so
+# its receptor sequences are identical to the binding-site arm's and every
+# a3m already fetched there is reusable. Override with CONTRASCF_MSA_CACHE.
+MSA_CACHE = Path(os.environ.get("CONTRASCF_MSA_CACHE",
+                                str(OUTPUT_ROOT / "_msa_cache")))
 
 
 def _build_af3_env() -> dict:
@@ -185,11 +196,37 @@ def _resolve_ids() -> tuple[list[str], str]:
     scope = os.environ.get("CONTRASCF_SCOPE", "subset20")
     if scope == "full":
         ids = json.loads(SPLIT_JSON.read_text())["casf2016"]
+    elif scope == "disk":
+        # Discover systems from OUTPUTS_ROOT itself. Required for the ligand
+        # arm, whose system list comes from its build manifest rather than a
+        # CASF label file, and whose per-system variant set is dynamic.
+        ids = sorted(
+            q.parent.parent.name
+            for q in OUTPUTS_ROOT.glob("*/wt/af3.json")
+            if not q.parent.parent.name.startswith("_")
+        )
     else:
         ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
     start = int(os.environ.get("CONTRASCF_START", "0"))
     end = int(os.environ.get("CONTRASCF_END", str(len(ids))))
     return ids[start:end], f"{scope}[{start}:{end}]"
+
+
+def _variants_for(pdbid: str) -> list[str]:
+    """Variant names for one system.
+
+    The binding-site arm has a fixed 4-tuple (wt/rem/pack/inv). The ligand
+    arm's set is dynamic per system — halo_*/meth_*/chrg_* exist only where
+    the ligand carries the matching functional group — so under
+    CONTRASCF_SCOPE=disk we read it off disk instead. `wt` is forced first so
+    the MSA-bearing reference is folded before the variants that reuse it.
+    """
+    if os.environ.get("CONTRASCF_SCOPE") != "disk":
+        return list(VARIANTS)
+    found = sorted(q.parent.name for q in (OUTPUTS_ROOT / pdbid).glob("*/af3.json"))
+    if "wt" in found:
+        found = ["wt"] + [v for v in found if v != "wt"]
+    return found
 
 
 def main() -> int:
@@ -202,7 +239,7 @@ def main() -> int:
     print("Phase 1: fetch MSAs for WT sequences\n")
     wt_msas: dict[str, dict[str, str]] = {}          # pdbid -> {chain_id: a3m}
     for i, pdbid in enumerate(ids, 1):
-        wt_json = OUTPUT_ROOT / pdbid / "wt" / "af3.json"
+        wt_json = OUTPUTS_ROOT / pdbid / "wt" / "af3.json"
         if not wt_json.exists():
             print(f"  [{i}/{len(ids)}] {pdbid}: no af3.json — skip"); continue
         wt_chains = _read_af3_protein_chains(wt_json)
@@ -231,24 +268,26 @@ def main() -> int:
 
     # Phase 2: AF3 with MSA for each (pdbid, variant)
     print("\nPhase 2: run AF3 with MSA for each (pdbid, variant)\n")
-    n_total = len(ids) * len(VARIANTS)
+    variants_by_id = {pdbid: _variants_for(pdbid) for pdbid in ids}
+    n_total = sum(len(v) for v in variants_by_id.values())
     n_done = 0
     n_skip = 0
     n_fail = 0
-    log_path = OUTPUT_ROOT / "af3_msa_run_log.json"
+    log_path = OUTPUTS_ROOT / "af3_msa_run_log.json"
     runs: list[dict] = []
 
     for pdbid in ids:
         wt_chain_msas = wt_msas.get(pdbid)
+        variants = variants_by_id[pdbid]
         if wt_chain_msas is None:
-            for v in VARIANTS:
+            for v in variants:
                 runs.append({"pdbid": pdbid, "variant": v, "status": "skip_no_msa"})
                 n_skip += 1
                 n_done += 1
             continue
-        for variant in VARIANTS:
+        for variant in variants:
             n_done += 1
-            v_dir = OUTPUT_ROOT / pdbid / variant
+            v_dir = OUTPUTS_ROOT / pdbid / variant
             af3_json = v_dir / "af3.json"
             prefix = f"{pdbid}_{variant}"
             af3msa_cif = v_dir / f"af3msa_{prefix}_model_0.cif"
