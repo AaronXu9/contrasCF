@@ -29,10 +29,26 @@ import tempfile
 import time
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
-DOCKSTRAT_ROOT = Path("/mnt/katritch_lab2/aoxu/CogLigandBench")
-SURFDOCK_DIR = "/home/aoxu/projects/SurfDock"
-SURFDOCK_PRECOMPUTED_ARRAYS = "/home/aoxu/projects/precomputed/precomputed_arrays"
+# Host-specific locations. Defaults are the lab workstation; every one is
+# overridable so the same code runs on CARC, where SurfDock lives under
+# /project2 and the conda env is /home1/aoxu/.conda/envs/SurfDock_CARC.
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
+DOCKSTRAT_ROOT = Path(os.environ.get(
+    "CONTRASCF_DOCKSTRAT_ROOT", "/mnt/katritch_lab2/aoxu/CogLigandBench"))
+SURFDOCK_DIR = os.environ.get(
+    "CONTRASCF_SURFDOCK_DIR", "/home/aoxu/projects/SurfDock")
+SURFDOCK_PRECOMPUTED_ARRAYS = os.environ.get(
+    "CONTRASCF_SURFDOCK_PRECOMPUTED",
+    "/home/aoxu/projects/precomputed/precomputed_arrays")
+# Full conda-env PREFIX (not a bare name): the lab uses miniconda3/envs/SurfDock,
+# CARC uses /home1/aoxu/.conda/envs/SurfDock_CARC, so a name alone cannot locate it.
+SURFDOCK_ENV_PREFIX = os.environ.get(
+    "CONTRASCF_SURFDOCK_ENV", "/home/aoxu/miniconda3/envs/SurfDock")
+# Weights base holding docking/ and posepredict/. On lab these ship inside the
+# dockStrat fork; on CARC they sit in the SurfDock tree itself.
+SURFDOCK_WEIGHTS = os.environ.get(
+    "CONTRASCF_SURFDOCK_WEIGHTS",
+    str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights"))
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
@@ -77,10 +93,11 @@ BATCH_SIZE = 40
 def _surfdock_config() -> dict:
     return {
         "surfdock_env": "SurfDock",
+        "surfdock_env_prefix": SURFDOCK_ENV_PREFIX,
         "surfdock_dir": SURFDOCK_DIR,
         "precomputed_arrays": SURFDOCK_PRECOMPUTED_ARRAYS,
-        "diffusion_model_dir": str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights" / "docking"),
-        "confidence_model_dir": str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights" / "posepredict"),
+        "diffusion_model_dir": str(Path(SURFDOCK_WEIGHTS) / "docking"),
+        "confidence_model_dir": str(Path(SURFDOCK_WEIGHTS) / "posepredict"),
         "num_gpus": 1,
         "main_process_port": 29510,
         "batch_size": BATCH_SIZE,
@@ -191,7 +208,9 @@ def _run_inference_with_pocket_center(csv_path: str, esm_pt: str, out_dir: str, 
     env["precomputed_arrays"] = config.get("precomputed_arrays",
         os.path.join(os.path.dirname(surfdock_dir), "precomputed", "precomputed_arrays"))
 
-    accelerate = f"/home/aoxu/miniconda3/envs/{config.get('surfdock_env', 'SurfDock')}/bin/accelerate"
+    env_prefix = config.get("surfdock_env_prefix") or (
+        f"/home/aoxu/miniconda3/envs/{config.get('surfdock_env', 'SurfDock')}")
+    accelerate = os.path.join(env_prefix, "bin", "accelerate")
     cmd = [
         accelerate, "launch",
         "--num_processes", str(config.get("num_gpus", 1)),

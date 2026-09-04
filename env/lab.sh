@@ -17,6 +17,13 @@ export CONTRASCF_AF3_MODEL_DIR=/mnt/katritch_lab2/aoxu/CogLigandBench/forks/alph
 
 export CONTRASCF_CUDA_DEVICE=0
 
+# --- SurfDock on the lab box (these are also the code defaults) -----------
+export CONTRASCF_SURFDOCK_ENV=/home/aoxu/miniconda3/envs/SurfDock
+export CONTRASCF_SURFDOCK_DIR=/home/aoxu/projects/SurfDock
+export CONTRASCF_SURFDOCK_WEIGHTS=/mnt/katritch_lab2/aoxu/CogLigandBench/forks/SurfDock/model_weights
+export CONTRASCF_SURFDOCK_PRECOMPUTED=/home/aoxu/projects/precomputed/precomputed_arrays
+export CONTRASCF_DOCKSTRAT_ROOT=/mnt/katritch_lab2/aoxu/CogLigandBench
+
 # Python: needs rdkit_env's lib on LD_LIBRARY_PATH (gemmi/PyMOL libstdc++ quirk).
 export LD_LIBRARY_PATH=/home/aoxu/miniconda3/envs/rdkit_env/lib:${LD_LIBRARY_PATH:-}
 export CONTRASCF_PY=/home/aoxu/miniconda3/envs/rdkit_env/bin/python

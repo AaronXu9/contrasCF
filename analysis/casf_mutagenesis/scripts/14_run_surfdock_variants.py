@@ -39,9 +39,14 @@ import types
 from pathlib import Path
 
 REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
-DOCKSTRAT_ROOT = Path("/mnt/katritch_lab2/aoxu/CogLigandBench")
-SURFDOCK_DIR = "/home/aoxu/projects/SurfDock"
-SURFDOCK_PRECOMPUTED_ARRAYS = "/home/aoxu/projects/precomputed/precomputed_arrays"
+# Host-specific; lab defaults, all overridable so this also runs on CARC.
+DOCKSTRAT_ROOT = Path(os.environ.get(
+    "CONTRASCF_DOCKSTRAT_ROOT", "/mnt/katritch_lab2/aoxu/CogLigandBench"))
+SURFDOCK_DIR = os.environ.get(
+    "CONTRASCF_SURFDOCK_DIR", "/home/aoxu/projects/SurfDock")
+SURFDOCK_PRECOMPUTED_ARRAYS = os.environ.get(
+    "CONTRASCF_SURFDOCK_PRECOMPUTED",
+    "/home/aoxu/projects/precomputed/precomputed_arrays")
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
@@ -74,7 +79,8 @@ def _load_runner():
 def discover_cells(outputs_root: Path,
                    variant_filter: set[str] | None,
                    system_limit: int | None,
-                   pdbid_filter: set[str] | None = None) -> list[tuple[str, str, Path]]:
+                   pdbid_filter: set[str] | None = None,
+                   system_start: int = 0) -> list[tuple[str, str, Path]]:
     """Return sorted (pdbid, variant, docking_dir) for every cell that has
     receptor.pdb + ligand.sdf + box.json under
     <outputs_root>/<pdbid>/<variant>/docking/."""
@@ -83,6 +89,10 @@ def discover_cells(outputs_root: Path,
                      if d.is_dir() and not d.name.startswith("_"))
     if pdbid_filter is not None:
         systems = [d for d in systems if d.name in pdbid_filter]
+    # start BEFORE limit, so a job array slices systems[start:start+limit]
+    # and two hosts can split one sweep without overlapping.
+    if system_start:
+        systems = systems[system_start:]
     if system_limit is not None:
         systems = systems[:system_limit]
     for sys_dir in systems:
@@ -182,14 +192,17 @@ def main() -> int:
     )
     system_limit = os.environ.get("CONTRASCF_SYSTEM_LIMIT")
     system_limit = int(system_limit) if system_limit else None
+    system_start = int(os.environ.get("CONTRASCF_SYSTEM_START", "0"))
 
     print(f"SurfDock variant runner")
     print(f"  outputs_root:    {outputs_root}")
     print(f"  variant_filter:  {variant_filter or '(all)'}")
     print(f"  pdbid_filter:    {pdbid_filter or '(all)'}")
+    print(f"  system_start:    {system_start}")
     print(f"  system_limit:    {system_limit or '(unlimited)'}")
 
-    cells = discover_cells(outputs_root, variant_filter, system_limit, pdbid_filter)
+    cells = discover_cells(outputs_root, variant_filter, system_limit,
+                           pdbid_filter, system_start)
     print(f"  discovered cells: {len(cells)}")
     if not cells:
         print("nothing to do.")
