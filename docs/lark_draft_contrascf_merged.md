@@ -325,6 +325,8 @@ directly — each point is one system, x = its WT RMSD, y = its RMSD once the po
 destroyed:
 
 ![paired rmsd, inv](../analysis/casf_mutagenesis/figures/paired_rmsd_inv.png)
+![paired rmsd, rem](../analysis/casf_mutagenesis/figures/paired_rmsd_rem.png)
+![paired rmsd, pack](../analysis/casf_mutagenesis/figures/paired_rmsd_pack.png)
 
 - **Below the horizontal line = memorised** (still native on a pocket that no longer exists —
   the bad outcome). **Above it = the ligand moved** (desired).
@@ -346,9 +348,18 @@ Boltz-2 35/136, AF3+MSA 59/196).
 > column — ICM's 158 vs 172, for instance, is the 14 WT-correct systems whose `inv` cell was
 > never produced (§3.3). The panel is the stricter, more honest count.
 
-`paired_rmsd_{rem,pack}.png` are the same figure for the other two mutation cases, and
 `paired_rmsd_wt_vs_mutant.png` overlays all three — but **quote the per-variant ones**: the
 overlaid figure's rate is pooled across variants and matches no single CSV row.
+
+> 📝 **An observation worth testing, not yet a result.** Both co-folding models fall
+> monotonically `rem → pack → inv` (AF3+MSA 0.439 → 0.367 → 0.301; Boltz-2 0.368 → 0.360 →
+> 0.257), and `inv` — the most chemically disruptive of the three — is where they memorise
+> *least*. The docking engines show no consistent ordering (SurfDock and ICM peak at `pack`;
+> UniDock2 is flat across rem/pack). If it holds up it is a **dose-response** — memorisation
+> weakening as the pocket is perturbed harder, which is what you'd expect if the residual
+> signal is sequence-similarity-driven rather than pure lookup. The co-folding drop is
+> ~14–30% relative and has **not** been tested for significance; a paired test across the
+> three variants is the next step.
 
 ### 3.5 Deep dives: the three heads dissociate ✅
 
@@ -519,6 +530,8 @@ Make a co-folding model **report** that interactions are physically destroyed, r
 confidently emitting a plausible bound complex. Two requirements: correctly predict
 protein–ligand interactions, *and* flag their absence.
 
+![three legs](../.claude/worktrees/counterfold/docs/figures/fig4_three_legs.png)
+
 ### 4.2 Route 1 — physics-decomposed affinity head ✅ (offline)
 
 A typed head `a = baseline + Σ_type w_type·g_type(evidence)`, `w_type ≥ 0`, where an
@@ -539,6 +552,8 @@ PIGNet; labels from PLIP).
 > one fine-tune fails: inside FLOWR's LoRA fine-tune the head barely trained (0.04–0.67% weight
 > change) and the apparent training "gap" was **pose-mediated** — a fixed-pose eval showed the head
 > sitting at its warm-start value.
+
+![typed vs pooled](../.claude/worktrees/counterfold/docs/figures/fig3_delta3_typed_vs_pooled.png)
 
 ### 4.3 Route 2 — `L_pose` pose-divergence loss ❌ REFUTED
 
@@ -678,9 +693,13 @@ without FLOWR or Boltz.
 | **transfer A** — pose-free counterfactual on co-folded WT | mutated 0.942, control **0.000 false-positive** | ≥ +0.30 ✅ |
 | **refined A** — side-chain-mediated cells only | **0.993** (n=144), control 0.000 | load-bearing |
 
+![crystal validation](../.claude/worktrees/counterfold/docs/figures/fig2_crystal_validation.png)
+
 The transfer test is the thesis check: take the head trained *only* on crystals and apply it to the
 **co-folding model's own output structures**. Metric B passes even through the re-docked-pose confound;
 metric A is the head's intended serve-time use and passes with zero false positives.
+
+![transfer](../.claude/worktrees/counterfold/docs/figures/fig1_transfer.png)
 
 #### 4.4.6 Analysis
 
