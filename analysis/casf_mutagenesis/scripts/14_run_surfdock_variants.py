@@ -9,9 +9,16 @@ is delegated to `_run_surfdock_pipeline` from the existing 16-case runner
 `analysis/scripts/13_run_surfdock.py`, loaded via importlib because
 `scripts/` isn't a Python package.
 
-SurfDock is LAB-BOX-ONLY today — CARC doesn't have the SurfDock conda env,
-the model weights, or the precomputed arrays. Don't try to submit this
-via SLURM until those are provisioned.
+Runs on BOTH hosts as of 2026-09-04. CARC has the env at
+/home1/aoxu/.conda/envs/SurfDock_CARC (note /home1, not /project2), weights
+in the SurfDock tree itself, and precomputed_arrays rsynced from lab. Point
+CONTRASCF_SURFDOCK_{ENV,DIR,WEIGHTS,PRECOMPUTED} + CONTRASCF_DOCKSTRAT_ROOT
+at them; env/carc.sh already does. Ready-made job:
+slurm/run_surfdock_ligand_carc.sh.
+
+WARNING: CARC's dockStrat is a separate git history and shipped the PRE-FIX
+surface helper (keep-every-face). Verify the interface crop before trusting
+any CARC sweep -- see the surfdock gotcha in the dockstrat skill.
 
 Env vars:
   CONTRASCF_OUTPUTS_ROOT — which outputs dir to walk. Default:
