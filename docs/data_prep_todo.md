@@ -30,6 +30,7 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 11 | `ligand_rmsd_bestfit` is 100% NaN for atp_charge, 83% for glucose (GetBestRMS cannot match modified ligands) | medium | **new** — measured |
 | 12 | docking arm never extended to the 30 recovered receptors | **medium** | **new** — docking covers 251 systems vs co-folding's 285; cross-family comparisons run on unequal denominators |
 | **13** | **complete inventory of unresolved failure cells** (every method's short `n`) | **medium** | **new — mostly root-caused.** Boltz-2's 22 fully explained (12 over an 800 aa cap + 10 = item 4f); AF3+MSA 10/13; docking mutant gap *inherits* it. **Open:** SurfDock's 8 "0 graphs", ICM's 7 unproduced, 3 AF3+MSA singletons |
+| **14** | **configure SurfDock on CARC to run** (PyMesh blocker) | **medium** | **new (2026-09-04)** — env/weights/arrays/crop-fix all in place; blocked ONLY on PyMesh, absent from every CARC env and un-transplantable (glibc 2.28 vs 2.34). Sweeps stay lab-only until built |
 
 **Roots**
 
@@ -971,3 +972,91 @@ must be checked on CARC.
 the `SKIP (len=…)` exit-0 — mean a sweep that *looks* clean can be short by 12
 systems. After any co-folding sweep, diff the produced cell count against
 251 × 4 before trusting a rate.
+
+
+---
+
+## 14. Configure SurfDock on CARC to run — OPEN (2026-09-04)
+
+**Goal.** Run the full 4-step SurfDock pipeline (surface → CSV → ESM → diffusion)
+on CARC, so sweeps can be split across hosts instead of serialising on the single
+lab 4090. The ligand arm alone is 1300 cells at ~30-40 s each, ~13 h on one GPU.
+
+**Status: everything is in place except PyMesh.** Do not redo this survey.
+
+| piece | state |
+|---|---|
+| conda env | **done** — `/home1/aoxu/.conda/envs/SurfDock_CARC`, py3.10.18, torch 2.2.2/cu121, pyg 2.6.1. Note `/home1`, NOT `/project2`; searching only `/project2` is what produced the earlier false "SurfDock is absent from CARC" |
+| SurfDock source | **done** — `/project2/katritch_223/aoxu/projects/SurfDock` |
+| model weights | **done** — `<source>/model_weights/{docking,posepredict,screen}`, 140 MB. In the SurfDock tree, NOT under `dockStrat/forks/` as on lab |
+| MSMS / APBS / NanoShaper | **done** — bundled at `<source>/comp_surface/tools/transfer/APBS-3.4.1.Linux/bin` |
+| `precomputed_arrays` | **done** — rsynced 2026-09-04 to `/project2/katritch_223/aoxu/projects/precomputed/precomputed_arrays` (413 MB). Six HIDDEN dotfiles: `cp src/*` copies nothing, use `rsync -a src/ dst/` |
+| interface-crop fix | **done** — CARC's dockStrat is a SEPARATE git history and shipped the pre-fix `faces_to_keep = np.arange(len(faces2))`. Patched by hand (original at `*.prefix_backup`); `surfdock_inference.py` was already identical, so that one file was the whole delta. **Will not self-heal on a pull** |
+| host-aware runners | **done** — `13_`/`14_` take `CONTRASCF_SURFDOCK_{ENV,DIR,WEIGHTS,PRECOMPUTED}` + `CONTRASCF_DOCKSTRAT_ROOT`, exported by `env/carc.sh`. Env var is a full conda PREFIX, since a bare name cannot address an env under miniconda3 on one host and `/home1/.conda` on the other |
+| sbatch | **done** — `slurm/run_surfdock_ligand_carc.sh`, refuses to start unless the crop fix is present |
+| **PyMesh** | **BLOCKER — not installed, cannot be copied** |
+
+### The blocker
+
+Step 1 (`dockstrat/models/_surfdock_surface_helper.py`) does `import pymesh`.
+**No Python on CARC has it** — verified by importing from every env under both
+`/home1/aoxu/.conda/envs/` and `/project2/katritch_223/aoxu/conda/envs/`.
+
+The lab build cannot be transplanted. Copying the 45 MB package fails at import:
+
+```
+ImportError: /lib64/libc.so.6: version `GLIBC_2.34' not found
+             (required by .../pymesh/lib/PyMesh.cpython-310-x86_64-linux-gnu.so)
+```
+
+Lab supplies glibc 2.34; CARC is **Rocky Linux 8.10, glibc 2.28**, and glibc is
+not overridable via `LD_LIBRARY_PATH`. The copy was attempted on 2026-09-04 and
+**reverted**, so the env is exactly as found. `conda-forge` carries only
+`pymeshlab`, a different library and not a drop-in.
+
+Everything else PyMesh needs is already vendored inside the package
+(`libtbb`, `libgmp`, `libmpfr`, `libgcc_s`, all `libPyMesh-*.so`); system
+`libstdc++` is the only external link. So the problem is purely the glibc floor.
+
+### Why this never surfaced before
+
+The Sept-2025 CARC inference logs in the SurfDock tree
+(`log-inference-runsNposes_benchmark-2025-09-2{1,6}.log`) show inference
+consuming `*_8A.pdb` surfaces that **already existed** under
+`/scratch1/.../8A_surface/`. The 4046 `.ply` files on CARC are shipped sample
+data, not locally generated. CARC has only ever done **inference**, never
+surface prep — so PyMesh was never needed there.
+
+### Two ways to fix, neither started
+
+1. **Apptainer image (preferred).** `module avail` offers `apptainer/1.3.6`
+   through `1.5.3`. Build on a base with glibc ≥ 2.34 (e.g. Ubuntu 22.04),
+   `pip install pymesh2==0.3.1` inside, bind-mount the SurfDock tree and the
+   outputs dir. Isolates the glibc floor instead of fighting it.
+2. **Source build.** `gcc/12.3.0` or `gcc/13.3.0` are available. PyMesh needs
+   CGAL, Eigen, TBB, GMP, MPFR, Boost; the `pymesh2` sdist vendors most third-party
+   deps but the build is long and historically fragile.
+
+A third, cheaper option if only throughput is wanted: **prepare surfaces on lab,
+ship them, run inference-only on CARC** — which is what the 2025 runs did. That
+needs the runner split into two stages, which it currently is not.
+
+### Acceptance test
+
+Run the existing smoke job and require BOTH:
+
+```bash
+sbatch --array=0 --export=ALL,CONTRASCF_PDBID_FILTER=1bcu \
+    slurm/run_surfdock_ligand_carc.sh
+```
+
+1. 4/4 cells `ok` (currently 4/4 fail on `ModuleNotFoundError: pymesh`).
+2. Mesh vertex counts **60–260**, not ~1500 — proof the interface crop is live.
+   `grep "element vertex" <work>/surface/<case>/*_8A.ply`
+
+Cross-check `1bcu/wt` rank-1 against the lab value for the same cell; the ligand
+arm docks into the crystal receptor on both hosts, so they should agree closely.
+(`1bcu` is a hard system: lab SurfDock gives 5.65 Å on the protein arm's WT cell,
+and 21/249 protein-arm WT cells exceed 4 Å. Do not read that as a failure.)
+
+**Until this is done, run whole-pipeline SurfDock sweeps on the lab box.**
