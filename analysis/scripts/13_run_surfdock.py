@@ -390,6 +390,7 @@ def main() -> None:
     os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
     os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
     os.environ["precomputed_arrays"] = SURFDOCK_PRECOMPUTED_ARRAYS
+    os.environ["SURFDOCK_ENV_PREFIX"] = SURFDOCK_ENV_PREFIX
 
     SURFDOCK_OUT_ROOT.mkdir(parents=True, exist_ok=True)
     results = []

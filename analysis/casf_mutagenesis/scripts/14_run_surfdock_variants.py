@@ -54,6 +54,10 @@ SURFDOCK_DIR = os.environ.get(
 SURFDOCK_PRECOMPUTED_ARRAYS = os.environ.get(
     "CONTRASCF_SURFDOCK_PRECOMPUTED",
     "/home/aoxu/projects/precomputed/precomputed_arrays")
+# Full conda PREFIX; a bare name cannot locate the env across hosts
+# (lab: miniconda3/envs/SurfDock, CARC: /home1/aoxu/.conda/envs/SurfDock_CARC).
+SURFDOCK_ENV_PREFIX = os.environ.get(
+    "CONTRASCF_SURFDOCK_ENV", "/home/aoxu/miniconda3/envs/SurfDock")
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
@@ -176,6 +180,11 @@ def main() -> int:
     os.environ["PROJECT_ROOT"] = str(DOCKSTRAT_ROOT)
     os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
     os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
+    # dockstrat's surfdock_inference._env_prefix reads this to locate the
+    # env's python/accelerate. Without it those resolve to the lab-only
+    # /home/aoxu/miniconda3/envs/SurfDock and every CARC cell dies with
+    # FileNotFoundError on .../bin/python.
+    os.environ["SURFDOCK_ENV_PREFIX"] = SURFDOCK_ENV_PREFIX
     os.environ["precomputed_arrays"] = SURFDOCK_PRECOMPUTED_ARRAYS
 
     outputs_root = Path(os.environ.get(
