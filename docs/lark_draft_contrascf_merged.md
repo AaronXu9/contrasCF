@@ -2,9 +2,18 @@
 
 > **Published to Lark 2026-09-04:**
 > https://xlarkusveyke13ok.usttp.larksuite.com/docx/AvMXdV0NeoKdSdxfkQMul7LptJb
-> (doc token `AvMXdV0NeoKdSdxfkQMul7LptJb`). This markdown file is the source of
-> truth; re-publish section by section with `docs +update --command block_replace`
-> after editing here.
+> (doc token `AvMXdV0NeoKdSdxfkQMul7LptJb`).
+>
+> ⛔ **This file is NO LONGER a superset of the Lark doc.** Aaron added his own
+> content there on 2026-09-04 that does not exist here:
+> **§3.4c Case Study** (5 screenshots + prose on contact figures, AutoDock
+> united-atom prep, a GNINA protonated-vs-stripped test), **§5.6 Possible Future
+> Directions**, 3 extra images in §3.4b, and 1 image in §4.2 (which replaced
+> `fig3_delta3_typed_vs_pooled.png` — do not re-add it).
+>
+> **Never `docs +update --command overwrite` this doc** — it would destroy that
+> work and every uploaded image. Re-publish only with `block_replace` scoped to a
+> block id this file authored, after a `docs +fetch --detail with-ids` diff.
 >
 > **Local draft for review.** Merges the main idea doc (`Kg1hdTzdBoHEy9xlxANuIKqxtOh`)
 > with the 2026-08 update doc (`TVLddBn1koPfiyxh88UueCU3tNB`).
