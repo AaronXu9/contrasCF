@@ -860,6 +860,25 @@ or through the pose, which is gameable.
       mixed backbone-on-mutated cell at 0.438 (n=16).
 - [ ] Absolute calibration (~0.55) if single-structure calls are ever needed; a per-class MLP
       readout would fix it.
+- [ ] **Relaxation ablation on the counterfactual** (raised 2026-09-04). `remove_sidechain`
+      deletes atoms and moves nothing, so the pocket is left with a cavity and neighbouring
+      residues stay exactly where they were. That exactness is what makes the `persist`
+      target true by construction — but a real mutant repacks. **Do not add relaxation to
+      the training loop** (labels come from PLIP on the *unrelaxed* crystal, so relaxing
+      without re-labelling injects noise, and re-labelling flips borderline contacts —
+      you pay twice). Instead: relax the counterfactual with the ligand fixed, recompute
+      `E`, and measure how far *survivor* residues' evidence moves. That directly
+      quantifies the assumption. Note the cost is already partly measured — transfer
+      metric B's untouched-residue lost-rate of **0.395** (vs 0.000 pose-free) is exactly
+      what repacking does to survivors.
+- [ ] **Split has no homology control** (found 2026-09-04). `train_interaction.py` takes a
+      deterministic *prefix* of the parquet order — `val, train = feats[:nval], feats[nval:]`
+      — with no shuffle, no seed and no sequence-identity clustering. Held out by complex
+      (correct), but CASF has repeated families, so 0.955 may be optimistic. Mitigated by
+      the head having only ~40 parameters, which cannot memorise a family.
+- [ ] **No angular term.** `_memberships` uses `torch.cdist` only, so the head cannot tell
+      a well-oriented H-bond from a badly-oriented one at the same distance, while its PLIP
+      labels *do* use angles. This caps achievable `recover` performance.
 
 *All CounterFold work is on the isolated `worktree-counterfold` branch, not `main`; FLOWR edits on
 FLOWR branch `counterfold-contrastive`. Sources: `docs/CounterFold_progress_2026-07-08.md`,
