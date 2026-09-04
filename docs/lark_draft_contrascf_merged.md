@@ -1,5 +1,11 @@
 # contrasCF — Idea, Validation, Experiments
 
+> **Published to Lark 2026-09-04:**
+> https://xlarkusveyke13ok.usttp.larksuite.com/docx/AvMXdV0NeoKdSdxfkQMul7LptJb
+> (doc token `AvMXdV0NeoKdSdxfkQMul7LptJb`). This markdown file is the source of
+> truth; re-publish section by section with `docs +update --command block_replace`
+> after editing here.
+>
 > **Local draft for review.** Merges the main idea doc (`Kg1hdTzdBoHEy9xlxANuIKqxtOh`)
 > with the 2026-08 update doc (`TVLddBn1koPfiyxh88UueCU3tNB`).
 > **Precedence rule: where the two disagree, the update doc wins** — it is newer and
