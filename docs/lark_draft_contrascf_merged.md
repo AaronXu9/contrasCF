@@ -361,7 +361,23 @@ model. The answer is that the three heads **disagree with each other**.
 The perturbation signal **is present in the model**. The confidence head reports it cleanly;
 the structure head acts on it most of the time; the affinity head essentially ignores it.
 
-![confidence × affinity × RMSD](../analysis/casf_mutagenesis/figures/conf_aff_rmsd_pocket.png)
+![three heads dissociate](../analysis/casf_mutagenesis/figures/three_heads_dissociate.png)
+
+**Read the figure as two separate questions, because they have different answers.**
+
+- **(a) Direction — does the head move the right way?** Common currency: AUROC for separating
+  an intact pocket from a destroyed one. **All three beat chance** (structure 0.858,
+  confidence 0.734, affinity 0.637 for Boltz-2; AF3+MSA confidence 0.851). Direction is *not*
+  where the affinity head fails, and any figure showing only this would understate the problem.
+- **(b) Magnitude — does it move far enough?** Losing the binding pose demands **+3 to +6** log
+  units. The affinity head delivers **+0.229**, and under direct intervention — ligand ejected
+  35 Å, zero protein contacts — it delivers **−0.004**. A pure-physics scorer under the *same*
+  ejection loses 100% of its binding energy.
+
+**So the failure is one of magnitude, not sign.** The affinity head registers that *something*
+happened and then reports a number ~1/20th of the size physics requires — which is why it
+cannot function as a binding-physics readout even though it correlates weakly in the right
+direction.
 
 #### Q1 — is the affinity head reading the pose, or is it just insensitive?
 
@@ -460,11 +476,23 @@ heads memorise to different degrees — GNINA's CNN partly, **Boltz-2's affinity
 - **Practically: dropped interface confidence is a usable flag** for untrustworthy co-folding
   predictions (pose-level AUROC 0.80–0.86). **The affinity number is not.**
 
+#### Supporting analysis panels
+
+The four panels behind the claim — the Q1 strata, the Q2a ΔRMSD↔Δconfidence cloud, the Q2b
+within-case pose-level histogram, and the Q3 correlation matrix:
+
+![confidence × affinity × RMSD](../analysis/casf_mutagenesis/figures/conf_aff_rmsd_pocket.png)
+
+> **Currency check (2026-09-03).** This figure predates the August AF3 multi-chain re-run, so it
+> was re-verified against the current `results_full.csv`: n=189/166/332 and ΔAff
+> +0.439/+0.066/+0.068 reproduce **exactly**, ρ +0.445 vs +0.45. It is Boltz-2-only, and the
+> August re-run fixed AF3+MSA, so nothing in it moved. ⚠️ Note it shows the **unconditioned**
+> strata; the +0.229 quoted above is the WT-conditioned re-check (independently reproduced live).
+
 > **Caveats.** Single seed (42); the 5-sample diffusion spread gives a noise floor but is not a
 > substitute for multi-seed. Affinity is emitted **per system**, not per pose, so no pose-level
 > affinity analysis is possible — which is exactly why the pose-swap intervention was needed.
-> The 4-panel figure above shows the **unconditioned** strata (n=189/166/332); the +0.229 in the
-> text is the WT-conditioned re-check. Pocket axis only — the ligand axis is the next extension.
+> Pocket axis only — the ligand axis is the next extension.
 
 ---
 
