@@ -496,16 +496,113 @@ within-case pose-level histogram, and the Q3 correlation matrix:
 
 ---
 
-## 4. Trained model 🔲
+## 4. Trained model — CounterFold 🔶
 
-*Placeholder — do not fill yet.*
+> **Status: standalone arm works and is pre-registered-passed; co-folding integration not done;
+> single-seed on ≤60 systems.** Written up here because the *mechanism* is settled and it answers
+> §3.5 directly. Not yet decision-grade — do not quote as a headline result.
 
-Intended content: the interaction-recovery head — an interaction-level readout that is
-pose-trapping-robust by construction (removing a side chain zeroes its interaction
-regardless of where the ligand sits). Standalone results exist (crystal recover-AUROC
-0.955; transfer to co-folded structures Δlost-rate +0.599 pre-registered / +0.942
-pose-free with zero false positives), but co-folding integration is not done and results
-are single-seed. To be written once that arm is decision-grade.
+§3.5 ends on a design constraint: **the physics features exist in the trunk, but the affinity head
+does not consume them**, so retraining an output head cannot recover a signal that head never reads.
+CounterFold is the attempt to install that sensitivity. Its value here is partly the negative
+results — two plausible routes were built and refuted before the one that works.
+
+### 4.1 The goal
+
+Make a co-folding model **report** that interactions are physically destroyed, rather than
+confidently emitting a plausible bound complex. Two requirements: correctly predict
+protein–ligand interactions, *and* flag their absence.
+
+### 4.2 Route 1 — physics-decomposed affinity head ✅ (offline)
+
+A typed head `a = baseline + Σ_type w_type·g_type(evidence)`, `w_type ≥ 0`, where an
+`InteractionTyper` computes per interaction class (K=10) a learnable Gaussian over ligand–pocket
+distance × a chemical-compatibility gate. A genuine differentiable interaction reader (family:
+PIGNet; labels from PLIP).
+
+- **Type-awareness is what makes it directional.** A type-*blind* pooled head is **fooled by
+  atom-adding perturbations** — it rates `pack`(→Phe) and `inv`(→Trp) destroyed pockets as
+  *better* binders. Only the typed head stays directionally consistent.
+- **Trained offline on the fixed crystal pose** with a contrastive δ-margin loss: held-out WT-vs-
+  mutant gap **+0.98**.
+- **The anti-drift anchor does real work.** Ablating it ballooned `a(WT)` from +6 to **+48.5** —
+  the model satisfied the margin by decalibrating everything rather than by learning chemistry.
+
+> **The load-bearing lesson:** the affinity gap has **two independent factors** — head *chemistry*
+> (installable offline) and *structural reaction* (the co-folding model's job). Conflating them in
+> one fine-tune fails: inside FLOWR's LoRA fine-tune the head barely trained (0.04–0.67% weight
+> change) and the apparent training "gap" was **pose-mediated** — a fixed-pose eval showed the head
+> sitting at its warm-start value.
+
+### 4.3 Route 2 — `L_pose` pose-divergence loss ❌ REFUTED
+
+Fine-tune the co-folding model so the mutant ligand pose diverges from the WT pose, on the theory
+that a destroyed pocket should push the ligand off its trapped pose.
+
+Pre-registered threshold **≥ +0.30**; observed **S_ft − S_frozen = −0.23**.
+
+**And the way it failed is the interesting part.** Raw δ=3 divergence *rose*, 4.18 → 7.38 Å, which
+looks exactly like de-trapping. But the **WT-self noise floor rose more**, 4.38 → 7.81 Å: the
+fine-tune inflated pose variance **uniformly** rather than displacing the ligand where physics said
+it should move. Without the pre-registered WT-self control this would have been reported as a
+success.
+
+> **Root cause:** `L_pose` rewards *any* WT↔mutant divergence, so it has a degenerate solution —
+> inflate global pose variance. Pose RMSD is a downstream **symptom**: "move" ≠ "move correctly".
+> Structurally the same degeneracy the anchor fixed in 4.2.
+
+### 4.4 Route 3 — interaction-recovery head ✅ the mechanism
+
+Stop detecting "interaction lost" *through the pose*. Supervise at the **interaction level**.
+
+**Why it works — pose-trapping robustness by construction.** When Ser→Gly, the OG donor atom is
+*gone*, so the chemistry gate zeroes that H-bond **regardless of where the ligand sits**. No pose
+motion is required, which is precisely the failure mode that sank Route 2.
+
+Labels come from PLIP on the **crystal** WT complex — physical correctness, not "reproduce the
+generator" — and counterfactuals self-generate from crystal (remove one side chain, ligand fixed).
+Co-folded mutants are unusable as labels: they re-dock the ligand 0.8–9 Å, and an 8-system PLIP
+prototype found 38% of interactions killed but **37% of untouched contacts also broken** by pose
+noise alone.
+
+| test | result | bar |
+|---|---|---|
+| **crystal, held out** | recover-AUROC **0.955**; P(dead) **0.575 → 0.031** (~18×) on an *unchanged* pose | PASS |
+| **transfer B** — co-folded `rem` structure | mutated 0.994 vs unmutated 0.395 → **Δ +0.599** | ≥ +0.30 ✅ |
+| **transfer A** — pose-free counterfactual on co-folded WT | mutated 0.942, control **0.000 false-positive** | ≥ +0.30 ✅ |
+| **refined A**, side-chain-mediated only | **0.993** (n=144), control 0.000 | load-bearing |
+
+The refinement matters for honesty: the headline 0.942 was **diluted by backbone survivors that
+correctly persist** — Gly keeps its backbone N/O, so backbone H-bonds *should not* die, and killing
+them would be wrong. Splitting by mediation raises the should-die rate to 0.993 and isolates the
+claim properly.
+
+**Honest negative:** class-weighted recover training did **not** sharpen absolute calibration (mean
+P on real interactions 0.559 → 0.542); present/absent evidence overlaps and an affine calibrator
+cannot separate it. It does not matter for this use — the counterfactual runs on the **relative**
+drop, not absolute confidence — but it does bound single-structure calls.
+
+### 4.5 Why this answers §3.5
+
+The head needs only the generator's **WT** pose plus a deterministic side-chain edit. It does
+**not** depend on the co-folding model predicting the mutant well — which §3 shows it does not.
+That decouples the physics readout from the exact failure §3.5 diagnosed: the signal is read at
+the interaction level, where it survives, instead of through the affinity head, which cannot see it,
+or through the pose, which is gameable.
+
+### 4.6 What is missing before this is decision-grade
+
+- [ ] **Full CASF + ≥3 seeds.** Currently single-seed on ≤60 systems.
+- [ ] **Co-folding integration** — FLOWR/Boltz feed structures to this head; not built.
+- [ ] Use `applied_mutations` for the mutated set rather than the WT-vs-`rem` pocket diff, and a
+      *continuous* backbone/side-chain mediation weight — the hard `E_sc > E_bb` split leaves a
+      mixed backbone-on-mutated cell at 0.438 (n=16).
+- [ ] Absolute calibration (~0.55) if single-structure calls are ever needed; a per-class MLP
+      readout would fix it.
+
+*All CounterFold work is on the isolated `worktree-counterfold` branch, not `main`; FLOWR edits on
+FLOWR branch `counterfold-contrastive`. Sources: `docs/CounterFold_progress_2026-07-08.md`,
+`journal/2026-07-08-*`, spec `2026-07-07-interaction-recovery-head-design.md`.*
 
 ---
 
@@ -532,6 +629,26 @@ are single-seed. To be written once that arm is decision-grade.
 - [ ] `ligand_rmsd_bestfit` NaN for modified ligands — TODO 11.
 - [ ] ICM: confirm the 251 WT cells without `FINISHED`.
 - [ ] `3mss`/`4eo8` mutant specs identical to WT (impact ≤0.003, but fix the generator).
+
+**§3.5 — deeper analysis of the three heads** (deferred 2026-09-03; the section states the
+claim, these would harden it)
+- [ ] **Regenerate `conf_aff_rmsd_pocket.png` WT-conditioned** so the figure's strata match the
+      +0.229 in the text. Currently figure = unconditioned (n=189/166/332), text = conditioned.
+- [ ] **Multi-seed.** Everything in §3.5 is seed 42. The 5-sample diffusion spread gives a noise
+      floor (the WT→adv `iptm` drop is 3.1× it) but is not a substitute for ≥3 seeds.
+- [ ] **Per-variant breakdown of the three heads.** The text says `inv` hits confidence hardest,
+      matching the structure side — it is asserted, not shown. A rem/pack/inv split of the AUROC
+      and Δ would show whether all three heads share the same dose-response.
+- [ ] **Extend to the ligand axis** (`results_ligand.csv` — halo/meth/charge). Identical columns;
+      the pocket axis is the only one analysed. A pose-blind affinity head should fail there too,
+      and *differently* — ligand edits change the chemistry the head reads directly.
+- [ ] **The affinity finding rests on one model.** Boltz-2 is the only arm with an affinity head,
+      so "co-folding affinity heads are pose-insensitive" is currently an n=1 claim about a
+      specific head. Flag as a limitation or find a second model.
+- [ ] **Pose-swap n=29 is small.** It is the load-bearing intervention; widening it (or adding
+      intermediate clearances) would tighten the strongest evidence in the study.
+- [ ] Quantify what the residual partial(ΔAff, ΔRMSD | WT aff) = +0.12 actually is, now that
+      pose-reading is excluded.
 
 **Parked ideas from the main doc** (kept, not deleted): τRAMD / funnel-metadynamics layers;
 decoy-pocket and pocket-redirection tests ("the paper tests perturbations that destroy
