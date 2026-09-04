@@ -27,13 +27,18 @@
 #SBATCH --output=slurm/logs/%x_%A_%a.out
 #SBATCH --error=slurm/logs/%x_%A_%a.err
 
-set -uo pipefail
+set -o pipefail
 
 WORKTREE=/project2/katritch_223/aoxu/contrasCF-af3
 MAIN=/project2/katritch_223/aoxu/contrasCF
 
 cd "$WORKTREE"
+# `set -u` must be OFF across this source. env/carc.sh sources GROMACS's
+# GMXRC for the tau-RAMD pilot, and GMXRC is not -u clean: it reads `shell`
+# and `GMXLDLIB` while unset, so the job dies in 1 s before reaching Python.
+set +u
 source env/carc.sh
+set -u
 
 # Code from the worktree, data from the main clone. env/carc.sh points
 # CONTRASCF_ROOT at the main clone, but that clone sits on the CounterFold
