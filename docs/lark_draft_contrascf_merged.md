@@ -346,18 +346,125 @@ overlaid figure's rate is pooled across variants and matches no single CSV row.
 
 ### 3.5 Deep dives: the three heads dissociate ✅
 
-*(from main doc; Q1 numbers below are the update doc's re-checked, WT-conditioned values)*
+Everything above concerns **one output** — where the structure head puts the ligand. But
+Boltz-2 emits three things per prediction: a **pose**, a **confidence**, and an **affinity**.
+Asking what the other two do under the *same* perturbation turns the memorisation finding
+from a benchmark score into a statement about where the physics signal lives inside the
+model. The answer is that the three heads **disagree with each other**.
 
-- **Q1 — affinity invariance.** Responded-stratum ΔAff is **+0.229** conditioned
-  (published: +0.068) — 3.4× larger, because nearly half those cells were systems Boltz-2
-  cannot solve. But +0.229 is still **15–25× below** the +3–6 log units biophysics demands.
-  *The affinity head remains near pose-insensitive.*
-- **Q2 — confidence tracks the structural response** (RTM-robust).
-- **Q3 — joint structure, controlling for RMSD.**
-- **Pose-swap test.** The strongest evidence, and **immune to the WT-conditioning
-  confound**: it holds the trunk byte-identical and ejects the ligand 35 Å on fixed
-  systems, so WT-correctness never enters. **Δ = −0.004, p = 0.27.** Lean on this rather
-  than the strata.
+| head | signal | behaviour when the pocket is destroyed |
+|---|---|---|
+| **structure** | ligand RMSD | memorises 25–33% of adversarial cells; moves the ligand otherwise |
+| **confidence** | interface `iptm` | ✅ **registers the damage** — drops, and the drop scales with how far the ligand moved |
+| **affinity** | log[IC50], P(binder) | ❌ **near-blind** — change is dominated by regression-to-the-mean, **not** by the structure |
+
+The perturbation signal **is present in the model**. The confidence head reports it cleanly;
+the structure head acts on it most of the time; the affinity head essentially ignores it.
+
+![confidence × affinity × RMSD](../analysis/casf_mutagenesis/figures/conf_aff_rmsd_pocket.png)
+
+#### Q1 — is the affinity head reading the pose, or is it just insensitive?
+
+Two hypotheses explain "affinity barely changes on a broken pocket": the structure
+**memorised**, so affinity is *correct given a (wrong) native-like pose*; or the affinity
+**module is intrinsically pose-insensitive**. These have opposite implications — the first
+would make affinity a usable physics-aware reranker, the second would not.
+
+The decisive cells are the **responded** ones, where the ligand was ejected ≥4 Å — the
+clearest possible non-binder. WT-conditioned, median ΔAff there is **+0.229 log units**
+(unconditioned +0.068; the conditioned value is 3.4× larger because nearly half those cells
+were systems Boltz-2 cannot solve at all). Biophysics demands **+3 to +6**. So even the
+corrected number sits **15–25× below** the floor.
+
+> ⚠️ **The naive read of the strata is backwards.** The table appears to say affinity responds
+> *more* when the structure memorised (+0.439) than when it responded (+0.068) — which would
+> suggest local-contact sensing. It is **regression-to-the-mean**. Memorised systems are simply
+> much tighter WT binders (median WT logIC50 −0.26 ≈ 0.6 µM vs +0.80 ≈ 6 µM), and tighter
+> predictions have more room to drift weaker: **Spearman(ΔAff, WT affinity) = −0.63** (p=1e-77).
+> Control for WT affinity with a *partial* correlation and the apparent effect evaporates:
+> partial(ΔAff, absolute displacement | WT aff) = **−0.06 (n.s.)**. A faint
+> partial(ΔAff, ΔRMSD | WT aff) = **+0.12** survives — ~1.5% of variance — and the pose-swap
+> test below settles whether even that is real pose-reading. *(It is not.)*
+
+#### Q2 — confidence does register the damage, and it is not RTM
+
+Spearman(ΔRMSD, Δ`iptm`) = **+0.45** (Boltz-2), **+0.52** (AF3+MSA). Stratified, the drop is
+monotonic: memorised +0.012 → middle +0.046 → responded +0.086.
+
+Because every WT→adversarial Δ is RTM-exposed, this is checked three independent ways:
+
+| control | result | reading |
+|---|---|---|
+| partial out WT `iptm` | ρ 0.445 → **0.437** | essentially unchanged |
+| does it persist off the ceiling? | low-WT-`iptm` half still drops **69%** (median Δ +0.046) | RTM would push these *up*; they fall |
+| residual of `iptm_adv ~ iptm_wt` (slope 0.80) | corr(residual, displacement) = **−0.41** (p=1e-28) | displacement drives confidence *beyond* RTM |
+
+Three further controls rule out a trivial explanation: **global** `ptm` drops 3–6× less than
+interface `iptm` (the protein still folds — Cα ≈ 1 Å, so this is an *interface* signal, not a
+folding failure); a **broken no-MSA AF3** null shows ~zero drop (AUROC 0.54); and the observed
+WT→adv drop is **3.1× the within-system noise** across the 5 diffusion samples.
+
+**AF3+MSA is sharper than Boltz-2** at full CASF (n=239): `iptm` falls 0.96 → 0.80–0.85, with
+**AUROC 0.83–0.88** vs Boltz-2's 0.67–0.69, and `inv` hits hardest — matching the structure
+side.
+
+**The sharp result — the model "knows it memorised."** Restrict to cells where the *structure
+memorised* (WT correct **and** adversarial RMSD < 2 Å) and confidence *still* drops: Boltz-2
+Δ+0.011 (AUROC 0.65), **AF3+MSA Δ+0.030 (AUROC 0.91)**. Where the structure responded it drops
+~8× more. So confidence registers the broken pocket **even when the pose output does not move**.
+
+#### Q3 — the two heads' responses are decoupled
+
+On adversarial cells, RMSD drives confidence (**−0.42**) far more than it drives affinity
+(**+0.19**), and the confidence↔affinity link is weak (−0.15) — roughly half of which is shared
+dependence on RMSD (partial | RMSD = **−0.08**). Most directly:
+
+**Δ`iptm` ↔ ΔAff = −0.025 (n.s.)**, partial | ΔRMSD = −0.067. *Getting less confident does not
+come with predicting weaker binding.* The two heads respond to the same mutation independently.
+
+#### The pose-swap test — the capstone
+
+Q1–Q3 are observational and leave the faint +0.12 ambiguous. The pose-swap test removes it by
+**intervention**: hold the trunk byte-identical and hand the affinity head a *supplied* pose
+with the ligand rigidly ejected beyond the protein's bounding sphere. Boltz-2's affinity head
+reads pose only through a distogram over protein–ligand cross-pairs, so this isolates the
+pose channel exactly.
+
+**This design is also immune to the WT-conditioning confound** — it operates on fixed systems
+with the trunk held constant, so WT-correctness never enters. It is the strongest evidence in
+the study, and the claim should lean on it rather than on the strata.
+
+![pose-swap contrast](../analysis/casf_mutagenesis/figures/pose_swap_contrast.png)
+
+**Result (n=29 systems, ligand ejected to a median 35 Å — zero protein contacts):**
+
+| scorer | response to a 35 Å ejection | notices? |
+|---|---|---|
+| **Boltz-2 affinity head** | median gap **−0.004** log units; **0/29** weaken by ≥+1; Wilcoxon **p=0.27** | ❌ no |
+| **GNINA Vina** (pure physics) | **−8.7 → 0.0** kcal/mol; **100%** of systems lose all binding energy | ✅ completely |
+| **GNINA CNNscore** (learned pose-quality) | 0.95 → 0.54 — collapses for 21%, floors for the rest | ⚠️ partially |
+
+A ligand floating 35 Å in solvent is predicted to bind **essentially as well as the native
+pose**. The +0.12 was not pose-reading. And the three-way contrast is the cleanest statement of
+the thesis in the whole study: the **physics** term collapses completely, while the **learned**
+heads memorise to different degrees — GNINA's CNN partly, **Boltz-2's affinity head totally**.
+
+#### Why this matters
+
+- **The fix belongs in the trunk, not the head.** The physics features exist — the interface
+  representation registers the broken pocket cleanly and proportionally — but the affinity head
+  does not consume them. Retraining an output head cannot recover a signal that head never
+  reads. *(Direct evidence for CounterFold H5; see §4.)*
+- **It rules out the optimistic fallback** that the affinity head could serve as a
+  physics-aware reranker on top of a memorising structure head.
+- **Practically: dropped interface confidence is a usable flag** for untrustworthy co-folding
+  predictions (pose-level AUROC 0.80–0.86). **The affinity number is not.**
+
+> **Caveats.** Single seed (42); the 5-sample diffusion spread gives a noise floor but is not a
+> substitute for multi-seed. Affinity is emitted **per system**, not per pose, so no pose-level
+> affinity analysis is possible — which is exactly why the pose-swap intervention was needed.
+> The 4-panel figure above shows the **unconditioned** strata (n=189/166/332); the +0.229 in the
+> text is the WT-conditioned re-check. Pocket axis only — the ligand axis is the next extension.
 
 ---
 
