@@ -273,7 +273,13 @@ def main() -> int:
     n_done = 0
     n_skip = 0
     n_fail = 0
-    log_path = OUTPUTS_ROOT / "af3_msa_run_log.json"
+    # Per-task override. A SLURM job array runs many copies of this script
+    # against the same OUTPUTS_ROOT; they never collide on cell outputs (one
+    # dir per cell) but they would all rewrite one shared log and clobber
+    # each other, so give each task its own file.
+    log_path = Path(os.environ.get(
+        "CONTRASCF_RUN_LOG", str(OUTPUTS_ROOT / "af3_msa_run_log.json")))
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     runs: list[dict] = []
 
     for pdbid in ids:
