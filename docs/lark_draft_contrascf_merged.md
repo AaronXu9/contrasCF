@@ -4,15 +4,14 @@
 > https://xlarkusveyke13ok.usttp.larksuite.com/docx/AvMXdV0NeoKdSdxfkQMul7LptJb
 > (doc token `AvMXdV0NeoKdSdxfkQMul7LptJb`).
 >
-> ⛔ **This file is NO LONGER a superset of the Lark doc.** Aaron added his own
-> content there on 2026-09-04 that does not exist here:
-> **§3.4c Case Study** (5 screenshots + prose on contact figures, AutoDock
-> united-atom prep, a GNINA protonated-vs-stripped test), **§5.6 Possible Future
-> Directions**, 3 extra images in §3.4b, and 1 image in §4.2 (which replaced
-> `fig3_delta3_typed_vs_pooled.png` — do not re-add it).
+> ✅ **Synced from Lark 2026-09-04.** Aaron authored content directly in the Lark doc;
+> it has been pulled back here so this file is a superset again — **§3.4c Case Study**,
+> **§5.6 Possible future directions**, 3 images in §3.4b, 1 in §4.2 (which replaced
+> `fig3_delta3_typed_vs_pooled.png` — do not re-add it). Aaron-authored blocks are
+> marked ✍️; images downloaded to `analysis/casf_mutagenesis/figures/lark_user/`.
 >
-> **Never `docs +update --command overwrite` this doc** — it would destroy that
-> work and every uploaded image. Re-publish only with `block_replace` scoped to a
+> **Never `docs +update --command overwrite` this doc** — it would destroy the Lark
+> formatting and every uploaded image. Re-publish only with `block_replace` scoped to a
 > block id this file authored, after a `docs +fetch --detail with-ids` diff.
 >
 > **Local draft for review.** Merges the main idea doc (`Kg1hdTzdBoHEy9xlxANuIKqxtOh`)
@@ -336,6 +335,9 @@ destroyed:
 ![paired rmsd, inv](../analysis/casf_mutagenesis/figures/paired_rmsd_inv.png)
 ![paired rmsd, rem](../analysis/casf_mutagenesis/figures/paired_rmsd_rem.png)
 ![paired rmsd, pack](../analysis/casf_mutagenesis/figures/paired_rmsd_pack.png)
+![user figure, 3.4b (1)](../analysis/casf_mutagenesis/figures/lark_user/s34b_1.png)
+![user figure, 3.4b (2)](../analysis/casf_mutagenesis/figures/lark_user/s34b_2.png)
+![user figure, 3.4b (3)](../analysis/casf_mutagenesis/figures/lark_user/s34b_3.png)
 
 - **Below the horizontal line = memorised** (still native on a pocket that no longer exists —
   the bad outcome). **Above it = the ligand moved** (desired).
@@ -369,6 +371,114 @@ overlaid figure's rate is pooled across variants and matches no single CSV row.
 > signal is sequence-similarity-driven rather than pure lookup. The co-folding drop is
 > ~14–30% relative and has **not** been tested for significance; a paired test across the
 > three variants is the next step.
+
+### 3.4c Case Study
+
+> ✍️ **Authored by Aaron directly in the Lark doc (2026-09-04);** synced back here
+> 2026-09-04. Edit in Lark, not here, or re-sync deliberately.
+
+#### 1. Special zero-mutation case
+
+```
+Path:
+analysis/casf_mutagenesis/figures/structures/<system>/<system>_contact.png
+17 systems now, all 4×4. Same directory holds view.pml (interactive), 16 per-scene PNGs, and manifest.json.
+Newly rendered representatives: 2brb, 4dld, 4gid, 2vkm. Existing set covers the low end (4eo8, 3u5j) and mid-range.
+
+Reproducible selection:
+$CONTRASCF_PY .../33_render_mutation_views.py --pick extremes --limit 6 --render --contact-sheet
+# low-mutation  -> 4eo8(0) 2brb(1) 3u5j(1) 2wtv(2) 3e92(2) 3uev(2)
+# high-mutation -> 1z6e(9) 2fvd(9) 4dld(9) 1qf1(10) 4gid(11) 2vkm(12)
+
+Gated on a complete 4×4 grid, Cα fit < 3 Å, and all four methods solving WT — so panel
+differences are the mutation, not missing data or a broken frame.
+
+The one-line summary the figures make visible: at 1 mutation everything holds the pose;
+at 12 mutations everything fails, co-folding included. The memorization result lives in
+the middle of that curve, where the median CASF pocket (5 residues) sits.
+
+4eo8 is worth keeping as a permanent control — 0 mutations, so co-folding returns
+bit-identical RMSDs across all four columns (0.67/0.67/0.67/0.67), which validates the
+pipeline is deterministic, while SurfDock still drifts 5.2 Å purely from the
+crystal→predicted receptor swap.
+```
+
+```
+ZERO-mutation systems (generation no-op, TODO 4d): ['3mss', '4eo8']
+With 0 mutations the receptor sequence is unchanged, so ANY wt->variant
+change is pure receptor-provenance artifact (crystal wt vs AF3-predicted mutant)
+
+  system  method        wt    rem   pack    inv   interpretation
+  3mss    icm        10.54  10.54  10.53  10.54   unchanged (correct)
+  3mss    surfdock    1.61   7.04   7.02   7.09   DRIFT 5.5 A = provenance artifact
+  3mss    gnina      10.57   9.82  10.09  10.07   DRIFT 0.8 A = provenance artifact
+  3mss    unidock2    2.52   2.56   3.47   2.62   DRIFT 1.0 A = provenance artifact
+  3mss    boltz2      2.15   2.15   2.15   2.15   unchanged (correct)
+  3mss    af3msa      2.33   2.33   2.33   2.34   unchanged (correct)
+
+  4eo8    icm         1.10   0.93   0.92   0.95   unchanged (correct)
+  4eo8    surfdock    0.99   6.22   6.22   4.53   DRIFT 5.2 A = provenance artifact
+  4eo8    gnina       1.03   1.14   1.20   1.14   unchanged (correct)
+  4eo8    unidock2    1.13   2.52   1.11   2.21   DRIFT 1.4 A = provenance artifact
+  4eo8    boltz2      0.67   0.67   0.67   0.67   unchanged (correct)
+  4eo8    af3msa      0.93   0.93   0.93   0.93   unchanged (correct)
+```
+
+![zero-mutation contact grid](../analysis/casf_mutagenesis/figures/lark_user/casestudy_zeromut_grid.png)
+
+#### 2. Representative systems
+
+1. **Cα fit < 3 Å, and all four methods solving WT** — so panel differences are the
+   mutation and nothing else. **69 systems qualify.**
+2. **Minimal perturbation — nothing moves**
+
+![minimal perturbation, rates](../analysis/casf_mutagenesis/figures/lark_user/casestudy_minimal_table.png)
+![minimal perturbation, grid](../analysis/casf_mutagenesis/figures/lark_user/casestudy_minimal_grid.png)
+
+3. **Maximal perturbation — everything collapses, co-folding included**
+
+![maximal perturbation, rates](../analysis/casf_mutagenesis/figures/lark_user/casestudy_maximal_table.png)
+![maximal perturbation, grid](../analysis/casf_mutagenesis/figures/lark_user/casestudy_maximal_grid.png)
+
+#### 3. Protonation
+
+**The academic name.** Adding hydrogens to a structure is **protonation** (or *hydrogen
+placement*). The non-trivial part isn't placing them geometrically — it's deciding *which*
+ones exist:
+
+| sub-problem | name | canonical tool |
+|---|---|---|
+| which ionizable groups are charged at pH | protonation-state / titration-state assignment | PDB2PQR + **PROPKA** (Olsson 2011), H++ |
+| His tautomer choice (HID / HIE / HIP) | tautomer assignment | same |
+| Asn/Gln/His 180° amide flips | flip correction / H-bond network optimization | **Reduce** (Word et al., *JMB* 1999) |
+| the whole thing, in a docking context | **receptor preparation** / structure preparation | Protein Prep Wizard, `prepare_receptor4.py`, OpenBabel `-p 7.4` |
+
+Worth knowing: AutoDock's preparation produces a **united-atom** ("polar hydrogens only")
+receptor — nonpolar H are merged into their heavy atoms. That's directly relevant below.
+
+**Was stripping the right call? Two different questions.**
+
+- **For the figure — yes, unambiguously.** It's display normalization. Every reported RMSD
+  is heavy-atom, so nothing quantitative moves, and the WT panel was rendering ~2× the
+  sticks of its own mutant panels for a reason that has nothing to do with the pocket.
+- **As a scientific fix — it isn't one, and I should not have implied it was.** Stripping
+  makes the arms *look* comparable; it doesn't make the docking inputs comparable. That
+  asymmetry is still there in what the engines were actually given.
+
+**Does the asymmetry matter to the engines? Measured, partially.** GNINA tested directly —
+same receptor, protonated vs stripped, same crystal ligand:
+
+| system | Vina affinity (with H → no H) | CNNscore |
+|---|---|---|
+| `1e66` | −11.43865 → **−11.43865** | 0.963 → 0.969 |
+| `3u5j` | −8.45888 → **−8.45888** | 0.946 → 0.943 |
+| `2brb` | −7.70226 → **−7.70226** | 0.926 → 0.926 |
+
+Vina's affinity is **bit-identical** — expected, since the Vina scoring function is
+united-atom and ignores explicit hydrogens by construction (Trott & Olson 2010). The CNN
+moves ~0.006. Negligible for the Vina family.
+
+---
 
 ### 3.5 Deep dives: the three heads dissociate ✅
 
@@ -562,7 +672,10 @@ PIGNet; labels from PLIP).
 > change) and the apparent training "gap" was **pose-mediated** — a fixed-pose eval showed the head
 > sitting at its warm-start value.
 
-![typed vs pooled](../.claude/worktrees/counterfold/docs/figures/fig3_delta3_typed_vs_pooled.png)
+![user figure, 4.2](../analysis/casf_mutagenesis/figures/lark_user/s42_user_figure.png)
+
+> ✍️ Aaron replaced our `fig3_delta3_typed_vs_pooled.png` with this figure in Lark
+> (2026-09-04). Do not re-add the old one.
 
 ### 4.3 Route 2 — `L_pose` pose-divergence loss ❌ REFUTED
 
@@ -802,3 +915,104 @@ claim, these would harden it)
 decoy-pocket and pocket-redirection tests ("the paper tests perturbations that destroy
 binding but never ones that create or redirect it"); energy minimisation post-prediction;
 pocket-based vs blind docking; testing GPCR/kinase targets.
+
+---
+
+## 5.6 Possible future directions
+
+> ✍️ **Authored by Aaron directly in the Lark doc (2026-09-04);** synced back here
+> 2026-09-04. Edit in Lark, not here, or re-sync deliberately.
+
+1. **Understand SurfDock better**, so that we can combine it to have
+   1. accurate pose **+** accurate classification head
+
+**SurfDock's motivation for using the molecular surface**
+
+```
+So, for the mechanism of the SurfDock method, why does it take both surface-residue
+interaction and surface-to-surface interaction into account, given that the molecular
+surface is constructed from the pocket residues?
+
+The premise is right about the geometry but there is a gap in it. The surface is generated
+by rolling a probe over the all-atom structure with MSMS, following the MaSIF recipe. The
+residue graph the network actually sees has one node per residue, placed at the Ca. So the
+mesh is not a re-encoding of the residue graph. It is the only place all-atom,
+side-chain-level geometry enters the model at all, and the residue graph is the only place
+sequence identity and the ESM-2 embedding enter. Neither is recoverable from the other
+inside the network.
+
+That splits the question into two, with different answers.
+
+Why residue-to-surface, if the surface came from those residues? The mesh vertices carry
+Poisson-Boltzmann electrostatics, hydropathy, shape index, and donor / free-electron flags.
+None of those say which amino acid a vertex belongs to, or where it sits in the sequence.
+The projection layer is what writes residue identity and evolutionary context onto the
+mesh. It matters more than it looks, because of the ordering in the architecture: residues
+talk to residues, then residues talk to the surface, and only then does anything talk to
+the ligand. The ligand never has an edge to a residue node. So this layer is the sole path
+by which sequence information can reach the ligand, and cutting it would leave the pocket
+described by pure physicochemistry with no evolutionary signal. That signal is presumably
+what carries the generalization to unseen proteins.
+
+Why surface-to-surface, if the residue graph already connects everything? Because the two
+edge sets propagate along different metrics. Residue-residue and residue-surface edges are
+Euclidean radius graphs, cut at 15 A with at most 30 neighbours. Surface-surface edges come
+from the MSMS triangulation, so messages travel along the surface itself. Two vertices can
+be 3 A apart in space and far apart across the mesh — for instance on facing lips of a
+narrow cleft, or on either side of a thin wall between subpockets. Only the geodesic route
+distinguishes those cases, and pocket complementarity is a property of the surface as a
+two-dimensional manifold. This is the core MaSIF idea.
+
+There is a second reason. Shape index at one vertex is a pointwise curvature number. It
+only becomes a description of a groove once it is pooled over a connected patch, and the
+mesh convolution is what pools it. The surface edges also carry a relative-coordinate
+vector rather than just a distance, so the tensor-product convolution sees direction. That
+is how the network encodes which way the surface faces, which is exactly what it needs to
+place the ligand on the correct side.
+
+One caveat worth stating plainly. This is the architectural rationale, not a measured
+result. I did not see an ablation in the main text, methods, or extended data that removes
+either layer and reports the cost. So the necessity of each is argued from design and from
+the MaSIF and DeepDock lineage, not demonstrated component by component.
+```
+
+**MSMS: Maximal Speed Molecular Surface**
+
+```
+MSMS is a program, not a method inside SurfDock. It stands for Maximal Speed Molecular
+Surface, written by Sanner and colleagues and published in Biopolymers in 1996. The paper
+cites it as reference 81. It is the standard tool for turning a set of atomic coordinates
+into a triangulated surface, and MaSIF used it first, which is why SurfDock inherits it.
+
+What it computes is the solvent-excluded surface, also called the Connolly surface. Three
+surfaces get confused here and the difference matters:
+
+- Van der Waals surface. Just the union of the atomic spheres. Full of narrow crevices no
+  molecule could enter.
+- Solvent-accessible surface. Traced by the probe's centre as it rolls, so every atomic
+  radius is inflated by the probe radius. It sits well outside the actual atoms.
+- Solvent-excluded surface. Traced by the probe's inward-facing side. This is what MSMS
+  returns.
+
+The probe is a sphere roughly the size of a water molecule, about 1.5 A. Rolling it
+produces three kinds of patch: convex where it touches one atom, saddle-shaped where it
+bridges two, and concave reentrant where it seats against three. Those reentrant patches
+are the interesting part for docking. They span gaps too small for water to enter, so the
+boundary comes out smoothed rather than jagged. That is a large part of what the paper
+means when it calls the surface a softer boundary than fixed atoms.
+
+The output is a mesh with vertices, faces, and normals. Those vertices become the surface
+nodes, and the triangulation edges become the surface-to-surface edges described earlier.
+
+Worth knowing if you ever run this pipeline: MSMS is an old closed-source binary and it is
+fragile. It fails outright on some structures and returns non-manifold or self-intersecting
+meshes on others. That is why SurfDock passes the result through PyMesh before using it,
+and it is the concrete reason surface generation is the brittle step in the preprocessing
+chain.
+```
+
+> 🔗 **Connects to two open items.** The MSMS fragility above is the mechanism behind
+> §5.2's unexplained *"8 SurfDock cells fail with 0 graphs"* — non-manifold meshes are
+> exactly the failure class described. It is also why TODO 14 (SurfDock on CARC) is blocked
+> on PyMesh, which is the repair step in that chain.
+
