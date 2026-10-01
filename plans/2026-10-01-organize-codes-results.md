@@ -47,13 +47,52 @@ three places: `analysis/src/loaders.py`, `analysis/scripts/13_run_surfdock.py`
 - **Pre-condition:** S1 committed.
 - **Action:** commit the 4 untracked scripts, 12 journal entries, `experiments/`; open a PR `fix/af3-multichain-and-data-audit` → main. `worktree-counterfold` stays separate.
 - **Post-condition:** working tree clean; PR open with a reviewable summary.
-- **Status:** pending
+- **Status:** done (2026-10-01) — tree clean; PR https://github.com/AaronXu9/contrasCF/pull/1 open, **awaiting user review/merge**.
 
 ### S3 — Restructure into three arms + shared core
 - **Pre-condition:** S2 merged (or restructure branch cut from the S2 head).
 - **Action:** extract the 3 cross-arm dependencies into a shared core; renumber scripts into stages; split per-arm result tables; one notebook location; retire `SURFDOCK_FIX.md` into docs. Update CARC sbatch scripts and the `dockstrat`/`contrascf-casf` skills in the same commit as each rename.
 - **Post-condition:** every arm's headline regenerates from its new path and matches the pre-restructure CSVs byte-for-byte or numerically; one CARC dry run passes.
 - **Status:** pending
+
+### S3 design (written 2026-10-01, awaiting go-ahead)
+
+**Keep** the package names `casf_mutagenesis` and `ligand_mutagenesis`: renaming them breaks every import, doc and skill for little gain. Restructure inside them.
+
+**1. Shared core — `analysis/core/`** (removes every cross-arm reach-in):
+
+| new module | from | why |
+|---|---|---|
+| `core/ligand_rmsd.py` | `casf_mutagenesis/analysis.py` `_atom_correspondences`, `_matched_rmsd`, `_bestfit_rmsd` + `gnina_analysis.py` `_mcs_match_indices` | ONE atom-correspondence implementation for co-folding and docking. Today's bug lived in only one of two matchers; they must not diverge again |
+| `core/loaders.py` | `analysis/src/loaders.py` | imported by the pocket arm |
+| `core/surfdock_engine.py` | helpers in `analysis/scripts/13_run_surfdock.py` | loaded BY FILE PATH by `14_run_surfdock_variants.py` |
+| `core/reference_smiles.py` | paper SMILES in `analysis/src/config.py` | used by the ligand arm's verify gate |
+
+Old locations re-export from `core/` so the paper-reproduction arm keeps running unchanged.
+
+**2. Paper-reproduction arm** — move `analysis/src/` + `analysis/scripts/` → `analysis/paper_repro/{lib,scripts}/`. Stays fully regenerable (memory: paper-reproduction-arm).
+
+**3. Scripts grouped by stage, renumbered inside each stage** (pocket arm, 43 scripts; collisions at 10/11/12/34 disappear):
+
+| stage | pocket-arm scripts (current numbers) |
+|---|---|
+| `build/` | 00, 01, 02, 10_build_mutant_docking, 11_build_mek1, 25, 26, 37, audit_mutation_presence |
+| `run/` | 03, 04, 06, 07, 08, 11_run_unidock2, 12_run_mek1, 14, 27, 28, 36 |
+| `analyze/` | 05 → `analyze_cofold.py` (**default scope becomes `full`**; sbatch set `subset20` explicitly), 09, 12_analyze_docking, 15–22, 30, 34_validate, 35 |
+| `figures/` | 10_plot_affinity, 13, 29, 31, 32, 33, 34_plot_three_heads |
+| `export/` | 23, 24 |
+
+Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.md` (old → new) so historical journal references still resolve; journal entries themselves stay immutable.
+
+**4. Per-arm result tables.** `12_analyze_docking_engines.py` writes ligand rows to `ligand_mutagenesis/outputs/docking_results_ligand.csv` instead of the pocket arm's table with a `module` column. Consumers updated in the same commit.
+
+**5. Housekeeping.** `docs/lab_notebook/` (1 entry) → `journal/`; top-level `SURFDOCK_FIX.md` (contains retracted advice) → `docs/archive/` behind a banner.
+
+**Same-commit updates for every rename:** 8 `slurm/*.sh`, `env/*.sh`, the `dockstrat` and `contrascf-casf` skills, and current docs (`casf_overview`, `casf_mutagenesis`, `ligand_mutagenesis`, `data_store_map`, `data_prep_todo`, `project_notes`). Historical specs/plans under `docs/superpowers/` are left as written.
+
+**Verification gate (S3 post-condition):** from the new paths, regenerate every arm's analysis and diff against the S1 frozen CSVs (`results_full`, `memorization_full`, `paired_*_full`, `docking_results`, `results_ligand`, `memorization_ligand`, paper arm `analysis/results/all/results.csv`): numerically identical. Then on CARC: `git pull` in the worktree, import check, and one `--array=0` dry run of each touched sbatch.
+
+**Branching:** cut `restructure/three-arms` from the S2 head. If PR #1 changes in review, rebase before merging.
 
 ### S4 — Results index
 - **Pre-condition:** S3 done.
