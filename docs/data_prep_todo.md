@@ -31,6 +31,8 @@ map, machine-verified by `env/verify_data_store_map.sh` (**40/40 PASS**, 2026-08
 | 12 | docking arm never extended to the 30 recovered receptors | **medium** | **new** — docking covers 251 systems vs co-folding's 285; cross-family comparisons run on unequal denominators |
 | **13** | **complete inventory of unresolved failure cells** (every method's short `n`) | **medium** | **new — mostly root-caused.** Boltz-2's 22 fully explained (12 over an 800 aa cap + 10 = item 4f); AF3+MSA 10/13; docking mutant gap *inherits* it. **Open:** SurfDock's 8 "0 graphs", ICM's 7 unproduced, 3 AF3+MSA singletons |
 | **14** | **configure SurfDock on CARC to run** (PyMesh blocker) | **medium** | **new (2026-09-04)** — env/weights/arrays/crop-fix all in place; blocked ONLY on PyMesh, absent from every CARC env and un-transplantable (glibc 2.28 vs 2.34). Sweeps stay lab-only until built |
+| **15** | **ligand-arm SurfDock invalid: wrong pocket footprint** | **high** | **open (2026-10-01)** — input `ligand.sdf` is an RDKit embedding 22–173 Å off-site; SurfDock's crop follows its orientation. WT 0.175 vs 0.876 on identical complexes. Re-run with crystal pose as pocket reference |
+| **16** | **co-folding ligand-variant RMSD used file-order atom mapping** | **high** | **DONE (2026-10-01)** — `_atom_correspondences` fix; every ligand-arm variant RMSD regenerated; protein arm unaffected. Derived ligand-axis confidence tables regenerated; June ligand-axis claim needs re-reading |
 
 **Roots**
 
@@ -1060,3 +1062,59 @@ arm docks into the crystal receptor on both hosts, so they should agree closely.
 and 21/249 protein-arm WT cells exceed 4 Å. Do not read that as a failure.)
 
 **Until this is done, run whole-pipeline SurfDock sweeps on the lab box.**
+
+
+---
+
+## 15. Ligand-arm SurfDock was given the wrong pocket footprint — OPEN (2026-10-01)
+
+Full analysis: `journal/2026-10-01-surfdock-ligand-arm-input-footprint.md`.
+
+`ligand_mutagenesis/build.py` writes a fresh RDKit embedding as `docking/ligand.sdf`
+for every variant. GNINA and UniDock2 take the site from `box.json` (identical across
+arms) and only use the ligand as a starting conformer, so they are fine. SurfDock
+also uses the ligand's atom positions: `_translate_ligand_to_pocket`
+(`analysis/scripts/13_run_surfdock.py:149`) moves the centroid onto the pocket but
+keeps the embedding's arbitrary orientation, and the interface crop keeps mesh
+faces within 3 Å of those atoms. The model saw a random footprint.
+
+| engine | protein-arm WT < 2 Å | ligand-arm WT < 2 Å |
+|---|---|---|
+| SurfDock | 218/249 = 0.876 | **43/246 = 0.175** |
+
+**Until fixed: do not quote any ligand-arm SurfDock number.** Rows stay in
+`docking_results.csv` / `memorization_ligand.csv` but are excluded from conclusions.
+
+**Proposed fix:** separate "pocket reference ligand" (the crystal pose, shared by
+all variants of a system) from "ligand to dock" (the variant) in
+`14_run_surfdock_variants.py`, then re-run ~1300 cells (~13 GPU-h, lab only — see
+item 14). Acceptance: ligand-arm WT within 0.05 of the protein arm's 0.876 on the
+same systems, before any variant is read.
+
+Secondary, not a bug: the protein arm docks WT from the crystal conformer, the
+ligand arm from an RDKit conformer, which plausibly explains GNINA 0.625 vs 0.729
+and UniDock2 0.446 vs 0.578 on WT. State it in any cross-arm docking comparison.
+
+---
+
+## 16. Co-folding ligand-variant RMSD used file-order atom mapping — DONE (2026-10-01)
+
+Full analysis: `journal/2026-10-01-cofold-ligand-variant-rmsd-mapping.md`.
+
+`_matched_rmsd` / `_bestfit_rmsd` in `analysis/casf_mutagenesis/analysis.py` threw
+away valid substructure matches whenever crystal and predicted ligands differed in
+heavy-atom count, then paired atoms by file order while reporting a full match.
+Every ligand-mutagenesis variant was affected (Boltz-2 since 2026-05-23):
+halo_F_1 retention read 0.03 instead of 0.82–0.90. Replaced by
+`_atom_correspondences` (superset / subset / MCS modes, symmetry-enumerated,
+raises instead of guessing), gated by `cofold-variant-rmsd-fix-gate`.
+
+Regenerated: `results_ligand.csv`, every ligand-arm product of
+`07_confidence_response.py`, `figures/conf_aff_rmsd_ligand.*`. The corrected
+picture reverses the old one — Boltz-2 retains the pose in 504 adversarial cells
+and moves it in 224 (was 20 / 756), and confidence ranks good vs bad poses at
+AUROC 0.87 on variants (was 0.59).
+
+**Not affected:** the protein arm, all docking numbers, the paper-reproduction arm
+(its own MCS pairing), the Lark draft and `casf_confidence.md` (pocket axis only).
+**Needs re-reading:** `journal/2026-06-30-three-head-dissociation.md` item 8.

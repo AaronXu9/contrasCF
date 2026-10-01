@@ -1,0 +1,34 @@
+========================================================================
+# 2026-10-01T01:45:52-07:00  exit_code: 0  wall: 0.487s  rss: 129.4MB  gpu: 0
+$ /home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/ligand_mutagenesis/scripts/08_retention_table.py
+--- stdout ---
+wrote /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/memorization_ligand.csv (75 rows)
+wrote /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/retention_by_dheavy.csv
+delta_heavy_stratum      1      2  <=0    >=3
+method                                       
+AF3+MSA              0.034  0.015  NaN  0.005
+Boltz2               0.037  0.000  NaN  0.000
+GNINA                0.709  0.278  0.0  0.223
+SurfDock             0.468  0.294  0.5  0.100
+UniDock2             0.653  0.219  NaN  0.104
+
+--- stderr ---
+
+========================================================================
+========================================================================
+# 2026-10-01T02:17:59-07:00  exit_code: 0  wall: 0.454s  rss: 129.4MB  gpu: 0
+$ /home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/ligand_mutagenesis/scripts/08_retention_table.py
+--- stdout ---
+wrote /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/memorization_ligand.csv (75 rows)
+wrote /mnt/katritch_lab2/aoxu/contrasCF/analysis/ligand_mutagenesis/outputs/retention_by_dheavy.csv
+delta_heavy_stratum      1      2  <=0    >=3
+method                                       
+AF3+MSA              0.899  0.400  NaN  0.318
+Boltz2               0.820  0.424  NaN  0.333
+GNINA                0.709  0.278  0.0  0.223
+SurfDock             0.468  0.294  0.5  0.100
+UniDock2             0.653  0.219  NaN  0.104
+
+--- stderr ---
+
+========================================================================

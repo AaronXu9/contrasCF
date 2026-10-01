@@ -33,7 +33,6 @@ sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 import gemmi  # noqa: E402
 import numpy as np  # noqa: E402
 from rdkit import Chem  # noqa: E402
-from rdkit.Chem import rdFMCS  # noqa: E402
 
 from Bio.SVDSuperimposer import SVDSuperimposer  # noqa: E402
 
@@ -359,120 +358,83 @@ def _predicted_ligand(
 # RMSD with symmetry / atom-mapping
 # ---------------------------------------------------------------------------
 
-_CORR_CACHE: dict = {}
-
-
-def _topology_key(m: Chem.Mol) -> tuple:
-    """Exact, index-preserving topology fingerprint (coords excluded).
-
-    Two mols with the same key have identical atom indexing, so a cached index
-    correspondence is valid for both. A cell's poses share topology, so the
-    expensive MCS runs once per cell instead of 15 times."""
-    atoms = tuple((a.GetAtomicNum(), a.GetIsAromatic(), a.GetFormalCharge())
-                  for a in m.GetAtoms())
-    bonds = tuple(sorted((b.GetBeginAtomIdx(), b.GetEndAtomIdx(),
-                          b.GetBondTypeAsDouble()) for b in m.GetBonds()))
-    return atoms, bonds
-
-
-def _atom_correspondences(
-    crystal_heavy: Chem.Mol, pred_heavy: Chem.Mol, max_matches: int = 200,
-) -> tuple[list[tuple[list[int], list[int]]], str]:
-    key = (_topology_key(crystal_heavy), _topology_key(pred_heavy), max_matches)
-    hit = _CORR_CACHE.get(key)
-    if hit is None:
-        hit = _atom_correspondences_uncached(crystal_heavy, pred_heavy, max_matches)
-        _CORR_CACHE[key] = hit
-    return hit
-
-
-def _atom_correspondences_uncached(
-    crystal_heavy: Chem.Mol, pred_heavy: Chem.Mol, max_matches: int = 200,
-) -> tuple[list[tuple[list[int], list[int]]], str]:
-    """All symmetry-equivalent heavy-atom correspondences crystal ↔ pred.
-
-    Returns ([(crystal_idx, pred_idx), ...], mode). Each pair of equal-length
-    index lists says crystal_heavy atom crystal_idx[k] corresponds to
-    pred_heavy atom pred_idx[k]. mode is one of
-      "pred_superset"    crystal is a substructure of pred (identical ligand,
-                         or a variant that ADDS atoms: halogenation, methylation)
-      "crystal_superset" pred is a substructure of crystal (variant REMOVES atoms)
-      "mcs"              neither; maximum common substructure (charge swaps)
-      "none"             no usable correspondence.
-
-    Replaces logic that, once the two ligands differed in heavy-atom count,
-    discarded every valid substructure match and paired atoms by FILE ORDER
-    while reporting a full match. That silently corrupted every ligand-
-    mutagenesis variant (top-1 RMSD ~5-6 Å on a one-atom fluorine swap whose
-    true RMSD is ~0.5 Å). Postmortem: journal/2026-10-01-cofold-ligand-variant-
-    rmsd-mapping.md. Identical-ligand cells (the whole protein arm) take the
-    "pred_superset" path with equal sizes and get exactly the matches they got
-    before.
-    """
-    nc, npd = crystal_heavy.GetNumAtoms(), pred_heavy.GetNumAtoms()
-    kw = dict(useChirality=False, uniquify=False, maxMatches=max_matches)
-    m = pred_heavy.GetSubstructMatches(crystal_heavy, **kw)
-    if m:
-        return [(list(range(nc)), list(t)) for t in m], "pred_superset"
-    m = crystal_heavy.GetSubstructMatches(pred_heavy, **kw)
-    if m:
-        return [(list(t), list(range(npd))) for t in m], "crystal_superset"
-    res = rdFMCS.FindMCS(
-        [crystal_heavy, pred_heavy],
-        atomCompare=rdFMCS.AtomCompare.CompareElements,
-        bondCompare=rdFMCS.BondCompare.CompareAny,
-        timeout=10, completeRingsOnly=False,
-    )
-    if res.numAtoms < 3 or not res.smartsString:
-        return [], "none"
-    patt = Chem.MolFromSmarts(res.smartsString)
-    if patt is None:
-        return [], "none"
-    cm = crystal_heavy.GetSubstructMatches(patt, **kw)
-    pm = pred_heavy.GetSubstructMatch(patt)
-    if not cm or not pm:
-        return [], "none"
-    # Fix the pred side, enumerate crystal symmetry: covers the equivalent
-    # mappings without a combinatorial product.
-    return [(list(c), list(pm)) for c in cm], "mcs"
-
-
 def _matched_rmsd(
     crystal_mol: Chem.Mol, pred_xyz: np.ndarray, pred_mol: Chem.Mol,
 ) -> tuple[float, int]:
     """Return (RMSD, n_matched_heavy) between the crystal ligand and the
     predicted ligand whose heavy-atom coords have been transformed into the
-    crystal frame. In-place: no superposition of the ligand itself.
+    crystal frame.
 
-    Minimum over all symmetry-equivalent correspondences from
-    `_atom_correspondences`, computed on the matched atoms only, so variant
-    ligands with extra or missing atoms are scored on their shared scaffold.
-    Raises ValueError when no correspondence exists, so the cell is marked
-    `error` rather than given a meaningless number.
+    Strategy: enumerate substructure matches between pred_mol and crystal_mol;
+    over all matches, take the one minimizing RMSD. Falls back to the trivial
+    1-to-1 mapping (pred[i] ↔ crystal[i]) when no match exists.
     """
+    crystal_xyz = _heavy_coords(crystal_mol)
+    n_c = len(crystal_xyz)
+    n_p = len(pred_xyz)
+    if n_c != n_p:
+        # SMILES round-trip can lose/gain explicit H counts; align on min.
+        n = min(n_c, n_p)
+        pred_xyz = pred_xyz[:n]
+        crystal_xyz = crystal_xyz[:n]
+
     if pred_mol is None:
-        # Legacy path: no RDKit mol for the prediction. Same-order assumption
-        # is only meaningful for identical ligands; refuse otherwise.
-        crystal_xyz = _heavy_coords(crystal_mol)
-        if len(crystal_xyz) != len(pred_xyz):
-            raise ValueError("no RDKit mol for prediction and heavy-atom counts differ")
+        # fallback: assume same atom order
         d = pred_xyz - crystal_xyz
         return float(np.sqrt((d * d).sum() / len(d))), len(d)
 
+    # Map pred → crystal heavy-atom indices
+    crystal_heavy_idx = _heavy_indices(crystal_mol)
+    pred_heavy_idx = _heavy_indices(pred_mol)
+
+    # Build heavy-only RDKit copies for substructure search
     crystal_heavy = Chem.RemoveHs(crystal_mol)
     pred_heavy = Chem.RemoveHs(pred_mol)
-    crystal_pts = _heavy_coords(crystal_heavy)
+
+    matches = pred_heavy.GetSubstructMatches(
+        crystal_heavy, useChirality=False, uniquify=False, maxMatches=200,
+    )
+    if not matches:
+        # Try the other direction (pred is template) — useful when bond
+        # orders differ on aromatics
+        matches = crystal_heavy.GetSubstructMatches(
+            pred_heavy, useChirality=False, uniquify=False, maxMatches=200,
+        )
+        # invert: matches now map crystal heavy idx → pred heavy idx
+        matches = [tuple(range(len(m))) for m in matches]
+
+    if not matches:
+        d = pred_xyz - crystal_xyz
+        return float(np.sqrt((d * d).sum() / len(d))), len(d)
+
+    crystal_pts = _heavy_coords(crystal_heavy)  # heavy-only ordering matches
     pred_pts = _heavy_coords(pred_heavy)
-    pairs, mode = _atom_correspondences(crystal_heavy, pred_heavy)
-    if not pairs:
-        raise ValueError("no atom correspondence between crystal and predicted ligand")
-    best, n_best = float("inf"), 0
-    for ci, pi in pairs:
-        d = pred_pts[pi] - crystal_pts[ci]
-        r = float(np.sqrt((d * d).sum() / len(d)))
-        if r < best:
-            best, n_best = r, len(ci)
-    return best, n_best
+
+    # Translate the pred points: we already passed the transformed heavy coords
+    # but the heavy-only Mol may have a slightly different ordering than the
+    # ligand block. Rebuild pred_xyz aligned with pred_heavy ordering.
+    # The simplest correct approach: re-derive pred coords from the heavy-only
+    # mol's conformer (which was inherited from the original pred_mol whose
+    # conformer we already transformed).
+    n_match_atoms = crystal_heavy.GetNumAtoms()
+    if pred_pts.shape[0] != n_match_atoms or crystal_pts.shape[0] != n_match_atoms:
+        d = pred_xyz - crystal_xyz
+        return float(np.sqrt((d * d).sum() / len(d))), len(d)
+
+    best_rmsd = float("inf")
+    for m in matches:
+        # m: tuple of len n_match_atoms — the i-th crystal heavy atom maps to
+        # m[i] in pred. (When matching pred against crystal as template, that
+        # is the SubstructMatch convention.)
+        try:
+            sel_pred = pred_pts[list(m)]
+        except IndexError:
+            continue
+        d = sel_pred - crystal_pts
+        rmsd = float(np.sqrt((d * d).sum() / len(d)))
+        if rmsd < best_rmsd:
+            best_rmsd = rmsd
+    return best_rmsd, n_match_atoms
 
 
 def _bestfit_rmsd(
@@ -480,23 +442,48 @@ def _bestfit_rmsd(
 ) -> float:
     """Symmetry-corrected Kabsch RMSD between predicted and crystal ligand.
 
-    Same correspondences as `_matched_rmsd`, but each candidate mapping gets an
-    independent rigid-body Kabsch superposition of the matched predicted atoms
-    onto the matched crystal atoms; returns the minimum. Paper-style
-    "conformation-only" RMSD: pocket-blind. NaN when no correspondence exists.
+    Uses the SAME symmetry-aware matcher as `_matched_rmsd` (rdkit substructure
+    enumeration), but for each candidate atom mapping performs an INDEPENDENT
+    rigid-body Kabsch superposition of the predicted heavy coords onto the
+    crystal heavy coords. Returns the minimum RMSD over correspondences.
+
+    This is the paper-style "conformation-only" RMSD: ignores where the ligand
+    sits in the protein, asks only "is the internal heavy-atom geometry right?"
+    Returns NaN if matching fails on both directions.
     """
     crystal_heavy = Chem.RemoveHs(crystal_mol)
     crystal_xyz = _heavy_coords(crystal_heavy)
     if pred_mol is None:
-        if len(crystal_xyz) != len(pred_heavy_xyz):
-            return float("nan")
-        return _kabsch_rmsd(pred_heavy_xyz, crystal_xyz)
+        n = min(len(crystal_xyz), len(pred_heavy_xyz))
+        return _kabsch_rmsd(pred_heavy_xyz[:n], crystal_xyz[:n])
+
     pred_heavy = Chem.RemoveHs(pred_mol)
     pred_xyz = _heavy_coords(pred_heavy)
-    pairs, _ = _atom_correspondences(crystal_heavy, pred_heavy)
-    if not pairs:
-        return float("nan")
-    return min(_kabsch_rmsd(pred_xyz[pi], crystal_xyz[ci]) for ci, pi in pairs)
+    n_match_atoms = crystal_heavy.GetNumAtoms()
+    matches = pred_heavy.GetSubstructMatches(
+        crystal_heavy, useChirality=False, uniquify=False, maxMatches=200,
+    )
+    if not matches:
+        # Bond-order asymmetry: try the other direction; this returns matches
+        # in crystal indexing, so the trivial mapping is the identity.
+        if crystal_heavy.GetSubstructMatches(
+            pred_heavy, useChirality=False, uniquify=False, maxMatches=1
+        ):
+            matches = [tuple(range(n_match_atoms))]
+    if not matches or pred_xyz.shape[0] != n_match_atoms or crystal_xyz.shape[0] != n_match_atoms:
+        n = min(len(crystal_xyz), len(pred_heavy_xyz))
+        return _kabsch_rmsd(pred_heavy_xyz[:n], crystal_xyz[:n])
+
+    best = float("inf")
+    for m in matches:
+        try:
+            sel_pred = pred_xyz[list(m)]
+        except IndexError:
+            continue
+        r = _kabsch_rmsd(sel_pred, crystal_xyz)
+        if r < best:
+            best = r
+    return best if best != float("inf") else float("nan")
 
 
 def _kabsch_rmsd(P: np.ndarray, Q: np.ndarray) -> float:

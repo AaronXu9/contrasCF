@@ -11,8 +11,10 @@ Sibling of `casf_mutagenesis/scripts/05_analyze_subset20.py`. Walks
   - Computes paired Δaffinity vs WT per system for halo / charge / methyl
     variants.
 
-The ligand_mutagenesis module only has Boltz-2 results (no AF3 runs), so the
-output CSVs are Boltz-2-only.
+Scores every co-folding model that has predictions on disk: Boltz-2 and,
+since 2026-09-04, AF3+MSA (run on CARC via slurm/run_af3msa_ligand_carc.sh).
+A model with no CIFs in a cell gets a `missing_cif` row, so its `n` shortfall
+stays visible. Affinity pairing is Boltz-2-only (AF3 has no affinity head).
 
 Outputs (in OUTPUT_ROOT = analysis/ligand_mutagenesis/outputs/):
   - results_ligand.csv          — per-pose data
@@ -50,7 +52,11 @@ def main() -> int:
     systems = [s for s in manifest["systems"] if s["status"] == "ok"]
     print(f"manifest: {len(systems)} ok systems")
 
-    spec = MODEL_FILES["Boltz2"]
+    # Models scored on this arm. Skipped entirely if a model has no predictions
+    # anywhere, so an un-run model never floods the CSV with missing_cif rows.
+    models = [m for m in ("Boltz2", "AF3+MSA")
+              if any(OUTPUT_ROOT.glob(f"*/*/{MODEL_FILES[m]['cif_glob'].format(prefix='*')}"))]
+    print(f"models with predictions: {models}")
     rows: list[PredictionRecord] = []
     n_cells = n_missing = n_ok = 0
 
@@ -63,23 +69,25 @@ def main() -> int:
                 continue
             v_dir = sys_dir_base / v_name
             prefix = f"{pdbid}_{v_name}"
-            cifs = sorted(v_dir.glob(spec["cif_glob"].format(prefix=prefix)))
-            n_cells += 1
-            if not cifs:
-                rows.append(PredictionRecord(
-                    pdbid=pdbid, variant=v_name, model="Boltz2",
-                    pose_idx=0, status="missing_cif",
-                ))
-                n_missing += 1
-                continue
-            for rank, cif in enumerate(cifs):
-                rec = _analyze_single_pose(
-                    pdbid, v_name, "Boltz2", rank, cif, spec, v_dir,
-                    smiles_override=variant_smiles,
-                )
-                rows.append(rec)
-                if rec.status == "ok":
-                    n_ok += 1
+            for model in models:
+                spec = MODEL_FILES[model]
+                cifs = sorted(v_dir.glob(spec["cif_glob"].format(prefix=prefix)))
+                n_cells += 1
+                if not cifs:
+                    rows.append(PredictionRecord(
+                        pdbid=pdbid, variant=v_name, model=model,
+                        pose_idx=0, status="missing_cif",
+                    ))
+                    n_missing += 1
+                    continue
+                for rank, cif in enumerate(cifs):
+                    rec = _analyze_single_pose(
+                        pdbid, v_name, model, rank, cif, spec, v_dir,
+                        smiles_override=variant_smiles,
+                    )
+                    rows.append(rec)
+                    if rec.status == "ok":
+                        n_ok += 1
 
     print(f"cells: {n_cells} ({n_missing} missing CIFs); "
           f"poses analyzed: {n_ok} ok / {len(rows)} total")
@@ -94,7 +102,7 @@ def main() -> int:
     print(f"Per-pose results: {results_path}")
 
     # Paired affinity Δ vs WT — uses rank-0 (top-1-by-confidence) per cell
-    aff_paired = affinity_paired_stats(rows)
+    aff_paired = affinity_paired_stats([r for r in rows if r.model == "Boltz2"])
     if aff_paired:
         paired_path = OUTPUT_ROOT / "paired_affinity_ligand.csv"
         with paired_path.open("w", newline="") as f:

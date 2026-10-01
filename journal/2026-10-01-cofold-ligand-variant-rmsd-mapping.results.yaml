@@ -1,0 +1,4 @@
+summary: "Shared co-folding scorer paired variant-ligand atoms by file order whenever heavy-atom counts differed; every ligand-arm variant RMSD was wrong (halo_F retention 0.03 -> 0.82-0.90 after fix). Fixed with _atom_correspondences; protein arm unaffected."
+status: "done"
+metrics: {}
+completed_at: "2026-10-01T02:20:30-07:00"
