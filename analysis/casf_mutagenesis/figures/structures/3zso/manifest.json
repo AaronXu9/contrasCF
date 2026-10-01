@@ -3,6 +3,36 @@
   "frame": "crystal",
   "reference_ligand": "data/casf2016/crystal_ligands/3zso_ligand.sdf",
   "cells": {
+    "icm": {
+      "wt": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/_icm_poses/3zso/wt/ICM/D_3zso_wt_pose1.sdf",
+        "reported_rmsd_a": 5.386
+      },
+      "rem": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/_icm_poses/3zso/rem/ICM/D_3zso_rem_pose1.sdf",
+        "reported_rmsd_a": 8.457
+      },
+      "pack": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/_icm_poses/3zso/pack/ICM/D_3zso_pack_pose1.sdf",
+        "reported_rmsd_a": 6.762
+      },
+      "inv": {
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
+        "source": "analysis/casf_mutagenesis/outputs/_icm_poses/3zso/inv/ICM/D_3zso_inv_pose1.sdf",
+        "reported_rmsd_a": 7.248
+      }
+    },
     "surfdock": {
       "wt": {
         "aligned": false,
@@ -12,23 +42,23 @@
         "reported_rmsd_a": 4.28
       },
       "rem": {
-        "aligned": true,
-        "ca_rmsd_a": 1.376,
-        "n_ca_paired": 154,
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
         "source": "analysis/casf_mutagenesis/outputs/3zso/rem/surfdock/poses.sdf",
         "reported_rmsd_a": 34.366
       },
       "pack": {
-        "aligned": true,
-        "ca_rmsd_a": 1.277,
-        "n_ca_paired": 154,
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
         "source": "analysis/casf_mutagenesis/outputs/3zso/pack/surfdock/poses.sdf",
         "reported_rmsd_a": 33.654
       },
       "inv": {
-        "aligned": true,
-        "ca_rmsd_a": 1.316,
-        "n_ca_paired": 154,
+        "aligned": false,
+        "ca_rmsd_a": 0.0,
+        "n_ca_paired": null,
         "source": "analysis/casf_mutagenesis/outputs/3zso/inv/surfdock/poses.sdf",
         "reported_rmsd_a": 32.887
       }
@@ -65,6 +95,40 @@
         "ligand_sdf": true,
         "source": "analysis/casf_mutagenesis/outputs/3zso/inv/3zso_inv_model_0.cif",
         "reported_rmsd_a": 1.009
+      }
+    },
+    "af3msa": {
+      "wt": {
+        "aligned": true,
+        "ca_rmsd_a": 1.274,
+        "n_ca_paired": 154,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3zso/wt/af3msa_3zso_wt_model_0.cif",
+        "reported_rmsd_a": 0.835
+      },
+      "rem": {
+        "aligned": true,
+        "ca_rmsd_a": 1.322,
+        "n_ca_paired": 154,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3zso/rem/af3msa_3zso_rem_model_0.cif",
+        "reported_rmsd_a": 0.796
+      },
+      "pack": {
+        "aligned": true,
+        "ca_rmsd_a": 1.294,
+        "n_ca_paired": 154,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3zso/pack/af3msa_3zso_pack_model_0.cif",
+        "reported_rmsd_a": 0.893
+      },
+      "inv": {
+        "aligned": true,
+        "ca_rmsd_a": 1.319,
+        "n_ca_paired": 154,
+        "ligand_sdf": true,
+        "source": "analysis/casf_mutagenesis/outputs/3zso/inv/af3msa_3zso_inv_model_0.cif",
+        "reported_rmsd_a": 0.876
       }
     }
   }

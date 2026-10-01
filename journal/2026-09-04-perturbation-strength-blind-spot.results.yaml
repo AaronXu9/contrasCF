@@ -1,0 +1,6 @@
+summary: "Outcome-only figure selection surfaced 1- and 0-mutation systems as memorization exhibits; retention is dose-dependent so the filter selected the weakest evidence. Also found 6.6% of mutant docking cells have Ca fit >5 A (aggregate impact <=1.4 pts)."
+status: "done"
+metrics:
+  bad_exhibits: 2
+  ca_fit_gt5_frac: 0.066
+completed_at: "2026-09-04T06:18:27-07:00"

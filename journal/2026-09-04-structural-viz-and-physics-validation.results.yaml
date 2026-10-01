@@ -1,0 +1,4 @@
+summary: "Three new scripts: 4x4 PyMOL grid renderer (ICM/SurfDock/Boltz-2/AF3+MSA), PoseBusters+rotamer validator, GNINA 4-arm rescorer. Exported geometry gate reproduces all 8 reported RMSDs on 1e66."
+status: "done"
+metrics: {}
+completed_at: "2026-09-04T06:18:27-07:00"
