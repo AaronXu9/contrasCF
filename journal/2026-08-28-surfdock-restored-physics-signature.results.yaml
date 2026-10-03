@@ -1,0 +1,11 @@
+summary: "SurfDock restored: 87.6% WT <2A (1.06 A median) and the steepest WT->adversarial collapse of any method (+0.842), overturning the retracted 'SurfDock fails on CASF' conclusion."
+status: "logged"
+metrics:
+  surfdock_wt_lt2A: 0.876
+  surfdock_wt_median_rmsd_A: 1.06
+  surfdock_adv_lt2A: "0.026-0.046"
+  surfdock_gap: 0.842
+  gnina_gap: 0.601
+  unidock2_gap: 0.493
+  cells_ok: "956_of_968"
+completed_at: "2026-08-28T04:05:38-07:00"

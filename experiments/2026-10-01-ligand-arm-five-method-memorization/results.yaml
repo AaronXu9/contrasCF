@@ -1,0 +1,8 @@
+summary: "Ligand-arm retention, 4 valid methods: every method dose-dependent in Δheavy (H1); co-folding retains most at Δheavy=1 (AF3+MSA 0.899, Boltz-2 0.820 vs GNINA 0.709, UniDock2 0.653; H2); SurfDock invalid (input footprint)"
+status: "done"
+metrics:
+  af3msa_d1: 0.899
+  boltz2_d1: 0.82
+  gnina_d1: 0.709
+  unidock2_d1: 0.653
+completed_at: "2026-10-01T02:20:08-07:00"

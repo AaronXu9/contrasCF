@@ -1,0 +1,4 @@
+summary: "Ligand-arm SurfDock invalid: input ligand.sdf is an RDKit embedding 22-173 A from the site, SurfDock's interface crop follows its random orientation; WT 0.175 vs 0.876 on identical complexes. Re-run pending (TODO 15)."
+status: "done"
+metrics: {}
+completed_at: "2026-10-01T02:20:30-07:00"

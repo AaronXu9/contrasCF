@@ -179,6 +179,10 @@ def auroc(pos, neg):
 # --------------------------------------------------------------------------- #
 def load():
     df = pd.read_csv(OUT / "results_ligand.csv")
+    # Boltz-2 only. results_ligand.csv also holds AF3+MSA rows since
+    # 2026-10-01; without this filter every (pdbid, variant) group would pool
+    # 10 poses across two models and AF3's missing affinity would leak in.
+    df = df[df.model == "Boltz2"]
     df = df[df.status == "ok"].copy()
     num = ["ligand_rmsd_a", "iptm", "ptm", "ligand_iptm", "complex_plddt",
            "confidence_score", "affinity_pred_value",

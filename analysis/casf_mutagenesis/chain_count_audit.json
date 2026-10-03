@@ -1,0 +1,5021 @@
+[
+  {
+    "sys": "1bcu",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1bcu",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1bcu",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1bzc",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1bzc",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1bzc",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1e66",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1e66",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1e66",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1eby",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1eby",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1eby",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1g2k",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1g2k",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1g2k",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpk",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpk",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpk",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpn",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpn",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1gpn",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h22",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h22",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h22",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h23",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h23",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1h23",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1k1i",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1k1i",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1k1i",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1lpg",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1lpg",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1lpg",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1mq6",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1mq6",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1mq6",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc1",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc1",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc1",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc3",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc3",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nc3",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nvq",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nvq",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1nvq",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o0h",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o0h",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o0h",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o3f",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o3f",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1o3f",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1owh",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1owh",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1owh",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1oyt",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1oyt",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1oyt",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1n",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1n",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1n",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1q",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1q",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1p1q",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1pxn",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1pxn",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1pxn",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8t",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8t",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8t",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8u",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8u",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1q8u",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qf1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qf1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qf1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qkt",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qkt",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1qkt",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1r5y",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1r5y",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1r5y",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1s38",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1s38",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1s38",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1sqa",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1sqa",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1sqa",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1syi",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1syi",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1syi",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1u1b",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1u1b",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1u1b",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1uto",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1uto",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1uto",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1vso",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1vso",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1vso",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1w4o",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1w4o",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1w4o",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1y6r",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1y6r",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1y6r",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1yc1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1yc1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1yc1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydr",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydr",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydr",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydt",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydt",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1ydt",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z6e",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z6e",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z6e",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z95",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z95",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z95",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z9g",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z9g",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "1z9g",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2al5",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2al5",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2al5",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2br1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2br1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2br1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2brb",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2brb",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2brb",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cbv",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cbv",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cbv",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cet",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cet",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2cet",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fvd",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fvd",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fvd",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fxs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fxs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2fxs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2hb1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2hb1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2hb1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2iwx",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2iwx",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2iwx",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j78",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j78",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j78",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j7h",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j7h",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2j7h",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2p4y",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2p4y",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2p4y",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2pog",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2pog",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2pog",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbp",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbp",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbp",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbq",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbq",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbq",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbr",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbr",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qbr",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qe4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qe4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qe4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qnq",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qnq",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2qnq",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2r9w",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2r9w",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2r9w",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v00",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v00",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v00",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v7a",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v7a",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2v7a",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vkm",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vkm",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vkm",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vw5",
+    "var": "rem",
+    "spec_chains": 4,
+    "wt_rec_chains": 4,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vw5",
+    "var": "pack",
+    "spec_chains": 4,
+    "wt_rec_chains": 4,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2vw5",
+    "var": "inv",
+    "spec_chains": 4,
+    "wt_rec_chains": 4,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w4x",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w4x",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w4x",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w66",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w66",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2w66",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wbg",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wbg",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wbg",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2weg",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2weg",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2weg",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wer",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wer",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wer",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wn9",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wn9",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wn9",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wnc",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wnc",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wnc",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wtv",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wtv",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wtv",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wvt",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wvt",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2wvt",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2x00",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2x00",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2x00",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xb8",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xb8",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xb8",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xbv",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xbv",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xbv",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xdl",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xdl",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xdl",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xii",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xii",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xii",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xj7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xj7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xj7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xnb",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xnb",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xnb",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xys",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xys",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2xys",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2y5h",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2y5h",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2y5h",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yfe",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yfe",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yfe",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yge",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yge",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yge",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yki",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yki",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2yki",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2ymd",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2ymd",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2ymd",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zb1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zb1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zb1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zcq",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zcq",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "2zcq",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ag9",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ag9",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ag9",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ao4",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ao4",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ao4",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b1m",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b1m",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b1m",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b27",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b27",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b27",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b5r",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b5r",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b5r",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b68",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b68",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3b68",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3bgz",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3bgz",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3bgz",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3cj4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3cj4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3cj4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coy",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coy",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coy",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coz",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coz",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3coz",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3d6q",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3d6q",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3d6q",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3dd0",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3dd0",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3dd0",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e5a",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e5a",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e5a",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e92",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e92",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e92",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e93",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e93",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3e93",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ehy",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ehy",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ehy",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3c",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3c",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3c",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3d",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3d",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3d",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3e",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3e",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3f3e",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fcq",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fcq",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fcq",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fur",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fur",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fur",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv2",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv2",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3fv2",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g0w",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g0w",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g0w",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g2z",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g2z",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g2z",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g31",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g31",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3g31",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gbb",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gbb",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gbb",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gc5",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gc5",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gc5",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ge7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ge7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ge7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gnw",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gnw",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gnw",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gr2",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gr2",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gr2",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gv9",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gv9",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gv9",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gy4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gy4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3gy4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ivg",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ivg",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ivg",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvr",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvr",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvr",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jvs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jya",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jya",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3jya",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3k5v",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3k5v",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3k5v",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kr8",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kr8",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kr8",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kwa",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kwa",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3kwa",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3lka",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3lka",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3lka",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3mss",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3mss",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3mss",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n76",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n76",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n76",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n7a",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n7a",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n7a",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n86",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n86",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3n86",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nq9",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nq9",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nq9",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nw9",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nw9",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nw9",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nx7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nx7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3nx7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe5",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe5",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3oe5",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozt",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozt",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ozt",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3p5o",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3p5o",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3p5o",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pxf",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pxf",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pxf",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pyy",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pyy",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3pyy",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3qgy",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3qgy",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3qgy",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rlr",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rlr",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rlr",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rr4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rr4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rr4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rsx",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rsx",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3rsx",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ryj",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ryj",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ryj",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3tsk",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3tsk",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3tsk",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u5j",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u5j",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u5j",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8k",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8k",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8k",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8n",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8n",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u8n",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u9q",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u9q",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3u9q",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3udh",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3udh",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3udh",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ueu",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ueu",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ueu",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uev",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uev",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uev",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uew",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uew",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uew",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ui7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ui7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3ui7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uo4",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uo4",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uo4",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3up2",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3up2",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3up2",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3utu",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3utu",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3utu",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uuo",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uuo",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3uuo",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wtj",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wtj",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wtj",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wz8",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wz8",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3wz8",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zdg",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zdg",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zdg",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zso",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zso",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zso",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zt2",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zt2",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "3zt2",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agn",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agn",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agn",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agp",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agp",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agp",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agq",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agq",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4agq",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4bkt",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4bkt",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4bkt",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cig",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cig",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cig",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ciw",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ciw",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ciw",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cr9",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cr9",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cr9",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cra",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cra",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4cra",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4crc",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4crc",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4crc",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddh",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddh",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddh",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddk",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddk",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ddk",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de1",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de1",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de1",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de2",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de2",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de2",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de3",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de3",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4de3",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4djv",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4djv",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4djv",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dld",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dld",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dld",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dli",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dli",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4dli",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e5w",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e5w",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e5w",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e6q",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e6q",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4e6q",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ea2",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ea2",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ea2",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eo8",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eo8",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eo8",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eor",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eor",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4eor",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f09",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f09",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f09",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f2w",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f2w",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f2w",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f3c",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f3c",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f3c",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f9w",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f9w",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4f9w",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gfm",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gfm",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gfm",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gid",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gid",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gid",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gkm",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gkm",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gkm",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gr0",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gr0",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4gr0",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4hge",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4hge",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4hge",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih5",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih5",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih5",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ih7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivb",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivb",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivb",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivc",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivc",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivc",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivd",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivd",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ivd",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j21",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j21",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j21",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j28",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j28",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j28",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j3l",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j3l",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4j3l",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jfs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jfs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jfs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jia",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jia",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jia",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jsz",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jsz",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jsz",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jxs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jxs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4jxs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k18",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k18",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k18",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k77",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k77",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4k77",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4kz6",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4kz6",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4kz6",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4llx",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4llx",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4llx",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4lzs",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4lzs",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4lzs",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0y",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0y",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0y",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0z",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0z",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4m0z",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mgd",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mgd",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mgd",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mme",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mme",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4mme",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ogj",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ogj",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ogj",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qac",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qac",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qac",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qd6",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qd6",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4qd6",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4rfm",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4rfm",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4rfm",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4tmn",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4tmn",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4tmn",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4twp",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4twp",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4twp",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ty7",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ty7",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4ty7",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4u4s",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4u4s",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4u4s",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9c",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9c",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9c",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9h",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9h",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9h",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9i",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9i",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9i",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9l",
+    "var": "rem",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9l",
+    "var": "pack",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4w9l",
+    "var": "inv",
+    "spec_chains": 3,
+    "wt_rec_chains": 3,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4wiv",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4wiv",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4wiv",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4x6p",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4x6p",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "4x6p",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5a7b",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5a7b",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5a7b",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5aba",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5aba",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5aba",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c28",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c28",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c28",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c2h",
+    "var": "rem",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c2h",
+    "var": "pack",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5c2h",
+    "var": "inv",
+    "spec_chains": 2,
+    "wt_rec_chains": 2,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5dwr",
+    "var": "rem",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5dwr",
+    "var": "pack",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5dwr",
+    "var": "inv",
+    "spec_chains": null,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5tmn",
+    "var": "rem",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5tmn",
+    "var": "pack",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  },
+  {
+    "sys": "5tmn",
+    "var": "inv",
+    "spec_chains": 1,
+    "wt_rec_chains": 1,
+    "mut_rec_chains": 1
+  }
+]

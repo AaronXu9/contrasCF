@@ -9,9 +9,16 @@ is delegated to `_run_surfdock_pipeline` from the existing 16-case runner
 `analysis/scripts/13_run_surfdock.py`, loaded via importlib because
 `scripts/` isn't a Python package.
 
-SurfDock is LAB-BOX-ONLY today — CARC doesn't have the SurfDock conda env,
-the model weights, or the precomputed arrays. Don't try to submit this
-via SLURM until those are provisioned.
+Runs on BOTH hosts as of 2026-09-04. CARC has the env at
+/home1/aoxu/.conda/envs/SurfDock_CARC (note /home1, not /project2), weights
+in the SurfDock tree itself, and precomputed_arrays rsynced from lab. Point
+CONTRASCF_SURFDOCK_{ENV,DIR,WEIGHTS,PRECOMPUTED} + CONTRASCF_DOCKSTRAT_ROOT
+at them; env/carc.sh already does. Ready-made job:
+slurm/run_surfdock_ligand_carc.sh.
+
+WARNING: CARC's dockStrat is a separate git history and shipped the PRE-FIX
+surface helper (keep-every-face). Verify the interface crop before trusting
+any CARC sweep -- see the surfdock gotcha in the dockstrat skill.
 
 Env vars:
   CONTRASCF_OUTPUTS_ROOT — which outputs dir to walk. Default:
@@ -39,9 +46,18 @@ import types
 from pathlib import Path
 
 REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
-DOCKSTRAT_ROOT = Path("/mnt/katritch_lab2/aoxu/CogLigandBench")
-SURFDOCK_DIR = "/home/aoxu/projects/SurfDock"
-SURFDOCK_PRECOMPUTED_ARRAYS = "/home/aoxu/projects/precomputed/precomputed_arrays"
+# Host-specific; lab defaults, all overridable so this also runs on CARC.
+DOCKSTRAT_ROOT = Path(os.environ.get(
+    "CONTRASCF_DOCKSTRAT_ROOT", "/mnt/katritch_lab2/aoxu/CogLigandBench"))
+SURFDOCK_DIR = os.environ.get(
+    "CONTRASCF_SURFDOCK_DIR", "/home/aoxu/projects/SurfDock")
+SURFDOCK_PRECOMPUTED_ARRAYS = os.environ.get(
+    "CONTRASCF_SURFDOCK_PRECOMPUTED",
+    "/home/aoxu/projects/precomputed/precomputed_arrays")
+# Full conda PREFIX; a bare name cannot locate the env across hosts
+# (lab: miniconda3/envs/SurfDock, CARC: /home1/aoxu/.conda/envs/SurfDock_CARC).
+SURFDOCK_ENV_PREFIX = os.environ.get(
+    "CONTRASCF_SURFDOCK_ENV", "/home/aoxu/miniconda3/envs/SurfDock")
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
@@ -74,7 +90,8 @@ def _load_runner():
 def discover_cells(outputs_root: Path,
                    variant_filter: set[str] | None,
                    system_limit: int | None,
-                   pdbid_filter: set[str] | None = None) -> list[tuple[str, str, Path]]:
+                   pdbid_filter: set[str] | None = None,
+                   system_start: int = 0) -> list[tuple[str, str, Path]]:
     """Return sorted (pdbid, variant, docking_dir) for every cell that has
     receptor.pdb + ligand.sdf + box.json under
     <outputs_root>/<pdbid>/<variant>/docking/."""
@@ -83,6 +100,10 @@ def discover_cells(outputs_root: Path,
                      if d.is_dir() and not d.name.startswith("_"))
     if pdbid_filter is not None:
         systems = [d for d in systems if d.name in pdbid_filter]
+    # start BEFORE limit, so a job array slices systems[start:start+limit]
+    # and two hosts can split one sweep without overlapping.
+    if system_start:
+        systems = systems[system_start:]
     if system_limit is not None:
         systems = systems[:system_limit]
     for sys_dir in systems:
@@ -153,6 +174,19 @@ def run_cell(pdbid: str, variant: str, dock_dir: Path, runner_mod) -> dict:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
+    # 13_run_surfdock.py sets these in its own main(), which we bypass by
+    # calling _run_surfdock_pipeline directly -- so set them here too or the
+    # SurfDock subprocesses inherit an environment without them.
+    os.environ["PROJECT_ROOT"] = str(DOCKSTRAT_ROOT)
+    os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
+    os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
+    # dockstrat's surfdock_inference._env_prefix reads this to locate the
+    # env's python/accelerate. Without it those resolve to the lab-only
+    # /home/aoxu/miniconda3/envs/SurfDock and every CARC cell dies with
+    # FileNotFoundError on .../bin/python.
+    os.environ["SURFDOCK_ENV_PREFIX"] = SURFDOCK_ENV_PREFIX
+    os.environ["precomputed_arrays"] = SURFDOCK_PRECOMPUTED_ARRAYS
+
     outputs_root = Path(os.environ.get(
         "CONTRASCF_OUTPUTS_ROOT",
         REPO_ROOT / "analysis" / "casf_mutagenesis" / "outputs",
@@ -174,14 +208,24 @@ def main() -> int:
     )
     system_limit = os.environ.get("CONTRASCF_SYSTEM_LIMIT")
     system_limit = int(system_limit) if system_limit else None
+    system_start = int(os.environ.get("CONTRASCF_SYSTEM_START", "0"))
+    # An explicit pdbid list is a selection, not a window: applying the
+    # array slice on top of it silently yields 0 cells and exits 0, which
+    # reads as a successful no-op and burns a queue slot. Selection wins.
+    if pdbid_filter and (system_start or system_limit):
+        print(f"  note: CONTRASCF_PDBID_FILTER is set, so ignoring "
+              f"system_start={system_start} / system_limit={system_limit}")
+        system_start, system_limit = 0, None
 
     print(f"SurfDock variant runner")
     print(f"  outputs_root:    {outputs_root}")
     print(f"  variant_filter:  {variant_filter or '(all)'}")
     print(f"  pdbid_filter:    {pdbid_filter or '(all)'}")
+    print(f"  system_start:    {system_start}")
     print(f"  system_limit:    {system_limit or '(unlimited)'}")
 
-    cells = discover_cells(outputs_root, variant_filter, system_limit, pdbid_filter)
+    cells = discover_cells(outputs_root, variant_filter, system_limit,
+                           pdbid_filter, system_start)
     print(f"  discovered cells: {len(cells)}")
     if not cells:
         print("nothing to do.")

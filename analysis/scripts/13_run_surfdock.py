@@ -29,10 +29,26 @@ import tempfile
 import time
 from pathlib import Path
 
-REPO_ROOT = Path("/mnt/katritch_lab2/aoxu/contrasCF")
-DOCKSTRAT_ROOT = Path("/mnt/katritch_lab2/aoxu/CogLigandBench")
-SURFDOCK_DIR = "/home/aoxu/projects/SurfDock"
-SURFDOCK_PRECOMPUTED_ARRAYS = "/home/aoxu/projects/precomputed/precomputed_arrays"
+# Host-specific locations. Defaults are the lab workstation; every one is
+# overridable so the same code runs on CARC, where SurfDock lives under
+# /project2 and the conda env is /home1/aoxu/.conda/envs/SurfDock_CARC.
+REPO_ROOT = Path(os.environ.get("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF"))
+DOCKSTRAT_ROOT = Path(os.environ.get(
+    "CONTRASCF_DOCKSTRAT_ROOT", "/mnt/katritch_lab2/aoxu/CogLigandBench"))
+SURFDOCK_DIR = os.environ.get(
+    "CONTRASCF_SURFDOCK_DIR", "/home/aoxu/projects/SurfDock")
+SURFDOCK_PRECOMPUTED_ARRAYS = os.environ.get(
+    "CONTRASCF_SURFDOCK_PRECOMPUTED",
+    "/home/aoxu/projects/precomputed/precomputed_arrays")
+# Full conda-env PREFIX (not a bare name): the lab uses miniconda3/envs/SurfDock,
+# CARC uses /home1/aoxu/.conda/envs/SurfDock_CARC, so a name alone cannot locate it.
+SURFDOCK_ENV_PREFIX = os.environ.get(
+    "CONTRASCF_SURFDOCK_ENV", "/home/aoxu/miniconda3/envs/SurfDock")
+# Weights base holding docking/ and posepredict/. On lab these ship inside the
+# dockStrat fork; on CARC they sit in the SurfDock tree itself.
+SURFDOCK_WEIGHTS = os.environ.get(
+    "CONTRASCF_SURFDOCK_WEIGHTS",
+    str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights"))
 
 sys.path.insert(0, str(REPO_ROOT / "analysis" / "src"))
 
@@ -77,10 +93,11 @@ BATCH_SIZE = 40
 def _surfdock_config() -> dict:
     return {
         "surfdock_env": "SurfDock",
+        "surfdock_env_prefix": SURFDOCK_ENV_PREFIX,
         "surfdock_dir": SURFDOCK_DIR,
         "precomputed_arrays": SURFDOCK_PRECOMPUTED_ARRAYS,
-        "diffusion_model_dir": str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights" / "docking"),
-        "confidence_model_dir": str(DOCKSTRAT_ROOT / "forks" / "SurfDock" / "model_weights" / "posepredict"),
+        "diffusion_model_dir": str(Path(SURFDOCK_WEIGHTS) / "docking"),
+        "confidence_model_dir": str(Path(SURFDOCK_WEIGHTS) / "posepredict"),
         "num_gpus": 1,
         "main_process_port": 29510,
         "batch_size": BATCH_SIZE,
@@ -160,15 +177,27 @@ def _translate_ligand_to_pocket(ligand_sdf: Path, pocket_center: tuple[float, fl
 
 
 def _run_inference_with_pocket_center(csv_path: str, esm_pt: str, out_dir: str, config: dict) -> str:
-    """Local SurfDock inference launcher, mirroring dockstrat's _run_inference but
-    with --ligand_to_pocket_center=True appended.
+    """Local SurfDock inference launcher, mirroring dockstrat's _run_inference.
 
-    SurfDock's diffusion sampler uses randomize_position(); without
-    ligand_to_pocket_center=True it adds a Normal(0, tr_sigma_max) translation
-    and lets the model learn translations from there. For OOD adversarial
-    ligands (e.g. propyl-ATP, penta-methyl-glucose) the diffusion can produce
-    pose centroids thousands of Angstroms from the pocket. Anchoring the
-    initial position to the predicted pocket center prevents that runaway.
+    Historically this appended --ligand_to_pocket_center, on the theory that
+    anchoring the diffusion's initial position prevented runaway poses. That
+    was wrong on both counts and the flag is no longer passed:
+
+      * SurfDock's own eval scripts (bash_scripts/test_scripts/*.sh) never
+        pass it.
+      * randomize_position() (utils/sampling.py:33-41) is an if/else, so the
+        flag REPLACES the trained Normal(0, tr_sigma_max=5.0) translational
+        prior with a deterministic delta at the pocket centre -- off-
+        distribution for the reverse diffusion.
+
+    Measured on 1a0q (SurfDock's own test system), rank-1 RMSD:
+        broken surface + flag  8.30 A   |  broken surface, no flag  7.74 A
+        fixed  surface + flag  0.86 A   |  fixed  surface, no flag  0.44 A
+
+    The dominant defect was the missing interface crop in the surface step
+    (see dockstrat _surfdock_surface_helper.py); dropping this flag is the
+    smaller, independent second win. The pocket_center CSV column is still
+    written -- it is simply unused now, and is cheap to keep for diagnostics.
     """
     import subprocess
 
@@ -179,7 +208,9 @@ def _run_inference_with_pocket_center(csv_path: str, esm_pt: str, out_dir: str, 
     env["precomputed_arrays"] = config.get("precomputed_arrays",
         os.path.join(os.path.dirname(surfdock_dir), "precomputed", "precomputed_arrays"))
 
-    accelerate = f"/home/aoxu/miniconda3/envs/{config.get('surfdock_env', 'SurfDock')}/bin/accelerate"
+    env_prefix = config.get("surfdock_env_prefix") or (
+        f"/home/aoxu/miniconda3/envs/{config.get('surfdock_env', 'SurfDock')}")
+    accelerate = os.path.join(env_prefix, "bin", "accelerate")
     cmd = [
         accelerate, "launch",
         "--num_processes", str(config.get("num_gpus", 1)),
@@ -204,7 +235,6 @@ def _run_inference_with_pocket_center(csv_path: str, esm_pt: str, out_dir: str, 
         "--tail_index", "10000",
         "--inference_mode", "evaluate",
         "--wandb_dir", os.path.join(out_dir, "wandb"),
-        "--ligand_to_pocket_center",
     ]
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=surfdock_dir, env=env)
     # Persist stdout + stderr so the actual Python traceback from
@@ -260,8 +290,9 @@ def _run_surfdock_pipeline(case: str, receptor: Path, ligand: Path, work_dir: Pa
     _compute_surface(str(data_dir), str(surface_dir), cfg)
     _build_input_csv(str(data_dir), str(surface_dir), str(csv_path), cfg)
 
-    # Inject pocket_center column (read from box.json) so inference_accelerate.py
-    # populates receptor['pocket_center'] for --ligand_to_pocket_center.
+    # Inject pocket_center column (read from box.json). inference_accelerate.py
+    # reads it into receptor['pocket_center'], but nothing consumes that now
+    # that --ligand_to_pocket_center is no longer passed -- kept for diagnostics.
     import csv as csv_mod
     cx, cy, cz = pocket_center
     with open(csv_path) as fh:
@@ -359,6 +390,7 @@ def main() -> None:
     os.environ["SURFDOCK_DIR"] = SURFDOCK_DIR
     os.environ["SURFDOCK_PRECOMPUTED_ARRAYS"] = SURFDOCK_PRECOMPUTED_ARRAYS
     os.environ["precomputed_arrays"] = SURFDOCK_PRECOMPUTED_ARRAYS
+    os.environ["SURFDOCK_ENV_PREFIX"] = SURFDOCK_ENV_PREFIX
 
     SURFDOCK_OUT_ROOT.mkdir(parents=True, exist_ok=True)
     results = []

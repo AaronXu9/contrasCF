@@ -27,6 +27,9 @@ data/casf2016
 **/*.pyc
 **/_msa_cache/
 **/_*_work/
+# Cached RCSB mmCIFs + control reports for receptor recovery
+# (scripts/25_recover_missing_receptors.py); ~25 MB, regenerable.
+**/_rcsb_cache/
 **/_boltz_work/
 **/_af3_work/
 **/_af3_msa_work/
@@ -48,3 +51,14 @@ data/casf2016
 # --- environment ----------------------------------------------------------
 .env
 *.local.sh
+
+# 33_render_mutation_views.py: per-system PyMOL sessions, aligned PDB/SDFs and
+# per-scene renders are bulky and fully regenerable. Keep only the contact
+# sheets (the publishable figure) and the manifests.
+analysis/casf_mutagenesis/figures/structures/**
+!analysis/casf_mutagenesis/figures/structures/**/
+!analysis/casf_mutagenesis/figures/structures/**/*_contact.png
+!analysis/casf_mutagenesis/figures/structures/**/manifest.json
+
+# SLURM / nohup run logs: per-run, regenerable, and can be large.
+slurm/logs/

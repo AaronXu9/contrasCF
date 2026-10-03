@@ -1,0 +1,6 @@
+summary: "AF3+MSA ligand-arm scoring + SurfDock ingestion gated: Boltz-2 rows unchanged, WT reproduces protein arm (0.835 vs 0.822, concordance 0.987), docking rows unchanged"
+status: "done"
+metrics:
+  wt_concordance: 0.987
+  af3msa_wt_rate: 0.835
+completed_at: "2026-10-01T01:44:35-07:00"

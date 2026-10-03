@@ -1,0 +1,12 @@
+summary: "Co-folding memorization is dose-dependent on pocket size (median 5 mutations): AF3+MSA rem retention 78.3% at 1-2 mutations -> 14.7% at 9+. PoseBusters/rotamer/GNINA checks show retained poses are the CLEAN ones; models carry 60-88% of the true physical penalty."
+status: "done"
+metrics:
+  af3msa_rem_lowmut: 0.783
+  af3msa_rem_highmut: 0.147
+  r_point_biserial: -0.412
+  median_n_mutations: 5
+  pb_retained_rem: 0.88
+  pb_wt: 0.875
+  chi1_outlier_pack: 0.01
+  chi1_outlier_crystal: 0.011
+completed_at: "2026-09-04T06:18:27-07:00"

@@ -18,6 +18,23 @@ export CONTRASCF_AF3_MODEL_DIR=/project2/katritch_223/aoxu/dockStrat/forks/alpha
 
 export CONTRASCF_CUDA_DEVICE=0
 
+# --- SurfDock on CARC -----------------------------------------------------
+# SurfDock IS runnable here (an earlier note claiming otherwise was wrong: it
+# only ever checked /project2/.../conda/envs, /project2/.../envs and
+# ~/miniconda3/envs, and the env actually lives under /home1).
+#   env      : /home1/aoxu/.conda/envs/SurfDock_CARC (torch 2.2.2/cu121, pyg 2.6.1)
+#   source   : /project2/katritch_223/aoxu/projects/SurfDock
+#   weights  : that tree's model_weights/{docking,posepredict,screen} (140 MB)
+#   MSMS/APBS: bundled at comp_surface/tools/transfer/APBS-3.4.1.Linux/bin
+#   arrays   : 6 HIDDEN .npy dotfiles, rsynced from lab 2026-09-04 (413 MB).
+#              Copy them with `rsync -a src/ dst/`; a `cp src/*` glob silently
+#              copies NOTHING because every file starts with a dot.
+export CONTRASCF_SURFDOCK_ENV=/home1/aoxu/.conda/envs/SurfDock_CARC
+export CONTRASCF_SURFDOCK_DIR=/project2/katritch_223/aoxu/projects/SurfDock
+export CONTRASCF_SURFDOCK_WEIGHTS=/project2/katritch_223/aoxu/projects/SurfDock/model_weights
+export CONTRASCF_SURFDOCK_PRECOMPUTED=/project2/katritch_223/aoxu/projects/precomputed/precomputed_arrays
+export CONTRASCF_DOCKSTRAT_ROOT=/project2/katritch_223/aoxu/dockStrat
+
 # Analysis Python: CARC's `boltzina_env` already has rdkit + gemmi +
 # biopython + numpy + pandas + yaml AND the Boltz-2 binary, so we use it
 # for both analysis and Boltz inference. The dedicated rdkit_env at

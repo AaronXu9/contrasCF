@@ -15,7 +15,7 @@ For the deep dives, see the per-topic docs:
 | signal                            | Boltz-2          | AF3 (no MSA)    | AF3+MSA           | GNINA            | UniDock2         | SurfDock  |
 |-----------------------------------|------------------|-----------------|-------------------|------------------|------------------|-----------|
 | **Pocket mutation** (rem/pack/inv) | | | | | | |
-| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | ✓ **full CASF (n=234-244)**; SurfDock fails on these systems — see below |
+| Ligand RMSD vs crystal             | ✓ full CASF (n=229) | subset20 only (n=19) | ✓ full CASF (n=238-239) | ✓ full CASF (n=239) | ✓ full CASF (n=239) | ✓ **full CASF (n=231-249)**, re-run 2026-08-26 after the interface-crop fix |
 | Confidence (iptm/ptm/rs)           | ✓                | ✓               | ✓                 | n/a              | n/a              | confidence in SDF tags |
 | Affinity head (log[IC50] + P)      | ✓ **full CASF**  | — (no head)     | — (no head)       | n/a              | n/a              | n/a       |
 | Best-of-5 poses                    | ✓                | ✓ (subset20)    | ✓ (subset20)      | n/a (single pose)| n/a              | ✓ (top-10) |
@@ -65,47 +65,33 @@ For the figure: see
 
 ---
 
-### SurfDock CASF result (now at full-CASF scale)
+### SurfDock — retraction resolved, result restored (2026-08-28)
 
-SurfDock (the diffusion-based docker) was integrated as a 4th docking
-engine via `analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py`.
-On the full CASF set: **967/968 cells (99.9%)** completed successfully.
-The 1 outlier: a single adversarial-variant cell hit a systematic
-RDKit-strict-parse bug on its cropped pocket PDB (visible in earlier
-subset20 runs as well).
+The earlier "SurfDock fails on CASF (0/244 WT under 2 Å), CASF-2016 is outside its
+training distribution" reading was an artifact of **our own** surface preprocessing —
+`dockstrat`'s helper skipped SurfDock's ligand-proximity interface crop, handing the
+model ~10× the mesh it was trained on. Full diagnosis: [`SURFDOCK_FIX.md`](../SURFDOCK_FIX.md)
+and postmortem `journal/2026-08-28-surfdock-interface-crop.md`.
 
-The actual RMSD numbers, **full CASF (n ≈ 234-244 per variant)**:
+With the crop restored and the full sweep re-run (956/968 cells, 12 excluded):
 
-| variant | n   | <2 Å rate | <4 Å rate | median RMSD |
-|---------|-----|-----------|------------|--------------|
-| wt      | 244 | **0/244**  | 7%         | 6.82 Å       |
-| rem     | 234 | 0/234      | 0.9%       | 8.71 Å       |
-| pack    | 234 | 1/234      | 3.0%       | 7.75 Å       |
-| inv     | 236 | 0/236      | 2.1%       | 8.42 Å       |
+| variant | n | <2 Å (uncond) | <2 Å (**WT-conditioned**) | median RMSD |
+|---|---|---|---|---|
+| wt | 249 | **0.876** | — (1.000 by construction) | **1.06 Å** |
+| rem | 238 | 0.029 | **0.024** | 6.20 Å |
+| pack | 238 | 0.046 | **0.043** | 6.09 Å |
+| inv | 231 | 0.026 | **0.030** | 7.19 Å |
 
-Inspecting individual poses (see subset20 deep-dive): SurfDock's
-diffusion drifts the ligand 4-7 Å from the crystal pocket on essentially
-every system. SurfDock's own self-reported pose RMSDs match —
-its rank-1-by-confidence is ~7 Å off the crystal, ranks 4-10 are
-catastrophic divergences (millions of Å). The other docking engines
-(GNINA, UniDock2) succeed on the same `docking/` inputs (GNINA WT 73% < 2 Å),
-so the inputs are good — SurfDock just fails on these CASF systems.
+**SurfDock is now the best-separating method in the study** — the highest WT ceiling
+of any docking engine *and* the lowest adversarial rates. Its numbers barely move
+under WT-conditioning (218/249 = 87.6% WT-correct), so the result is robust.
 
-The 16-case CB2/MEK1 SurfDock data the user previously generated worked
-fine, so the install + pipeline are correct. The hypothesis is that
-CASF-2016 sits outside SurfDock's training distribution despite both
-deriving from PDBbind — CASF is the standard held-out benchmark, which
-SurfDock training likely excluded.
-
-This is itself a useful finding — **SurfDock is not a reliable
-substitute for Vina-family docking on novel CASF-style binding sites**.
-The SurfDock bar in panel (a) of the cross-method figure should NOT be
-read as "all docking methods agree" — it's really "SurfDock fails on
-every variant, including WT, so its WT-vs-adversarial gap is
-ambiguous." Interestingly, the WT bar IS still slightly taller than the
-adversarial bars (7% vs 0.9-3% < 4 Å), suggesting SurfDock has *some*
-residual signal — but at this RMSD scale it's not meaningfully
-distinguishing physics from memorization.
+**12 exclusions (1.24%)**, two mechanisms: 8 cells where SurfDock builds zero graphs
+(7 `inv`, 1 `rem`) and 4 where MSMS produces no surface (2 `wt`, 1 `pack`, 1 `inv`).
+The cause of the "0 graphs" class is **not established** — mesh size does not predict
+it (failed cells span 42–158 vertices, successful ones 7–166,
+`analysis/casf_mutagenesis/mesh_census.json`). Failed cells write no `poses.sdf`, so
+the analyzer skips them cleanly and per-variant `n` reflects the exclusions.
 
 ✓ = results on disk. — = not run. n/a = method doesn't produce that signal.
 
@@ -145,12 +131,29 @@ inv. The signature you want to see if the method is "doing physics" is:
 > a TALL WT bar (model places the native ligand correctly) and SHORT
 > adversarial bars (model can't place the ligand when the pocket is broken).
 
-| method   | WT rate | adv rate (rem / pack / inv) | gap (memorization signal)  |
-|----------|---------|------------------------------|-----------------------------|
-| AF3+MSA  | 0.89    | 0.31 / 0.26 / 0.16           | huge gap → recognizes ~most |
-| GNINA    | 0.73    | 0.14 / 0.13 / 0.11           | very steep → physics-aware  |
-| UniDock2 | 0.58    | 0.09 / 0.10 / 0.06           | very steep → physics-aware  |
-| Boltz-2  | 0.58    | 0.23 / 0.24 / 0.17           | moderate gap → memorizes ~25% |
+**Adversarial rates are WT-CONDITIONED** (2026-08-28): restricted to systems where
+that method placed the wild-type ligand correctly. Without this a method is credited
+for "responding" on systems it cannot solve at all, which flatters low-WT-accuracy
+methods. The WT column stays unconditioned — it is the ceiling and the conditioning
+denominator. Unconditioned rates are in the `*_uncond`-free columns of
+`memorization_full.csv` / `docking_memorization.csv`.
+
+| method   | WT rate (uncond) | WT-correct | adv rate, conditioned (rem / pack / inv) | unconditioned |
+|----------|---------|------------|----------------------|---------------|
+| SurfDock | 0.876   | 218/249    | **0.024 / 0.043 / 0.030** | 0.029 / 0.046 / 0.026 |
+| AF3+MSA  | 0.824   | 196/238    | **0.439 / 0.367 / 0.301** | 0.377 / 0.314 / 0.259 |
+| GNINA    | 0.729   | 183/251    | **0.180 / 0.157 / 0.151** | 0.138 / 0.130 / 0.117 |
+| Boltz-2  | 0.594   | 136/229    | **0.368 / 0.360 / 0.257** | 0.231 / 0.240 / 0.166 |
+| UniDock2 | 0.578   | 145/251    | **0.141 / 0.141 / 0.104** | 0.092 / 0.092 / 0.071 |
+| AF3 (no MSA) | 0.000 | **0/19** | undefined — no WT-correct systems | 0.000 |
+
+Two things conditioning changes:
+
+- **Boltz-2's memorization was understated by 50–60% relative** (0.23/0.24/0.17 →
+  0.37/0.36/0.26). It solves only 59% of WT, so the unconditioned rate hid most of it.
+- **GNINA and UniDock2 swap.** Unconditioned gaps: GNINA +0.601 > UniDock2 +0.493.
+  Conditioned: UniDock2 +0.872 > GNINA +0.837. The old metric was rewarding
+  UniDock2's low WT accuracy as if it were physics-awareness.
 
 So the picture is:
 

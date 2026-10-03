@@ -52,6 +52,16 @@ POCKET_LABELS = {
 
 # Ligand-side variant grouping (collapse halo_Br/Cl/F → "halo", chrg_* → "chrg",
 # meth_1..5 → "meth"). Keeps the bar plot readable.
+#
+# NOTE on the two charge groups: they are NOT "negative variant" vs "positive
+# variant". Both ladders amputate the SAME anionic triphosphate at the same
+# bond and differ only in the tail grafted back on (charge_swap.py:36-45):
+#   chrg-  = chrg_neu_*  anion → NEUTRAL alkyl   (charge removed)
+#   chrg+  = chrg_pos_*  anion → CATIONIC ammonium (charge flipped)
+# The WT is the anionic one; these are two rungs going the same direction away
+# from it. The neutral ladder is also the isosteric control for the cationic
+# one (rungs 2 and 3 are heavy-atom matched, 9 and 13). Legend labels must say
+# this -- the bare "chrg-/chrg+" keys read as a symmetric pos/neg dichotomy.
 LIG_GROUPS = {
     "halo":  ("halo_F_1", "halo_Cl_1", "halo_Br_1"),
     "chrg-": ("chrg_neu_methyl", "chrg_neu_ethyl", "chrg_neu_propyl"),
@@ -66,6 +76,14 @@ LIG_COLORS = {
     "chrg+": "#C44E52",
     "meth":  "#55A868",
 }
+# Display labels (same pattern as ligand_mutagenesis/scripts/06_plot_affinity.py).
+LIG_LABELS = {
+    "wt":    "wt (anionic)",
+    "halo":  "halo (F/Cl/Br)",
+    "chrg-": "chrg→neutral",
+    "chrg+": "chrg→flipped (+)",
+    "meth":  "meth",
+}
 
 
 def load_memorization_full() -> dict[tuple[str, str], dict]:
@@ -79,9 +97,17 @@ def load_memorization_full() -> dict[tuple[str, str], dict]:
     out: dict[tuple[str, str], dict] = {}
     with path.open() as f:
         for r in csv.DictReader(f):
+            # WT-CONDITIONED rate is primary (restricted to systems where this
+            # model solved WT). Unconditioned kept for the companion view.
+            # A blank *_wtok means the conditional is UNDEFINED (0 WT-correct
+            # systems, e.g. AF3 without MSA) -- never treat that as 0.
+            wtok = (r.get("memorization_rate_2A_wtok") or "").strip()
             out[(r["model"], r["variant"])] = {
-                "n": int(r["n_total"]),
-                "rate_2A": float(r["memorization_rate_2A"]),
+                "n": int(r["n_wtok"]) if wtok else 0,
+                "rate_2A": float(wtok) if wtok else None,
+                "n_uncond": int(r["n_total"]),
+                "rate_2A_uncond": float(r["memorization_rate_2A"]),
+                "undefined": not wtok,
             }
     return out
 
@@ -113,9 +139,13 @@ def load_docking_memorization() -> dict[tuple[str, str, str], dict]:
     out: dict[tuple[str, str, str], dict] = {}
     with path.open() as f:
         for r in csv.DictReader(f):
+            wtok = (r.get("<2_A_wtok") or "").strip()
             out[(r["module"], r["engine"], r["variant"])] = {
-                "n": int(r["n"]),
-                "rate_2A": float(r["<2_A"]),
+                "n": int(r["n_wtok"]) if wtok else 0,
+                "rate_2A": float(wtok) if wtok else None,
+                "n_uncond": int(r["n"]),
+                "rate_2A_uncond": float(r["<2_A"]),
+                "undefined": not wtok,
             }
     return out
 
@@ -171,13 +201,19 @@ def panel_a_pocket(ax) -> None:
                     ns.append(r["n"] if r else 0)
                 else:
                     r = cofold.get((model, variant))
-                    rates.append(r["rate_2A"] if r else 0.0)
+                    rates.append((r["rate_2A"] or 0.0) if r else 0.0)
                     ns.append(r["n"] if r else 0)
             else:
                 _, engine = key.split(":", 1)
                 r = dock.get(("casf", engine, variant))
-                rates.append(r["rate_2A"] if r else 0.0)
-                ns.append(r["n"] if r else 0)
+                if variant == "wt":
+                    # Conditioned WT is 1.000 by construction -- show the real
+                    # (unconditioned) WT success rate instead.
+                    rates.append(r["rate_2A_uncond"] if r else 0.0)
+                    ns.append(r["n_uncond"] if r else 0)
+                else:
+                    rates.append((r["rate_2A"] or 0.0) if r else 0.0)
+                    ns.append(r["n"] if r else 0)
         bars = ax.bar(x + (i - 1.5) * width, rates, width,
                       label=POCKET_LABELS[variant], color=POCKET_COLORS[variant],
                       edgecolor="white", linewidth=0.5)
@@ -192,8 +228,10 @@ def panel_a_pocket(ax) -> None:
     ax.set_xticklabels([m[0] for m in methods], fontsize=9)
     ax.set_ylabel("Top-1 ligand RMSD < 2 Å rate")
     ax.set_title("(a) Pocket mutation — rate of placing ligand near native\n"
-                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized",
-                 fontsize=10)
+                 "WT bar = unconditioned success ceiling (n above bar). Adversarial bars are "
+                 "WT-CONDITIONED:\nrestricted to systems that method solved on WT — "
+                 "low = recognized, high = memorized",
+                 fontsize=9)
     ax.legend(fontsize=8, loc="upper right", ncol=2, framealpha=0.95)
     ax.set_ylim(0, 1)
     ax.grid(axis="y", alpha=0.3)
@@ -256,12 +294,16 @@ def panel_b_ligand(ax) -> None:
         # docking engine
         eng = method_key.split(":", 1)[1]
         if group_key == "wt":
+            # WT bar stays UNCONDITIONED (conditioned WT is 1.000 by construction).
             r = dock.get(("ligand", eng, "wt"))
-            return (r["rate_2A"], r["n"]) if r else (0.0, 0)
+            return (r["rate_2A_uncond"], r["n_uncond"]) if r else (0.0, 0)
         ns, rates = [], []
         for v in LIG_GROUPS[group_key]:
             r = dock.get(("ligand", eng, v))
-            if not r:
+            # rate_2A is None when the conditional is UNDEFINED (no WT-correct
+            # systems for that variant) -- drop it from the weighted mean rather
+            # than folding in a spurious zero.
+            if not r or r["rate_2A"] is None or not r["n"]:
                 continue
             ns.append(r["n"])
             rates.append(r["rate_2A"])
@@ -279,7 +321,7 @@ def panel_b_ligand(ax) -> None:
             r, n = grouped_rate(mkey, gkey)
             rates.append(r); ns.append(n)
         bars = ax.bar(x + (i - 2) * width, rates, width,
-                      label=gkey, color=LIG_COLORS[gkey],
+                      label=LIG_LABELS[gkey], color=LIG_COLORS[gkey],
                       edgecolor="white", linewidth=0.5)
         if gkey == "wt":
             for bar, n in zip(bars, ns):
@@ -291,7 +333,8 @@ def panel_b_ligand(ax) -> None:
     ax.set_xticklabels([m[0] for m in methods], fontsize=9)
     ax.set_ylabel("Top-1 ligand RMSD < 2 Å rate")
     ax.set_title("(b) Ligand mutation — rate of placing ligand near native\n"
-                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized",
+                 "WT bar = success ceiling; adversarial bars: low = recognized, high = memorized\n"
+                 "both charge bars start from the same anionic WT: →neutral removes the charge, →flipped reverses it",
                  fontsize=10)
     ax.legend(fontsize=8, loc="upper right", ncol=2, framealpha=0.95)
     ax.set_ylim(0, 1)
@@ -343,6 +386,17 @@ def main() -> int:
     fig.suptitle("CASF-mutagenesis: cross-method memorization overview",
                  fontsize=13, y=0.995)
     fig.tight_layout()
+    # Provenance. As of 2026-08-28 all three docking engines ARE like-for-like:
+    # SurfDock was re-run on the same post-fix receptors after its interface-crop
+    # bug was found, so the earlier "SurfDock is not like-for-like" caveat no
+    # longer applies and has been removed.
+    fig.text(0.005, -0.004,
+             "Provenance: all mutant receptors rebuilt 2026-08-25 after the single-chain "
+             "AF3 fix; SurfDock re-run 2026-08-26 on those same receptors after its "
+             "interface-crop bug (SURFDOCK_FIX.md) — the three docking engines are "
+             "like-for-like. Panel (a) adversarial bars are WT-conditioned; panels "
+             "(b)-(d) are not.",
+             fontsize=7.5, color="0.35", ha="left", va="top", wrap=True)
     out = FIG_DIR / "overview_full.png"
     fig.savefig(out, dpi=170, bbox_inches="tight")
     print(f"Wrote {out}")

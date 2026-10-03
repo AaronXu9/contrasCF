@@ -1,0 +1,242 @@
+[
+  {
+    "pdbid": "1e66",
+    "variant": "wt",
+    "vertices": 154,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1e66",
+    "variant": "rem",
+    "vertices": 63,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1e66",
+    "variant": "pack",
+    "vertices": 62,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1e66",
+    "variant": "inv",
+    "vertices": 32,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1gpk",
+    "variant": "wt",
+    "vertices": 132,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1gpk",
+    "variant": "rem",
+    "vertices": 122,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1gpk",
+    "variant": "pack",
+    "vertices": 112,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1gpk",
+    "variant": "inv",
+    "vertices": 114,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1h22",
+    "variant": "wt",
+    "vertices": 149,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1h22",
+    "variant": "rem",
+    "vertices": 56,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1h22",
+    "variant": "pack",
+    "vertices": 79,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1h22",
+    "variant": "inv",
+    "vertices": 58,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1k1i",
+    "variant": "wt",
+    "vertices": 125,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1k1i",
+    "variant": "rem",
+    "vertices": 105,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1k1i",
+    "variant": "pack",
+    "vertices": 72,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1k1i",
+    "variant": "inv",
+    "vertices": 90,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3e5a",
+    "variant": "wt",
+    "vertices": 166,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3e5a",
+    "variant": "rem",
+    "vertices": 103,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3e5a",
+    "variant": "pack",
+    "vertices": 101,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3e5a",
+    "variant": "inv",
+    "vertices": 158,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "3n86",
+    "variant": "wt",
+    "vertices": 7,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3n86",
+    "variant": "rem",
+    "vertices": 104,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3n86",
+    "variant": "pack",
+    "vertices": 105,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "3n86",
+    "variant": "inv",
+    "vertices": 91,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "4de3",
+    "variant": "wt",
+    "vertices": 115,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "4de3",
+    "variant": "rem",
+    "vertices": 42,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "4de3",
+    "variant": "pack",
+    "vertices": 75,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "4de3",
+    "variant": "inv",
+    "vertices": 66,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "1o3f",
+    "variant": "wt",
+    "vertices": 113,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1o3f",
+    "variant": "rem",
+    "vertices": 48,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1o3f",
+    "variant": "pack",
+    "vertices": 34,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "1o3f",
+    "variant": "inv",
+    "vertices": 42,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "2weg",
+    "variant": "wt",
+    "vertices": 66,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "2weg",
+    "variant": "rem",
+    "vertices": 28,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "2weg",
+    "variant": "pack",
+    "vertices": 76,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "2weg",
+    "variant": "inv",
+    "vertices": 75,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "4k77",
+    "variant": "wt",
+    "vertices": 86,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "4k77",
+    "variant": "rem",
+    "vertices": 106,
+    "cell_succeeded": false
+  },
+  {
+    "pdbid": "4k77",
+    "variant": "pack",
+    "vertices": 82,
+    "cell_succeeded": true
+  },
+  {
+    "pdbid": "4k77",
+    "variant": "inv",
+    "vertices": 81,
+    "cell_succeeded": true
+  }
+]

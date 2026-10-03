@@ -1,0 +1,8 @@
+summary: "SurfDock's input surface is materially protonation-dependent: stripping H costs up to 36% of surface vertices, moves vertices 0.55-0.59 A median, changes the hbond channel up to 2x and flips 2brb's shape index. No protonation step exists in the pipeline and SurfDock's own reference input is 49% H, so our unprotonated AF3 mutant receptors ran off-distribution."
+status: "refuted"
+metrics:
+  max_vertex_loss: 0.36
+  median_surface_shift_a: 0.57
+  surfdock_ref_h_fraction: 0.49
+  vina_affinity_delta: 0.0
+completed_at: "2026-09-04T07:05:26-07:00"

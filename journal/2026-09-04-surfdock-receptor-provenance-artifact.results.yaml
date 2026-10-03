@@ -1,0 +1,7 @@
+summary: "Zero-mutation controls (3mss, 4eo8) show SurfDock drifts 5.2-5.5 A from the crystal->AF3-predicted receptor swap alone, while co-folding is bit-identical and GNINA/UniDock2 drift <=1.4 A. Casts doubt on the magnitude of SurfDock's +0.842 WT->adversarial gap."
+status: "done"
+metrics:
+  surfdock_drift_3mss: 5.48
+  surfdock_drift_4eo8: 5.23
+  unidock2_max_drift: 1.39
+completed_at: "2026-09-04T06:18:27-07:00"

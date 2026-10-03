@@ -1,0 +1,6 @@
+summary: "Atom-correspondence fix gated: synthetic 0 A in superset/subset/MCS modes, old code shown wrong (3.47 A), full protein arm has zero rate/flag changes (5 RMSD values corrected), halo_F bestfit back to WT level"
+status: "done"
+metrics:
+  protein_rate_changes: 0
+  protein_rmsd_rows_changed: 5
+completed_at: "2026-10-01T02:22:41-07:00"

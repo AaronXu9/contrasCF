@@ -1,0 +1,10 @@
+summary: "SurfDock's 'fails on CASF-2016' result was our own missing interface crop, not the model; 968 cells invalidated and regenerated. The previously documented shape-bug root cause is a proven no-op."
+status: "done"
+metrics:
+  root_cause: "missing_ligand_proximity_interface_crop"
+  mesh_vertices_1a0q: "1474_vs_reference_142"
+  1a0q_rank1_before_after: "7.74A_to_0.44A"
+  1e66_wt_rank1_before_after: "6.80A_to_0.32A"
+  cells_invalidated: 968
+  prior_fix_was_noop: "true"
+completed_at: "2026-08-28T04:04:55-07:00"
