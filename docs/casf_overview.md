@@ -70,7 +70,7 @@ For the figure: see
 The earlier "SurfDock fails on CASF (0/244 WT under 2 Å), CASF-2016 is outside its
 training distribution" reading was an artifact of **our own** surface preprocessing —
 `dockstrat`'s helper skipped SurfDock's ligand-proximity interface crop, handing the
-model ~10× the mesh it was trained on. Full diagnosis: [`SURFDOCK_FIX.md`](../SURFDOCK_FIX.md)
+model ~10× the mesh it was trained on. Full diagnosis: [`docs/archive/SURFDOCK_FIX.md`](../SURFDOCK_FIX.md)
 and postmortem `journal/2026-08-28-surfdock-interface-crop.md`.
 
 With the crop restored and the full sweep re-run (956/968 cells, 12 excluded):
@@ -99,7 +99,7 @@ the analyzer skips them cleanly and per-variant `n` reflects the exclusions.
 
 1. **Boltz-2 on ligand_mutagenesis** — DONE 2026-05-23. Job 8932179 returned
    1213 affinity sidecars + 6065 CIFs (best-of-5). Driver
-   `analysis/ligand_mutagenesis/scripts/05_analyze.py` aggregates these
+   `analysis/ligand_mutagenesis/scripts/analyze/01_analyze_cofold.py` aggregates these
    into `results_ligand.csv` (6059 ok poses) and `paired_affinity_ligand.csv`
    (959 paired rows). The findings are a striking dichotomy — see
    "Ligand-side Boltz-2 dichotomy" section below.
@@ -109,12 +109,12 @@ the analyzer skips them cleanly and per-variant `n` reflects the exclusions.
    CARC re-run analogous to the affinity one (no GPU cost reason against,
    just hasn't been scheduled).
 4. **SurfDock** — variant-aware runner ready
-   (`analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py`); runs
+   (`analysis/casf_mutagenesis/scripts/run/08_run_surfdock_variants.py`); runs
    locally on the lab box since the SurfDock conda env, model weights, and
    precomputed arrays aren't on CARC. Smoke test pending; if green,
    subset20 (~80 cells) runs in ~1.5 h, full CASF (~1000 cells) in ~16 h
    on RTX 4090. Same `discover_cells` contract as 08/11 runners — emits
-   `poses.sdf` files that the `12_analyze_docking_engines.py` analyzer
+   `poses.sdf` files that the `analyze/03_analyze_docking_engines.py` analyzer
    can pick up (would need a one-line addition to its `ENGINES` tuple).
 
 ## Headline figure
@@ -216,27 +216,27 @@ memorization.
 source env/lab.sh
 
 # Pocket-mutation module
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py        # build subset20 YAMLs
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/02_build_full_casf.py        # build full CASF YAMLs (251/285 OK)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py    # Boltz-2 (use CONTRASCF_SCOPE=full for full)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/04_run_af3_subset20.py       # AF3 (subset20 only currently)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py   # AF3+MSA (CONTRASCF_SCOPE=full available)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/07_run_gnina_wt.py           # WT-only GNINA dock
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/01_build_subset20.py        # build subset20 YAMLs
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/02_build_full_casf.py        # build full CASF YAMLs (251/285 OK)
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py    # Boltz-2 (use CONTRASCF_SCOPE=full for full)
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/02_run_af3.py       # AF3 (subset20 only currently)
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py   # AF3+MSA (CONTRASCF_SCOPE=full available)
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/05_run_gnina_wt.py           # WT-only GNINA dock
 # GNINA + UniDock2 on variants:
 CONTRASCF_OUTPUTS_ROOT=analysis/casf_mutagenesis/outputs \
-    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/08_run_gnina_variants.py
+    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/06_run_gnina_variants.py
 CONTRASCF_OUTPUTS_ROOT=analysis/casf_mutagenesis/outputs \
-    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/11_run_unidock2_variants.py
+    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/07_run_unidock2_variants.py
 
 # Analysis
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py       # subset20
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py       # subset20
 CONTRASCF_SCOPE=full \
-    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py   # full CASF
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/12_analyze_docking_engines.py # GNINA + UniDock2 both modules
+    $CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py   # full CASF
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/03_analyze_docking_engines.py # GNINA + UniDock2 both modules
 
 # Plots
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/10_plot_affinity.py --scope full
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/13_plot_overview.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/plot/01_plot_affinity.py --scope full
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/plot/02_plot_overview.py
 ```
 
 For CARC: see `slurm/run_full_casf_carc.sh` (build + Boltz-2 + AF3+MSA per

@@ -84,32 +84,32 @@ Everything lives under [../analysis/](../analysis/). Two conda envs used:
 Both require prepending env's `lib/` to `LD_LIBRARY_PATH` to avoid system libstdc++.
 
 ### Structure
-- [`analysis/src/config.py`](../analysis/src/config.py) — CASES, MODELS, COMMON_SUBSETS (single source of truth; all 16 case SMILES hard-coded from the AF3 `*_data.json` inputs).
-- [`analysis/src/loaders.py`](../analysis/src/loaders.py) — gemmi CIF/PDB loading; `select_target_ligand()` picks the target by MCS-vs-SMILES score, ignoring metals, NADP, waters, and ACE caps.
-- [`analysis/src/native.py`](../analysis/src/native.py) — caches fetched 1B38/2VWH references (native ATP resname `ATP`; native glucose resname **`BGC`** = β-D-glucose, not GLC).
-- [`analysis/src/align.py`](../analysis/src/align.py) — Bio.SVDSuperimposer Cα superposition over residue-number intersection.
-- [`analysis/src/ligand_match.py`](../analysis/src/ligand_match.py) — RDKit MCS pairing with **symmetry-minimizing selection** (enumerates `GetSubstructMatches` and picks the pairing with minimum pre-fitted RMSD — matters for phosphate-O permutations).
-- [`analysis/src/confidence.py`](../analysis/src/confidence.py) — per-model pTM/ipTM/ligand-iPTM/pLDDT extractors; RFAA falls back to ligand B-factor mean.
-- [`analysis/src/clashes.py`](../analysis/src/clashes.py) — heavy-atom protein-ligand pairs at <2.0 Å.
-- [`analysis/src/pipeline.py`](../analysis/src/pipeline.py) — `run_one(model, case) -> row dict`.
+- [`analysis/paper_repro/lib/config.py`](../analysis/paper_repro/lib/config.py) — CASES, MODELS, COMMON_SUBSETS (single source of truth; all 16 case SMILES hard-coded from the AF3 `*_data.json` inputs).
+- [`analysis/paper_repro/lib/loaders.py`](../analysis/paper_repro/lib/loaders.py) — gemmi CIF/PDB loading; `select_target_ligand()` picks the target by MCS-vs-SMILES score, ignoring metals, NADP, waters, and ACE caps.
+- [`analysis/paper_repro/lib/native.py`](../analysis/paper_repro/lib/native.py) — caches fetched 1B38/2VWH references (native ATP resname `ATP`; native glucose resname **`BGC`** = β-D-glucose, not GLC).
+- [`analysis/paper_repro/lib/align.py`](../analysis/paper_repro/lib/align.py) — Bio.SVDSuperimposer Cα superposition over residue-number intersection.
+- [`analysis/paper_repro/lib/ligand_match.py`](../analysis/paper_repro/lib/ligand_match.py) — RDKit MCS pairing with **symmetry-minimizing selection** (enumerates `GetSubstructMatches` and picks the pairing with minimum pre-fitted RMSD — matters for phosphate-O permutations).
+- [`analysis/paper_repro/lib/confidence.py`](../analysis/paper_repro/lib/confidence.py) — per-model pTM/ipTM/ligand-iPTM/pLDDT extractors; RFAA falls back to ligand B-factor mean.
+- [`analysis/paper_repro/lib/clashes.py`](../analysis/paper_repro/lib/clashes.py) — heavy-atom protein-ligand pairs at <2.0 Å.
+- [`analysis/paper_repro/lib/pipeline.py`](../analysis/paper_repro/lib/pipeline.py) — `run_one(model, case) -> row dict`.
 
 ### Scripts
-- [`analysis/scripts/01_fetch_native.py`](../analysis/scripts/01_fetch_native.py) — downloads 1B38.cif, 2VWH.cif from RCSB into `analysis/native/`.
-- [`analysis/scripts/02_run_analysis.py`](../analysis/scripts/02_run_analysis.py) — iterates 4 × 16 = 64 cells, writes `analysis/results/results.csv` (24 columns).
-- [`analysis/scripts/03_make_plots.py`](../analysis/scripts/03_make_plots.py) — aggregate heatmap, Fig.3-style bar chart, confidence vs RMSD scatter.
-- [`analysis/scripts/04_render_figures.py`](../analysis/scripts/04_render_figures.py) — headless PyMOL renders per-case binding-site PNGs and a grid per family (matches paper Fig. 1/4/5 visual style).
+- [`analysis/paper_repro/scripts/01_fetch_native.py`](../analysis/paper_repro/scripts/01_fetch_native.py) — downloads 1B38.cif, 2VWH.cif from RCSB into `analysis/native/`.
+- [`analysis/paper_repro/scripts/02_run_analysis.py`](../analysis/paper_repro/scripts/02_run_analysis.py) — iterates 4 × 16 = 64 cells, writes `analysis/results/results.csv` (24 columns).
+- [`analysis/paper_repro/scripts/03_make_plots.py`](../analysis/paper_repro/scripts/03_make_plots.py) — aggregate heatmap, Fig.3-style bar chart, confidence vs RMSD scatter.
+- [`analysis/paper_repro/scripts/04_render_figures.py`](../analysis/paper_repro/scripts/04_render_figures.py) — headless PyMOL renders per-case binding-site PNGs and a grid per family (matches paper Fig. 1/4/5 visual style).
 
 ### Run commands
 ```bash
 # analysis (rdkit_env)
 export LD_LIBRARY_PATH="/home/aoxu/miniconda3/envs/rdkit_env/lib:$LD_LIBRARY_PATH"
-/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/scripts/01_fetch_native.py
-/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/scripts/02_run_analysis.py
-/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/scripts/03_make_plots.py
+/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/paper_repro/scripts/01_fetch_native.py
+/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/paper_repro/scripts/02_run_analysis.py
+/home/aoxu/miniconda3/envs/rdkit_env/bin/python analysis/paper_repro/scripts/03_make_plots.py
 
 # rendering (PyMOL-PoseBench)
 export LD_LIBRARY_PATH="/home/aoxu/miniconda3/envs/PyMOL-PoseBench/lib:$LD_LIBRARY_PATH"
-/home/aoxu/miniconda3/envs/PyMOL-PoseBench/bin/python analysis/scripts/04_render_figures.py
+/home/aoxu/miniconda3/envs/PyMOL-PoseBench/bin/python analysis/paper_repro/scripts/04_render_figures.py
 ```
 
 ## Results summary

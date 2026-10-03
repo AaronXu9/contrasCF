@@ -69,12 +69,12 @@ analysis/casf_mutagenesis/
 ├── build.py              # per-system pipeline orchestrator
 ├── analysis.py           # per-prediction RMSD + memorization aggregates
 ├── scripts/
-│   ├── 00_verify_reference_systems.py   # gating test (CDK2 + MEK1)
-│   ├── 01_build_subset20.py             # build inputs for 20 systems
-│   ├── 02_build_full_casf.py            # build inputs for 285 systems (TODO)
-│   ├── 03_run_boltz2_subset20.py        # GPU runner — Boltz-2
-│   ├── 04_run_af3_subset20.py           # GPU runner — AF3 (no-MSA)
-│   └── 05_analyze_subset20.py           # ligand-RMSD + memorization
+│   ├── build/00_verify_reference_systems.py   # gating test (CDK2 + MEK1)
+│   ├── build/01_build_subset20.py             # build inputs for 20 systems
+│   ├── build/02_build_full_casf.py            # build inputs for 285 systems (TODO)
+│   ├── run/01_run_boltz2.py        # GPU runner — Boltz-2
+│   ├── run/02_run_af3.py           # GPU runner — AF3 (no-MSA)
+│   └── analyze/01_analyze_cofold.py           # ligand-RMSD + memorization
 └── outputs/
     └── <pdbid>/<variant>/{af3.json, boltz.yaml,
                            <prefix>_model_0.cif (Boltz),
@@ -121,7 +121,7 @@ For each PDB id:
 
 Mutant-protein docking inputs are deferred — they need an AF3 prediction of
 the mutated sequence first, then a follow-on script analogous to
-`analysis/scripts/10_prep_docking_inputs.py`.
+`analysis/paper_repro/scripts/10_prep_docking_inputs.py`.
 
 ## Per-model file-naming convention
 
@@ -147,7 +147,7 @@ To prevent collision, AF3 outputs are prefixed with `af3_`:
 
 ## Verification (gating test)
 
-[`scripts/00_verify_reference_systems.py`](../analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py)
+[`scripts/build/00_verify_reference_systems.py`](../analysis/casf_mutagenesis/scripts/build/00_verify_reference_systems.py)
 runs the auto-detection logic on the two systems Masters et al. enumerate
 explicitly:
 
@@ -183,7 +183,7 @@ artifact. The artifact predates the systematic Methods description.
 
 ## End-to-end: subset20
 
-`01_build_subset20.py` builds inputs for the 20-PDB CASF subset
+`build/01_build_subset20.py` builds inputs for the 20-PDB CASF subset
 (`PDBbind_casf2016_subset20.json`).
 
 Per-system invariants checked (all 20 pass):
@@ -215,7 +215,7 @@ point calls
 [`config.assert_boltz2_binary`](../analysis/casf_mutagenesis/config.py)
 which imports `boltz` from the binary's adjacent Python and fails with a
 clear error if the major version is < 2. The check is run:
-- at import time in `scripts/03_run_boltz2_subset20.py` (the dedicated
+- at import time in `scripts/run/01_run_boltz2.py` (the dedicated
   Boltz runner),
 - lazily on the first MSA fetch in `msa_via_boltz.fetch_msa_via_boltz`.
 
@@ -274,23 +274,23 @@ PY="/home/aoxu/miniconda3/envs/rdkit_env/bin/python"
 
 # 1. Gating test (CDK2 + MEK1)
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py
+  analysis/casf_mutagenesis/scripts/build/00_verify_reference_systems.py
 
 # 2. Build inputs for the 20-system subset
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/casf_mutagenesis/scripts/01_build_subset20.py
+  analysis/casf_mutagenesis/scripts/build/01_build_subset20.py
 
 # 3. Run Boltz-2 (single GPU; ~37 s/job × 76 jobs ≈ 47 min)
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+  analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 
 # 4. Run AF3 (single GPU; ~85 s/job × 76 jobs ≈ 1 h 47 min)
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/casf_mutagenesis/scripts/04_run_af3_subset20.py
+  analysis/casf_mutagenesis/scripts/run/02_run_af3.py
 
 # 5. Analyze: ligand RMSD-to-native + memorization rate
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+  analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py
 ```
 
 Outputs:
@@ -521,7 +521,7 @@ pocket is broken.
 
 ### Build pipeline for mutant docking inputs
 
-[`scripts/10_build_mutant_docking.py`](../analysis/casf_mutagenesis/scripts/10_build_mutant_docking.py)
+[`scripts/build/03_build_mutant_docking.py`](../analysis/casf_mutagenesis/scripts/build/03_build_mutant_docking.py)
 takes the AF3+MSA mutant CIFs (rsync'd from CARC) and for each
 (pdbid, variant ∈ {rem, pack, inv}):
   1. Strips predicted complex → `receptor.pdb` (mutant in AF3 frame).
@@ -529,11 +529,11 @@ takes the AF3+MSA mutant CIFs (rsync'd from CARC) and for each
      mutations modify the protein, not the ligand chemistry).
   3. Places the docking box on the AF3-predicted ligand centroid.
 
-Then `08_run_gnina_variants.py` with `CONTRASCF_OUTPUTS_ROOT` pointed
+Then `run/06_run_gnina_variants.py` with `CONTRASCF_OUTPUTS_ROOT` pointed
 at `casf_mutagenesis/outputs/` finds all docking/ subdirs and dockers;
 skip_existing makes resubmission cheap.
 
-`09_analyze_gnina.py` now reads `receptor.pdb` per cell and, for
+`analyze/02_analyze_gnina.py` now reads `receptor.pdb` per cell and, for
 `module == "casf" and variant != "wt"`, applies an extra Cα
 superposition (receptor → crystal) before computing pose RMSD — without
 this the apparent RMSD is ~40 Å because the AF3-frame pose is being
@@ -624,7 +624,7 @@ mutated query is preserved.
 
 The fix is real. AF3 produces paper-quality structures with the MSA
 injected; the no-MSA results were genuinely uninterpretable. The
-[`scripts/06_run_af3_msa_subset20.py`](../analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py)
+[`scripts/run/04_run_af3_msa.py`](../analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py)
 runner reproduces this for all 76 (system, variant) cells and writes
 `af3msa_<prefix>_*` files alongside the no-MSA `af3_*` baseline so both
 can be compared.
@@ -677,7 +677,7 @@ order so future work can reuse the diagnostic patterns.
    Boltz and AF3 accept. Re-ran the 12 failed jobs in each model; 0
    remaining failures.
 8. **Analysis pass.** Wrote `analysis.py` (`analyze_prediction`,
-   `memorization_stats`) and `scripts/05_analyze_subset20.py`. First run
+   `memorization_stats`) and `scripts/analyze/01_analyze_cofold.py`. First run
    produced wildly wrong numbers — Boltz-2 WT median 9 Å, AF3 17 Å.
 9. **Bug 2 (Cα superpose).** Diagnosed that `analysis.src.align.
    superpose_ca` only scans ±50 PDB-resnum offset and CASF crystals use
@@ -779,7 +779,7 @@ order so future work can reuse the diagnostic patterns.
 - **Running the models** is split out from the input-generation step; this
   doc's "Running the pipeline" section covers both, but the build/run
   separation is intentional so input generation is cheap and re-runnable.
-- **Full CASF-2016 (285 systems)** — `02_build_full_casf.py` not yet
+- **Full CASF-2016 (285 systems)** — `build/02_build_full_casf.py` not yet
   written; mirrors `01_` but iterates the 285 IDs in
   `labels/PDBbind_data_split_cleansplit.json["casf2016"]`. Estimated
   wallclock at the current per-job rates: ~3 h Boltz-2 + ~7.5 h AF3.

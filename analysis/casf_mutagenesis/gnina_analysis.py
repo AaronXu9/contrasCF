@@ -72,38 +72,9 @@ def _heavy_coords(mol: Chem.Mol, indices: list[int]) -> np.ndarray:
     )
 
 
-def _mcs_match_indices(
-    crystal: Chem.Mol, pose: Chem.Mol
-) -> tuple[list[int], list[int], int]:
-    """Find the maximum common substructure and return (crystal_idx, pose_idx, n)."""
-    # Quick path: if pose is a superstructure of crystal (halogenation,
-    # methylation add atoms), GetSubstructMatch is fast.
-    direct = pose.GetSubstructMatch(crystal)
-    if direct:
-        return list(range(crystal.GetNumAtoms())), list(direct), crystal.GetNumAtoms()
-    # Reverse direction (crystal contains pose — unusual but try).
-    direct = crystal.GetSubstructMatch(pose)
-    if direct:
-        return list(direct), list(range(pose.GetNumAtoms())), pose.GetNumAtoms()
-    # Fall back to MCS (handles charge_swap etc. where neither is a
-    # substructure of the other).
-    res = rdFMCS.FindMCS(
-        [crystal, pose],
-        atomCompare=rdFMCS.AtomCompare.CompareElements,
-        bondCompare=rdFMCS.BondCompare.CompareAny,
-        timeout=10,
-        completeRingsOnly=False,
-    )
-    if res.numAtoms == 0 or res.smartsString == "":
-        return [], [], 0
-    pattern = Chem.MolFromSmarts(res.smartsString)
-    if pattern is None:
-        return [], [], 0
-    crystal_match = crystal.GetSubstructMatch(pattern)
-    pose_match = pose.GetSubstructMatch(pattern)
-    if not crystal_match or not pose_match:
-        return [], [], 0
-    return list(crystal_match), list(pose_match), len(crystal_match)
+from core.ligand_rmsd import _mcs_match_indices  # noqa: E402,F401
+
+
 
 
 def _aligned_rmsd(crystal_pts: np.ndarray, pose_pts: np.ndarray) -> float:

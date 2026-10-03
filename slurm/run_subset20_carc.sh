@@ -44,19 +44,19 @@ echo "Time: $(date -Iseconds)"
 echo
 
 echo "=== 1/4 build inputs ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/01_build_subset20.py
 echo
 
 echo "=== 2/4 Boltz-2 ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 echo
 
 echo "=== 3/4 AF3 + MSA ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py
 echo
 
 echo "=== 4/4 Analysis ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+CONTRASCF_SCOPE=subset20 $CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py   # explicit: the default became `full` in S3
 echo
 
 echo "=== Done at $(date -Iseconds) ==="

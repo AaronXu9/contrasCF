@@ -58,7 +58,7 @@ For "memorization rate" framing and why high adversarial RMSD is the *desired*
 outcome, see `casf_mutagenesis.md`. Models with a confidence signal: **Boltz-2**
 (full CASF, n≈229/variant) and **AF3+MSA** (confidence at full CASF, n=239, after
 rsyncing the CARC `af3msa_summary_confidences` JSONs and ingesting them via
-`18_ingest_af3msa_confidence.py`; note WT-RMSD-dependent analyses stay subset20
+`analyze/08_ingest_af3msa_confidence.py`; note WT-RMSD-dependent analyses stay subset20
 because the full run predicted only the adversarial structures, not WT). Only
 Boltz-2 has an affinity head.
 
@@ -128,7 +128,7 @@ stayed <2 Å), AF3 `iptm` still drops Δ+0.040 (AUROC 0.852, n=168) — 4× the 
 effect (Δ+0.011, AUROC 0.65); on *responded* cells Δ+0.160 (AUROC 0.958).
 Spearman(ΔRMSD, Δconf) = +0.515 (p=7e-50). The subset20 AF3 result was no fluke.
 
-Plus the controls from `16_confidence_response.py`: the **global** confidence
+Plus the controls from `analyze/06_confidence_response.py`: the **global** confidence
 `ptm` drops 3× less than interface `iptm` (the protein still folds — Cα ~1 Å);
 the **broken no-MSA AF3** baseline (ptm~0.28) shows ~zero drop (AUROC 0.54);
 and the WT→adv `iptm` drop (0.030) is **3.1× the within-system noise** across
@@ -180,7 +180,7 @@ Q1–Q3 are observational and RTM-controlled; they leave one residual ambiguity
 hold the trunk fixed and hand the affinity head a *supplied* pose with the ligand
 rigidly ejected from the pocket — does the predicted affinity react?
 
-**Method** (`19_pose_swap_affinity.py`; design `docs/superpowers/specs/2026-06-06-pose-swap-test-design.md`;
+**Method** (`analyze/09_pose_swap_affinity.py`; design `docs/superpowers/specs/2026-06-06-pose-swap-test-design.md`;
 lab notebook `docs/lab_notebook/2026-06-06_pose-swap-test.md`). Boltz-2's affinity
 head reads pose *only* via a distogram of `x_pred` over protein–ligand cross-pairs;
 the trunk (`s_inputs`, `z`) is pose-independent. So: monkeypatch
@@ -262,26 +262,26 @@ the pose level), whereas the affinity number is not.
 
 ```bash
 # Pure-stdlib confidence-drop analysis (runs on any python3):
-python3 analysis/casf_mutagenesis/scripts/16_confidence_response.py
+python3 analysis/casf_mutagenesis/scripts/analyze/06_confidence_response.py
 
 # Joint conf × affinity × RMSD (needs pandas/scipy/matplotlib/sklearn;
 # on this host: /mnt/katritch_lab2/aoxu/envs/protenix/bin/python3):
 PY=/mnt/katritch_lab2/aoxu/envs/protenix/bin/python3
-$PY analysis/casf_mutagenesis/scripts/17_conf_aff_rmsd.py
+$PY analysis/casf_mutagenesis/scripts/analyze/07_conf_aff_rmsd.py
 ```
 
 ## Files of interest
 
 | path | what |
 |---|---|
-| `analysis/casf_mutagenesis/scripts/16_confidence_response.py` | confidence-drop test (Wilcoxon/AUROC/bootstrap, stdlib) |
-| `analysis/casf_mutagenesis/scripts/17_conf_aff_rmsd.py` | joint Q1–Q3 analysis + figure |
+| `analysis/casf_mutagenesis/scripts/analyze/06_confidence_response.py` | confidence-drop test (Wilcoxon/AUROC/bootstrap, stdlib) |
+| `analysis/casf_mutagenesis/scripts/analyze/07_conf_aff_rmsd.py` | joint Q1–Q3 analysis + figure |
 | `analysis/casf_mutagenesis/outputs/confidence_stats_full.csv` | per (model, variant, metric) drop stats |
 | `analysis/casf_mutagenesis/outputs/confidence_conditional_full.csv` | memorized-vs-responded conditional |
 | `analysis/casf_mutagenesis/outputs/paired_conf_aff_rmsd.csv` | per-cell WT/adv RMSD + confidence + affinity + deltas |
 | `analysis/casf_mutagenesis/outputs/q1_affinity_strata.csv` / `q2_within_case_rho.csv` / `q3_corr_matrix.csv` | per-module tables |
 | `analysis/casf_mutagenesis/figures/conf_aff_rmsd_pocket.png` | 4-panel summary figure |
-| `analysis/casf_mutagenesis/scripts/19_pose_swap_affinity.py` + `20`–`22` | pose-swap driver, panel aggregator, GNINA reference + contrast |
+| `analysis/casf_mutagenesis/scripts/analyze/09_pose_swap_affinity.py` + `20`–`22` | pose-swap driver, panel aggregator, GNINA reference + contrast |
 | `analysis/casf_mutagenesis/scripts/23`/`24_export_*_poses.py` | export native/ejected ligand structures (crystal + predicted frame) for visual inspection |
 | `analysis/casf_mutagenesis/figures/pose_swap_affinity.png` / `pose_swap_contrast.png` | pose-swap result + Boltz-vs-GNINA contrast |
 | `docs/lab_notebook/2026-06-06_pose-swap-test.md` + `docs/superpowers/specs/2026-06-06-pose-swap-test-design.md` | pose-swap lab-notebook entry + design spec |

@@ -63,5 +63,5 @@ echo "code:  $CONTRASCF_ROOT"
 echo "data:  $CONTRASCF_OUTPUTS_ROOT"
 echo "cache: $CONTRASCF_MSA_CACHE ($(ls "$CONTRASCF_MSA_CACHE" 2>/dev/null | wc -l) a3m)"
 
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py
 echo "=== task ${SLURM_ARRAY_TASK_ID} exit=$? at $(date -Is) ==="

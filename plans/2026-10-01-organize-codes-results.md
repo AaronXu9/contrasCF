@@ -53,7 +53,7 @@ three places: `analysis/src/loaders.py`, `analysis/scripts/13_run_surfdock.py`
 - **Pre-condition:** S2 merged (or restructure branch cut from the S2 head).
 - **Action:** extract the 3 cross-arm dependencies into a shared core; renumber scripts into stages; split per-arm result tables; one notebook location; retire `SURFDOCK_FIX.md` into docs. Update CARC sbatch scripts and the `dockstrat`/`contrascf-casf` skills in the same commit as each rename.
 - **Post-condition:** every arm's headline regenerates from its new path and matches the pre-restructure CSVs byte-for-byte or numerically; one CARC dry run passes.
-- **Status:** pending
+- **Status:** done on branch `restructure/three-arms` (2026-10-03). Gate: baseline regenerated from the OLD layout first (so staleness could not masquerade as a change), then every entry point re-run from the NEW layout — 6 pocket-arm analyses, 3 ligand-arm analyses, paper arm × 4 scopes, τ-RAMD smoke test: all exit 0; **42 CSVs byte-identical; the 4 split docking tables row-identical** (old combined = new pocket + new ligand). Import smoke: 76/94 load standalone, failure set identical to the old layout (package-only library modules + PyMOL). Found en route: stale `results/gdh/results.csv` (TODO 17), SurfDock box symlink bridge (TODO 18), overview panel (b) needs regen (TODO 19), τ-RAMD `test_smoke.py` is a script not a pytest file.
 
 ### S3 design (written 2026-10-01, awaiting go-ahead)
 
@@ -100,7 +100,7 @@ Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.
 - **Pre-condition:** S3 done.
 - **Action:** write `docs/results_index.md` mapping each headline number → CSV → producing script → command.
 - **Post-condition:** every headline in `casf_overview.md` and the Lark draft has a row.
-- **Status:** pending
+- **Status:** done (2026-10-03) — `docs/results_index.md`: values read live from the files, writer located by searching code for each filename. Two headline items have NO reproducible provenance (TODO 20): `mutant_receptor_alignment.csv` (no writer in repo) and the pose-swap tables (written to `/tmp`, lost). README now points at the index.
 
 ## Risk register
 | Risk | Likelihood | Impact | Mitigation |
@@ -119,5 +119,6 @@ Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.
 - 2026-10-01 — Keep paper-reproduction arm regenerable — user instruction; it is the direct comparison to Masters et al.
 - 2026-10-01 — Merge via PR, not direct merge — 43 commits deserve review.
 - 2026-10-01 — Fix the shared co-folding scorer inside S1 rather than defer — the five-method table would otherwise freeze garbage; verified the protein arm has zero rate/flag changes across all 7896 rows.
+- 2026-10-03 — S3 implemented and gated; CARC dry run is the last check before the PR.
 - 2026-10-03 — User approved PR #1 and the S3 layout; τ-RAMD track added to the layout (was omitted); matcher unification split out of S3 because it changes docking numbers.
 - 2026-10-01 — Do NOT re-run ligand-arm SurfDock inside this plan — ~13 GPU-h and a methodological choice (what defines the pocket); tracked as TODO 15 for the user.

@@ -80,15 +80,15 @@ PY
 echo
 
 echo "=== 2/2 Boltz-2 (with affinity) ==="
-# Note: input regen (01_build_subset20.py) intentionally NOT run here —
+# Note: input regen (build/01_build_subset20.py) intentionally NOT run here —
 # CARC doesn't have the 42 GB CASF data tree (raw PDBs + ligand SDFs).
 # The affinity-enabled boltz.yaml files are rsync'd from the lab box
 # before submission, and Boltz-2 only needs the YAMLs as input.
 #
-# Analysis (05_analyze_subset20.py) also intentionally NOT run here —
+# Analysis (analyze/01_analyze_cofold.py) also intentionally NOT run here —
 # it needs the crystal data for RMSD. Run analysis back on the lab box
 # after rsyncing the affinity JSONs back.
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 echo
 
 echo "=== Done at $(date -Iseconds) ==="
