@@ -51,7 +51,7 @@ properties:
 ```
 
 The renderer (`render_boltz`) always emits this block as of commit 4b697ef. The
-runner (`scripts/03_run_boltz2_subset20.py::_copy_all_samples`) copies
+runner (`scripts/run/01_run_boltz2.py::_copy_all_samples`) copies
 `affinity_<prefix>.json` into the per-variant directory whenever Boltz-2
 produced one.
 
@@ -235,8 +235,8 @@ Two narrower observations:
 | `analysis/casf_mutagenesis/inputs_boltz.py`                                       | YAML renderer (adds the `properties` block)       |
 | `analysis/casf_mutagenesis/analysis.py::_read_affinity`                           | parse `affinity_<prefix>.json`                    |
 | `analysis/casf_mutagenesis/analysis.py::affinity_paired_stats`                    | WT ↔ adversarial join                             |
-| `analysis/casf_mutagenesis/scripts/05_analyze_subset20.py`                        | driver; emits `paired_affinity_<scope>.csv`       |
-| `analysis/casf_mutagenesis/scripts/10_plot_affinity.py`                           | the 4-panel figure                                |
+| `analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py`                        | driver; emits `paired_affinity_<scope>.csv`       |
+| `analysis/casf_mutagenesis/scripts/plot/01_plot_affinity.py`                           | the 4-panel figure                                |
 | `analysis/casf_mutagenesis/outputs/paired_affinity_subset20.csv`                  | per-system data                                   |
 | `analysis/casf_mutagenesis/outputs/results_subset20.csv`                          | per-pose data; `affinity_pred_value` column       |
 | `analysis/casf_mutagenesis/figures/affinity_memorization_subset20.png`            | the figure above                                  |
@@ -251,16 +251,16 @@ Two narrower observations:
 source env/lab.sh
 
 # 1. Build inputs (renderer now writes affinity-enabled YAMLs)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/01_build_subset20.py
 
 # 2. Run Boltz-2 (with affinity head)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 
 # 3. Analyze — emits paired_affinity_subset20.csv
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py
 
 # 4. Plot
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/10_plot_affinity.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/plot/01_plot_affinity.py
 ```
 
 For CARC: see `slurm/run_boltz2_affinity_subset20_carc.sh` (subset20) and the

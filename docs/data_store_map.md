@@ -97,7 +97,7 @@ not a convention:
 | variant | receptor | box centre | source |
 |---|---|---|---|
 | `wt` | **crystal protein** | **crystal** ligand centroid | `inputs_docking.py:5-6` |
-| `rem`/`pack`/`inv` | **AF3+MSA predicted CIF**, stripped to protein | **AF3-predicted** ligand centroid | `10_build_mutant_docking.py:62,71,74` |
+| `rem`/`pack`/`inv` | **AF3+MSA predicted CIF**, stripped to protein | **AF3-predicted** ligand centroid | `build/03_build_mutant_docking.py:62,71,74` |
 
 Cell counts — **katlab**: wt 251, rem/pack/inv 239 each = **968**, matching the
 968 `gnina`/`unidock2`/`surfdock` output dirs. **CARC**: wt 251, mutants **0**
@@ -130,7 +130,7 @@ Audits: `receptor_size_audit.json` (sizes), `mutation_presence_audit.json`
    `$LAB_CACHE/carc_runkit/` bundles, not a byte-for-byte mirror.
 4. **[UPDATED 2026-08-23]** `raw/` holds **281** on lab, not 285. HiQBind lacked
    34 CASF-core systems; **30 were recovered from the RCSB deposited mmCIF** by
-   `analysis/casf_mutagenesis/scripts/25_recover_missing_receptors.py` (chain
+   `analysis/casf_mutagenesis/scripts/build/05_recover_missing_receptors.py` (chain
    selection uses HiQBind's own 10 Å rule; validated on 25 HiQBind-backed
    controls, which reproduce the 3.5 Å pocket **exactly 25/25**). The 4 still
    absent are `1a30`/`3bv9`/`3uri` (peptide ligands — categorical exclusion) and
@@ -142,9 +142,9 @@ Audits: `receptor_size_audit.json` (sizes), `mutation_presence_audit.json`
    are **absent** (0), and the 968 `gnina`/`unidock2` dirs there are **empty
    scaffolding, not results** — every docking result to date was produced on
    katlab. The 239 AF3+MSA mutant CIFs *are* on CARC, so mutant inputs can be
-   regenerated in place with `10_build_mutant_docking.py` rather than rsynced
+   regenerated in place with `build/03_build_mutant_docking.py` rather than rsynced
    (safe as of 2026-08-25: the AF3 all-chains fix plus the build-time guard in
-   `10_build_mutant_docking.py` mean a rebuild no longer reproduces the 16
+   `build/03_build_mutant_docking.py` mean a rebuild no longer reproduces the 16
    truncated receptors).
 6. **[NEW]** `labels/clusters_casf2016.json` contains **`105b` and `10wh`**
    (digit zero) where the real ids are **`1o5b` and `1owh`** (letter O). It is

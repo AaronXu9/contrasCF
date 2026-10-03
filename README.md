@@ -14,17 +14,25 @@ physics.
 
 This repo contains:
 
-1. **The 16 hand-built adversarial cases** (CDK2 + GDH systems) and the
+1. **The 20 hand-built adversarial cases** (CDK2, GDH and MEK1 systems) and the
    analysis pipeline that scores them across four cofolding models plus
    physics-based docking baselines (UniDock2, GNINA, SurfDock, Boltz-2).
    Source under [`analysis/`](analysis/), entry scripts under
-   [`analysis/scripts/`](analysis/scripts/).
+   [`analysis/paper_repro/scripts/`](analysis/paper_repro/scripts/).
 2. **A new automated CASF-2016 mutagenesis pipeline** that scales the
    paper's binding-site mutagenesis (Fig. 3, n=285) by auto-detecting
    pockets and generating `wt`/`rem`/`pack`/`inv` variants for any
    PDBbind-format complex. Source under
    [`analysis/casf_mutagenesis/`](analysis/casf_mutagenesis/);
    end-to-end docs at [`docs/casf_mutagenesis.md`](docs/casf_mutagenesis.md).
+3. **The ligand-side counterpart** — halogenation, methylation and charge-swap
+   variants of every CASF ligand, scored across five methods. Source under
+   [`analysis/ligand_mutagenesis/`](analysis/ligand_mutagenesis/); docs at
+   [`docs/ligand_mutagenesis.md`](docs/ligand_mutagenesis.md).
+4. **A τ-RAMD physics-validation pilot** that tests whether biased-MD exit
+   times separate a paper binder from a non-binder. Source under
+   [`analysis/ramd_pilot/`](analysis/ramd_pilot/); results in
+   [`docs/ramd_pilot_results.md`](docs/ramd_pilot_results.md).
 
 ## How to read RMSD numbers from this project
 
@@ -38,30 +46,40 @@ the desired outcome**, the inverse of typical pose-prediction benchmarks.
 
 ## Project layout
 
+Three benchmark **arms** over one shared **core**, plus a physics-validation track.
+Each arm's scripts are grouped by stage — `build/` → `run/` → `analyze/` → `plot/`
+(→ `export/`) — and numbered within a stage. Old script names resolve through each
+arm's `scripts/RENAMES.md` (restructure of 2026-10, `plans/2026-10-01-organize-codes-results.md`).
+
 ```
 analysis/
-├── src/                       # 16-case pipeline (config, loaders, native,
-│                              #   align, ligand_match, confidence, clashes,
-│                              #   pipeline)
-├── scripts/                   # 16-case end-to-end (01_fetch → 13_run_surfdock)
-├── native/                    # crystal references (1B38, 2VWH, 7XLP)
-├── casf_mutagenesis/          # NEW: automated CASF-2016 sweep
-│   ├── config.py              # mutation tables (rem→G, pack→F, inv per Miyata)
-│   ├── sequence.py / pocket.py
-│   ├── mutate.py
-│   ├── inputs_{af3,boltz,docking}.py
-│   ├── msa_via_boltz.py       # ColabFold piggyback (direct API errors out)
-│   ├── analysis.py            # ligand RMSD, memorisation aggregates
-│   └── scripts/               # 00_verify → 06_run_af3_msa
-└── results/                   # 16-case results (CSV + figures); gitignored
-contrasCF/
-├── data/                      # paper-shipped predictions (gitignored;
-│                              #   download from Zenodo 14749304)
-└── Cofolding-Tools-main/      # AF3/Boltz/Chai/RFAA input templates
-docking/                       # working dirs for UniDock2 / GNINA / SurfDock
-docs/
-├── project_notes.md           # 16-case pipeline notes + caveats
-└── casf_mutagenesis.md        # CASF sweep details, results, gotchas
+├── core/                      # shared by every arm — no arm imports another arm
+│   ├── ligand_rmsd.py         # atom correspondence + in-place / best-fit ligand RMSD
+│   ├── loaders.py             # structure + ligand loading (gemmi, RDKit)
+│   ├── surfdock_engine.py     # SurfDock surface→CSV→ESM→diffusion helpers
+│   └── reference_smiles.py    # Masters et al. 2025 reference SMILES
+├── paper_repro/               # ARM 1 — the 20 hand-built paper cases (CDK2, GDH, MEK1)
+│   ├── lib/                   #   config, align, ligand_match, confidence, clashes, pipeline
+│   └── scripts/               #   01_fetch_native → 13_run_surfdock
+├── casf_mutagenesis/          # ARM 2 — CASF-2016 pocket mutagenesis (wt/rem/pack/inv)
+│   ├── *.py                   #   config, pocket, mutate, inputs_*, analysis, gnina_analysis
+│   ├── scripts/{build,run,analyze,plot,export}/
+│   ├── outputs/               #   per-cell predictions + result tables (gitignored)
+│   └── figures/
+├── ligand_mutagenesis/        # ARM 3 — CASF-2016 ligand mutagenesis (halo/meth/charge)
+│   ├── rules/                 #   methylation, charge_swap, halogenation
+│   ├── scripts/{build,run,analyze,plot}/
+│   └── outputs/               #   incl. *_ligand.csv docking tables (gitignored)
+├── ramd_pilot/                # PHYSICS VALIDATION — τ-RAMD exit-time oracle (CARC, GROMACS-RAMD)
+│   └── {prep,ramd,analysis,scripts,tests,carc_setup}/
+├── native/                    # crystal references (1B38, 2VWH, 7XLP) — shared input data
+└── results/                   # paper-reproduction result tables + figures (gitignored)
+contrasCF/                     # paper-shipped predictions (Zenodo 14749304) + input templates
+docking/                       # docking working dirs (SurfDock reads inputs/<case>/box.json)
+env/                           # lab.sh / carc.sh — source one before any script
+slurm/                         # CARC job scripts
+docs/                          # living docs; docs/archive/ holds retracted guidance
+journal/  experiments/  plans/ # lab-notebook: postmortems, gated experiments, plans (immutable history)
 ```
 
 ## Setup
@@ -104,19 +122,19 @@ cd /path/to/contrasCF
 source env/lab.sh    # or env/carc.sh — sets CONTRASCF_* and $CONTRASCF_PY
 
 # 1. gating test (CDK2 must match paper 11/11)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/00_verify_reference_systems.py
 
 # 2. build inputs for the 20-PDB subset
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/01_build_subset20.py
 
 # 3. run Boltz-2 on subset20  (~37 s/job × 76 jobs ≈ 47 min)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 
 # 4. run AF3 with MSA on subset20 (~85 s/job × 76 jobs ≈ 1.8 h)
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py
 
-# 5. analysis: ligand RMSD + memorisation rates
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/05_analyze_subset20.py
+# 5. analysis: ligand RMSD + memorisation rates (default scope is the FULL set)
+CONTRASCF_SCOPE=subset20 $CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py
 ```
 
 ## Latest results (subset20, 2026-05-06)

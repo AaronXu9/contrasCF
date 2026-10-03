@@ -201,14 +201,14 @@ should be fixed before publication rather than defended.
 - [ ] `[confirmed]` Port `_matched_rmsd`'s match enumeration into
       `gnina_analysis.py::_mcs_match_indices` (swap `GetSubstructMatch` for
       `GetSubstructMatches(..., uniquify=False)` and minimise) so both arms use
-      one matcher, then re-run `12_analyze_docking_engines.py`. Expect docking
+      one matcher, then re-run `analyze/03_analyze_docking_engines.py`. Expect docking
       rates to rise ~2 points.
 
 ---
 
 ## 5. `rdMolAlign.GetBestRMS` — do NOT use it for the docking fix
 
-`analysis/src/rmsd.py:57` (the 16-case pipeline) uses `GetBestRMS` behind a
+`analysis/paper_repro/lib/rmsd.py:57` (the 16-case pipeline) uses `GetBestRMS` behind a
 blanket `except Exception: return float("nan")` (`:58`). It is the obvious
 candidate for fixing §4 — and it is the wrong choice. Measured 2026-08-28:
 

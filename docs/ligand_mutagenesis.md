@@ -24,7 +24,7 @@ The paper hand-built **12 ligand variants on 2 systems**:
 
 The paper did **not** run a CASF-scale ligand sweep analogous to Fig. 3's
 pocket sweep. The shipped repo contains only the 12 hand-built SMILES
-(see [`analysis/src/config.py::ATP_CHARGE_SMILES`](../analysis/src/config.py)
+(see [`analysis/paper_repro/lib/config.py::ATP_CHARGE_SMILES`](../analysis/paper_repro/lib/config.py)
 and `GLUCOSE_SMILES`). This module **encodes the paper's transformation
 rules** so they apply systematically to every CASF-2016 ligand carrying
 the relevant functional group — extending the paper's two systems × 12
@@ -160,9 +160,9 @@ analysis/ligand_mutagenesis/
 │   └── halogenation.py   # informational extension
 ├── build.py              # per-system pipeline orchestrator
 ├── scripts/
-│   ├── 00_verify_reference_systems.py   # gating test (paper 11/11 SMILES)
-│   ├── 01_build_subset20.py             # 20-system smoke build
-│   └── 02_build_full_casf.py            # 285-system full build (--start/--limit)
+│   ├── build/00_verify_reference_systems.py   # gating test (paper 11/11 SMILES)
+│   ├── build/01_build_subset20.py             # 20-system smoke build
+│   └── build/02_build_full_casf.py            # 285-system full build (--start/--limit)
 └── outputs/
     ├── <pdbid>/<variant>/{af3.json, boltz.yaml,
     │                      docking/{receptor.pdb, ligand.sdf, box.json}}
@@ -203,15 +203,15 @@ For each PDB id:
 
 ## Verification (gating test)
 
-[`scripts/00_verify_reference_systems.py`](../analysis/ligand_mutagenesis/scripts/00_verify_reference_systems.py)
+[`scripts/build/00_verify_reference_systems.py`](../analysis/ligand_mutagenesis/scripts/build/00_verify_reference_systems.py)
 asserts that the rules reproduce all 11 paper SMILES on the two paper
 systems. Without this gate the systematic CASF sweep is meaningless.
 
 | ladder | n | parent SMILES | source in repo |
 |---|---|---|---|
-| glucose methylation | 5 | `GLUCOSE_SMILES["glucose_0"]` | `analysis/src/config.py:72` |
-| ATP charge swap (neutral) | 3 | `ATP_SMILES` | `analysis/src/config.py:52-55` |
-| ATP charge swap (cationic) | 3 | `ATP_SMILES` | `analysis/src/config.py:52-55` |
+| glucose methylation | 5 | `GLUCOSE_SMILES["glucose_0"]` | `analysis/paper_repro/lib/config.py:72` |
+| ATP charge swap (neutral) | 3 | `ATP_SMILES` | `analysis/paper_repro/lib/config.py:52-55` |
+| ATP charge swap (cationic) | 3 | `ATP_SMILES` | `analysis/paper_repro/lib/config.py:52-55` |
 
 The test canonicalises both the generated and the expected SMILES via
 `Chem.MolToSmiles(canonical=True, isomericSmiles=True)` before comparing,
@@ -243,7 +243,7 @@ carboxylate, so `charge_swap.is_eligible` must refuse it.
 
 ## Pilot run — subset20 (2026-05-07)
 
-`01_build_subset20.py` on the 20-PDB CASF subset
+`build/01_build_subset20.py` on the 20-PDB CASF subset
 (`PDBbind_casf2016_subset20.json`).
 
 **Outcome:** 20/20 systems built, 0 errors, 0 warnings, **93 total variants**.
@@ -286,7 +286,7 @@ scripts read the variant set from this manifest (not from a fixed tuple).
 
 ## Full CASF-2016 build (2026-05-07, n=285)
 
-`02_build_full_casf.py` on all 285 CASF-2016 PDB ids from
+`build/02_build_full_casf.py` on all 285 CASF-2016 PDB ids from
 `PDBbind_data_split_cleansplit.json["casf2016"]`.
 
 **Outcome:** 251/285 systems built successfully, **1300 total variants**
@@ -378,16 +378,16 @@ PY="/home/aoxu/miniconda3/envs/rdkit_env/bin/python"
 
 # 1. Gating test — must pass before doing anything else
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/ligand_mutagenesis/scripts/00_verify_reference_systems.py
+  analysis/ligand_mutagenesis/scripts/build/00_verify_reference_systems.py
 
 # 2. Build inputs for the 20-system subset
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/ligand_mutagenesis/scripts/01_build_subset20.py
+  analysis/ligand_mutagenesis/scripts/build/01_build_subset20.py
 
 # 3. Build inputs for the full CASF-2016 (285 systems).
 #    Supports --start / --limit / --manifest for chunked re-runs.
 LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
-  analysis/ligand_mutagenesis/scripts/02_build_full_casf.py
+  analysis/ligand_mutagenesis/scripts/build/02_build_full_casf.py
 ```
 
 ## Implementation gotchas (and workarounds)
@@ -398,13 +398,13 @@ LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
 | Pure canonical-rank ordering picks 6'-CH₂OH before anomeric OH on glucose | chemistry-aware priority class (hemiacetal → secondary → primary) + path-distance tiebreak required for paper reproduction |
 | `Chem.GetShortestPath(mol, a, a)` errors with "Invariant Violation aid1 != aid2" | guard `c_idx != hemi_c_idx` before calling |
 | Atom indices shift after `RWMol.RemoveAtom` | tag the anchor with `SetAtomMapNum(99)` before deletion, then look up by map number |
-| Charge-swap chain-length off-by-one easy to make | replacement SMILES decoded by hand from `analysis/src/config.py::ATP_CHARGE_SMILES`; covered by 6/6 gating-test assertions |
+| Charge-swap chain-length off-by-one easy to make | replacement SMILES decoded by hand from `analysis/paper_repro/lib/config.py::ATP_CHARGE_SMILES`; covered by 6/6 gating-test assertions |
 | RDKit "molecule is tagged as 2D" warning when reading crystal SDFs | benign — emitted by most PDBbind crystal SDFs; ignore |
 
 ## Out of scope (deferred to follow-ons)
 
 - **Running the models** (AF3 / Boltz-2 / docking) on the generated
-  inputs. Mirrors `casf_mutagenesis/scripts/03_*` and `04_*`. Variant
+  inputs. Mirrors `casf_mutagenesis/scripts/run/01_run_boltz2.py` and `run/02_run_af3.py`. Variant
   names in the manifest are filename-safe so the wrappers can be written
   by reading variant names from the manifest (not from a fixed tuple).
 - **MSA injection** for the AF3 inputs. Protein sequences are constant
@@ -415,7 +415,7 @@ LD_LIBRARY_PATH=$LIB:$LD_LIBRARY_PATH $PY \
   `casf_mutagenesis.analysis.superpose_by_index` will work directly
   (protein numbering is identical across variants since protein is
   constant), but per-rule common-substructure SMARTS — analogous to
-  `analysis/src/config.py::COMMON_SUBSETS["ADENOSINE"]` and
+  `analysis/paper_repro/lib/config.py::COMMON_SUBSETS["ADENOSINE"]` and
   `["GLC_CORE"]` — are needed to pair "the same atoms" across a WT
   ligand and its variants for RMSD purposes. Design that in a follow-on.
 - **More chemistry rules.** Deisostere swap (C=O → C=S, etc.) and

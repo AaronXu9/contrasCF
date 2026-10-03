@@ -22,7 +22,7 @@ from .pocket import load_ligand_heavy_coords
 def _strip_to_protein_pdb(st: gemmi.Structure) -> str:
     """PDB string with only standard-AA residues from all protein chains.
 
-    Differs from analysis/scripts/10_prep_docking_inputs.py:strip_to_protein_pdb
+    Differs from analysis/paper_repro/scripts/10_prep_docking_inputs.py:strip_to_protein_pdb
     which picks the single largest chain — here we keep all chains, since CASF
     ligand-binding sites can sit at chain interfaces.
     """
