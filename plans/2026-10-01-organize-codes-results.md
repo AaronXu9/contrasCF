@@ -63,14 +63,14 @@ three places: `analysis/src/loaders.py`, `analysis/scripts/13_run_surfdock.py`
 
 | new module | from | why |
 |---|---|---|
-| `core/ligand_rmsd.py` | `casf_mutagenesis/analysis.py` `_atom_correspondences`, `_matched_rmsd`, `_bestfit_rmsd` + `gnina_analysis.py` `_mcs_match_indices` | ONE atom-correspondence implementation for co-folding and docking. Today's bug lived in only one of two matchers; they must not diverge again |
+| `core/ligand_rmsd.py` | `casf_mutagenesis/analysis.py` `_atom_correspondences`, `_matched_rmsd`, `_bestfit_rmsd` + `gnina_analysis.py` `_mcs_match_indices` | both atom matchers in ONE file, moved verbatim. **Not unified in S3**: the docking matcher takes a single match without symmetry enumeration, so unifying it changes docking RMSDs (that is TODO item 10, rate understated ~2.4 pts) and would break S3's numbers-identical gate. Unify later as its own gated change |
 | `core/loaders.py` | `analysis/src/loaders.py` | imported by the pocket arm |
 | `core/surfdock_engine.py` | helpers in `analysis/scripts/13_run_surfdock.py` | loaded BY FILE PATH by `14_run_surfdock_variants.py` |
 | `core/reference_smiles.py` | paper SMILES in `analysis/src/config.py` | used by the ligand arm's verify gate |
 
 Old locations re-export from `core/` so the paper-reproduction arm keeps running unchanged.
 
-**2. Paper-reproduction arm** — move `analysis/src/` + `analysis/scripts/` → `analysis/paper_repro/{lib,scripts}/`. Stays fully regenerable (memory: paper-reproduction-arm).
+**2. Paper-reproduction arm** — move `analysis/src/` + `analysis/scripts/` → `analysis/paper_repro/{lib,scripts}/`. Stays fully regenerable (memory: paper-reproduction-arm). `analysis/native/` and `analysis/results/` stay in place (shared data / existing result paths).
 
 **3. Scripts grouped by stage, renumbered inside each stage** (pocket arm, 43 scripts; collisions at 10/11/12/34 disappear):
 
@@ -86,7 +86,9 @@ Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.
 
 **4. Per-arm result tables.** `12_analyze_docking_engines.py` writes ligand rows to `ligand_mutagenesis/outputs/docking_results_ligand.csv` instead of the pocket arm's table with a `module` column. Consumers updated in the same commit.
 
-**5. Housekeeping.** `docs/lab_notebook/` (1 entry) → `journal/`; top-level `SURFDOCK_FIX.md` (contains retracted advice) → `docs/archive/` behind a banner.
+**5. Physics-validation track — τ-RAMD (added 2026-10-03 after user review).** `analysis/ramd_pilot/` stays where it is: it is already a clean package (`prep/`, `ramd/`, `analysis/`, `scripts/00-04`, `tests/`, `carc_setup/`), imports nothing from the three arms, and runs on CARC through `CONTRASCF_RAMD_OUT` / `CONTRASCF_GMX_RAMD` in `env/carc.sh`. It is a fourth component beside the three arms — a physics oracle (exit-time ranking, Kokh & Wade 2018) validating paper cases, verdict MARGINAL at force 6 (R = 4.25 vs gate 5, p < 0.001). Its only input dependency is `analysis/native/` (paper native CIFs), which therefore **stays at `analysis/native/` as shared data** rather than moving under `paper_repro/`. S3 gate adds: `pytest analysis/ramd_pilot/tests` passes.
+
+**6. Housekeeping.** `docs/lab_notebook/` (1 entry) → `journal/`; top-level `SURFDOCK_FIX.md` (contains retracted advice) → `docs/archive/` behind a banner.
 
 **Same-commit updates for every rename:** 8 `slurm/*.sh`, `env/*.sh`, the `dockstrat` and `contrascf-casf` skills, and current docs (`casf_overview`, `casf_mutagenesis`, `ligand_mutagenesis`, `data_store_map`, `data_prep_todo`, `project_notes`). Historical specs/plans under `docs/superpowers/` are left as written.
 
@@ -117,4 +119,5 @@ Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.
 - 2026-10-01 — Keep paper-reproduction arm regenerable — user instruction; it is the direct comparison to Masters et al.
 - 2026-10-01 — Merge via PR, not direct merge — 43 commits deserve review.
 - 2026-10-01 — Fix the shared co-folding scorer inside S1 rather than defer — the five-method table would otherwise freeze garbage; verified the protein arm has zero rate/flag changes across all 7896 rows.
+- 2026-10-03 — User approved PR #1 and the S3 layout; τ-RAMD track added to the layout (was omitted); matcher unification split out of S3 because it changes docking numbers.
 - 2026-10-01 — Do NOT re-run ligand-arm SurfDock inside this plan — ~13 GPU-h and a methodological choice (what defines the pocket); tracked as TODO 15 for the user.
