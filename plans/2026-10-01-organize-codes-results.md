@@ -100,7 +100,7 @@ Ligand arm (8 scripts) gets the same four stages. Each `scripts/` gets `RENAMES.
 - **Pre-condition:** S3 done.
 - **Action:** write `docs/results_index.md` mapping each headline number → CSV → producing script → command.
 - **Post-condition:** every headline in `casf_overview.md` and the Lark draft has a row.
-- **Status:** pending
+- **Status:** done (2026-10-03) — `docs/results_index.md`: values read live from the files, writer located by searching code for each filename. Two headline items have NO reproducible provenance (TODO 20): `mutant_receptor_alignment.csv` (no writer in repo) and the pose-swap tables (written to `/tmp`, lost). README now points at the index.
 
 ## Risk register
 | Risk | Likelihood | Impact | Mitigation |

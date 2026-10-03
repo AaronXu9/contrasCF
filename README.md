@@ -137,18 +137,8 @@ $CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py
 CONTRASCF_SCOPE=subset20 $CONTRASCF_PY analysis/casf_mutagenesis/scripts/analyze/01_analyze_cofold.py
 ```
 
-## Latest results (subset20, 2026-05-06)
+## Results
 
-| model | WT RMSD <2 Å | adversarial <2 Å (rem / pack / inv) |
-|---|---|---|
-| AF3 + ColabFold MSA | **0.79** (15/19) | 0.37 / 0.37 / 0.26 |
-| Boltz-2 (single-seq) | 0.63 (12/19) | 0.26 / 0.37 / 0.21 |
-| AF3 (no-MSA, broken baseline) | 0.00 | 0.00 / 0.00 / 0.00 |
-
-Higher WT, lower adversarial = more physics-aware. Both production models
-keep the ligand near the WT pose in ~30 % of adversarial cases despite
-disrupted pockets — the residual memorisation Masters et al. 2025 quantifies.
-
-See [`docs/casf_mutagenesis.md`](docs/casf_mutagenesis.md) for full
-implementation history, gotchas, and the AF3+MSA fix that took six bugs to
-land.
+Every headline number, with the file that holds it and the script that writes
+it, is in [`docs/results_index.md`](docs/results_index.md). Start there; the
+regenerate-everything block at its top rebuilds all tables in about 15 minutes.
