@@ -207,6 +207,11 @@ def _resolve_ids() -> tuple[list[str], str]:
         )
     else:
         ids = json.loads(SUBSET20_JSON.read_text())["casf2016"]
+    # Same filter the other runners take: re-run named systems only.
+    pf = {x.strip() for x in os.environ.get("CONTRASCF_PDBID_FILTER", "").split(",") if x.strip()}
+    if pf:
+        ids = [i for i in ids if i in pf]
+        scope = f"{scope}+filter"
     start = int(os.environ.get("CONTRASCF_START", "0"))
     end = int(os.environ.get("CONTRASCF_END", str(len(ids))))
     return ids[start:end], f"{scope}[{start}:{end}]"
