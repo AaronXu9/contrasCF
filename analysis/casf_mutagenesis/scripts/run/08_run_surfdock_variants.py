@@ -128,6 +128,63 @@ def discover_cells(outputs_root: Path,
 # Per-cell runner
 # ---------------------------------------------------------------------------
 
+def _crystal_frame_ligand(pdbid: str, variant_sdf: Path, out_path: Path) -> dict:
+    """Write the variant ligand as a conformer sitting in the CRYSTAL frame.
+
+    SurfDock uses the input ligand's atom positions to choose the protein surface
+    it shows the model (interface crop + 8 A pocket) and also docks that same
+    molecule (it computes an RMSD between docked and reference ligand, so the two
+    cannot be different molecules). The ligand arm's docking/ligand.sdf is an
+    RDKit embedding 22-173 A off-site with an arbitrary orientation, which gave
+    SurfDock a wrong surface footprint (data_prep_todo item 15).
+
+    Here the variant is re-embedded with every atom it shares with the crystal
+    ligand pinned to the crystal coordinates (MCS / substructure correspondence
+    from core.ligand_rmsd), then rigidly aligned on those atoms. Added atoms
+    (halogen, methyl, swapped charge group) are placed by the embedding. For `wt`
+    this reproduces the crystal pose, i.e. exactly the protein arm's input.
+    """
+    from rdkit import Chem
+    from rdkit.Chem import AllChem, rdMolAlign
+    from rdkit.Geometry import Point3D
+    from core.ligand_rmsd import _atom_correspondences
+
+    casf = Path(os.environ.get("CONTRASCF_CASF_ROOT", str(REPO_ROOT / "data" / "casf2016")))
+    xpath = casf / "crystal_ligands" / f"{pdbid}_ligand.sdf"
+
+    def _read(p):
+        m = Chem.MolFromMolFile(str(p))
+        if m is None:  # some crystal ligands fail full sanitization
+            m = Chem.MolFromMolFile(str(p), sanitize=False)
+            m.UpdatePropertyCache(strict=False)
+            Chem.GetSymmSSSR(m)
+        return Chem.RemoveHs(m, sanitize=False)
+
+    xtal, var = _read(xpath), _read(variant_sdf)
+    pairs, mode = _atom_correspondences(xtal, var)
+    if not pairs:
+        raise ValueError(f"no crystal/variant atom correspondence for {pdbid}")
+    ci, pi = pairs[0]
+    xyz = xtal.GetConformer().GetPositions()
+    mol = Chem.AddHs(var)  # heavy-atom indices are preserved by AddHs
+    cmap = {int(p): Point3D(*map(float, xyz[c])) for c, p in zip(ci, pi)}
+    try:  # RDKit can raise (Invariant Violation in BFGS) as well as return -1
+        embedded = AllChem.EmbedMolecule(mol, coordMap=cmap, randomSeed=42,
+                                         useRandomCoords=True, maxAttempts=50) == 0
+    except RuntimeError:
+        embedded = False
+    if not embedded:
+        # Fall back to the existing conformer, rigidly aligned on the matched
+        # atoms: right site and orientation, approximate footprint. frame_rms
+        # records how approximate; it is 0 for a successful pinned embedding.
+        mol = Chem.AddHs(var, addCoords=True)
+    rms = rdMolAlign.AlignMol(mol, xtal, atomMap=[(int(p), int(c)) for c, p in zip(ci, pi)])
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    w = Chem.SDWriter(str(out_path)); w.write(mol); w.close()
+    return {"frame_mode": mode, "frame_matched": len(ci), "frame_rms": round(float(rms), 3),
+            "frame_embedded": embedded}
+
+
 def run_cell(pdbid: str, variant: str, dock_dir: Path, runner_mod) -> dict:
     """Run SurfDock on one cell. Returns a small status dict.
 
@@ -158,6 +215,11 @@ def run_cell(pdbid: str, variant: str, dock_dir: Path, runner_mod) -> dict:
 
     t0 = time.time()
     try:
+        frame = {}
+        if os.environ.get("CONTRASCF_SURFDOCK_LIGAND", "").strip().lower() == "crystal_frame":
+            framed = out_dir / "ligand_crystal_frame.sdf"
+            frame = _crystal_frame_ligand(pdbid, ligand, framed)
+            ligand = framed
         source_sdfs = runner_mod._run_surfdock_pipeline(
             case, receptor, ligand, work_dir,
         )
@@ -166,7 +228,7 @@ def run_cell(pdbid: str, variant: str, dock_dir: Path, runner_mod) -> dict:
         # Collect ranked SDFs into poses.sdf with score tags.
         runner_mod._collect_poses_sdf(source_sdfs, out_dir)
         shutil.rmtree(work_dir, ignore_errors=True)
-        return {"pdbid": pdbid, "variant": variant, "status": "ok",
+        return {"pdbid": pdbid, "variant": variant, "status": "ok", **frame,
                 "poses_sdf": str(poses_sdf),
                 "wallclock_s": round(time.time() - t0, 1)}
     except Exception as exc:
@@ -225,6 +287,7 @@ def main() -> int:
     print(f"  outputs_root:    {outputs_root}")
     print(f"  variant_filter:  {variant_filter or '(all)'}")
     print(f"  pdbid_filter:    {pdbid_filter or '(all)'}")
+    print(f"  input ligand:    {os.environ.get('CONTRASCF_SURFDOCK_LIGAND') or 'docking/ligand.sdf as-is'}")
     print(f"  system_start:    {system_start}")
     print(f"  system_limit:    {system_limit or '(unlimited)'}")
 
