@@ -121,16 +121,28 @@ def fetch_msa_via_boltz(
         if bfd.exists():
             # Append BFD/MGnify hits, skipping the duplicate query row.
             bfd_text = _strip_null_bytes(bfd.read_text())
-            seen_query = False
+            # Skip the BFD file's query RECORD — header AND its sequence line(s).
+            # Until 2026-11-02 only the header was skipped, so the query's
+            # sequence line was appended to whatever record ended uniref.a3m:
+            # it glued the query onto the last UniRef hit (which
+            # clean_a3m_for_af3 then dropped as the wrong length, losing one
+            # hit), and when UniRef returned no hits it doubled the query row
+            # itself, which AF3 rejects ("First MSA sequence ... is not the
+            # query_sequence"). That killed every AF3+MSA run for 1o5b and
+            # 2c3i (8-residue peptide chains). Repair for cached files:
+            # build/10_repair_msa_cache.py.
+            in_query = False
+            first_header_seen = False
             extra_lines = []
             for ln in bfd_text.splitlines():
                 if ln.startswith(">"):
-                    if not seen_query:
-                        # first header is the query — skip it
-                        seen_query = True
+                    if not first_header_seen:
+                        first_header_seen = True
+                        in_query = True
                         continue
+                    in_query = False
                     extra_lines.append(ln)
-                elif seen_query:
+                elif first_header_seen and not in_query:
                     extra_lines.append(ln)
             if extra_lines:
                 a3m = a3m.rstrip("\n") + "\n" + "\n".join(extra_lines) + "\n"
