@@ -1,0 +1,49 @@
+# Script renames (S3, 2026-10)
+
+Scripts were grouped by stage (`build/`, `run/`, `analyze/`, `plot/`, `export/`) and renumbered inside each stage. Journal entries and older plans cite the old names; this table resolves them. See `plans/2026-10-01-organize-codes-results.md`.
+
+| old | new |
+|---|---|
+| `00_verify_reference_systems.py` | `build/00_verify_reference_systems.py` |
+| `01_build_subset20.py` | `build/01_build_subset20.py` |
+| `02_build_full_casf.py` | `build/02_build_full_casf.py` |
+| `03_run_boltz2_subset20.py` | `run/01_run_boltz2.py` |
+| `04_run_af3_subset20.py` | `run/02_run_af3.py` |
+| `05_analyze_subset20.py` | `analyze/01_analyze_cofold.py` |
+| `06_run_af3_msa_subset20.py` | `run/04_run_af3_msa.py` |
+| `07_run_gnina_wt.py` | `run/05_run_gnina_wt.py` |
+| `08_run_gnina_variants.py` | `run/06_run_gnina_variants.py` |
+| `09_analyze_gnina.py` | `analyze/02_analyze_gnina.py` |
+| `10_build_mutant_docking.py` | `build/03_build_mutant_docking.py` |
+| `10_plot_affinity.py` | `plot/01_plot_affinity.py` |
+| `11_build_mek1.py` | `build/04_build_mek1.py` |
+| `11_run_unidock2_variants.py` | `run/07_run_unidock2_variants.py` |
+| `12_analyze_docking_engines.py` | `analyze/03_analyze_docking_engines.py` |
+| `12_run_mek1_predictions.py` | `run/09_run_mek1_predictions.py` |
+| `13_plot_overview.py` | `plot/02_plot_overview.py` |
+| `14_run_surfdock_variants.py` | `run/08_run_surfdock_variants.py` |
+| `15_compare_rmsd_metrics.py` | `analyze/05_compare_rmsd_metrics.py` |
+| `16_confidence_response.py` | `analyze/06_confidence_response.py` |
+| `17_conf_aff_rmsd.py` | `analyze/07_conf_aff_rmsd.py` |
+| `18_ingest_af3msa_confidence.py` | `analyze/08_ingest_af3msa_confidence.py` |
+| `19_pose_swap_affinity.py` | `analyze/09_pose_swap_affinity.py` |
+| `20_pose_swap_aggregate.py` | `analyze/10_pose_swap_aggregate.py` |
+| `21_pose_swap_gnina.py` | `analyze/11_pose_swap_gnina.py` |
+| `22_pose_swap_contrast.py` | `analyze/12_pose_swap_contrast.py` |
+| `23_export_poses.py` | `export/01_export_poses.py` |
+| `24_export_predicted_poses.py` | `export/02_export_predicted_poses.py` |
+| `25_recover_missing_receptors.py` | `build/05_recover_missing_receptors.py` |
+| `26_verify_af3_multichain_input.py` | `build/07_verify_af3_multichain_input.py` |
+| `27_pilot_af3_multichain_wt.py` | `run/10_pilot_af3_multichain_wt.py` |
+| `28_af3_multiseed_check.py` | `run/11_af3_multiseed_check.py` |
+| `29_plot_paired_rmsd.py` | `plot/03_plot_paired_rmsd.py` |
+| `30_analyze_icm.py` | `analyze/04_analyze_icm.py` |
+| `31_plot_crossmethod_conditioned.py` | `plot/04_plot_crossmethod_conditioned.py` |
+| `32_plot_matched_comparison.py` | `plot/05_plot_matched_comparison.py` |
+| `33_render_mutation_views.py` | `plot/07_render_mutation_views.py` |
+| `34_plot_three_heads.py` | `plot/06_plot_three_heads.py` |
+| `34_validate_cofold_pockets.py` | `analyze/13_validate_cofold_pockets.py` |
+| `35_rescore_crystal_pose.py` | `analyze/14_rescore_crystal_pose.py` |
+| `36_prefetch_msas.py` | `run/03_prefetch_msas.py` |
+| `37_protonate_receptors.py` | `build/06_protonate_receptors.py` |
+| `audit_mutation_presence.py` | `build/08_audit_mutation_presence.py` |

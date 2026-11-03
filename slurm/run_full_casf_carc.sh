@@ -51,15 +51,15 @@ echo "Time: $(date -Iseconds)"
 echo
 
 echo "=== 1/4 build inputs ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/02_build_full_casf.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/02_build_full_casf.py
 
 echo
 echo "=== 2/4 Boltz-2 ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 
 echo
 echo "=== 3/4 AF3 + MSA ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py
 
 # Step 4 (analysis) is intentionally OUT of the array — run once after
 # all chunks finish, not per-chunk (analysis is fast + needs the full

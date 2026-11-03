@@ -71,5 +71,5 @@ echo -n "crop fix     : "
 grep -q "iface_v" "$CONTRASCF_DOCKSTRAT_ROOT/dockstrat/models/_surfdock_surface_helper.py" \
   && echo "PRESENT" || { echo "MISSING - refusing to run"; exit 2; }
 
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/14_run_surfdock_variants.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/08_run_surfdock_variants.py
 echo "=== sd task ${SLURM_ARRAY_TASK_ID} exit=$? at $(date -Is) ==="

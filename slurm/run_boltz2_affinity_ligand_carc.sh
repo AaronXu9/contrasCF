@@ -20,7 +20,7 @@
 # Pre-flight (lab box):
 #   1. Regenerate ligand_mutagenesis YAMLs so they have the
 #      properties.affinity block:
-#        $CONTRASCF_PY analysis/ligand_mutagenesis/scripts/02_build_full_casf.py
+#        $CONTRASCF_PY analysis/ligand_mutagenesis/scripts/build/02_build_full_casf.py
 #   2. Rsync the YAMLs to CARC (~50 KB):
 #        rsync -avz --include='*/' --include='boltz.yaml' --exclude='*' \
 #          analysis/ligand_mutagenesis/outputs/                                \
@@ -41,7 +41,7 @@ cd "${SLURM_SUBMIT_DIR:-/project2/katritch_223/aoxu/contrasCF}"
 source env/carc.sh
 
 # Slice the SORTED list of ligand_mutagenesis system dirs by array index.
-# The 03_run_boltz2.py runner honors CONTRASCF_START / CONTRASCF_END to
+# The run/01_run_boltz2.py runner honors CONTRASCF_START / CONTRASCF_END to
 # select a pdbid slice.
 N_CHUNKS=10
 LIG_OUT="$PWD/analysis/ligand_mutagenesis/outputs"
@@ -66,6 +66,6 @@ echo "system slice: $START..$END (of $TOTAL)"
 echo "Time: $(date -Iseconds)"
 echo
 
-$CONTRASCF_PY analysis/ligand_mutagenesis/scripts/03_run_boltz2.py
+$CONTRASCF_PY analysis/ligand_mutagenesis/scripts/run/01_run_boltz2.py
 
 echo "=== Done chunk $SLURM_ARRAY_TASK_ID at $(date -Iseconds) ==="

@@ -33,11 +33,11 @@ nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader
 echo
 
 echo "--- 1. CDK2/MEK1 gating verification (no GPU needed) ---"
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/00_verify_reference_systems.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/00_verify_reference_systems.py
 
 echo
 echo "--- 2. Build subset20 inputs ---"
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/01_build_subset20.py | tail -5
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/01_build_subset20.py | tail -5
 
 echo
 echo "--- 3. One Boltz-2 prediction (1pxn-wt) ---"
@@ -69,7 +69,7 @@ from casf_mutagenesis.inputs_af3 import (
 )
 import importlib.util
 spec = importlib.util.spec_from_file_location(
-    'runner06', 'analysis/casf_mutagenesis/scripts/06_run_af3_msa_subset20.py')
+    'runner06', 'analysis/casf_mutagenesis/scripts/run/04_run_af3_msa.py')
 mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 
 # Fetch + clean the MSA, build a fresh JSON, run AF3, check the cif lands.

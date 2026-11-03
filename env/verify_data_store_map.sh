@@ -43,7 +43,7 @@ eq "crystal_ligands real files"     14661 "$CLRF"
 # raw/<id>/ now carries TWO provenances (docs/data_prep_todo.md item 1):
 #   251 HiQBind-backed -- <id>_protein.pdb + <id>_ligand.sdf, both symlinks into $HIQBIND
 #    30 RCSB-recovered -- <id>_protein.pdb only, a REAL file, unrefined deposited
-#                         coordinates written by 25_recover_missing_receptors.py
+#                         coordinates written by build/05_recover_missing_receptors.py
 REC=$LAB_REPO/analysis/casf_mutagenesis/recovered_receptors.json
 recids=$($PY -c "
 import json

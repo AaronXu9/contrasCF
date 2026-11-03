@@ -1,7 +1,7 @@
 """Extract per-chain protein sequence + PDB residue-number mapping.
 
 Returns a list of (chain_id, [ResidueRecord, ...]) preserving PDB numbering and
-insertion codes. Pattern follows analysis/scripts/12_run_boltz2.py:51-72 but
+insertion codes. Pattern follows analysis/paper_repro/scripts/12_run_boltz2.py:51-72 but
 keeps PDB resnums alongside the 1-letter sequence (which that script discards).
 """
 from __future__ import annotations

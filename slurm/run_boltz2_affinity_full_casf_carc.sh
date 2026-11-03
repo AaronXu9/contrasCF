@@ -16,7 +16,7 @@
 #
 # Pre-flight (run from the lab box BEFORE submitting):
 #   1. Regenerate YAMLs locally so they have the `properties: - affinity:`
-#      block:  $CONTRASCF_PY analysis/casf_mutagenesis/scripts/02_build_full_casf.py
+#      block:  $CONTRASCF_PY analysis/casf_mutagenesis/scripts/build/02_build_full_casf.py
 #   2. Rsync labels + the 1004 YAMLs to CARC:
 #      rsync -avz data/casf2016/labels/                      \
 #          discovery.usc.edu:/project2/katritch_223/aoxu/contrasCF/data/casf2016/labels/
@@ -95,7 +95,7 @@ PY
 echo
 
 echo "=== 2/2 Boltz-2 (with affinity) ==="
-$CONTRASCF_PY analysis/casf_mutagenesis/scripts/03_run_boltz2_subset20.py
+$CONTRASCF_PY analysis/casf_mutagenesis/scripts/run/01_run_boltz2.py
 echo
 
 echo "=== Done chunk $SLURM_ARRAY_TASK_ID at $(date -Iseconds) ==="

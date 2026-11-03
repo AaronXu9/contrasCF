@@ -23,7 +23,7 @@ REPO_ROOT = _path_env("CONTRASCF_ROOT", "/mnt/katritch_lab2/aoxu/contrasCF")
 MODULE_ROOT = REPO_ROOT / "analysis" / "casf_mutagenesis"
 OUTPUT_ROOT = MODULE_ROOT / "outputs"
 NATIVE_DIR = REPO_ROOT / "analysis" / "native"
-ANALYSIS_SRC = REPO_ROOT / "analysis" / "src"
+ANALYSIS_SRC = REPO_ROOT / "analysis" / "paper_repro" / "lib"   # paper-reproduction arm library
 
 # --- CASF dataset ---------------------------------------------------------
 # Default points at the in-repo symlink `<repo>/data/casf2016`. To override
