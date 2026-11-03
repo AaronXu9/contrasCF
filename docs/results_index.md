@@ -32,6 +32,54 @@ byte-for-byte.
 
 ## 1. Pocket mutagenesis (CASF-2016, wt / rem / pack / inv)
 
+### 1a. Corrected six-method table (2026-11-03) — use this
+
+Scored by `casf_mutagenesis/scripts/analyze/15_corrected_pocket_scores.py` under the
+2026-10-21 audit's protocol for every method: chains mapped by exact sequence (or
+exact identity with deletions only, 76 of 5676 rows), frame fitted on the native-chain
+5 Å shell Cα, symmetry-aware ligand RMSD, top-1, GNINA from the corrected replays,
+no-op systems (2) excluded from mutant rates. Gate: reproduces the audit's Set B
+counts for GNINA, UniDock2, ICM and SurfDock with 99–100% per-row agreement
+(`experiments/2026-11-03-corrected-pocket-scorer-gate/`).
+
+WT-conditioned retention, each method on its own denominator (low adversarial = good):
+
+| method | WT accuracy | rem | pack | inv |
+|---|---|---|---|---|
+| AF3+MSA | 0.808 (n=239) | 0.326 | 0.268 | 0.184 |
+| Boltz-2 | 0.616 (n=229) | 0.286 | 0.271 | 0.186 |
+| GNINA | 0.754 (n=248) | 0.168 | 0.150 | 0.116 |
+| ICM | 0.702 (n=248) | 0.164 | 0.175 | 0.113 |
+| UniDock2 | 0.597 (n=248) | 0.141 | 0.133 | 0.081 |
+| SurfDock | 0.907 (n=246) | 0.024 | 0.043 | 0.025 |
+
+Matched set (systems scored for all six methods; unconditioned; n = 212 / 213 / 206):
+
+| method | rem | pack | inv |
+|---|---|---|---|
+| AF3+MSA | 0.274 | 0.230 | 0.150 |
+| Boltz-2 | 0.175 | 0.178 | 0.121 |
+| ICM | 0.146 | 0.141 | 0.097 |
+| GNINA | 0.142 | 0.127 | 0.092 |
+| UniDock2 | 0.094 | 0.089 | 0.058 |
+| SurfDock | 0.019 | 0.042 | 0.019 |
+
+**Why co-folding dropped from the published table** (AF3+MSA rem 0.439 → 0.326,
+Boltz-2 rem 0.368 → 0.286): of 117 co-folding rows the old scorer called retained and
+the corrected one does not, **106 are relocations to a homologous site** (pose >8 Å
+from the native pocket; in 90% of sampled cases the ligand's main contact chain is not
+the native chain). The legacy "chain nearest the ligand" superposition laid the intact
+homologous copy over the mutated native site. Moving the ligand to an unmutated copy
+of the pocket is not memorization of the destroyed site. Docking engines barely move
+because their published numbers already used a crystal-anchored frame.
+
+Files: `corrected_pocket_scores.csv` (5676 scored rows, with `chain_match`,
+`no_op`, `n_mutations`, `pose_centroid_to_native_a`, `pose_min_dist_changed_sc_a`,
+`native_atoms_in_box_frac`), `corrected_pocket_table.csv`.
+
+### 1b. Historical table (superseded; kept for reproducibility)
+
+
 Primary metric: top-1 ligand RMSD < 2 Å, **conditioned on the method solving that
 system's WT** (`*_wtok`). Low adversarial = good. WT shown unconditioned.
 
