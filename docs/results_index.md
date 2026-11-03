@@ -37,10 +37,10 @@ system's WT** (`*_wtok`). Low adversarial = good. WT shown unconditioned.
 
 | claim | value | file (`casf_mutagenesis/outputs/`) | written by (`casf_mutagenesis/scripts/`) |
 |---|---|---|---|
-| AF3+MSA WT accuracy | 0.824 (n=238) | `results_full.csv` | `analyze/01_analyze_cofold.py` |
+| AF3+MSA WT accuracy | 0.825 (n=240) | `results_full.csv` | `analyze/01_analyze_cofold.py` |
 | Boltz-2 WT accuracy | 0.594 (n=229) | `results_full.csv` | `analyze/01_analyze_cofold.py` |
 | AF3 without MSA | 0/19 WT — conditional undefined | `memorization_full.csv` | `analyze/01_analyze_cofold.py` |
-| AF3+MSA memorization rem / pack / inv | 0.439 / 0.367 / 0.301 | `memorization_full.csv` | `analyze/01_analyze_cofold.py` |
+| AF3+MSA memorization rem / pack / inv | 0.439 / 0.364 / 0.298 | `memorization_full.csv` | `analyze/01_analyze_cofold.py` |
 | Boltz-2 memorization rem / pack / inv | 0.368 / 0.360 / 0.257 | `memorization_full.csv` | `analyze/01_analyze_cofold.py` |
 | GNINA WT; rem / pack / inv | 0.729; 0.180 / 0.157 / 0.151 | `docking_memorization.csv` | `analyze/03_analyze_docking_engines.py` |
 | UniDock2 WT; rem / pack / inv | 0.578; 0.141 / 0.141 / 0.104 | `docking_memorization.csv` | `analyze/03_analyze_docking_engines.py` |
@@ -48,7 +48,7 @@ system's WT** (`*_wtok`). Low adversarial = good. WT shown unconditioned.
 | ICM WT; rem / pack / inv | 0.685; 0.133 / 0.170 / 0.114 | `icm_results.csv` | `analyze/04_analyze_icm.py` |
 | best-of-5 (oracle) companion | per cell | `paired_oracle_full.csv` | `analyze/01_analyze_cofold.py` |
 | per-system WT vs mutant pairs | per cell | `paired_full.csv` | `analyze/01_analyze_cofold.py` |
-| headline figure | `figures/overview_full.png` | — | `plot/02_plot_overview.py` (**panel b stale, TODO 19**) |
+| headline figure | `figures/overview_full.png` | — | `plot/02_plot_overview.py` (regenerated 2026-11-02) |
 | like-for-like common system set | `figures/matched_comparison.png` | `docking_results.csv`, `results_full.csv` | `plot/05_plot_matched_comparison.py` |
 | per-system paired RMSD scatters | `figures/paired_rmsd_{wt_vs_mutant,rem,pack,inv}.png` | `docking_results.csv`, `icm_results.csv` | `plot/03_plot_paired_rmsd.py` |
 | dose dependence on mutation count | journal `2026-09-04-memorization-is-dose-dependent` | `results_full.csv` | see journal entry |
@@ -77,11 +77,11 @@ quote with Δheavy (heavy atoms added).
 
 | claim | value (Δheavy 1 / 2 / ≥3) | file (`ligand_mutagenesis/outputs/`) | written by (`ligand_mutagenesis/scripts/`) |
 |---|---|---|---|
-| AF3+MSA retention | 0.899 / 0.400 / 0.318 | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
+| AF3+MSA retention | 0.901 / 0.400 / 0.318 | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
 | Boltz-2 retention | 0.820 / 0.424 / 0.333 | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
 | GNINA retention | 0.709 / 0.278 / 0.223 | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
 | UniDock2 retention | 0.653 / 0.219 / 0.104 | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
-| SurfDock | **invalid — do not quote** (TODO 15) | `retention_by_dheavy.csv` | — |
+| SurfDock | 0.936 / 0.631 / 0.235 (re-run 2026-11-02 from a crystal-frame conformer; TODO 15) | `retention_by_dheavy.csv` | `analyze/03_retention_table.py` |
 | per method × variant, Wilson CIs | 75 rows | `memorization_ligand.csv` | `analyze/03_retention_table.py` |
 | co-folding per pose | 12324 rows | `results_ligand.csv` | `analyze/01_analyze_cofold.py` |
 | docking per cell / aggregate | — | `docking_results_ligand.csv`, `docking_memorization_ligand.csv`, `gnina_*_ligand.csv` | `casf_mutagenesis/scripts/analyze/02`, `03_*` |
@@ -124,5 +124,3 @@ Lives on branch `worktree-counterfold` (`counterfold/`), not on `main`. Not inde
 |---|---|---|
 | `casf_mutagenesis/outputs/mutant_receptor_alignment.csv` | no script in the repo writes it (dated 2026-09-03); cited as the frame-error gate in the contrascf-casf skill | 20 |
 | pose-swap tables `pose_swap_summary.csv`, `pose_swap_contrast.csv` | `analyze/10`, `12` default `--out` to `/tmp/poseswap_panel2`; the tables are gone, only the figures survive | 20 |
-| ligand-arm SurfDock | invalid input footprint | 15 |
-| overview panel (b) | drawn from pre-fix ligand data | 19 |
