@@ -2,7 +2,7 @@
 
 **Type:** plan
 **Date:** 2026-11-03
-**Status:** in_progress
+**Status:** done (S1 here; S2-S5 owned by another session)
 **Project:** contrasCF
 
 ## Goal
@@ -36,16 +36,16 @@ follow-ups, and update the table."
 - **Pre-condition:** S1 done.
 - **Action:** pilot on a predeclared stratified subset (no-op / low / high dose, retained and lost): build in-place side-chain-substituted receptors on the crystal with restrained relaxation; dock GNINA/UniDock2 with a WT-defined native-site box; compare with the AF3-refolded receptor.
 - **Post-condition:** per-case contact change, backbone movement, clash and native-pose accommodation, plus retention under both receptor sources.
-- **Status:** pending
+- **Status:** ALREADY DONE by another session (`experiments/2026-10-21-matched-receptor-*`, `2026-10-21-matched-receptors/RESULTS.md`): with in-place prepared receptors, 2YKI retains 0/9 mutant vs 9/9 WT (AF3 receptor retained 3/3); retention is strongly receptor-preparation-dependent. Not re-run here.
 
 ### S3 — Instrument Boltz-2 on a predeclared panel (audit follow-up 3)
 - **Pre-condition:** the audit's single-system direct-channel gate (`boltz/direct_pose_channel_3u5j_v2`) passes.
 - **Action:** extend it to a small predeclared panel × 3 seeds, saving both inference passes and the affinity-scored sample, with native / ejection / translation controls.
 - **Post-condition:** per-system coordinate-sensitivity estimates with seed spread.
-- **Status:** pending
+- **Status:** ALREADY DONE / extended by another session (`2026-10-27-boltz-*`, `2026-10-30-boltz-head-replay-*`, `2026-11-02-boltz-full-cohort-*`): full cohort, 687 comparisons — pose motion tracks ligand-ipTM change (rho -0.61) far more than affinity change (rho -0.20). Not re-run here.
 
 ### S4 — Experimental protein variants; S5 — interaction-aware model
-- Sequenced AFTER S1–S3 by the audit itself ("later", "after the gates"). Not started in this plan.
+- IN PROGRESS in another session as of 2026-11-03 (`2026-11-02-experimental-pocket-*`, `2026-11-02/03-pocket-ranker-*`, entries marked running). Not touched here to avoid colliding with active work.
 
 ## Risk register
 | Risk | Likelihood | Impact | Mitigation |
