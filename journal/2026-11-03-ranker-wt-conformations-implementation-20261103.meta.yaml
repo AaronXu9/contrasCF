@@ -1,0 +1,18 @@
+slug: "ranker-wt-conformations-implementation-20261103"
+type: "iteration"
+date: "2026-11-03"
+status: "logged"
+created_at: "2026-11-03T00:15:19-08:00"
+updated_at: "2026-11-03T00:15:19-08:00"
+git_rev: "n/a"
+git_branch: "n/a"
+git_dirty: "n/a"
+host: "katlab"
+hostname: "br-443"
+gpu: "n/a"
+conda_env: "unidock2"
+python: "3.10.18"
+pip_hash: "n/a"
+tags: []
+refs:
+  plan_step: "S1"

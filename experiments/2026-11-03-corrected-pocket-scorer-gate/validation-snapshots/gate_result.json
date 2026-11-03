@@ -1,0 +1,50 @@
+{
+  "GNINA": {
+    "rows": 192,
+    "scored": 192,
+    "agreement": 0.9948,
+    "not_scored": [],
+    "unexplained": [],
+    "retained_audit_vs_ours": {
+      "pack": "15 vs 16",
+      "inv": "15 vs 15"
+    },
+    "passed": true
+  },
+  "UniDock2": {
+    "rows": 192,
+    "scored": 192,
+    "agreement": 1.0,
+    "not_scored": [],
+    "unexplained": [],
+    "retained_audit_vs_ours": {
+      "pack": "11 vs 11",
+      "inv": "7 vs 7"
+    },
+    "passed": true
+  },
+  "ICM": {
+    "rows": 192,
+    "scored": 192,
+    "agreement": 0.9896,
+    "not_scored": [],
+    "unexplained": [],
+    "retained_audit_vs_ours": {
+      "pack": "15 vs 16",
+      "inv": "11 vs 12"
+    },
+    "passed": true
+  },
+  "SurfDock": {
+    "rows": 192,
+    "scored": 192,
+    "agreement": 0.9948,
+    "not_scored": [],
+    "unexplained": [],
+    "retained_audit_vs_ours": {
+      "pack": "4 vs 4",
+      "inv": "3 vs 4"
+    },
+    "passed": true
+  }
+}

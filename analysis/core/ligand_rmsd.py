@@ -133,8 +133,12 @@ def _matched_rmsd(
 
     crystal_heavy = Chem.RemoveHs(crystal_mol)
     pred_heavy = Chem.RemoveHs(pred_mol)
-    crystal_pts = _heavy_coords(crystal_heavy)
-    pred_pts = _heavy_coords(pred_heavy)
+    # Coordinates must index the SAME molecules the matches index into. RemoveHs
+    # can keep some explicit/isotopic hydrogens; filtering them out here (the old
+    # _heavy_coords call) shifted indices — IndexError at best, a silently wrong
+    # RMSD when the kept H sat mid-list. (2026-11-03)
+    crystal_pts = crystal_heavy.GetConformer().GetPositions()
+    pred_pts = pred_heavy.GetConformer().GetPositions()
     pairs, mode = _atom_correspondences(crystal_heavy, pred_heavy)
     if not pairs:
         raise ValueError("no atom correspondence between crystal and predicted ligand")
@@ -158,13 +162,13 @@ def _bestfit_rmsd(
     "conformation-only" RMSD: pocket-blind. NaN when no correspondence exists.
     """
     crystal_heavy = Chem.RemoveHs(crystal_mol)
-    crystal_xyz = _heavy_coords(crystal_heavy)
+    crystal_xyz = crystal_heavy.GetConformer().GetPositions()  # same indexing as matches
     if pred_mol is None:
         if len(crystal_xyz) != len(pred_heavy_xyz):
             return float("nan")
         return _kabsch_rmsd(pred_heavy_xyz, crystal_xyz)
     pred_heavy = Chem.RemoveHs(pred_mol)
-    pred_xyz = _heavy_coords(pred_heavy)
+    pred_xyz = pred_heavy.GetConformer().GetPositions()  # same indexing as matches
     pairs, _ = _atom_correspondences(crystal_heavy, pred_heavy)
     if not pairs:
         return float("nan")

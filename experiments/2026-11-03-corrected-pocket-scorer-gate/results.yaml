@@ -1,0 +1,5 @@
+summary: "Full-cohort six-method scorer reproduces the audit's Set B classifications (99-100%); core H-indexing fix and gapped mapping change no prior row"
+status: "done"
+metrics:
+  setb_agreement_min: 0.99
+completed_at: "2026-11-03T00:21:29-08:00"
